@@ -2,6 +2,7 @@
 > This file is kept up to date automatically while the stage runs. Add observations at the review step, not by editing here directly.
 
 ## Interpretations
+- 2026-11-01T15:40:00Z — Q11 の「母親が確定処理をするまで」を、子供のあとからの記録と母親の修正の両方の期限とし、確定後は誰も変更できないと解釈した; Q3 の「月末のまとめを送るまで」は Q11 で置き換えたものとして扱った。
 <!-- example: 2026-05-29T10:14:32Z — chose REST over GraphQL; the consuming team only needs CRUD, revisit if subscriptions land -->
 
 ## Deviations
