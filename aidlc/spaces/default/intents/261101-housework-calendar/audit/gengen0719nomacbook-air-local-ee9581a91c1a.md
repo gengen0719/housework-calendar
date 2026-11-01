@@ -2629,3 +2629,459 @@
 **Options**: Q1: A,B,C,D,X; Q2: A,B,C,X; Q3: A,B,C,X; Q4: A,B,C,D,E,X; Q5: A,B,C,X; Q6: A,B,C,D,X; Q7: A,B,C,D,E,X; Q8: A,B,C,X; Q9: A,B,X
 
 ---
+
+## Human Turn
+**Timestamp**: 2026-11-01T15:10:49Z
+**Event**: HUMAN_TURN
+**Session**: sess_1f44501a-e84f-4a25-a27a-11fc9f4a1925
+**Origin**: person
+**Source**: typed
+**Message Id**: d689bcbf
+
+---
+
+## Question Answered
+**Timestamp**: 2026-11-01T15:11:13Z
+**Event**: QUESTION_ANSWERED
+**Stage**: practices-discovery
+**Details**: Q1: B; Q2: A; Q3: A; Q4: C; Q5: A; Q6: A; Q7: A; Q8: A; Q9: B 秘密の情報をリポジトリに入れない、本番のデータを手で書き換えない
+**Person Reply**: done
+**Message Id**: d689bcbf
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-01T15:12:00Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/practices-discovery-questions.md
+**Context**: inception > practices-discovery > practices-discovery-questions.md
+
+---
+
+## Decision Recorded
+**Timestamp**: 2026-11-01T15:12:00Z
+**Event**: DECISION_RECORDED
+**Stage**: practices-discovery
+**Decision**: Does this all look correct before I generate the artifact?
+**Options**: Looks correct,Request changes
+**Checkpoint**: Consolidated Summary Confirmation
+**Questions File**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/practices-discovery-questions.md
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-01T15:13:28Z
+**Event**: HUMAN_TURN
+**Session**: sess_1f44501a-e84f-4a25-a27a-11fc9f4a1925
+**Origin**: person
+**Source**: typed
+**Message Id**: 476a8623
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-01T15:13:35Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/practices-discovery-questions.md
+**Context**: inception > practices-discovery > practices-discovery-questions.md
+
+---
+
+## Summary Confirmation Recorded
+**Timestamp**: 2026-11-01T15:13:41Z
+**Event**: SUMMARY_CONFIRMATION_RECORDED
+**Stage**: practices-discovery
+**Details**: Looks correct
+**Checkpoint**: Consolidated Summary Confirmation
+**Questions File**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/practices-discovery-questions.md
+**Questions SHA-256**: 167e8c46648a3e82a8667cff775f1be76514ada91541249dd7673763da781040
+**Hash Scope**: confirmed-content-v2
+**Message Id**: 476a8623
+**Person Reply**: 1
+**Summary Authorization Id**: d23cb079971b9316e6a6adc36806f536714aa137d5c3a862b682f4967159e5ca
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-01T15:14:08Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-pipeline-deploy-agent
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-01T15:19:08Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md
+**Context**: inception > practices-discovery > team-practices.md
+**Summary Authorization Id**: d23cb079971b9316e6a6adc36806f536714aa137d5c3a862b682f4967159e5ca
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-01T15:19:25Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/discovered-rules.md
+**Context**: inception > practices-discovery > discovered-rules.md
+**Summary Authorization Id**: d23cb079971b9316e6a6adc36806f536714aa137d5c3a862b682f4967159e5ca
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-01T15:19:33Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/practices-discovery-timestamp.md
+**Context**: inception > practices-discovery > practices-discovery-timestamp.md
+**Summary Authorization Id**: d23cb079971b9316e6a6adc36806f536714aa137d5c3a862b682f4967159e5ca
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-01T15:19:33Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/evidence.md
+**Context**: inception > practices-discovery > evidence.md
+**Summary Authorization Id**: d23cb079971b9316e6a6adc36806f536714aa137d5c3a862b682f4967159e5ca
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-01T15:19:55Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-pipeline-deploy-agent
+**Message**: ## Subagent Summary: Practices Discovery\n\n### Produced\n- `aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md`: final version, no draft markers. It h
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-01T15:20:03Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/memory.md
+**Context**: inception > practices-discovery > memory.md
+**Summary Authorization Id**: d23cb079971b9316e6a6adc36806f536714aa137d5c3a862b682f4967159e5ca
+
+---
+
+## Practices Discovered
+**Timestamp**: 2026-11-01T15:20:10Z
+**Event**: PRACTICES_DISCOVERED
+**Sources Scanned**: org.md defaults, mvp scope file, git status, practices-discovery-questions.md
+**Drafts**: team-practices.md, discovered-rules.md
+
+---
+
+## Decision Recorded
+**Timestamp**: 2026-11-01T15:20:18Z
+**Event**: DECISION_RECORDED
+**Stage**: practices-discovery
+**Decision**: Anything to add for next time?
+**Options**: Nothing to add,Add a note
+**Question Kind**: learnings-note
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-01T15:21:40Z
+**Event**: HUMAN_TURN
+**Session**: sess_1f44501a-e84f-4a25-a27a-11fc9f4a1925
+**Origin**: person
+**Source**: typed
+**Message Id**: 30c27cf7
+
+---
+
+## Question Answered
+**Timestamp**: 2026-11-01T15:21:46Z
+**Event**: QUESTION_ANSWERED
+**Stage**: practices-discovery
+**Details**: Nothing to add
+**Person Reply**: 1
+**Message Id**: 30c27cf7
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-01T15:21:52Z
+**Event**: SENSOR_FIRED
+**Fire id**: 42888d10
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-01T15:21:52Z
+**Event**: SENSOR_PASSED
+**Fire id**: 42888d10
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-01T15:21:52Z
+**Event**: SENSOR_FIRED
+**Fire id**: 81868f9d
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/discovered-rules.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-01T15:21:52Z
+**Event**: SENSOR_PASSED
+**Fire id**: 81868f9d
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/discovered-rules.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-01T15:21:52Z
+**Event**: SENSOR_FIRED
+**Fire id**: 87848fc8
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/evidence.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-01T15:21:52Z
+**Event**: SENSOR_PASSED
+**Fire id**: 87848fc8
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/evidence.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-01T15:21:52Z
+**Event**: SENSOR_FIRED
+**Fire id**: 185f63cc
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/practices-discovery-timestamp.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-01T15:21:52Z
+**Event**: SENSOR_PASSED
+**Fire id**: 185f63cc
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/practices-discovery-timestamp.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-01T15:21:52Z
+**Event**: SENSOR_FIRED
+**Fire id**: a2b3df29
+**Sensor ID**: upstream-coverage
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-01T15:21:52Z
+**Event**: SENSOR_PASSED
+**Fire id**: a2b3df29
+**Sensor ID**: upstream-coverage
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-01T15:21:53Z
+**Event**: SENSOR_FIRED
+**Fire id**: b875e3a2
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-01T15:21:53Z
+**Event**: SENSOR_PASSED
+**Fire id**: b875e3a2
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-01T15:21:53Z
+**Event**: SENSOR_FIRED
+**Fire id**: acee77f6
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/discovered-rules.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-01T15:21:53Z
+**Event**: SENSOR_PASSED
+**Fire id**: acee77f6
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/discovered-rules.md
+**Duration ms**: 61
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-01T15:21:53Z
+**Event**: SENSOR_FIRED
+**Fire id**: 11189760
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/evidence.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-01T15:21:53Z
+**Event**: SENSOR_PASSED
+**Fire id**: 11189760
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/evidence.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-01T15:21:53Z
+**Event**: SENSOR_FIRED
+**Fire id**: 3aafc4f6
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/practices-discovery-timestamp.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-01T15:21:53Z
+**Event**: SENSOR_PASSED
+**Fire id**: 3aafc4f6
+**Sensor ID**: required-sections
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/practices-discovery-timestamp.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-01T15:21:53Z
+**Event**: SENSOR_FIRED
+**Fire id**: 01343809
+**Sensor ID**: upstream-coverage
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-01T15:21:53Z
+**Event**: SENSOR_PASSED
+**Fire id**: 01343809
+**Sensor ID**: upstream-coverage
+**Stage slug**: practices-discovery
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md
+**Duration ms**: 51
+
+---
+
+## Stage Awaiting Approval
+**Timestamp**: 2026-11-01T15:21:53Z
+**Event**: STAGE_AWAITING_APPROVAL
+**Stage**: practices-discovery
+**Next Stage**: requirements-analysis
+**Brief Digest**: none
+**Sensor State**: required-sections@aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/discovered-rules.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/evidence.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/practices-discovery-timestamp.md=passed; upstream-coverage@aidlc/spaces/default/intents/261101-housework-calendar/inception/practices-discovery/team-practices.md=passed
+**Open Decisions**: 0
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-01T15:23:31Z
+**Event**: HUMAN_TURN
+**Session**: sess_1f44501a-e84f-4a25-a27a-11fc9f4a1925
+**Origin**: person
+**Source**: typed
+**Message Id**: 409ede1d
+
+---
+
+## Practices Affirmed
+**Timestamp**: 2026-11-01T15:23:46Z
+**Event**: PRACTICES_AFFIRMED
+**Affirming User**: gengen0719
+**Sections Written**: Way of Working, Walking Skeleton, Testing Posture, Deployment, Code Style
+**Mandated Rules Appended**: 1
+**Forbidden Rules Appended**: 2
+
+---
+
+## Gate Approved
+**Timestamp**: 2026-11-01T15:24:05Z
+**Event**: GATE_APPROVED
+**Stage**: practices-discovery
+**User Input**: Approve
+**Person Reply**: 1
+**Message Id**: 409ede1d
+**Brief Digest**: none
+
+---
+
+## Stage Completion
+**Timestamp**: 2026-11-01T15:24:05Z
+**Event**: STAGE_COMPLETED
+**Stage**: practices-discovery
+**Validation Basis**: {"graphContract":"sha256:886af627a0fea6d271a662e4a54b4c5993ecee715d6144d46d4a58c2bc3d19bb","inputs":[],"outputs":[{"artifact":"discovered-rules","contentHash":"sha256:cfe8b31893bad2c2ccecc6f4b9d9936931d7d59a9a2c71c2a748713035c3cfc4","instanceCount":1,"presentCount":1,"producer":"practices-discovery","required":true,"structureHash":"sha256:bac50c610a727cd9437c9da1b30982a90313d3bfeda2c449199cdf2e48cd8f09"},{"artifact":"evidence","contentHash":"sha256:1bcd86929ac012f76286afdaa766e208b37ada7098eb2507d24c710d6c641719","instanceCount":1,"presentCount":1,"producer":"practices-discovery","required":true,"structureHash":"sha256:84918462952d803f86f757a02d6727c63956d79e7f306b240153f41d09092ca4"},{"artifact":"practices-discovery-timestamp","contentHash":"sha256:5907de770a934f69e5a497ce253cf17d29aab81a8b1723ae9fe1a4cda083d02a","instanceCount":1,"presentCount":1,"producer":"practices-discovery","required":true,"structureHash":"sha256:38fa38b9ba1cddbe9c1ac8c0ce96edbd8e2c9cacb6df3d3cbea83fa3ce6c57ed"},{"artifact":"team-practices","contentHash":"sha256:57c1c607ee7aa73ae74b1fc03a2ccde40812da6743965baa9cae4662d3ef63c1","instanceCount":1,"presentCount":1,"producer":"practices-discovery","required":true,"structureHash":"sha256:40e1b79938f0f4a06d54d572068ee32d6d77399976ec4aacc50dc0820d795a03"}],"projectType":"greenfield","schema":3}
+**Details**: Stage Practices Discovery approved by gate
+
+---
+
+## Stage Start
+**Timestamp**: 2026-11-01T15:24:05Z
+**Event**: STAGE_STARTED
+**Stage**: requirements-analysis
+**Agent**: aidlc-product-agent
+**Answer Mode**: file (reused from intent-capture)
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-01T15:25:18Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/inception/requirements-analysis/requirements-analysis-questions.md
+**Context**: inception > requirements-analysis > requirements-analysis-questions.md
+
+---

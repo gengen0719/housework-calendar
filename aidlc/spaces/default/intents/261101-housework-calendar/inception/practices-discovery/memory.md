@@ -5,6 +5,7 @@
 <!-- example: 2026-05-29T10:14:32Z — chose REST over GraphQL; the consuming team only needs CRUD, revisit if subscriptions land -->
 
 ## Deviations
+- 2026-11-01T15:18:47Z: 発見イベント（practices-event --type discovered）は、この担当の権限設定で実行が止められたため、進め役の側で実行してもらう必要がある。
 <!-- example: 2026-05-29T10:14:32Z — skipped the optional caching layer the stage prose suggested; the dataset is small enough that it adds risk -->
 
 ## Tradeoffs

@@ -12,7 +12,7 @@ C. 手元のパソコンだけ（自動テストは手元で動かす）
 D. Not yet defined（まだ決めていない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: B
 
 ## Q2. [開発者] 変更の取り込み方
 
@@ -23,7 +23,7 @@ B. `main` に直接コミットし、自動テストはそのあとに動かす
 C. Not yet defined（まだ決めていない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q3. [開発者] 最初に細い通り道を作るか
 
@@ -34,7 +34,7 @@ B. いいえ。最初から、使う流れの順に機能を作っていく
 C. Not yet defined（まだ決めていない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q4. [品質担当] テストを書く順番
 
@@ -47,7 +47,7 @@ D. 計算などの大事な部分だけ先にテストを書き、ほかは作�
 E. Not yet defined（まだ決めていない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: C
 
 ## Q5. [品質担当] テストでどこまで確かめるか
 
@@ -58,7 +58,7 @@ B. 80% より高くしたい（何 % かを書いてください）
 C. Not yet defined（まだ決めていない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q6. [運用担当] 環境の数と公開のしかた
 
@@ -70,7 +70,7 @@ C. 2 つに分けるが、どちらも自分で操作して反映する（自動
 D. Not yet defined（まだ決めていない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q7. [運用担当] 反映に使う道具
 
@@ -83,7 +83,7 @@ D. こだわりはない（おすすめに任せる）
 E. Not yet defined（まだ決めていない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q8. [開発者] コードの書き方
 
@@ -94,7 +94,7 @@ B. A に加えて、決めておきたい書き方がある（例: default expor
 C. Not yet defined（まだ決めていない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q9. [開発者] 必ず守ること・決してしないこと
 
@@ -104,4 +104,25 @@ A. None（特にない）
 B. ある（内容を書いてください。例: 秘密の情報をリポジトリに入れない、本番のデータを手で書き換えない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: B 秘密の情報をリポジトリに入れない、本番のデータを手で書き換えない
+
+## Consolidated Summary Confirmation
+
+回答のまとめ:
+
+- コードは GitHub の公開リポジトリに置き、GitHub Actions で自動テストを動かす。公開なので秘密の情報は置かない（Q1）
+- 作業ごとに短いブランチを作り、プルリクエストで自動テストが通ってから、`main` に 1 つのコミットとして取り込む（Q2）
+- 最初に、LINE でのログインから公式アカウントの返事までが端から端まで通る最小限の形（walking skeleton）を作り、動作を確かめて承認してから機能を足していく（Q3）
+- テストは BDD で進める。先に「こう動けばよい」という利用者目線の筋書きを書き、それに沿って作る（Q4）
+- 行カバレッジ 80% 以上と、取り込み前の自動テストを求める（Q5）
+- ステージングと本番の 2 つの環境に分ける。`main` に取り込んだらステージングに自動で反映し、本番は自分で確認してから反映する（Q6）
+- AWS への反映には AWS CDK（TypeScript）を使う（Q7）
+- 整形は Prettier、検査は ESLint を使い、それ以外の特別な決まりは作らない（Q8）
+- 必ず守る決まり: 秘密の情報をリポジトリに入れない。本番のデータを手で書き換えない（Q9）
+
+Does this all look correct before I generate the artifact?
+
+- Looks correct
+- Request changes
+
+[Answer]: Looks correct

@@ -7,21 +7,28 @@
 
 ## Way of Working
 
-<!-- Affirmed during practices-discovery. Example: -->
-<!-- We use GitHub Flow with feature branches. Branches live 3-5 days max. -->
-<!-- Hotfixes branch from main and merge back via expedited review. -->
+- コードは GitHub の公開リポジトリに置き、自動テストは GitHub Actions で動かします。公開リポジトリなので、秘密の情報（鍵、トークン、パスワードなど）はリポジトリに置きません。（Q1）
+- 作業ごとに `main` から短いブランチを作り、プルリクエストを出します。CI の自動テストが通ってから、`main` に 1 つのコミットとして squash-merge します。ブランチの元も取り込み先も `main` です。（Q2）
+- Construction で AI-DLC が作る Bolt ごとの作業用ブランチも同じく、`--base main`、`--target main`、`--strategy squash` で扱い、Bolt の名前を付けた 1 つのコミットとして `main` に取り込みます。
+- 長く残る `develop` やリリース用のブランチは作りません。ステージングと本番の区別は、ブランチではなく配備の手順と環境ごとの設定で行います。
 
 ## Walking Skeleton
 
-<!-- Affirmed during practices-discovery. Example: -->
-<!-- We don't run a walking skeleton — our deployment pipeline is mature -->
-<!-- and the slice cost outweighs the value at our maturity stage. -->
+- 私たちは最初に、端から端まで通る最小限の形（walking skeleton）を作ります。（Q3）
+- 最初の形は、LINE でログインする、画面を開く、裏側の処理を呼ぶ、データを保存する、公式アカウントが返事をする、という一連の流れが最小限でつながることを確かめるものにします。
+- その動作を、この作業のために人が決めて記録した確認用のコマンドで確かめ、人が承認してから、次に進みます。
+- 承認のあとは、範囲の定義で決めた「使う流れの順」に機能を足していきます。
 
 ## Testing Posture
 
-<!-- Affirmed during practices-discovery. Example: -->
-<!-- We use BDD. Specifications drive scenarios; scenarios drive code. -->
-<!-- Each Unit ships with feature files in /features/. -->
+- **Methodology**: bdd
+- **Methodology evidence**: Q4 で「先に『こう動けばよい』という利用者目線の筋書きを書き、それに沿って作る（BDD）」が選ばれ、まとめの確認でも「Looks correct」と承認されました。
+- **Ordering**: 機能ごとに、先に利用者目線の Given/When/Then の筋書き（シナリオ）を書き、そのシナリオがすべて通るまで実装します。
+- 行カバレッジ 80% 以上を下限とします。（Q5）
+- プルリクエストを `main` に取り込む前に、GitHub Actions の CI でテストを実行し、失敗したら取り込みません。（Q5、Q2）
+- 選んだテストの量（Test Strategy）はそのまま適用し、上の下限はそれに追加するもので、減らすものではありません。
+- Build and Test では、カバレッジの下限と品質の目標を確かめます。通すために下限を下げることはしません。
+- テストの道具（シナリオを動かす道具やテストの実行環境）は、まだ決めていません。設計の段階で決めます。
 
 ## Guard Policy
 
@@ -29,14 +36,20 @@
 
 ## Deployment
 
-<!-- Affirmed during practices-discovery. -->
+- 環境はステージングと本番の 2 つに分けます。（Q6）
+- `main` に取り込んだら、ステージングに自動で反映します。
+- 本番への反映は、作り手本人がステージングで確認してから、手で行います。
+- AWS への反映には AWS CDK（TypeScript）を使います。（Q7）
+- 本番のデータは手で書き換えません。データを直す必要があるときは、コードや手順として用意し、通常の流れで反映します。（Q9）
+- 要件で確かめること（未確定）: ステージングと本番では、LINE の公式アカウントとチャネル（ログイン用・画面用・メッセージ用）を環境ごとに別に用意する必要があると考えられます。公式アカウントごとに無料で送れるメッセージ数の枠があるため、費用 0 円の条件との関係も含めて、要件の段階で確かめます。
+- 元に戻す方法（前の版に戻す手順）と、反映後の動作確認の内容は、まだ決めていません。後の段階で決めます。
 
 ## Code Style
 
-<!-- Team-specific conventions beyond the linter. Example: -->
-<!-- - Prefer named exports over default exports -->
-<!-- - All async functions return Result<T, E>, never throw -->
-
+- 整形は Prettier、検査は ESLint を使い、リポジトリに置く設定ファイルに従います。（Q8）
+- それ以外の特別な書き方の決まりは作りません。名前の付け方は TypeScript の慣習に従います。
+- 検査は取り込み前の CI で実行し、失敗したら取り込みません。
+- AI-DLC からの書き方の提案は、検査ツールの設定を先に読み、その設定で扱っていないことだけにします。
 ## Forbidden
 
 <!-- Team-specific forbidden patterns -->
