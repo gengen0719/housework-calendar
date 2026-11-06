@@ -20,7 +20,7 @@ C. 子供を年齢などで分けて、3 人物以上にする
 D. Not yet defined（まだ決めていない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q2. [プロダクトオーナー] ストーリーの分け方
 
@@ -32,7 +32,7 @@ C. 要件のまとまりごと（FR1〜FR9 にそのまま合わせる）
 D. Not yet defined（まだ決めていない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q3. [開発者] ストーリーの細かさ
 
@@ -44,4 +44,20 @@ C. 要件のまとまり（FR1〜FR9）ごとに 1 ストーリー。全部で 9
 D. Not yet defined（まだ決めていない）
 X. Other (please specify)
 
-[Answer]:
+[Answer]: C
+
+## Consolidated Summary Confirmation
+
+回答のまとめ:
+
+- 人物は母親（管理者）と子供の 2 つだけにする。費用や止まったときの知らせなど、機能以外の要件は受け入れ条件の中で扱う（Q1）
+- ストーリーは使う流れの順に並べる（家族の登録 → お手伝いの種類 → 割り当て → カレンダー → 記録 → 確認と確定 → 代わりにやる → お小遣い → お知らせ）（Q2）
+- 1 つのストーリーは要件のまとまり（FR1〜FR9）ごとにし、全部で 9〜10 前後にする。1 つのストーリーに受け入れ条件が多く付く（Q3）
+- 優先度は、加算・減額だけを Should Have、ほかは Must Have にする（計画）
+
+Does this all look correct before I generate the artifact?
+
+- Looks correct
+- Request changes
+
+[Answer]: Looks correct

@@ -8,6 +8,7 @@
 <!-- example: 2026-05-29T10:14:32Z — skipped the optional caching layer the stage prose suggested; the dataset is small enough that it adds risk -->
 
 ## Tradeoffs
+- 2026-11-01T16:40:00Z — Q3 で要件のまとまりごとに 1 ストーリーとしたが、FR1 は家族の登録とお知らせ先、FR8 は計算と加算・減額（Should）で性質が違うため、それぞれ 2 つに分けて 11 ストーリーにした; 優先度の違う IB-9 を外せるようにするため。
 <!-- example: 2026-05-29T10:14:32Z — picked TDD over BDD this run; the team is unit-first and the domain is well-understood -->
 
 ## Open questions

@@ -1,0 +1,20 @@
+{
+  "stage": "domain-design",
+  "upstream_ids": [
+    "US1.1", "US1.2", "US2.1", "US3.1", "US4.1", "US5.1",
+    "US6.1", "US7.1", "US8.1", "US8.2", "US9.1"
+  ],
+  "coverage": [
+    { "id": "US1.1", "status": "OK", "target": "家族とメンバー" },
+    { "id": "US1.2", "status": "OK", "target": "家族とメンバー" },
+    { "id": "US2.1", "status": "OK", "target": "お手伝いの種類" },
+    { "id": "US3.1", "status": "OK", "target": "カレンダー（担当と記録）" },
+    { "id": "US4.1", "status": "OK", "target": "カレンダー（担当と記録）" },
+    { "id": "US5.1", "status": "OK", "target": "カレンダー（担当と記録）" },
+    { "id": "US6.1", "status": "OK", "target": "カレンダー（担当と記録）" },
+    { "id": "US7.1", "status": "OK", "target": "カレンダー（担当と記録）" },
+    { "id": "US8.1", "status": "OK", "target": "お小遣い" },
+    { "id": "US8.2", "status": "OK", "target": "お小遣い" },
+    { "id": "US9.1", "status": "OK", "target": "お知らせ" }
+  ]
+}
