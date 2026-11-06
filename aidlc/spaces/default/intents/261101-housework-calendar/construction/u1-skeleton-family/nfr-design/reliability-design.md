@@ -62,6 +62,17 @@ await dynamodb.transactWrite({
 - 本番のテーブルは、CDK スタックを消してもテーブルが消えないように `removalPolicy: RemovalPolicy.RETAIN` を設定する
 - ポイントインタイムリカバリは費用がかかるので使わない
 
+## LINE に問い合わせられなかったときのフォールバック（NFR2.4）
+
+`requireAuth` の中で `lineApiService.getProfile` の呼び出し（BR1.11）が LINE のエラーまたは時間切れで失敗したとき、利用者を断らずリトライを促す。
+
+1. LINE の API が 5 秒（NFR7.5）を超えた、または 5xx を返した場合は、`{ ok: false, reason: 'LINE_API_UNAVAILABLE' }` を `familyMemberService` から返す（エラーを投げない）
+2. セッションの発行（`POST /sessions`）の入口がこれを受け取ったとき: 503 `{ error: { reason: 'SERVICE_TEMPORARILY_UNAVAILABLE' } }` を返す。これは 500 ではなく 503 で返すことで、画面がリトライを自動的に試みられるようにする
+3. 画面は 503 を受け取ったとき: 「表示できませんでした。もう一度お試しください」と「読み込み直す」ボタンを出す（FR4.5 と同じ扱い）
+4. ログには LINE の API の失敗として記録する（秘密の情報は含めない）
+
+この設計は、LINE の API が一時的に遅いときも利用者が使えなくなるのを防ぎます。LINE が本当に使えない状態が続く場合は、作り手が CloudWatch Logs で気づきます。
+
 ## Sources
 
 - `nfr-requirements/reliability-requirements.md`（NFR2.1〜NFR2.4、NFR6.1〜NFR6.2）

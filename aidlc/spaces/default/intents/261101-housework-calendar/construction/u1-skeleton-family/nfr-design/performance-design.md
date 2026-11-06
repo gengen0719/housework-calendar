@@ -8,7 +8,8 @@ Lambda の起動の時間を小さくする方法です。
 
 | 対策 | 内容 |
 |------|------|
-| メモリの大きさ [Q4] | 画面用と LINE 用の Lambda のメモリを 256 MB から始める（NFR7.4）。B1 でステージングで計測し、必要なら調整する |
+| メモリの大きさ（NFR7.1〜7.3） | 画面用と LINE 用の Lambda のメモリを 256 MB から始める。B1 でステージングで計測し、必要なら調整する |
+| Lambda の時間切れ（NFR7.4） | CDK の `timeout: Duration.seconds(30)` で設定する。30 秒を超えたら Lambda が強制終了して 504 が返る |
 | DynamoDB クライアントの使い回し [Q5] | グローバルのスコープで DynamoDB のクライアントを 1 つ作り、要求のたびに使い回す。パラメータストアの値も起動のときに 1 回だけ読む |
 | バンドルの大きさ | esbuild で Lambda のコードをまとめる（Tree Shaking）。AWS SDK v3 はモジュールごとに読み込み、使うものだけにする |
 | TypeScript の実行 | Lambda には JavaScript にまとめたファイルを配備し、TypeScript のコンパイルは配備の前に行う（Lambda の実行時に `ts-node` は使わない） |

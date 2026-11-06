@@ -100,13 +100,19 @@ const CreateFamilySchema = z.object({
 
 CloudFront のレスポンスヘッダーポリシーで付ける（Lambda の中で付けない）。
 
-| ヘッダー | 値（一例。許す配信元は NFR の設計の次に詳しく決める） |
+| ヘッダー | 値（React の npm パッケージを使うため、LIFF の CDN の script-src は不要） |
 |---------|------|
-| `Content-Security-Policy` | `default-src 'self'; script-src 'self' https://static.line-scdn.net; connect-src 'self' https://api.line.me; frame-ancestors 'none'` |
+| `Content-Security-Policy` | `default-src 'self'; script-src 'self'; connect-src 'self' https://api.line.me https://access.line.me; img-src 'self' data: https://profile.line-scdn.net; frame-ancestors 'none'` |
 | `X-Content-Type-Options` | `nosniff` |
 | `Referrer-Policy` | `strict-origin-when-cross-origin` |
 | `Strict-Transport-Security` | `max-age=63072000; includeSubDomains; preload` |
 | `X-Frame-Options` | `DENY` |
+
+CSP の根拠:
+- `script-src 'self'`: React のビルド済みファイルは S3 から CloudFront 経由で配信。LIFF SDK は npm パッケージ（`@line/liff`）としてバンドルするため CDN の URL は不要
+- `connect-src ... https://api.line.me`: ID トークンの確かめ（C4）、プロフィールの取得。`https://access.line.me` は LINE ログインの認証フロー
+- `img-src ... https://profile.line-scdn.net`: LINE の利用者のアイコン（表示する場合）
+- LIFF が内部で追加の配信元を必要とする場合（例: LINE アプリ内の WebView が追加するヘッダー）は、コード生成で LIFF の動作を確かめて必要なら足す
 
 React では `dangerouslySetInnerHTML` を使わない。ESLint に `eslint-plugin-react` の `no-danger` ルールを有効にする（NFR4.12）。
 
@@ -156,5 +162,5 @@ CI の秘密の情報の検査は `gitleaks` または `git-secrets` を使う�
 
 ## Assumptions & Open Questions
 
-- CSP の許す配信元の細かい一覧（LINE の SDK の URL など）は、コード生成のときに LINE の最新の案内で確かめます
+- CSP の許す配信元の細かい一覧は、LIFF の npm パッケージを使うため `static.line-scdn.net` の `script-src` は不要で、上の表に確定値を記載しました。LIFF が LINE アプリ内の WebView で追加の配信元を必要とする場合は、コード生成で `Content-Security-Policy-Report-Only` を使って確かめて足します
 - CloudFront の秘密のヘッダーの値を CDK の反映のときに入れる仕組みの詳細（CDK の Custom Resource か、GitHub Actions のステップで `aws cloudfront` を呼ぶか）はコード生成で決めます
