@@ -10307,3 +10307,388 @@
 **Review File Digest**: .aidlc-engine/reviews/nfr-design/units/u1-skeleton-family/924f2e3cbd1e4ff0/2.98c71487db9cc6666863a1a33ffe520c.review.md=absent
 
 ---
+
+## Human Turn
+**Timestamp**: 2026-11-07T13:01:26Z
+**Event**: HUMAN_TURN
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Origin**: person
+**Source**: typed
+**Message Id**: e890cc67
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-07T13:01:49Z
+**Event**: REVIEW_COMPLETED
+**Stage**: nfr-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u1-skeleton-family
+**Iteration**: 2
+**Verdict**: NOT-READY
+**Review Finished**: no
+**Request Fingerprint**: sha256:3aa9b46f0cf375306d20c9b3a3c0cc49e6a434215d5123f76934f285c239cdfe
+**Artifact Fingerprint**: sha256:3aa9b46f0cf375306d20c9b3a3c0cc49e6a434215d5123f76934f285c239cdfe
+**Request Id**: review:98c71487db9cc6666863a1a33ffe520c
+**Review Record**: .aidlc-engine/reviews/nfr-design/units/u1-skeleton-family/924f2e3cbd1e4ff0/2.json
+**Review Record Digest**: sha256:cd5ec95ff19fbc894e5f65b783615a71a3ed8e8fd5572d0e19b51f2ff3e03aa8
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-07T13:01:59Z
+**Event**: UNIT_STARTED
+**Stage**: nfr-design
+**Unit**: u1-skeleton-family
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-07T13:02:03Z
+**Event**: UNIT_COMPLETED
+**Stage**: nfr-design
+**Unit**: u1-skeleton-family
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-07T13:02:52Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-design-questions.md
+**Context**: construction > u1-skeleton-family > infrastructure-design > infrastructure-design-questions.md
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-07T13:06:09Z
+**Event**: HUMAN_TURN
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Origin**: person
+**Source**: typed
+**Message Id**: 18e2fd76
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-07T13:06:38Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-design-questions.md
+**Context**: construction > u1-skeleton-family > infrastructure-design > infrastructure-design-questions.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-07T13:06:42Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-design-questions.md
+**Context**: construction > u1-skeleton-family > infrastructure-design > infrastructure-design-questions.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-07T13:06:44Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-design-questions.md
+**Context**: construction > u1-skeleton-family > infrastructure-design > infrastructure-design-questions.md
+
+---
+
+## Decision Recorded
+**Timestamp**: 2026-11-07T13:06:45Z
+**Event**: DECISION_RECORDED
+**Stage**: infrastructure-design
+**Decision**: Does this all look correct before I generate the artifact?
+**Options**: Looks correct,Request changes
+**Checkpoint**: Consolidated Summary Confirmation
+**Questions File**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-design-questions.md
+**Unit**: u1-skeleton-family
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-07T13:08:37Z
+**Event**: HUMAN_TURN
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Origin**: person
+**Source**: typed
+**Message Id**: 2f0c6d5f
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-07T13:09:00Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-design-questions.md
+**Context**: construction > u1-skeleton-family > infrastructure-design > infrastructure-design-questions.md
+
+---
+
+## Summary Confirmation Recorded
+**Timestamp**: 2026-11-07T13:09:01Z
+**Event**: SUMMARY_CONFIRMATION_RECORDED
+**Stage**: infrastructure-design
+**Details**: Looks correct
+**Checkpoint**: Consolidated Summary Confirmation
+**Questions File**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-design-questions.md
+**Questions SHA-256**: b0d64e40190d603ac7d46d888d266b963a2b57110b0d7b903465d1d1c31c9e84
+**Hash Scope**: confirmed-content-v2
+**Unit**: u1-skeleton-family
+**Message Id**: 2f0c6d5f
+**Message Ids**: c3a3cba5,f6b79ec1,e890cc67,18e2fd76,2f0c6d5f
+**Person Reply**: continue\nresume\ncontinue\ndone\n1
+**Summary Authorization Id**: e8e96109618577c2bd716c1a896cb73cf052c2a09c5673303adf8bf494e613be
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-07T13:10:08Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-specification.md
+**Context**: construction > u1-skeleton-family > infrastructure-design > infrastructure-specification.md
+**Summary Authorization Id**: e8e96109618577c2bd716c1a896cb73cf052c2a09c5673303adf8bf494e613be
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-07T13:10:35Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/monitoring-design.md
+**Context**: construction > u1-skeleton-family > infrastructure-design > monitoring-design.md
+**Summary Authorization Id**: e8e96109618577c2bd716c1a896cb73cf052c2a09c5673303adf8bf494e613be
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-07T13:10:46Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u1-skeleton-family > infrastructure-design > cicd-pipeline.md
+**Summary Authorization Id**: e8e96109618577c2bd716c1a896cb73cf052c2a09c5673303adf8bf494e613be
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-07T13:11:00Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/traceability.json
+**Context**: construction > u1-skeleton-family > infrastructure-design > traceability.json
+**Summary Authorization Id**: e8e96109618577c2bd716c1a896cb73cf052c2a09c5673303adf8bf494e613be
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-07T13:11:01Z
+**Event**: SENSOR_FIRED
+**Fire id**: c7af59cc
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-specification.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-07T13:11:01Z
+**Event**: SENSOR_PASSED
+**Fire id**: c7af59cc
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-specification.md
+**Duration ms**: 49
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-07T13:11:01Z
+**Event**: SENSOR_FIRED
+**Fire id**: a04f20d7
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/monitoring-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-07T13:11:01Z
+**Event**: SENSOR_PASSED
+**Fire id**: a04f20d7
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/monitoring-design.md
+**Duration ms**: 49
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-07T13:11:01Z
+**Event**: SENSOR_FIRED
+**Fire id**: fe04aaf2
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/cicd-pipeline.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-07T13:11:01Z
+**Event**: SENSOR_PASSED
+**Fire id**: fe04aaf2
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/cicd-pipeline.md
+**Duration ms**: 49
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-07T13:11:01Z
+**Event**: SENSOR_FIRED
+**Fire id**: a7d42b3f
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-07T13:11:01Z
+**Event**: SENSOR_PASSED
+**Fire id**: a7d42b3f
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/traceability.json
+**Duration ms**: 49
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-07T13:11:01Z
+**Event**: SENSOR_FIRED
+**Fire id**: 4347ccd2
+**Sensor ID**: upstream-coverage
+**Stage slug**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-specification.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-07T13:11:01Z
+**Event**: SENSOR_PASSED
+**Fire id**: 4347ccd2
+**Sensor ID**: upstream-coverage
+**Stage slug**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/infrastructure-design/infrastructure-specification.md
+**Duration ms**: 49
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-07T13:11:01Z
+**Event**: REVIEW_REQUESTED
+**Stage**: infrastructure-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u1-skeleton-family
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:957628364a3104fd00aae38b69cb154883e71f5bef4693f0f91b0fec752733e3
+**Request Id**: review:9d6cc70c03d68d73e709a1cd8ad27f0a
+**Review File**: .aidlc-engine/reviews/infrastructure-design/units/u1-skeleton-family/924f2e3cbd1e4ff0/1.9d6cc70c03d68d73e709a1cd8ad27f0a.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-07T13:11:17Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architecture-reviewer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-07T13:11:47Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\nレビューを書きました。判定は READY です（Major 1 件、Minor 2 件）。\n\n- **Major:** CloudFront の秘密のヘッダーの値は `cloudfront/*` にあり、cicd-pipeline.md は Lambda がそれを起動のときに読むと書いています。しかし
+**Review File Digest**: .aidlc-engine/reviews/infrastructure-design/units/u1-skeleton-family/924f2e3cbd1e4ff0/1.9d6cc70c03d68d73e709a1cd8ad27f0a.review.md=b8fd416a2f0c19eaebdc1127cb8f50e010cb3df31d3724d8c30da1b478a9f2f4
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-07T13:12:04Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/infrastructure-design/units/u1-skeleton-family/924f2e3cbd1e4ff0/1.9d6cc70c03d68d73e709a1cd8ad27f0a.review.md
+**Context**: .aidlc-engine > reviews > infrastructure-design > units > u1-skeleton-family > 924f2e3cbd1e4ff0 > 1.9d6cc70c03d68d73e709a1cd8ad27f0a.review.md
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-07T13:12:04Z
+**Event**: REVIEW_COMPLETED
+**Stage**: infrastructure-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u1-skeleton-family
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:957628364a3104fd00aae38b69cb154883e71f5bef4693f0f91b0fec752733e3
+**Artifact Fingerprint**: sha256:957628364a3104fd00aae38b69cb154883e71f5bef4693f0f91b0fec752733e3
+**Request Id**: review:9d6cc70c03d68d73e709a1cd8ad27f0a
+**Review Record**: .aidlc-engine/reviews/infrastructure-design/units/u1-skeleton-family/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:013a6e5a18e28c77ed4f5f2b56b65e6e58cd784890c0d466b1bd2416799e08fb
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-07T13:12:17Z
+**Event**: UNIT_STARTED
+**Stage**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-07T13:12:23Z
+**Event**: UNIT_COMPLETED
+**Stage**: infrastructure-design
+**Unit**: u1-skeleton-family
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-07T13:14:28Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/code-generation/code-generation-plan.md
+**Context**: construction > u1-skeleton-family > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-07T13:14:44Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u1-skeleton-family/code-generation/unit-test-instructions.md
+**Context**: construction > u1-skeleton-family > code-generation > unit-test-instructions.md
+
+---
