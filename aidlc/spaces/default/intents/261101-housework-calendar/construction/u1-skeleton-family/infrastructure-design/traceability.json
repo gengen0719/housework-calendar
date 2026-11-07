@@ -1,0 +1,37 @@
+{
+  "stage": "infrastructure-design",
+  "unit": "u1-skeleton-family",
+  "upstream_ids": [
+    "NFR1.1", "NFR1.2", "NFR1.3", "NFR1.4", "NFR1.6", "NFR1.7",
+    "NFR2.7",
+    "NFR3.1",
+    "NFR4.11", "NFR4.13",
+    "NFR5.1", "NFR5.2", "NFR5.3", "NFR5.5", "NFR5.6",
+    "NFR6.2",
+    "NFR7.4",
+    "NFR8.3",
+    "NFR10.1", "NFR10.2"
+  ],
+  "coverage": [
+    { "id": "NFR1.1", "status": "OK", "target": "Lambda, CloudFront, S3, DynamoDB on-demand, SSM standard, CloudWatch Logs (infrastructure-specification.md Infrastructure Services)" },
+    { "id": "NFR1.2", "status": "OK", "target": "No API Gateway / Secrets Manager; Lambda function URLs behind CloudFront" },
+    { "id": "NFR1.3", "status": "OK", "target": "CloudWatch log groups per Lambda, 30-day retention" },
+    { "id": "NFR1.4", "status": "OK", "target": "DynamoDB TTL on ProcessedLineEvents (7d) and RequestRecords (24h)" },
+    { "id": "NFR1.6", "status": "OK", "target": "Lambda reserved concurrency 5 per function (quota check before B1)" },
+    { "id": "NFR1.7", "status": "OK", "target": "AWS Budgets USD 1 monthly in Housework-Account stack" },
+    { "id": "NFR2.7", "status": "OK", "target": "CloudWatch log groups 30-day retention" },
+    { "id": "NFR3.1", "status": "OK", "target": "Serverless only: Lambda + CloudFront + S3 + DynamoDB, no VPC/EC2/ECS" },
+    { "id": "NFR4.11", "status": "OK", "target": "CloudFront response headers policy (CSP, nosniff, Referrer-Policy, HSTS, X-Frame-Options)" },
+    { "id": "NFR4.13", "status": "OK", "target": "CloudFront origin custom header X-Origin-Verify to both function URLs; direct call returns 403 (post-deploy check)" },
+    { "id": "NFR5.1", "status": "OK", "target": "SSM Parameter Store SecureString under /housework-calendar/<env>/" },
+    { "id": "NFR5.2", "status": "OK", "target": "gitleaks step in ci.yml" },
+    { "id": "NFR5.3", "status": "OK", "target": "Per-Lambda IAM roles scoped to own env tables and parameter paths" },
+    { "id": "NFR5.5", "status": "OK", "target": "GitHub OIDC roles (staging: main ref; production: environment production)" },
+    { "id": "NFR5.6", "status": "OK", "target": "ci.yml without id-token permission or secrets for fork PRs" },
+    { "id": "NFR6.2", "status": "OK", "target": "Housework-<env>-Data stack, DynamoDB RemovalPolicy RETAIN in production" },
+    { "id": "NFR7.4", "status": "OK", "target": "Lambda timeout 30 seconds" },
+    { "id": "NFR8.3", "status": "OK", "target": "ci.yml required by branch protection (Prettier, ESLint, tsc, Vitest coverage, gitleaks, cdk synth)" },
+    { "id": "NFR10.1", "status": "OK", "target": "Separate staging/production stacks and parameter paths in one account" },
+    { "id": "NFR10.2", "status": "OK", "target": "deploy-staging.yml on main push; deploy-production.yml workflow_dispatch with environment approval" }
+  ]
+}
