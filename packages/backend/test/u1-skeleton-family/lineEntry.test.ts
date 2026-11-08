@@ -138,6 +138,31 @@ describe('config', () => {
     resetConfigCache();
   });
 
+  it('LINE 用の受け口は、使う 4 つの値だけを読み、JWT の鍵は読まない', async () => {
+    const world = setupWorld();
+    process.env.ENTRY = 'line';
+    const config = await getConfig();
+    const names = world.ssm.commandCalls(GetParametersCommand)[0]?.args[0].input.Names ?? [];
+    expect(names).toHaveLength(4);
+    expect(names.some((n) => n.includes('/jwt/'))).toBe(false);
+    expect(names.some((n) => n.endsWith('/line/login-channel-id'))).toBe(false);
+    expect(config.channelSecret).toBe('test-channel-secret');
+    expect(() => config.signingSecret).toThrow('読みません');
+  });
+
+  it('画面用の入口は 6 つの値すべてを読む', async () => {
+    const world = setupWorld();
+    process.env.ENTRY = 'api';
+    const config = await getConfig();
+    expect(world.ssm.commandCalls(GetParametersCommand)[0]?.args[0].input.Names).toHaveLength(6);
+    expect(config.signingSecret).toBeTruthy();
+  });
+
+  it('知らない入口なら分かる言葉で失敗する', async () => {
+    setupWorld();
+    await expect(loadConfig(undefined, SSM_PREFIX, 'other')).rejects.toThrow('知らない入口');
+  });
+
   it('SSM_PREFIX が未設定なら分かる言葉で失敗する', async () => {
     setupWorld();
     delete process.env.SSM_PREFIX;

@@ -21,6 +21,18 @@ const PARAMETER_PATHS: Record<keyof AppConfig, string> = {
   originVerifySecret: 'cloudfront/origin-verify-secret',
 };
 
+const ALL_KEYS = Object.keys(PARAMETER_PATHS) as (keyof AppConfig)[];
+
+/**
+ * 入口（環境変数 ENTRY）ごとに読む値。Lambda のロールは、この値の分だけ読む権限を持つ
+ * （infrastructure/lib/app-stack.ts の grantParameters と合わせる）。
+ * LINE 用の受け口は JWT の鍵もログインのチャネル ID も使わないので、読まない（読む権限もない）。
+ */
+const KEYS_BY_ENTRY: Record<string, readonly (keyof AppConfig)[]> = {
+  api: ALL_KEYS,
+  line: ['channelSecret', 'channelAccessToken', 'liffUrl', 'originVerifySecret'],
+};
+
 export function requireEnv(name: string): string {
   const value = process.env[name];
   if (!value) throw new Error(`環境変数 ${name} が設定されていません`);
@@ -30,8 +42,11 @@ export function requireEnv(name: string): string {
 export async function loadConfig(
   client: SSMClient = new SSMClient({}),
   prefix: string = requireEnv('SSM_PREFIX'),
+  entry: string = process.env.ENTRY ?? 'api',
 ): Promise<AppConfig> {
-  const names = Object.values(PARAMETER_PATHS).map((path) => `${prefix}/${path}`);
+  const keys = KEYS_BY_ENTRY[entry];
+  if (!keys) throw new Error(`知らない入口です（環境変数 ENTRY）: ${entry}`);
+  const names = keys.map((key) => `${prefix}/${PARAMETER_PATHS[key]}`);
   const response = await client.send(
     new GetParametersCommand({ Names: names, WithDecryption: true }),
   );
@@ -40,10 +55,21 @@ export async function loadConfig(
     throw new Error(`パラメータストアに値がありません: ${response.InvalidParameters.join(', ')}`);
   }
   const byName = new Map((response.Parameters ?? []).map((p) => [p.Name, p.Value]));
-  const config = {} as Record<keyof AppConfig, string>;
-  for (const [key, path] of Object.entries(PARAMETER_PATHS) as [keyof AppConfig, string][]) {
-    const value = byName.get(`${prefix}/${path}`);
-    if (!value) throw new Error(`パラメータストアの値が空です: ${prefix}/${path}`);
+  const config = {} as AppConfig;
+  for (const key of ALL_KEYS) {
+    const path = `${prefix}/${PARAMETER_PATHS[key]}`;
+    if (!keys.includes(key)) {
+      // この入口では読まない値。間違って使ったら、空の値で動かずにすぐ分かるよう止める
+      Object.defineProperty(config, key, {
+        enumerable: false,
+        get() {
+          throw new Error(`入口 ${entry} では ${path} を読みません`);
+        },
+      });
+      continue;
+    }
+    const value = byName.get(path);
+    if (!value) throw new Error(`パラメータストアの値が空です: ${path}`);
     config[key] = value;
   }
   return config;
