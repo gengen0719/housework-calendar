@@ -13,3 +13,6 @@
 # 今のファイルでは test/fixtures/fakeSecrets.ts から読み、ESLint で直書きを止めている。ここに並べているのは、直す前のコミット 6bee814 の検出。
 6bee814c6a9cdd26b0a4cb371897688822692e13:infrastructure/test/u2-invitation/stacks.test.ts:generic-api-key:22
 6bee814c6a9cdd26b0a4cb371897688822692e13:infrastructure/test/u3-notification-group/stacks.test.ts:generic-api-key:22
+# 2026-11-08: U4 のコードのレビューの記録（aidlc の review-01.md）に、ESLint のルールの穴を示す例として書かれた作り物の値（`const token = \`abcdefgh1234\``）。
+# 本物の秘密の情報ではない。レビューの記録は AI-DLC が書いたもので書き換えないため、コミット 630a016 の検出をここに足す。
+630a016ecc6f83ddf8cb4297620983f6ae59be9d:aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/code-generation/reviews/review-01.md:generic-api-key:32
