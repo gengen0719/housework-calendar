@@ -1,0 +1,36 @@
+{
+  "stage": "code-generation",
+  "unit": "u2-invitation",
+  "upstream_ids": [
+    "AC1.1.1", "AC1.1.2", "AC1.1.3", "AC1.1.4", "AC1.1.5", "AC1.1.6", "AC1.1.7",
+    "AC1.1.8", "AC1.1.9", "AC1.1.10", "AC1.1.11", "AC1.1.12", "AC1.1.13",
+    "BR3.1", "BR3.2", "BR3.3", "BR3.4", "BR3.5", "BR3.6", "BR3.7", "BR3.8", "BR3.9", "BR3.10", "BR3.11", "BR3.12"
+  ],
+  "coverage": [
+    { "id": "AC1.1.1", "status": "N/A", "target": "delivered by u1-skeleton-family" },
+    { "id": "AC1.1.2", "status": "N/A", "target": "delivered by u1-skeleton-family" },
+    { "id": "AC1.1.3", "status": "N/A", "target": "delivered by u1-skeleton-family" },
+    { "id": "AC1.1.4", "status": "N/A", "target": "delivered by u1-skeleton-family" },
+    { "id": "AC1.1.5", "status": "N/A", "target": "delivered by u1-skeleton-family" },
+    { "id": "AC1.1.6", "status": "OK", "target": "packages/backend/test/u2-invitation/create-invitation.feature" },
+    { "id": "AC1.1.7", "status": "OK", "target": "packages/backend/test/u2-invitation/accept-invitation.feature" },
+    { "id": "AC1.1.8", "status": "OK", "target": "packages/backend/test/u2-invitation/accept-invitation.feature" },
+    { "id": "AC1.1.9", "status": "OK", "target": "packages/backend/test/u2-invitation/accept-invitation.feature" },
+    { "id": "AC1.1.10", "status": "N/A", "target": "delivered by u1-skeleton-family" },
+    { "id": "AC1.1.11", "status": "N/A", "target": "delivered by u1-skeleton-family" },
+    { "id": "AC1.1.12", "status": "N/A", "target": "delivered by u1-skeleton-family" },
+    { "id": "AC1.1.13", "status": "OK", "target": "packages/backend/test/u2-invitation/create-invitation.feature" },
+    { "id": "BR3.1", "status": "OK", "target": "packages/backend/src/services/familyMemberService.ts" },
+    { "id": "BR3.2", "status": "OK", "target": "packages/backend/src/services/invitationTokenService.ts" },
+    { "id": "BR3.3", "status": "OK", "target": "packages/backend/test/u2-invitation/accept-invitation.feature" },
+    { "id": "BR3.4", "status": "OK", "target": "packages/backend/src/repositories/familyRepository.ts" },
+    { "id": "BR3.5", "status": "OK", "target": "packages/backend/src/repositories/requestRecordRepository.ts" },
+    { "id": "BR3.6", "status": "OK", "target": "packages/backend/src/services/familyMemberService.ts" },
+    { "id": "BR3.7", "status": "OK", "target": "packages/backend/src/services/familyMemberService.ts" },
+    { "id": "BR3.8", "status": "OK", "target": "packages/backend/src/repositories/userRepository.ts" },
+    { "id": "BR3.9", "status": "OK", "target": "packages/frontend/src/pages/InvitationPage.tsx" },
+    { "id": "BR3.10", "status": "OK", "target": "packages/frontend/src/pages/RegisterPage.tsx" },
+    { "id": "BR3.11", "status": "OK", "target": "packages/backend/src/handlers/family/listMembers.ts" },
+    { "id": "BR3.12", "status": "OK", "target": "packages/frontend/src/pages/FamilySettingsPage.tsx" }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "stage": "nfr-design",
+  "unit": "u4-chore-types",
+  "upstream_ids": [
+    "NFR1.16", "NFR1.17", "NFR1.18",
+    "NFR2.24", "NFR2.25", "NFR2.26", "NFR2.27",
+    "NFR3.5",
+    "NFR4.34", "NFR4.35", "NFR4.36", "NFR4.37", "NFR4.38", "NFR4.39", "NFR4.40", "NFR4.41",
+    "NFR6.5",
+    "NFR7.17", "NFR7.18", "NFR7.19",
+    "NFR8.7", "NFR8.8",
+    "NFR9.4",
+    "NFR11.3"
+  ],
+  "coverage": [
+    { "id": "NFR1.16", "status": "OK", "target": "scalability-design.md Lambda（api に足す）、テーブルの形" },
+    { "id": "NFR1.17", "status": "OK", "target": "scalability-design.md テーブルの形（familyId の Query、続きを最後まで）" },
+    { "id": "NFR1.18", "status": "OK", "target": "scalability-design.md 読み書きの量の見込み（登録は 2 件 + 送り直しの記録）" },
+    { "id": "NFR2.24", "status": "OK", "target": "reliability-design.md 登録、変更" },
+    { "id": "NFR2.25", "status": "OK", "target": "reliability-design.md 消す" },
+    { "id": "NFR2.26", "status": "OK", "target": "reliability-design.md 登録の 3、変更の 4" },
+    { "id": "NFR2.27", "status": "OK", "target": "observability-design.md 種類のできごとのログ" },
+    { "id": "NFR3.5", "status": "OK", "target": "scalability-design.md Lambda" },
+    { "id": "NFR4.34", "status": "OK", "target": "security-design.md 振り分けと確かめの順番" },
+    { "id": "NFR4.35", "status": "OK", "target": "security-design.md 振り分けと確かめの順番（GET は requireMembership）、scalability-design.md 一覧の Query" },
+    { "id": "NFR4.36", "status": "OK", "target": "security-design.md 種類の GetItem のキーに ctx.familyId" },
+    { "id": "NFR4.37", "status": "OK", "target": "security-design.md 入力の確かめ（共有の関数、zod）" },
+    { "id": "NFR4.38", "status": "OK", "target": "security-design.md 画面（React の文字、pre-wrap）" },
+    { "id": "NFR4.39", "status": "OK", "target": "security-design.md 送り直し、reliability-design.md 登録の 1〜2" },
+    { "id": "NFR4.40", "status": "OK", "target": "security-design.md 入力の確かめ（PATCH は z.boolean、ID の形）" },
+    { "id": "NFR4.41", "status": "OK", "target": "security-design.md 振り分けと確かめの順番の表" },
+    { "id": "NFR6.5", "status": "OK", "target": "reliability-design.md データと時刻（RETAIN）" },
+    { "id": "NFR7.17", "status": "OK", "target": "performance-design.md 時間の配分（一覧）" },
+    { "id": "NFR7.18", "status": "OK", "target": "performance-design.md 時間の配分（登録・変更など）" },
+    { "id": "NFR7.19", "status": "OK", "target": "observability-design.md かかった時間" },
+    { "id": "NFR8.7", "status": "OK", "target": "reliability-design.md 筋書きにする競合と失敗" },
+    { "id": "NFR8.8", "status": "OK", "target": "logical-components.md services/calendarPort.ts（差し替えられる仮の C8）" },
+    { "id": "NFR9.4", "status": "OK", "target": "logical-components.md ChoreTypesPage（U1 の MUI のテーマ）" },
+    { "id": "NFR11.3", "status": "OK", "target": "reliability-design.md データと時刻（UTC）" }
+  ]
+}

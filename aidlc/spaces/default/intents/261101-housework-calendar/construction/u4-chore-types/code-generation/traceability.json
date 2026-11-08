@@ -1,0 +1,29 @@
+{
+  "stage": "code-generation",
+  "unit": "u4-chore-types",
+  "upstream_ids": [
+    "AC2.1.1", "AC2.1.2", "AC2.1.3", "AC2.1.4", "AC2.1.5", "AC2.1.6", "AC2.1.7",
+    "BR5.1", "BR5.2", "BR5.3", "BR5.4", "BR5.5", "BR5.6", "BR5.7", "BR5.8", "BR5.9", "BR5.10", "BR5.11", "BR5.12"
+  ],
+  "coverage": [
+    { "id": "AC2.1.1", "status": "OK", "target": "packages/backend/test/u4-chore-types/create-chore-type.feature" },
+    { "id": "AC2.1.2", "status": "OK", "target": "packages/frontend/test/u4-chore-types/screens.feature" },
+    { "id": "AC2.1.3", "status": "OK", "target": "packages/backend/test/u4-chore-types/create-chore-type.feature" },
+    { "id": "AC2.1.4", "status": "OK", "target": "packages/backend/test/u4-chore-types/update-chore-type.feature" },
+    { "id": "AC2.1.5", "status": "OK", "target": "packages/backend/test/u4-chore-types/update-chore-type.feature" },
+    { "id": "AC2.1.6", "status": "OK", "target": "packages/backend/test/u4-chore-types/update-chore-type.feature" },
+    { "id": "AC2.1.7", "status": "OK", "target": "packages/backend/test/u4-chore-types/update-chore-type.feature" },
+    { "id": "BR5.1", "status": "OK", "target": "packages/backend/src/handlers/choreType/create.ts" },
+    { "id": "BR5.2", "status": "OK", "target": "packages/shared/src/choreTypeValidation.ts" },
+    { "id": "BR5.3", "status": "OK", "target": "packages/backend/src/repositories/choreTypeRepository.ts" },
+    { "id": "BR5.4", "status": "OK", "target": "packages/frontend/src/pages/ChoreTypesPage.tsx" },
+    { "id": "BR5.5", "status": "OK", "target": "packages/shared/src/choreTypeValidation.ts" },
+    { "id": "BR5.6", "status": "OK", "target": "packages/shared/src/choreTypeValidation.ts" },
+    { "id": "BR5.7", "status": "OK", "target": "packages/backend/src/services/choreTypeService.ts" },
+    { "id": "BR5.8", "status": "OK", "target": "packages/backend/src/handlers/choreType/setActive.ts" },
+    { "id": "BR5.9", "status": "OK", "target": "packages/backend/src/handlers/choreType/remove.ts" },
+    { "id": "BR5.10", "status": "OK", "target": "packages/backend/src/handlers/choreType/choreTypeId.ts" },
+    { "id": "BR5.11", "status": "OK", "target": "packages/backend/src/services/choreTypeService.ts" },
+    { "id": "BR5.12", "status": "OK", "target": "packages/backend/src/services/choreTypeService.ts" }
+  ]
+}

@@ -10,11 +10,16 @@ export class LineApiError extends Error {
   constructor(
     message: string,
     readonly status?: number,
+    /** 時間切れで打ち切ったとき true */
+    readonly timedOut: boolean = false,
   ) {
     super(message);
     this.name = 'LineApiError';
   }
 }
+
+/** グループの名前を受け取る時間切れ（NFR7.14。reply トークンの期限と 3 秒の目安に収める） */
+export const GROUP_SUMMARY_TIMEOUT_MS = 2000;
 
 export interface LineProfile {
   displayName: string;
@@ -22,7 +27,11 @@ export interface LineProfile {
 
 export type LineMessage = Record<string, unknown>;
 
-async function callLine(path: string, init: RequestInit): Promise<Response> {
+export async function callLine(
+  path: string,
+  init: RequestInit,
+  timeoutMs: number = LINE_API_TIMEOUT_MS,
+): Promise<Response> {
   const { channelAccessToken } = await getConfig();
   try {
     return await fetch(`${LINE_API}${path}`, {
@@ -32,12 +41,15 @@ async function callLine(path: string, init: RequestInit): Promise<Response> {
         'Content-Type': 'application/json',
         ...init.headers,
       },
-      signal: AbortSignal.timeout(LINE_API_TIMEOUT_MS),
+      signal: AbortSignal.timeout(timeoutMs),
     });
-  } catch {
+  } catch (cause) {
     // 時間切れ・通信の失敗。トークンを含む情報は載せない
+    const timedOut = cause instanceof Error && cause.name === 'TimeoutError';
     throw new LineApiError(
       `LINE API への接続に失敗しました: ${path.split('/').slice(0, 4).join('/')}`,
+      undefined,
+      timedOut,
     );
   }
 }
@@ -98,6 +110,50 @@ export async function verifyIdToken(
     typeof data.exp === 'number' &&
     data.exp > Math.floor(now.getTime() / 1000);
   return valid ? ok({ sub: data.sub as string }) : err('UNAUTHENTICATED');
+}
+
+export type GroupSummaryFailure = 'timeout' | `http_${number}` | 'connection' | 'invalid';
+
+/**
+ * グループの名前を受け取る（C4、BR4.8）。2 秒で打ち切り、受け取れなくても投げない
+ * （登録は名前なしで続ける）。失敗の理由は 'timeout'、'http_<status>' など。
+ */
+export async function getGroupSummary(
+  groupId: string,
+): Promise<Result<{ groupName: string }, GroupSummaryFailure>> {
+  let response: Response;
+  try {
+    response = await callLine(
+      `/v2/bot/group/${encodeURIComponent(groupId)}/summary`,
+      { method: 'GET' },
+      GROUP_SUMMARY_TIMEOUT_MS,
+    );
+  } catch (cause) {
+    if (cause instanceof LineApiError) return err(cause.timedOut ? 'timeout' : 'connection');
+    throw cause;
+  }
+  if (!response.ok) return err(`http_${response.status}`);
+  const data = (await response.json().catch(() => ({}))) as { groupName?: unknown };
+  if (typeof data.groupName !== 'string' || data.groupName.length === 0) return err('invalid');
+  return ok({ groupName: data.groupName });
+}
+
+/** 返事に付ける、ボタン 1 つ（postback）つきのメッセージ。 */
+export function buildPostbackButtonMessage(input: {
+  altText: string;
+  text: string;
+  label: string;
+  data: string;
+}): LineMessage {
+  return {
+    type: 'template',
+    altText: input.altText,
+    template: {
+      type: 'buttons',
+      text: input.text,
+      actions: [{ type: 'postback', label: input.label, data: input.data }],
+    },
+  };
 }
 
 /** 返事を送る。reply トークンは 1 回だけなので、やり直さない（C4）。 */

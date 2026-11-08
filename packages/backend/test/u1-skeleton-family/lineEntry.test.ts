@@ -15,6 +15,7 @@ import {
   stubLineFetch,
   webhookRequest,
 } from './helpers/world';
+import { REDACTED_MARKER } from '../fixtures/fakeSecrets';
 
 const asResult = (r: unknown) => r as APIGatewayProxyStructuredResultV2;
 
@@ -183,7 +184,7 @@ describe('logger', () => {
     const line = JSON.parse(String(spy.mock.calls[0]?.[0]));
     expect(line.requestId).toBe('req-x');
     expect(line.channelSecret).toBe('[REDACTED]');
-    expect(line.nested).toEqual({ idToken: '[REDACTED]', ok: 1 });
+    expect(line.nested).toEqual({ idToken: REDACTED_MARKER, ok: 1 });
     expect(line.list).toEqual([{ body: '[REDACTED]' }]);
     expect(JSON.stringify(line)).not.toContain('abc');
   });

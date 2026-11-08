@@ -3,6 +3,7 @@ import type { APIGatewayProxyStructuredResultV2 } from 'aws-lambda';
 import { expect, vi } from 'vitest';
 import { handler } from '../../src/entries/line';
 import type { User } from '../../src/models';
+import { FAKE_WRONG_LINE_SIGNATURE } from '../fixtures/fakeSecrets';
 import {
   followEvent,
   HANAKO_LINE_ID,
@@ -144,7 +145,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
       expect(hanakoRecords()).toHaveLength(0);
     });
     When('間違った署名で友だち登録の Webhook が届く', async () => {
-      await send({ events: [followEvent()] }, { signature: 'bm90LXRoZS1yaWdodC1zaWduYXR1cmU=' });
+      await send({ events: [followEvent()] }, { signature: FAKE_WRONG_LINE_SIGNATURE });
     });
     Then('応答は 401 になる', () => {
       expect(response.statusCode).toBe(401);

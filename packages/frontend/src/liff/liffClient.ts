@@ -19,6 +19,11 @@ function ensureInit(): Promise<void> {
   return initPromise;
 }
 
+/** LIFF の初期化が終わるまで待つ（招待の印は初期化のあとに読む。NFR4.18）。 */
+export function ensureReady(): Promise<void> {
+  return ensureInit();
+}
+
 /**
  * LINE の ID トークンを返す。
  * LINE アプリの中では LIFF のまま、外のブラウザでは未ログインなら LINE ログインへ移る（BR）。

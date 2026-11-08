@@ -4,6 +4,11 @@ import type {
   Context,
 } from 'aws-lambda';
 import { handleFollow } from '../handlers/line/followHandler';
+import { isOneToOneRegisterRequest, parseGroupCommand } from '../handlers/line/groupCommand';
+import { handleJoin } from '../handlers/line/joinHandler';
+import { handleLeave } from '../handlers/line/leaveHandler';
+import { handleMessage } from '../handlers/line/messageHandler';
+import { handlePostback } from '../handlers/line/postbackHandler';
 import { handleUnfollow } from '../handlers/line/unfollowHandler';
 import { WebhookBodySchema, type LineEvent } from '../handlers/line/types';
 import { getConfig } from '../lib/config';
@@ -22,18 +27,33 @@ const json = (statusCode: number, body: unknown): APIGatewayProxyStructuredResul
   body: JSON.stringify(body),
 });
 
-const handlers: Record<string, (event: LineEvent, now: Date) => Promise<void>> = {
-  follow: handleFollow,
-  unfollow: handleUnfollow,
+interface EventRoute {
+  /** false なら、二度処理しない記録を書く前に終える（NFR3.4、NFR4.28） */
+  accepts: (event: LineEvent) => boolean;
+  handle: (event: LineEvent, now: Date) => Promise<void>;
+}
+
+const always = (): boolean => true;
+const isGroupOperation = (event: LineEvent): boolean =>
+  parseGroupCommand(event) !== null || isOneToOneRegisterRequest(event);
+
+const handlers: Record<string, EventRoute> = {
+  follow: { accepts: always, handle: handleFollow },
+  join: { accepts: always, handle: handleJoin },
+  leave: { accepts: always, handle: handleLeave },
+  unfollow: { accepts: always, handle: handleUnfollow },
+  message: { accepts: isGroupOperation, handle: handleMessage },
+  postback: { accepts: isGroupOperation, handle: handlePostback },
 };
 
 /** 1 件のイベントを、二度処理しないようにして扱う（BR2.7）。思いがけない失敗は記録を消して投げる。 */
 async function processEvent(event: LineEvent, now: Date): Promise<void> {
-  const handle = handlers[event.type];
-  if (!handle) {
+  const route = Object.hasOwn(handlers, event.type) ? handlers[event.type] : undefined;
+  if (!route || !route.accepts(event)) {
     logger.info({ event: 'LINE_EVENT_IGNORED', type: event.type });
     return;
   }
+  const { handle } = route;
   const { webhookEventId } = event;
   if (!webhookEventId) {
     logger.warn({ event: 'LINE_EVENT_SKIPPED', type: event.type, reason: 'no-event-id' });
@@ -43,6 +63,7 @@ async function processEvent(event: LineEvent, now: Date): Promise<void> {
     logger.info({ event: 'LINE_EVENT_DUPLICATE', type: event.type });
     return;
   }
+  const startedAt = Date.now();
   try {
     await handle(event, now);
   } catch (err) {
@@ -52,6 +73,7 @@ async function processEvent(event: LineEvent, now: Date): Promise<void> {
     throw err;
   }
   await lineEventRepository.markDone(webhookEventId, now);
+  logger.info({ event: 'LINE_EVENT_DONE', type: event.type, durationMs: Date.now() - startedAt });
 }
 
 /** LINE 用の受け口（Lambda 関数 URL）。確かめたあと、業務の結果にかかわらず 200。思いがけない失敗だけ 500（NFR4.8）。 */

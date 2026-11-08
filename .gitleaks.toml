@@ -1,0 +1,14 @@
+# gitleaks の設定。既定のルールをそのまま使い、読む必要のない生成物のフォルダだけを除く。
+# （手元の `npm run secrets:scan` が node_modules などを読まないようにするため。
+#   これらはどれも .gitignore の対象で、Git には入らない。）
+[extend]
+useDefault = true
+
+[allowlist]
+description = "生成物と依存パッケージのフォルダ"
+paths = [
+  '''(^|/)node_modules/''',
+  '''(^|/)dist/''',
+  '''(^|/)cdk\.out/''',
+  '''(^|/)coverage/''',
+]

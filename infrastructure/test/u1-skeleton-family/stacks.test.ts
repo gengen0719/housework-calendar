@@ -7,13 +7,21 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { buildApp } from '../../lib/app.js';
 import { CONTENT_SECURITY_POLICY } from '../../lib/app-stack.js';
 
-const DUMMY_SECRET = 'dummy-origin-verify-secret-for-tests';
+import {
+  FAKE_ORIGIN_VERIFY_SECRET,
+  GITHUB_OIDC_AUD_CONDITION_KEY,
+  GITHUB_OIDC_SUB_CONDITION_KEY,
+} from '../fixtures/fakeSecrets.js';
 let distDir: string;
 let templates: Record<string, Template>;
 
 function makeApp(context: Record<string, string>): App {
   return new App({
-    context: { originVerifySecret: DUMMY_SECRET, frontendDistPath: distDir, ...context },
+    context: {
+      originVerifySecret: FAKE_ORIGIN_VERIFY_SECRET,
+      frontendDistPath: distDir,
+      ...context,
+    },
   });
 }
 
@@ -92,13 +100,15 @@ describe('U1 CDK stacks', () => {
     expect(groups.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('DynamoDB は 4 つで、オンデマンド、GSI と TTL がある', () => {
+  it('DynamoDB は 7 つ（U2 で Invitations、U3 で NotificationGroups、U4 で ChoreTypes を追加）で、オンデマンド、GSI と TTL がある', () => {
     const data = t('Housework-staging-Data');
-    data.resourceCountIs('AWS::DynamoDB::Table', 4);
+    data.resourceCountIs('AWS::DynamoDB::Table', 7);
     data.allResourcesProperties('AWS::DynamoDB::Table', { BillingMode: 'PAY_PER_REQUEST' });
     data.hasResourceProperties('AWS::DynamoDB::Table', {
       KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }],
-      GlobalSecondaryIndexes: [Match.objectLike({ IndexName: 'lineUserId-index' })],
+      GlobalSecondaryIndexes: Match.arrayWith([
+        Match.objectLike({ IndexName: 'lineUserId-index' }),
+      ]),
     });
     data.hasResourceProperties('AWS::DynamoDB::Table', {
       KeySchema: [{ AttributeName: 'webhookEventId', KeyType: 'HASH' }],
@@ -118,7 +128,7 @@ describe('U1 CDK stacks', () => {
       t('Housework-production-Data').findResources('AWS::DynamoDB::Table'),
     );
     const stg = Object.values(t('Housework-staging-Data').findResources('AWS::DynamoDB::Table'));
-    expect(prod).toHaveLength(4);
+    expect(prod).toHaveLength(7);
     for (const r of prod) expect(r.DeletionPolicy).toBe('Retain');
     for (const r of stg) expect(r.DeletionPolicy).toBe('Delete');
   });
@@ -199,11 +209,13 @@ describe('U1 CDK stacks', () => {
   });
 
   it('秘密のヘッダーの値はコンテキストから入り、コードには書かれていない', () => {
-    expect(JSON.stringify(t('Housework-staging-App').toJSON())).toContain(DUMMY_SECRET);
+    expect(JSON.stringify(t('Housework-staging-App').toJSON())).toContain(
+      FAKE_ORIGIN_VERIFY_SECRET,
+    );
     const sources = ['app-stack.ts', 'account-stack.ts', 'data-stack.ts', 'app.ts'].map((f) =>
       fs.readFileSync(path.resolve(import.meta.dirname, '..', '..', 'lib', f), 'utf8'),
     );
-    for (const s of sources) expect(s).not.toContain(DUMMY_SECRET);
+    for (const s of sources) expect(s).not.toContain(FAKE_ORIGIN_VERIFY_SECRET);
   });
 
   it('S3 は非公開で、画面を入れる BucketDeployment がある', () => {
@@ -229,9 +241,8 @@ describe('U1 CDK stacks', () => {
           Match.objectLike({
             Condition: {
               StringEquals: {
-                'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
-                'token.actions.githubusercontent.com:sub':
-                  'repo:octo/housework:ref:refs/heads/main',
+                [GITHUB_OIDC_AUD_CONDITION_KEY]: 'sts.amazonaws.com',
+                [GITHUB_OIDC_SUB_CONDITION_KEY]: 'repo:octo/housework:ref:refs/heads/main',
               },
             },
           }),
@@ -244,8 +255,7 @@ describe('U1 CDK stacks', () => {
           Match.objectLike({
             Condition: {
               StringEquals: Match.objectLike({
-                'token.actions.githubusercontent.com:sub':
-                  'repo:octo/housework:environment:production',
+                [GITHUB_OIDC_SUB_CONDITION_KEY]: 'repo:octo/housework:environment:production',
               }),
             },
           }),
@@ -296,8 +306,8 @@ describe('U1 CDK stacks', () => {
           Match.objectLike({
             Condition: {
               StringEquals: {
-                'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
-                'token.actions.githubusercontent.com:sub': [
+                [GITHUB_OIDC_AUD_CONDITION_KEY]: 'sts.amazonaws.com',
+                [GITHUB_OIDC_SUB_CONDITION_KEY]: [
                   'repo:octo/housework:ref:refs/heads/main',
                   'repo:octo@74813858/housework@1441628441:ref:refs/heads/main',
                 ],
@@ -314,7 +324,7 @@ describe('U1 CDK stacks', () => {
           Match.objectLike({
             Condition: {
               StringEquals: Match.objectLike({
-                'token.actions.githubusercontent.com:sub': [
+                [GITHUB_OIDC_SUB_CONDITION_KEY]: [
                   'repo:octo/housework:environment:production',
                   'repo:octo@74813858/housework@1441628441:environment:production',
                 ],

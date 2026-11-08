@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { ApiError } from '../../src/lib/errors';
 import { requireAuth } from '../../src/middleware/requireAuth';
 import { signSession } from '../../src/services/tokenService';
+import { FAKE_BASIC_AUTHORIZATION, FAKE_OTHER_SIGNING_SECRET } from '../fixtures/fakeSecrets';
 import { setupWorld, SIGNING_SECRET } from './helpers/world';
 
 const NOW = new Date('2026-11-01T00:00:00.000Z');
@@ -67,7 +68,7 @@ describe('requireAuth', () => {
     for (const headers of [
       undefined,
       {},
-      { authorization: 'Basic abc' },
+      { authorization: FAKE_BASIC_AUTHORIZATION },
       { authorization: 'Bearer ' },
     ]) {
       const error = await rejection(requireAuth(headers, SIGNING_SECRET, NOW));
@@ -85,7 +86,7 @@ describe('requireAuth', () => {
   it('署名が合わないセッションは 401', async () => {
     seedUser();
     const forged = {
-      authorization: `Bearer ${signSession('user-1', 'other-secret-0123456789', NOW).token}`,
+      authorization: `Bearer ${signSession('user-1', FAKE_OTHER_SIGNING_SECRET, NOW).token}`,
     };
     const error = await rejection(requireAuth(forged, SIGNING_SECRET, NOW));
     expect(error.status).toBe(401);

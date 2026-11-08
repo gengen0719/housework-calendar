@@ -4,6 +4,7 @@ import { describeFeature, loadFeature } from '@amiceli/vitest-cucumber';
 import { expect, vi } from 'vitest';
 import { MESSAGES } from '@housework/shared';
 import { App } from '../../src/App';
+import { FAKE_SESSION_TOKEN } from '../fixtures/fakeSecrets';
 
 // LIFF は差し替える（本物の LINE にはつながない）
 const liff = vi.hoisted(() => ({
@@ -34,7 +35,7 @@ let calls: RecordedCall[];
 let sessionCount: number;
 
 const HANAKO = { userId: 'user-hanako', displayName: '花子' };
-const SESSION = { sessionToken: 'session-token-1', expiresAt: '2026-11-01T01:00:00.000Z' };
+const SESSION = { sessionToken: FAKE_SESSION_TOKEN, expiresAt: '2026-11-01T01:00:00.000Z' };
 const family = (name: string) => ({ familyId: 'fam-1', name, role: 'admin' as const });
 
 function installFakeApi(): void {

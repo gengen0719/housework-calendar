@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "secrets:scan": "bash scripts/secrets-scan.sh"
   },
   "devDependencies": {
     "@amiceli/vitest-cucumber": "8.0.0",

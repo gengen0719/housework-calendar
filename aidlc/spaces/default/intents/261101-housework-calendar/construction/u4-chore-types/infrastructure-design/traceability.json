@@ -1,0 +1,25 @@
+{
+  "stage": "infrastructure-design",
+  "unit": "u4-chore-types",
+  "upstream_ids": [
+    "NFR1.16", "NFR1.17",
+    "NFR3.5",
+    "NFR4.34", "NFR4.35", "NFR4.36",
+    "NFR6.5",
+    "NFR7.17", "NFR7.18", "NFR7.19",
+    "NFR8.7"
+  ],
+  "coverage": [
+    { "id": "NFR1.16", "status": "OK", "target": "infrastructure-specification.md no new stack, Lambda or paid service; 費用の見込み (both environments under 1 yen)" },
+    { "id": "NFR1.17", "status": "OK", "target": "infrastructure-specification.md ChoreTypes PK familyId (Query on table, no Scan permission)" },
+    { "id": "NFR3.5", "status": "OK", "target": "infrastructure-specification.md Deployment (handlers added to existing Lambda api)" },
+    { "id": "NFR4.34", "status": "OK", "target": "infrastructure-specification.md CloudFront /v1/* ALLOW_ALL; cicd-pipeline.md smoke checks 3d-3h return 401" },
+    { "id": "NFR4.35", "status": "OK", "target": "infrastructure-specification.md Lambda のロールの権限 (api only; line has no ChoreTypes access; least privilege)" },
+    { "id": "NFR4.36", "status": "OK", "target": "infrastructure-specification.md ChoreTypes keyed by familyId (family scope by key); CDK のテスト" },
+    { "id": "NFR6.5", "status": "OK", "target": "infrastructure-specification.md ChoreTypes RemovalPolicy.RETAIN in production; cicd-pipeline.md 前の版に戻す (forward fix after U5)" },
+    { "id": "NFR7.17", "status": "OK", "target": "monitoring-design.md SLIs / SLOs" },
+    { "id": "NFR7.18", "status": "OK", "target": "monitoring-design.md SLIs / SLOs" },
+    { "id": "NFR7.19", "status": "OK", "target": "monitoring-design.md SLIs / SLOs (REQUEST_END durationMs by route template)" },
+    { "id": "NFR8.7", "status": "OK", "target": "cicd-pipeline.md ci.yml unchanged (coverage gate applies to U4 code); infrastructure-specification.md CDK のテスト (exact api permissions)" }
+  ]
+}
