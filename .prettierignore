@@ -1,0 +1,10 @@
+node_modules/
+dist/
+cdk.out/
+coverage/
+package-lock.json
+aidlc/
+.kiro/
+.github/
+AGENTS.md
+.gitleaksignore

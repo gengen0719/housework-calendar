@@ -1,0 +1,79 @@
+name: CI
+
+# AWS の権限は付けない（id-token なし）。フォークからのプルリクエストでも安全に動く（NFR5.6）。
+# deploy-staging.yml / deploy-production.yml は、この検査をそのまま呼び出して使う。
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_call:
+    inputs:
+      ref:
+        description: 検査するコミット（空なら呼び出したときのコミット）
+        type: string
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}-${{ inputs.ref || 'default' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      # NOTE: サードパーティのアクションはバージョンのタグで指定している。
+      # フルコミット SHA での固定は、ネットワークのある環境で行う（README の「既知の課題」を参照）。
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: 依存の取り込み
+        run: npm ci
+
+      - name: 整形の確かめ（Prettier）
+        run: npx prettier --check .
+
+      - name: 検査（ESLint）
+        run: npx eslint .
+
+      - name: 型の確かめ（tsc）
+        run: |
+          npx tsc --noEmit -p packages/shared
+          npx tsc --noEmit -p packages/backend
+          npx tsc --noEmit -p packages/frontend
+          npx tsc --noEmit -p infrastructure
+
+      - name: テストとカバレッジ（Vitest。行 80% 以上）
+        run: npx vitest run --coverage
+
+      - name: 秘密の情報の検査（gitleaks）
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 画面のビルド（ダミーの公開値）
+        run: npm run build -w packages/frontend
+        env:
+          VITE_LIFF_ID: ci-dummy-liff-id
+          VITE_LINE_OA_ID: '@ci-dummy'
+
+      - name: CDK の組み立て（ダミーのコンテキスト。AWS の権限は使わない）
+        working-directory: infrastructure
+        run: >
+          npx cdk synth --quiet
+          -c originVerifySecret=ci-dummy-origin-verify-secret
+          -c githubOwner=ci-owner
+          -c githubRepo=ci-repo
+          -c budgetEmail=ci@example.com

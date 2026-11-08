@@ -1,0 +1,117 @@
+name: Deploy production
+
+# 作り手が手で実行する。反映できるのは main にあるコミットだけ。
+# さらに、GitHub の環境 production の承認（承認者は作り手）を待つ。
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 反映するコミット（ステージングで確かめたもの。main にあること）
+        type: string
+        required: true
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: main にあるコミットか確かめる
+        env:
+          INPUT_REF: ${{ inputs.ref }}
+        run: |
+          git fetch --no-tags origin main
+          if ! git merge-base --is-ancestor HEAD FETCH_HEAD; then
+            echo "::error::${INPUT_REF} は main にありません。本番へは main のコミットだけ反映できます。"
+            exit 1
+          fi
+
+  ci:
+    needs: guard
+    uses: ./.github/workflows/ci.yml
+    with:
+      ref: ${{ inputs.ref }}
+    permissions:
+      contents: read
+
+  deploy:
+    needs: ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      ENV_NAME: production
+    steps:
+      # NOTE: タグ指定（SHA 固定は README の「既知の課題」）
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: main にあるコミットか、もう一度確かめる
+        env:
+          INPUT_REF: ${{ inputs.ref }}
+        run: |
+          git fetch --no-tags origin main
+          if ! git merge-base --is-ancestor HEAD FETCH_HEAD; then
+            echo "::error::${INPUT_REF} は main にありません。"
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: AWS の一時的な権限を受け取る（OIDC）
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.PRODUCTION_DEPLOY_ROLE_ARN }}
+          aws-region: ap-northeast-1
+          role-session-name: housework-production-deploy
+
+      - name: 秘密のヘッダーの値を読み、ログに出ないよう伏せる
+        run: |
+          value="$(aws ssm get-parameter --name "/housework-calendar/${ENV_NAME}/cloudfront/origin-verify-secret" --with-decryption --query Parameter.Value --output text)"
+          echo "::add-mask::${value}"
+          echo "ORIGIN_VERIFY_SECRET=${value}" >> "$GITHUB_ENV"
+
+      - name: 画面のビルド
+        run: npm run build -w packages/frontend
+        env:
+          VITE_LIFF_ID: ${{ vars.PRODUCTION_VITE_LIFF_ID }}
+          VITE_LINE_OA_ID: ${{ vars.PRODUCTION_VITE_LINE_OA_ID }}
+
+      - name: 反映
+        working-directory: infrastructure
+        run: >
+          npx cdk deploy Housework-production-Data Housework-production-App
+          --require-approval never
+          --outputs-file ../cdk-outputs.json
+          -c originVerifySecret="${ORIGIN_VERIFY_SECRET}"
+          ${RESERVED_CONCURRENCY:+-c reservedConcurrency="${RESERVED_CONCURRENCY}"}
+        env:
+          RESERVED_CONCURRENCY: ${{ vars.RESERVED_CONCURRENCY }}
+
+      - name: 反映後の確かめ
+        run: |
+          domain="$(jq -r '."Housework-production-App".DistributionDomain' cdk-outputs.json)"
+          api_url="$(jq -r '."Housework-production-App".ApiFunctionUrl' cdk-outputs.json)"
+          ./scripts/smoke-check.sh "https://${domain}" "${api_url}"
