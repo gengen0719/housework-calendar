@@ -5,7 +5,7 @@ import { setupWorld } from './helpers/world';
 
 const NOW = new Date('2026-11-01T00:00:00.000Z');
 const NOW_SECONDS = NOW.getTime() / 1000;
-const KEY = '3f1c1a52-8f0e-4a5e-9d38-0c1f4f6e7a01';
+const KEY = '00000000-0000-4000-8000-000000000001'; // gitleaks:allow テスト用の作り物の Idempotency-Key
 
 const result = {
   familyId: 'fam-1',

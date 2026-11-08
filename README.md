@@ -20,6 +20,36 @@
 
 秘密の情報（チャネルシークレット、トークン、鍵）は、リポジトリには絶対に置きません。AWS のパラメータストアにだけ入れます。AWS の操作に使う権限は、手元の AWS CLI のプロファイルを使います。
 
+### 全体の順番と、つまずきやすいところ
+
+CloudFront のドメイン（`xxxx.cloudfront.net`）は、AWS に反映するまで決まりません。一方で、LINE の設定には URL が要り、画面のビルドには LIFF ID が要ります。そのため、次の順番で進めます。
+
+1. LINE のチャネルを作る。Webhook URL は空のまま、LIFF のエンドポイント URL は仮の値（`https://example.com` など）で作り、LIFF ID をもらう（手順 1）
+2. パラメータストアに値を入れる。LIFF の URL は LIFF ID だけで決まるので、この時点で入れられる（手順 2）
+3. CDK の bootstrap、`Housework-Account` の反映、GitHub の設定（手順 3〜6）
+4. ステージングに反映し、CloudFront のドメインを知る（手順 7）
+5. LINE の Webhook URL と LIFF のエンドポイント URL を、本物のドメインに入れ直す（手順 8）
+
+手順 8 が終わるまでは、友だち登録しても返事は届きません。CloudFront のドメインは、スタックを消して作り直さない限り変わらないので、手順 8 は最初の 1 回だけです。
+
+### 用意するもの（どれを自分で作り、どこに入れるか）
+
+| もの                                             | 入手のしかた                                            | 入れる場所          | 秘密か                               |
+| ------------------------------------------------ | ------------------------------------------------------- | ------------------- | ------------------------------------ |
+| Messaging API のチャネルシークレット             | LINE Developers で表示されるものを写す                  | パラメータストア    | 秘密                                 |
+| Messaging API のチャネルアクセストークン（長期） | LINE Developers で発行して写す                          | パラメータストア    | 秘密                                 |
+| LINE ログインのチャネル ID                       | LINE Developers で表示されるものを写す                  | パラメータストア    | 秘密ではないが、ほかの値と一緒に置く |
+| LIFF の URL                                      | `https://liff.line.me/<LIFF ID>` の形で自分で組み立てる | パラメータストア    | 秘密ではない                         |
+| セッション用の鍵（JWT の鍵）                     | **自分で作る**（ランダムな文字列）                      | パラメータストア    | 秘密                                 |
+| CloudFront の秘密のヘッダーの値                  | **自分で作る**（ランダムな文字列。JWT の鍵とは別の値）  | パラメータストア    | 秘密                                 |
+| 反映用のロールの ARN（ステージング用、本番用）   | 手順 4 の反映の出力を写す                               | GitHub の Variables | 秘密ではない                         |
+| LIFF ID                                          | 手順 1 で LIFF アプリを作ると表示される                 | GitHub の Variables | 秘密ではない                         |
+| 公式アカウントの ID（`@xxxx`）                   | LINE Official Account Manager で表示される（任意）      | GitHub の Variables | 秘密ではない                         |
+
+自分で作る必要があるのは、**セッション用の鍵**と **CloudFront の秘密のヘッダーの値**の 2 つだけです。どちらも環境ごと（ステージングと本番）に別の値を作ります。
+
+**GitHub Actions の Secrets には、何も入れません。** AWS の権限は OIDC で一時的に受け取り、秘密の値はパラメータストアから読むためです。`ci.yml` が使う `GITHUB_TOKEN` は、GitHub が自動で用意します。例外として、リポジトリの持ち主が組織（Organization）の場合は、`gitleaks/gitleaks-action` のライセンスキー（`GITLEAKS_LICENSE`）を Secrets に入れる必要があります。個人のアカウントなら要りません。
+
 ### 1. LINE のチャネルを作る
 
 LINE Developers で、プロバイダーの下にチャネルを 3 つ作ります（環境ごとに別のものを用意するのが安全です。ステージングと本番で 2 セット）。
@@ -27,32 +57,45 @@ LINE Developers で、プロバイダーの下にチャネルを 3 つ作りま�
 1. **Messaging API チャネル**（公式アカウント）: 友だち登録のあいさつと返事を送るもの。
    - 「チャネルシークレット」と「チャネルアクセストークン（長期）」を控えます。
    - Webhook の使用を有効にし、**Webhook の再送を有効にします**（反映に失敗したときの取りこぼしを防ぎます）。
-   - Webhook URL は、後で分かる CloudFront のドメインを使って `https://<CloudFront のドメイン>/line/webhook` にします。
+   - Webhook URL は、この時点では空のままで構いません。手順 8 で `https://<CloudFront のドメイン>/line/webhook` を入れます。
    - 応答メッセージ（自動応答）は無効にします。
 2. **LINE ログイン チャネル**: 画面でログインするためのもの。「チャネル ID」を控えます。
-3. **LIFF アプリ**（LINE ログイン チャネルの中に作ります）: エンドポイント URL は `https://<CloudFront のドメイン>/`、サイズは Full、スコープは `openid` と `profile`。「LIFF ID」と LIFF の URL（`https://liff.line.me/<LIFF ID>`）を控えます。LINE ログイン チャネルと公式アカウントを「リンク」して、友だち追加の案内が出るようにします。
-
-CloudFront のドメインは、手順 5 の反映で分かります。反映したあと、Webhook URL と LIFF のエンドポイント URL を入れ直してください。
+3. **LIFF アプリ**（LINE ログイン チャネルの中に作ります）: サイズは Full、スコープは `openid` と `profile`。LINE ログイン チャネルと公式アカウントを「リンク」して、友だち追加の案内が出るようにします。
+   - **エンドポイント URL は、仮の値（`https://example.com` など、`https://` で始まる URL なら何でもよい）で作ります。** 本物の URL は AWS に反映するまで決まりませんが、LIFF ID がないと画面をビルドできないためです。エンドポイント URL は、あとから LINE Developers の画面で変えられます（手順 8）。
+   - 作ると「LIFF ID」（`1234567890-abcdefgh` のような形）が表示されます。これを控えます。LIFF の URL は `https://liff.line.me/<LIFF ID>` です。
 
 ### 2. パラメータストアに値を入れる
 
 環境ごと（`<env>` は `staging` か `production`）に、SecureString で次の 6 つを入れます。値は手元で入力し、チャットやファイルには書かないでください。
 
-| 名前                                                        | 値                                                                    |
-| ----------------------------------------------------------- | --------------------------------------------------------------------- |
-| `/housework-calendar/<env>/line/channel-secret`             | Messaging API のチャネルシークレット                                  |
-| `/housework-calendar/<env>/line/channel-access-token`       | Messaging API のチャネルアクセストークン                              |
-| `/housework-calendar/<env>/line/login-channel-id`           | LINE ログインのチャネル ID                                            |
-| `/housework-calendar/<env>/line/liff-url`                   | LIFF の URL                                                           |
-| `/housework-calendar/<env>/jwt/signing-secret`              | セッション用の鍵（長いランダムな文字列）                              |
-| `/housework-calendar/<env>/cloudfront/origin-verify-secret` | CloudFront と Lambda の間の秘密のヘッダーの値（長いランダムな文字列） |
+| 名前                                                        | 値                                                                                  |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `/housework-calendar/<env>/line/channel-secret`             | Messaging API のチャネルシークレット                                                |
+| `/housework-calendar/<env>/line/channel-access-token`       | Messaging API のチャネルアクセストークン                                            |
+| `/housework-calendar/<env>/line/login-channel-id`           | LINE ログインのチャネル ID                                                          |
+| `/housework-calendar/<env>/line/liff-url`                   | LIFF の URL（`https://liff.line.me/<LIFF ID>`。CloudFront のドメインではない）      |
+| `/housework-calendar/<env>/jwt/signing-secret`              | セッション用の鍵（**自分で作る**。長いランダムな文字列）                            |
+| `/housework-calendar/<env>/cloudfront/origin-verify-secret` | CloudFront と Lambda の間の秘密のヘッダーの値（**自分で作る**。JWT の鍵とは別の値） |
+
+自分で作る 2 つの値は、手元のその場で作って入れます（履歴に残したくなければ、コマンドの先頭にスペースを入れます）。
 
 ```bash
-# 例（値は手元でその場で作る。履歴に残したくなければ先頭にスペースを入れる）
+# セッション用の鍵
 aws ssm put-parameter --region ap-northeast-1 --type SecureString \
   --name /housework-calendar/staging/jwt/signing-secret \
   --value "$(openssl rand -base64 48)"
+
+# CloudFront の秘密のヘッダーの値（英数字だけにする）
+aws ssm put-parameter --region ap-northeast-1 --type SecureString \
+  --name /housework-calendar/staging/cloudfront/origin-verify-secret \
+  --value "$(openssl rand -hex 32)"
 ```
+
+CloudFront の秘密のヘッダーの値は、CloudFront のヘッダーに入り、反映のときは `cdk deploy -c originVerifySecret=...` のコマンドの引数でも渡ります。`+`・`/`・`=` を含まないよう、英数字だけ（`openssl rand -hex 32` で 64 文字の 0-9 と a-f）にしてください。
+
+LINE から写す 4 つの値も、同じ `aws ssm put-parameter --type SecureString` で入れます。
+
+値はあとから入れ替えられます。パラメータストアの値を変えてから、反映（手順 7）をもう一度動かしてください。Lambda は起動するときに新しい値を読み、CloudFront も新しい値で作り直されます。本番を用意するときは、`<env>` を `production` にして、すべて別の値で入れます。
 
 ### 3. CDK の bootstrap
 
@@ -98,7 +141,7 @@ aws service-quotas get-service-quota --region ap-northeast-1 \
    - Required reviewers に作り手自身を入れます。
    - Deployment branches は「Selected branches」で `main` だけにします。
 2. `main` のブランチ保護で、`ci.yml` の成功を必須にします。
-3. Variables（Settings → Secrets and variables → Actions → Variables）に次を入れます。秘密の値ではありません。
+3. Variables（Settings → Secrets and variables → Actions → **Variables** タブ）に次を入れます。秘密の値ではありません。Secrets のタブには何も入れません（上の「用意するもの」を参照）。ステージングを試すだけなら、`STAGING_DEPLOY_ROLE_ARN` と `STAGING_VITE_LIFF_ID` の 2 つで足ります。
 
 | 変数                                                     | 値                                                                |
 | -------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -120,7 +163,16 @@ npx cdk deploy Housework-staging-Data Housework-staging-App \
   -c originVerifySecret="$(aws ssm get-parameter --name /housework-calendar/staging/cloudfront/origin-verify-secret --with-decryption --query Parameter.Value --output text)"
 ```
 
-出力の `DistributionDomain` が CloudFront のドメインです。手順 1 の Webhook URL と LIFF のエンドポイント URL を、このドメインで入れ直します。
+出力の `DistributionDomain`（`xxxx.cloudfront.net`）が CloudFront のドメインです。GitHub Actions で反映したときは、ワークフローのログの「反映」の出力に出ます。
+
+### 8. LINE の URL を本物に入れ直す
+
+手順 1 で空のまま・仮の値にした 2 つを、CloudFront のドメインで入れ直します。
+
+1. LIFF アプリのエンドポイント URL: `https://xxxx.cloudfront.net/`
+2. Messaging API の Webhook URL: `https://xxxx.cloudfront.net/line/webhook`。「Webhook の利用」をオンにし、「検証」ボタンで成功が返ることを確かめます
+
+LIFF ID と LIFF の URL は変わらないので、パラメータストアと GitHub の Variables はそのままで構いません。
 
 ## 画面のビルド
 

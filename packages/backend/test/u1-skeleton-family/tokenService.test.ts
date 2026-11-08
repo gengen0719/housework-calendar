@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { describe, expect, it } from 'vitest';
 import { SESSION_TTL_SECONDS, signSession, verifySession } from '../../src/services/tokenService';
 
-const SECRET = 'test-signing-secret-0123456789abcdef';
+const SECRET = 'test-signing-secret-0123456789abcdef'; // gitleaks:allow テスト用の作り物の鍵
 const NOW = new Date('2026-11-01T00:00:00.000Z');
 
 function decode(token: string): Record<string, unknown> {

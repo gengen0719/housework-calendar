@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import * as familyMemberService from '../../src/services/familyMemberService';
 import { setupWorld } from './helpers/world';
 
-const KEY = '3f1c1a52-8f0e-4a5e-9d38-0c1f4f6e7a01';
+const KEY = '00000000-0000-4000-8000-000000000001'; // gitleaks:allow テスト用の作り物の Idempotency-Key
 const NOW = new Date('2026-11-01T00:00:00.000Z');
 
 /** 取引が条件で断られた（ほかの要求が先に書いた）ことにする。 */

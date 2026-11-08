@@ -25,7 +25,7 @@ let currentKey: string;
 
 const START = new Date('2026-11-01T00:00:00.000Z');
 const HANAKO_USER_ID = 'user-hanako';
-const KEY_1 = '3f1c1a52-8f0e-4a5e-9d38-0c1f4f6e7a01';
+const KEY_1 = '00000000-0000-4000-8000-000000000001'; // gitleaks:allow テスト用の作り物の Idempotency-Key
 
 function seedHanako(withFamily: boolean): void {
   const user: User = {
@@ -163,7 +163,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
         for (const [index, name] of ['', '   　 ', 'あ'.repeat(21)].entries()) {
           responses.push(
             await postFamily(name, {
-              'idempotency-key': `3f1c1a52-8f0e-4a5e-9d38-0c1f4f6e7b0${index}`,
+              'idempotency-key': `00000000-0000-4000-8000-00000000010${index}`,
             }),
           );
         }

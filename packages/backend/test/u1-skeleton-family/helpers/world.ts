@@ -18,7 +18,7 @@ export const CHANNEL_SECRET = 'test-channel-secret';
 export const ORIGIN_SECRET = 'test-origin-secret';
 export const LIFF_URL = 'https://liff.line.me/test-liff-id';
 export const LOGIN_CHANNEL_ID = '1234567890';
-export const SIGNING_SECRET = 'test-signing-secret-0123456789abcdef';
+export const SIGNING_SECRET = 'test-signing-secret-0123456789abcdef'; // gitleaks:allow テスト用の作り物の鍵
 
 const PARAMETERS: Record<string, string> = {
   'line/channel-secret': CHANNEL_SECRET,
