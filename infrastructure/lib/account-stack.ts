@@ -7,6 +7,13 @@ import { REGION, ssmPrefix, type EnvName } from './env.js';
 export interface AccountStackProps extends StackProps {
   githubOwner: string;
   githubRepo: string;
+  /**
+   * GitHub の持ち主とリポジトリの番号（ID）。GitHub は OIDC の `sub` を
+   * `repo:<owner>@<ownerId>/<repo>@<repoId>:...` の形で出すことがあるため、
+   * 両方を渡すと、名前だけの形と ID 入りの形の両方を受け付ける（どちらも完全一致。ワイルドカードは使わない）
+   */
+  githubOwnerId?: string;
+  githubRepoId?: string;
   budgetEmail: string;
   /** CDK の bootstrap のクオリファイア（既定のまま） */
   bootstrapQualifier?: string;
@@ -26,7 +33,22 @@ export class AccountStack extends Stack {
     super(scope, id, props);
 
     const qualifier = props.bootstrapQualifier ?? 'hnb659fds';
-    const repo = `${props.githubOwner}/${props.githubRepo}`;
+    const hasIds = props.githubOwnerId !== undefined && props.githubRepoId !== undefined;
+    if ((props.githubOwnerId === undefined) !== (props.githubRepoId === undefined)) {
+      throw new Error('githubOwnerId と githubRepoId は両方そろえて渡してください');
+    }
+    for (const id of [props.githubOwnerId, props.githubRepoId]) {
+      if (id !== undefined && !/^[0-9]+$/.test(id)) {
+        throw new Error('githubOwnerId と githubRepoId は数字だけにしてください');
+      }
+    }
+    // `sub` の頭の部分。名前だけの形と、ID 入りの形
+    const repoForms = [`${props.githubOwner}/${props.githubRepo}`];
+    if (hasIds) {
+      repoForms.push(
+        `${props.githubOwner}@${props.githubOwnerId}/${props.githubRepo}@${props.githubRepoId}`,
+      );
+    }
 
     const provider = new iam.OpenIdConnectProvider(this, 'GithubOidcProvider', {
       url: `https://${OIDC_HOST}`,
@@ -37,7 +59,7 @@ export class AccountStack extends Stack {
       'StagingDeployRole',
       'staging',
       provider,
-      `repo:${repo}:ref:refs/heads/main`,
+      repoForms.map((repo) => `repo:${repo}:ref:refs/heads/main`),
       qualifier,
     );
     // 本番は環境 `production` の承認のあとだけ。環境の反映できるブランチを main に限る設定は GitHub 側で行う
@@ -45,7 +67,7 @@ export class AccountStack extends Stack {
       'ProductionDeployRole',
       'production',
       provider,
-      `repo:${repo}:environment:production`,
+      repoForms.map((repo) => `repo:${repo}:environment:production`),
       qualifier,
     );
 
@@ -86,7 +108,7 @@ export class AccountStack extends Stack {
     id: string,
     envName: EnvName,
     provider: iam.IOpenIdConnectProvider,
-    subject: string,
+    subjects: string[],
     qualifier: string,
   ): iam.Role {
     const role = new iam.Role(this, id, {
@@ -95,7 +117,8 @@ export class AccountStack extends Stack {
       assumedBy: new iam.WebIdentityPrincipal(provider.openIdConnectProviderArn, {
         StringEquals: {
           [`${OIDC_HOST}:aud`]: 'sts.amazonaws.com',
-          [`${OIDC_HOST}:sub`]: subject,
+          // 値が 2 つのときは、どちらかに完全一致すれば引き受けられる
+          [`${OIDC_HOST}:sub`]: subjects.length === 1 ? subjects[0] : subjects,
         },
       }),
     });

@@ -23,6 +23,13 @@ function requireContext(app: App, key: string): string {
   return value;
 }
 
+/** コンテキストの値。数字で渡されても文字列にそろえる。なければ undefined */
+function optionalContextString(app: App, key: string): string | undefined {
+  const value: unknown = app.node.tryGetContext(key);
+  if (value === undefined || value === '') return undefined;
+  return String(value);
+}
+
 /** 4 つのスタックと、あれば Housework-Account を組み立てる。bin/app.ts とテストが使う */
 export function buildApp(app: App = new App()): App {
   const account = process.env.CDK_DEFAULT_ACCOUNT;
@@ -66,12 +73,21 @@ export function buildApp(app: App = new App()): App {
   const githubOwner: unknown = app.node.tryGetContext('githubOwner');
   const githubRepo: unknown = app.node.tryGetContext('githubRepo');
   const budgetEmail: unknown = app.node.tryGetContext('budgetEmail');
+  const githubOwnerId = optionalContextString(app, 'githubOwnerId');
+  const githubRepoId = optionalContextString(app, 'githubRepoId');
   if (
     typeof githubOwner === 'string' &&
     typeof githubRepo === 'string' &&
     typeof budgetEmail === 'string'
   ) {
-    new AccountStack(app, 'Housework-Account', { env, githubOwner, githubRepo, budgetEmail });
+    new AccountStack(app, 'Housework-Account', {
+      env,
+      githubOwner,
+      githubRepo,
+      githubOwnerId,
+      githubRepoId,
+      budgetEmail,
+    });
   }
   return app;
 }
