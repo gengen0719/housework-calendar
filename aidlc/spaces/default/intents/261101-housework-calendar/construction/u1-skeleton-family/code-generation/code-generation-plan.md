@@ -80,13 +80,13 @@
 
 ### 土台
 
-- [ ] **Step 1: リポジトリの骨組み**（全ストーリーの土台）
+- [x] **Step 1: リポジトリの骨組み**（全ストーリーの土台）
   - ルートの `package.json`（npm workspaces: `packages/shared`、`packages/backend`、`packages/frontend`、`infrastructure`）と `package-lock.json`。依存の版はすべて固定する（`^` を使わない）
   - `tsconfig.base.json`（strict）、各パッケージの `tsconfig.json`
   - Prettier と ESLint の設定（TypeScript、React、`react/no-danger` を error。NFR4.12）
   - `.gitignore` に `node_modules/`、`dist/`、`cdk.out/`、`coverage/`、`.env*` を足す（今ある行は変えない）
   - Node.js の版を `.nvmrc`（22）に書く
-- [ ] **Step 2: テストの道具を動かせるようにする**
+- [x] **Step 2: テストの道具を動かせるようにする**
   - Vitest、`@amiceli/vitest-cucumber`（Gherkin を Vitest で動かす）、`@vitest/coverage-v8`、`aws-sdk-client-mock`、`@testing-library/react`、`jsdom` を入れる
   - ルートの `vitest.config.ts`（ワークスペースのプロジェクト: backend と shared は node、frontend は jsdom、infrastructure は node）。カバレッジは v8、行 80% を下限（`thresholds.lines: 80`。下げない）
   - U1 のテストは、すべて `u1-skeleton-family` という名前のフォルダに置く（`unit-test-instructions.md` の範囲を絞ったコマンドで動かすため）
@@ -94,13 +94,13 @@
 
 ### 機能のまとまり A: 共有パッケージ（C10、作業単位の分割の Q9）
 
-- [ ] **Step 3: 筋書きとテストを書く**（US1.1）— `packages/shared/test/u1-skeleton-family/messages.test.ts`: すべての理由の印に文言がある、要件のとおりの文言（「すでに家族に入っています」など）、`NOT_FRIEND`・`INVALID_FAMILY_NAME`・`IDEMPOTENCY_KEY_REQUIRED` がある
-- [ ] **Step 4: 作る** — `packages/shared/src/`: `reasons.ts`（理由の印。C10 と機能設計の追加）、`messages.ts`（文言の一覧）、`result.ts`（`Result<T, Reason>`）、`api-types.ts`（C1・C2 の要求と結果の型: `Me`、`CreateFamilyRequest` など）
-- [ ] **Step 5: 通す、整える** — Step 3 のテストが通るまで直し、通ったまま整える
+- [x] **Step 3: 筋書きとテストを書く**（US1.1）— `packages/shared/test/u1-skeleton-family/messages.test.ts`: すべての理由の印に文言がある、要件のとおりの文言（「すでに家族に入っています」など）、`NOT_FRIEND`・`INVALID_FAMILY_NAME`・`IDEMPOTENCY_KEY_REQUIRED` がある
+- [x] **Step 4: 作る** — `packages/shared/src/`: `reasons.ts`（理由の印。C10 と機能設計の追加）、`messages.ts`（文言の一覧）、`result.ts`（`Result<T, Reason>`）、`api-types.ts`（C1・C2 の要求と結果の型: `Me`、`CreateFamilyRequest` など）
+- [x] **Step 5: 通す、整える** — Step 3 のテストが通るまで直し、通ったまま整える
 
 ### 機能のまとまり B: 友だち登録とブロック（AC1.1.1、AC1.1.2、F1、F2）
 
-- [ ] **Step 6: 筋書きを書く** — `packages/backend/test/u1-skeleton-family/follow.feature` と、その手順の実装（ステップ定義）`follow.steps.ts`。場面:
+- [x] **Step 6: 筋書きを書く** — `packages/backend/test/u1-skeleton-family/follow.feature` と、その手順の実装（ステップ定義）`follow.steps.ts`。場面:
   - 初めて友だち登録すると、利用者が記録され、あいさつ・アプリを開くボタン・説明の返事が届く（BR1.1、BR1.2）
   - ブロックして登録し直しても、記録は 1 人のまま、表示名は最初のまま、家族と役割も同じ（BR1.1、BR1.3、BR1.4）
   - ブロックすると「ブロック中」になり、返事はしない（BR1.3）
@@ -108,17 +108,17 @@
   - CloudFront の秘密のヘッダーがないと 403（NFR4.13）
   - 同じイベント ID が 2 回届いても 1 回だけ処理する。「処理中」のまま 2 分を過ぎたものは処理し直す（BR2.7）
   - 処理中に思いがけない失敗が起きると、「処理中」の記録を消して 500 を返す（NFR4.8）
-- [ ] **Step 7: 作る** — `packages/backend/src/`:
+- [x] **Step 7: 作る** — `packages/backend/src/`:
   - `lib/config.ts`（パラメータストアから起動のときに 1 回だけ読む）、`lib/dynamoClient.ts`（グローバルで 1 つ）、`lib/logger.ts`（JSON の 1 行ログ、秘密の情報を入れない）
   - `middleware/verifyOriginHeader.ts`、`middleware/verifyLineSignature.ts`（本文のバイト列で HMAC-SHA256、`timingSafeEqual`）
   - `repositories/userRepository.ts`（`Users`、GSI `lineUserId-index`）、`repositories/lineEventRepository.ts`（条件付きの書き込みで処理中・処理済み）
   - `services/lineApiService.ts`（プロフィールの取得、返事。時間切れ 5 秒）、`services/familyMemberService.ts`（`registerUser`、`markBlocked`、`findUserByLineId`、`getUserStatus`）
   - `handlers/line/followHandler.ts`、`handlers/line/unfollowHandler.ts`、`entries/line.ts`（Lambda の入口。思いがけない失敗は 500）
-- [ ] **Step 8: 通す、整える** — Step 6 の筋書きがすべて通るまで直し、通ったまま整える。部品ごとの単体テスト（`userRepository`、`lineEventRepository`、`verifyLineSignature`、`familyMemberService`。各 5〜8 件）を同じフォルダに足す
+- [x] **Step 8: 通す、整える** — Step 6 の筋書きがすべて通るまで直し、通ったまま整える。部品ごとの単体テスト（`userRepository`、`lineEventRepository`、`verifyLineSignature`、`familyMemberService`。各 5〜8 件）を同じフォルダに足す
 
 ### 機能のまとまり C: セッションと最初の画面の情報（AC1.1.3、AC1.1.10、AC1.1.11、AC1.1.12、F3、F4、F7）
 
-- [ ] **Step 9: 筋書きを書く** — `packages/backend/test/u1-skeleton-family/session.feature` と `session.steps.ts`。場面:
+- [x] **Step 9: 筋書きを書く** — `packages/backend/test/u1-skeleton-family/session.feature` と `session.steps.ts`。場面:
   - 正しい ID トークンでセッションが出る（LINE の verify を呼ぶ。BR2.1）。期限は 1 時間（NFR4.2）
   - 偽の・別のチャネルの・期限切れの ID トークンは 401（BR2.1）
   - 記録がない人は LINE に友だちか問い合わせ、友だちなら記録してセッションを出す。友だちでなければ 403 `NOT_FRIEND`（BR1.5、BR1.11）
@@ -126,24 +126,24 @@
   - LINE に問い合わせられないときは 503 `SERVICE_TEMPORARILY_UNAVAILABLE`（NFR2.4）
   - `GET /v1/me`: セッションなし・期限切れ・`alg` を変えたトークンは 401（BR2.2、NFR4.2）。家族に入っていない友だちは `family: null`、入っている人は家族と役割（BR1.6、BR1.10）。セッションのあとでブロックした人は 403 `NOT_FRIEND`
   - 家族のデータを求めたのにメンバーでなければ 403 `NOT_FAMILY_MEMBER`、管理者の操作を子供が行うと 403 `ADMIN_ONLY`、ほかの家族の ID の指定は 404（BR2.3〜BR2.5。仕組みのテスト）
-- [ ] **Step 10: 作る** — `services/tokenService.ts`（HS256 の JWT、`alg` 決め打ち）、`middleware/requireAuth.ts`、`middleware/requireMembership.ts`（`ctx` を作る）、`middleware/requireAdmin.ts`、`middleware/requireSameFamily.ts`（ID の家族を確かめる仕組み。BR2.5）、`handlers/session/createSession.ts`、`handlers/family/getMe.ts`、`entries/api.ts`（`/v1/...` の振り分け、入力の確かめは Zod、共通のエラーの形）
-- [ ] **Step 11: 通す、整える** — Step 9 の筋書きが通るまで直し、通ったまま整える。単体テスト（`tokenService`、`requireAuth`、`requireMembership`、`requireAdmin`、`requireSameFamily`）を足す
+- [x] **Step 10: 作る** — `services/tokenService.ts`（HS256 の JWT、`alg` 決め打ち）、`middleware/requireAuth.ts`、`middleware/requireMembership.ts`（`ctx` を作る）、`middleware/requireAdmin.ts`、`middleware/requireSameFamily.ts`（ID の家族を確かめる仕組み。BR2.5）、`handlers/session/createSession.ts`、`handlers/family/getMe.ts`、`entries/api.ts`（`/v1/...` の振り分け、入力の確かめは Zod、共通のエラーの形）
+- [x] **Step 11: 通す、整える** — Step 9 の筋書きが通るまで直し、通ったまま整える。単体テスト（`tokenService`、`requireAuth`、`requireMembership`、`requireAdmin`、`requireSameFamily`）を足す
 
 ### 機能のまとまり D: 家族を作る（AC1.1.4、AC1.1.5、F5）
 
-- [ ] **Step 12: 筋書きを書く** — `packages/backend/test/u1-skeleton-family/create-family.feature` と `create-family.steps.ts`。場面:
+- [x] **Step 12: 筋書きを書く** — `packages/backend/test/u1-skeleton-family/create-family.feature` と `create-family.steps.ts`。場面:
   - 名前を入れて作ると、家族ができ、作った人が管理者になる（BR1.7）
   - すでに家族に入っている人は 409 `ALREADY_IN_FAMILY`（BR1.8）
   - 名前が空・空白だけ・21 文字は 422 `INVALID_FAMILY_NAME`（BR1.9）
   - 同じ `Idempotency-Key` で送り直すと、前と同じ 201 と家族が返り、家族は 1 つのまま（BR2.8）
   - `Idempotency-Key` がない・UUID でないと 400（NFR4.10）
   - 家族の作成と利用者の更新の途中で失敗すると、どちらも残らない（NFR2.3）
-- [ ] **Step 13: 作る** — `repositories/familyRepository.ts`（`TransactWriteItems` で家族と利用者をまとめて書く）、`repositories/requestRecordRepository.ts`（TTL 24 時間）、`familyMemberService.createFamily(userId, name)`、`handlers/family/createFamily.ts`
-- [ ] **Step 14: 通す、整える** — Step 12 の筋書きが通るまで直し、通ったまま整える。単体テスト（`familyRepository`、`requestRecordRepository`）を足す
+- [x] **Step 13: 作る** — `repositories/familyRepository.ts`（`TransactWriteItems` で家族と利用者をまとめて書く）、`repositories/requestRecordRepository.ts`（TTL 24 時間）、`familyMemberService.createFamily(userId, name)`、`handlers/family/createFamily.ts`
+- [x] **Step 14: 通す、整える** — Step 12 の筋書きが通るまで直し、通ったまま整える。単体テスト（`familyRepository`、`requestRecordRepository`）を足す
 
 ### 機能のまとまり E: 画面（AC1.1.3、AC1.1.4、AC1.1.5、AC1.1.10、AC1.1.11、NFR9）
 
-- [ ] **Step 15: 筋書きを書く** — `packages/frontend/test/u1-skeleton-family/screens.feature` と `screens.steps.tsx`（LIFF と API は差し替えて動かす）。場面:
+- [x] **Step 15: 筋書きを書く** — `packages/frontend/test/u1-skeleton-family/screens.feature` と `screens.steps.tsx`（LIFF と API は差し替えて動かす）。場面:
   - 友だちでない（`NOT_FRIEND`）と、友だち登録の案内だけが出る（BR1.5）
   - 家族に入っていないと「家族を作る」「招待を待つ」が出る（BR1.6）
   - 「家族を作る」で名前を入れて保存すると、今月のカレンダーの枠が出る（BR1.10）。名前が正しくないと入力を残したまま文言が出る（BR1.9）。すでに家族に入っていると「すでに家族に入っています」（BR1.8）
@@ -151,18 +151,18 @@
   - メンバーでないと「このアプリは家族のメンバーだけが使えます」（BR2.3）
   - 503 や通信の失敗では「表示できませんでした。もう一度お試しください」と「読み込み直す」が出る（NFR2.4）
   - セッショントークンはメモリにだけ持ち、ブラウザの保存場所に書かない（NFR4.3）。401 でトークンを取り直す
-- [ ] **Step 16: 作る** — `packages/frontend/`: Vite + React + MUI、`@line/liff`（npm。スマホの LINE の中では LIFF、パソコンのブラウザでは LINE ログインに切り替える）、`src/hooks/useSession.ts`、`src/api/client.ts`（`Authorization: Bearer`、`Idempotency-Key` を作る）、`src/pages/RegisterPage.tsx`、`SetupPage.tsx`、`CalendarFramePage.tsx`、`ErrorRetry.tsx`、`src/theme.ts`（文字の差 4.5:1 以上、押す場所 44×44 以上。NFR9.1）。操作できる要素に `data-testid` を付ける
-- [ ] **Step 17: 通す、整える** — Step 15 の筋書きが通るまで直し、通ったまま整える。テーマの色の差を確かめる単体テストを足す
+- [x] **Step 16: 作る** — `packages/frontend/`: Vite + React + MUI、`@line/liff`（npm。スマホの LINE の中では LIFF、パソコンのブラウザでは LINE ログインに切り替える）、`src/hooks/useSession.ts`、`src/api/client.ts`（`Authorization: Bearer`、`Idempotency-Key` を作る）、`src/pages/RegisterPage.tsx`、`SetupPage.tsx`、`CalendarFramePage.tsx`、`ErrorRetry.tsx`、`src/theme.ts`（文字の差 4.5:1 以上、押す場所 44×44 以上。NFR9.1）。操作できる要素に `data-testid` を付ける
+- [x] **Step 17: 通す、整える** — Step 15 の筋書きが通るまで直し、通ったまま整える。テーマの色の差を確かめる単体テストを足す
 
 ### 環境と組み立ての設定
 
-- [ ] **Step 18: AWS CDK の構成**（`infrastructure/`）
+- [x] **Step 18: AWS CDK の構成**（`infrastructure/`）
   - `bin/app.ts`（環境 `staging`、`production`。東京リージョン）
   - `lib/account-stack.ts`（`Housework-Account`: GitHub の OIDC のプロバイダー、ステージング用と本番用のロール、AWS Budgets 月 1 ドル）
   - `lib/data-stack.ts`（`Housework-<env>-Data`: `Users`（GSI `lineUserId-index`）、`Families`、`ProcessedLineEvents`（TTL）、`RequestRecords`（TTL）。オンデマンド、本番は `RETAIN`）
   - `lib/app-stack.ts`（`Housework-<env>-App`: Lambda `api` と `line`（Node.js 22、arm64、256 MB、30 秒、予約された同時実行数はコンテキストで切り替え可能、esbuild で束ねる）、関数 URL（`NONE`）と公開で呼べる許可、S3（非公開、OAC）、CloudFront（振り分け、CloudFront Functions で画面の道の書き換え、応答ヘッダーのポリシーで CSP ほか、元への秘密のヘッダーはコンテキストから）、`BucketDeployment`、ロググループ 30 日、Lambda ごとの最小のロール（自分の環境のテーブルとパラメータだけ。`cloudfront/*` の読み取りを含む））
   - `test/u1-skeleton-family/stacks.test.ts`（CDK のテスト: 関数 URL、時間切れ 30 秒、メモリ 256 MB、ログ 30 日、TTL、本番の `RETAIN`、API Gateway と Secrets Manager がない、ロールがほかの環境に届かない、CSP のヘッダー、秘密のヘッダーの値がテンプレートに入るのはコンテキストからだけ）
-- [ ] **Step 19: GitHub Actions**（`.github/workflows/`）
+- [x] **Step 19: GitHub Actions**（`.github/workflows/`）
   - `ci.yml`（プルリクエストと `main`: Prettier、ESLint、tsc、Vitest とカバレッジ、gitleaks、`cdk synth`。AWS の権限なし）
   - `deploy-staging.yml`（`main` への push: 検査のあと OIDC で反映、秘密のヘッダーの値を伏せて渡す、反映後の確かめ）
   - `deploy-production.yml`（`workflow_dispatch`、環境 `production` の承認、反映できるブランチは `main` だけ）
@@ -170,7 +170,7 @@
 
 ### 書類と対応表
 
-- [ ] **Step 20: 書類**
+- [x] **Step 20: 書類**
   - `README.md`（作り手が最初にすること: LINE のチャネル 3 つと LIFF アプリの作成、Webhook の再送を有効にする、パラメータストアに入れる値の一覧、CDK の bootstrap、`Housework-Account` の反映、Lambda の同時実行数の枠の確かめ、GitHub の環境と変数の設定、ステージングで B1 を確かめる手順）
   - `docs/contract-changes-u1.md`（U1 で足した契約: C1 の `POST /families` の本文とヘッダーと応答、C2 の 403・503、C3 の「思いがけない失敗は 500」、C6 の新しい窓口、C10 の新しい印。`contract-summary.md` への反映を待つ一覧）
 

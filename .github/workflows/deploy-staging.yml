@@ -1,0 +1,77 @@
+name: Deploy staging
+
+# main への push のたびに、検査が通ったあとステージングへ自動で反映する。
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+
+  deploy:
+    needs: ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      ENV_NAME: staging
+    steps:
+      # NOTE: タグ指定（SHA 固定は README の「既知の課題」）
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: AWS の一時的な権限を受け取る（OIDC）
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.STAGING_DEPLOY_ROLE_ARN }}
+          aws-region: ap-northeast-1
+          role-session-name: housework-staging-deploy
+
+      - name: 秘密のヘッダーの値を読み、ログに出ないよう伏せる
+        run: |
+          value="$(aws ssm get-parameter --name "/housework-calendar/${ENV_NAME}/cloudfront/origin-verify-secret" --with-decryption --query Parameter.Value --output text)"
+          echo "::add-mask::${value}"
+          echo "ORIGIN_VERIFY_SECRET=${value}" >> "$GITHUB_ENV"
+
+      - name: 画面のビルド
+        run: npm run build -w packages/frontend
+        env:
+          VITE_LIFF_ID: ${{ vars.STAGING_VITE_LIFF_ID }}
+          VITE_LINE_OA_ID: ${{ vars.STAGING_VITE_LINE_OA_ID }}
+
+      - name: 反映
+        working-directory: infrastructure
+        run: >
+          npx cdk deploy Housework-staging-Data Housework-staging-App
+          --require-approval never
+          --outputs-file ../cdk-outputs.json
+          -c originVerifySecret="${ORIGIN_VERIFY_SECRET}"
+          ${RESERVED_CONCURRENCY:+-c reservedConcurrency="${RESERVED_CONCURRENCY}"}
+        env:
+          RESERVED_CONCURRENCY: ${{ vars.RESERVED_CONCURRENCY }}
+
+      - name: 反映後の確かめ
+        run: |
+          domain="$(jq -r '."Housework-staging-App".DistributionDomain' cdk-outputs.json)"
+          api_url="$(jq -r '."Housework-staging-App".ApiFunctionUrl' cdk-outputs.json)"
+          ./scripts/smoke-check.sh "https://${domain}" "${api_url}"
