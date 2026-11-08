@@ -20550,3 +20550,45 @@
 **Unit**: u4-chore-types
 
 ---
+
+## Human Turn
+**Timestamp**: 2026-11-08T13:22:31Z
+**Event**: HUMAN_TURN
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Origin**: person
+**Source**: typed
+**Message Id**: e15b8cf9
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:22:52Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: grant
+**Grant**: turn-marker
+**Actor**: main
+**Stage**: code-generation
+**Tool**: Edit
+**Details**: <project-dir>/.gitleaksignore
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:23:43Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/functional-design-questions.md
+**Context**: construction > u5-assignment-calendar > functional-design > functional-design-questions.md
+
+---
+
+## Decision Recorded
+**Timestamp**: 2026-11-08T13:23:44Z
+**Event**: DECISION_RECORDED
+**Stage**: functional-design
+**Decision**: U5 割り当てとカレンダーの機能設計の質問（Q1〜Q5）を質問ファイルに書き込み、終わったら「done」と返してください
+**Options**: done
+**Unit**: u5-assignment-calendar
+
+---
