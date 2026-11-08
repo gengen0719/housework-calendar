@@ -115,8 +115,20 @@ npx cdk deploy Housework-Account \
   -c originVerifySecret=unused \
   -c githubOwner=<GitHub のユーザー名または組織> \
   -c githubRepo=<リポジトリ名> \
+  -c githubOwnerId=<持ち主の ID（数字）> \
+  -c githubRepoId=<リポジトリの ID（数字）> \
   -c budgetEmail=<予算の知らせを受けるメール>
 ```
+
+**`githubOwnerId` と `githubRepoId` は必ず渡してください。** GitHub は、OIDC のトークンの `sub` を `repo:<持ち主>@<持ち主の ID>/<リポジトリ>@<リポジトリの ID>:ref:refs/heads/main` のように、番号の入った形で出すことがあります。両方を渡すと、ロールは名前だけの形と番号の入った形のどちらにも完全一致で応じます。渡さないと名前だけの形にしか応じず、GitHub Actions の反映が `Not authorized to perform sts:AssumeRoleWithWebIdentity` で止まります。
+
+番号は次のコマンドで調べられます（`gh` を使わないなら、`https://api.github.com/repos/<持ち主>/<リポジトリ>` をブラウザで開き、`owner.id` と `id` を見ます）。
+
+```bash
+gh api repos/<持ち主>/<リポジトリ> --jq '{githubOwnerId: .owner.id, githubRepoId: .id}'
+```
+
+反映が `AssumeRoleWithWebIdentity` で断られたときは、CloudTrail の「イベント履歴」（東京リージョン）でイベント名 `AssumeRoleWithWebIdentity` を開くと、`userIdentity.userName` に GitHub から届いた `sub` が出ます。ロールの条件（`aws iam get-role --role-name housework-calendar-github-staging-deploy`）と見比べてください。
 
 反映の出力に出る `StagingDeployRoleArn` と `ProductionDeployRoleArn` を控えます（秘密の値ではありません）。
 

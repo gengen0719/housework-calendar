@@ -269,4 +269,62 @@ describe('U1 CDK stacks', () => {
     );
     expect(() => buildApp(makeApp({ reservedConcurrency: '0' }))).toThrow(/reservedConcurrency/);
   });
+
+  it('Account: ID を渡すと、名前だけの sub と ID 入りの sub の両方に完全一致で引き受けられる', () => {
+    const app = buildApp(
+      makeApp({
+        githubOwner: 'octo',
+        githubRepo: 'housework',
+        githubOwnerId: '74813858',
+        githubRepoId: '1441628441',
+        budgetEmail: 'owner@example.com',
+      }),
+    );
+    const account = Template.fromStack(app.node.findChild('Housework-Account') as never);
+    account.hasResourceProperties('AWS::IAM::Role', {
+      RoleName: 'housework-calendar-github-staging-deploy',
+      AssumeRolePolicyDocument: Match.objectLike({
+        Statement: [
+          Match.objectLike({
+            Condition: {
+              StringEquals: {
+                'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
+                'token.actions.githubusercontent.com:sub': [
+                  'repo:octo/housework:ref:refs/heads/main',
+                  'repo:octo@74813858/housework@1441628441:ref:refs/heads/main',
+                ],
+              },
+            },
+          }),
+        ],
+      }),
+    });
+    account.hasResourceProperties('AWS::IAM::Role', {
+      RoleName: 'housework-calendar-github-production-deploy',
+      AssumeRolePolicyDocument: Match.objectLike({
+        Statement: [
+          Match.objectLike({
+            Condition: {
+              StringEquals: Match.objectLike({
+                'token.actions.githubusercontent.com:sub': [
+                  'repo:octo/housework:environment:production',
+                  'repo:octo@74813858/housework@1441628441:environment:production',
+                ],
+              }),
+            },
+          }),
+        ],
+      }),
+    });
+    // ワイルドカードで広げていない
+    expect(JSON.stringify(account.toJSON())).not.toContain('StringLike');
+  });
+
+  it('Account: ID は両方そろって数字だけのときに受け付ける', () => {
+    const base = { githubOwner: 'octo', githubRepo: 'housework', budgetEmail: 'owner@example.com' };
+    expect(() => buildApp(makeApp({ ...base, githubOwnerId: '74813858' }))).toThrow(/両方/);
+    expect(() =>
+      buildApp(makeApp({ ...base, githubOwnerId: '74813858', githubRepoId: '1441*' })),
+    ).toThrow(/数字/);
+  });
 });
