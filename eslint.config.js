@@ -23,6 +23,15 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       'react/no-danger': 'error',
+      // 招待の印は暗号論的な乱数（crypto.randomBytes）で作る。Math.random は使わない（NFR4.14）
+      'no-restricted-properties': [
+        'error',
+        {
+          object: 'Math',
+          property: 'random',
+          message: '印や識別子には crypto.randomBytes / crypto.randomUUID を使ってください。',
+        },
+      ],
     },
   },
 );

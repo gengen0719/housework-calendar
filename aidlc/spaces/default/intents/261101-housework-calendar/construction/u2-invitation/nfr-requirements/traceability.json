@@ -1,0 +1,18 @@
+{
+  "stage": "nfr-requirements",
+  "unit": "u2-invitation",
+  "upstream_ids": ["NFR1", "NFR2", "NFR3", "NFR4", "NFR5", "NFR6", "NFR7", "NFR8", "NFR9", "NFR10", "NFR11"],
+  "coverage": [
+    { "id": "NFR1", "status": "OK", "target": "NFR1.8, NFR1.9, NFR1.10, NFR1.11" },
+    { "id": "NFR2", "status": "OK", "target": "NFR2.9, NFR2.10, NFR2.11, NFR2.12, NFR2.13, NFR2.14, NFR2.15" },
+    { "id": "NFR3", "status": "OK", "target": "NFR3.3" },
+    { "id": "NFR4", "status": "OK", "target": "NFR4.14, NFR4.15, NFR4.16, NFR4.17, NFR4.18, NFR4.19, NFR4.20, NFR4.21, NFR4.22, NFR4.23, NFR4.24, NFR4.25, NFR4.26" },
+    { "id": "NFR5", "status": "OK", "target": "NFR5.7" },
+    { "id": "NFR6", "status": "OK", "target": "NFR6.3" },
+    { "id": "NFR7", "status": "OK", "target": "NFR7.7, NFR7.8, NFR7.9, NFR7.10, NFR7.11" },
+    { "id": "NFR8", "status": "OK", "target": "NFR8.4, NFR8.5" },
+    { "id": "NFR9", "status": "OK", "target": "NFR9.2" },
+    { "id": "NFR10", "status": "OK", "target": "NFR10.3" },
+    { "id": "NFR11", "status": "N/A", "target": "inherited unchanged from u1-skeleton-family NFR11.1" }
+  ]
+}

@@ -1,3 +1,4 @@
+import { GetCommand } from '@aws-sdk/lib-dynamodb';
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { User } from '../../src/models';
 import * as familyMemberService from '../../src/services/familyMemberService';
@@ -80,6 +81,14 @@ describe('familyMemberService', () => {
       ok: false,
       reason: 'NOT_FOUND',
     });
+  });
+
+  it('getUserStatus: 利用者を強い整合性（ConsistentRead）で読む（参加の直後に古い値を読まない）', async () => {
+    world.users.set(taro.userId, { ...taro });
+    await familyMemberService.getUserStatus('user-taro');
+    const gets = world.mock.commandCalls(GetCommand);
+    expect(gets).toHaveLength(1);
+    expect(gets[0]?.args[0].input.ConsistentRead).toBe(true);
   });
 
   it('getUserStatus: 友だちか・家族・役割を返し、家族のない人は家族の項目を持たない', async () => {

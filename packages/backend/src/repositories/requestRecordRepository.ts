@@ -24,11 +24,24 @@ export async function find(
 }
 
 /**
+ * 前の記録と同じ操作・対象か（BR3.5）。違えば、前の結果を返さず 422 IDEMPOTENCY_KEY_REUSED にする。
+ * target のない操作（createFamily）は、target なし同士を同じとみなす。
+ */
+export function isSameRequest(
+  record: RequestRecord,
+  operation: RequestRecord['operation'],
+  target?: string,
+): boolean {
+  return record.operation === operation && (record.target ?? '') === (target ?? '');
+}
+
+/**
  * 結果の記録を、取引（TransactWriteItems）の 1 項目として書くための Put。
  * 同じ組がすでにあれば条件で失敗するので、同じ印の同時の要求は 1 つだけが通る（BR2.8）。
  */
 export function buildPutItem(
-  input: Pick<RequestRecord, 'userId' | 'idempotencyKey' | 'operation' | 'result'>,
+  input: Pick<RequestRecord, 'userId' | 'idempotencyKey' | 'operation' | 'result'> &
+    Partial<Pick<RequestRecord, 'target'>>,
   now: Date = new Date(),
 ) {
   const record: RequestRecord = {

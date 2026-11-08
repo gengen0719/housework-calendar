@@ -48,6 +48,8 @@ export interface AppStackProps extends StackProps {
   families: dynamodb.ITable;
   processedLineEvents: dynamodb.ITable;
   requestRecords: dynamodb.ITable;
+  invitations: dynamodb.ITable;
+  notificationGroups: dynamodb.ITable;
   /** CloudFront が元に付ける秘密のヘッダー `X-Origin-Verify` の値（CDK のコンテキストから） */
   originVerifySecret: string;
   /** ビルド済みの画面（packages/frontend/dist）のあるフォルダ */
@@ -79,20 +81,37 @@ export class AppStack extends Stack {
         arnFormat: ArnFormat.SLASH_RESOURCE_NAME,
       });
 
-    this.apiFunction = this.createFunction('Api', 'api', props, {
+    const api = this.createFunction('Api', 'api', props, {
       SSM_PREFIX: prefix,
       USERS_TABLE: props.users.tableName,
       FAMILIES_TABLE: props.families.tableName,
       REQUEST_RECORDS_TABLE: props.requestRecords.tableName,
+      INVITATIONS_TABLE: props.invitations.tableName,
+      NOTIFICATION_GROUPS_TABLE: props.notificationGroups.tableName,
       ENV: envName,
       ENTRY: 'api',
     });
+    this.apiFunction = api.fn;
     this.lineFunction = this.createFunction('Line', 'line', props, {
       SSM_PREFIX: prefix,
       USERS_TABLE: props.users.tableName,
+      FAMILIES_TABLE: props.families.tableName,
       PROCESSED_LINE_EVENTS_TABLE: props.processedLineEvents.tableName,
+      NOTIFICATION_GROUPS_TABLE: props.notificationGroups.tableName,
       ENV: envName,
       ENTRY: 'line',
+    }).fn;
+
+    // 使えない招待を開こうとした回数（濫用の目安。アラームは U10）。データのない時間は 0
+    new logs.MetricFilter(this, 'InvitationInvalidMetricFilter', {
+      logGroup: api.logGroup,
+      metricNamespace: `Housework/${envName}`,
+      metricName: 'InvitationInvalidCount',
+      filterPattern: logs.FilterPattern.literal(
+        '{ $.event = "INVITATION_REJECTED" && $.reason = "INVITATION_INVALID" }',
+      ),
+      metricValue: '1',
+      defaultValue: 0,
     });
 
     // --- 権限（自分の環境のテーブルとパラメータだけ） ---
@@ -109,10 +128,39 @@ export class AppStack extends Stack {
         resources: [usersIndexArn],
       }),
     );
+    // U2: 作り直し・参加の取引で使う操作（Families は Update と ConditionCheck を足す）
+    this.apiFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: [
+          'dynamodb:GetItem',
+          'dynamodb:PutItem',
+          'dynamodb:UpdateItem',
+          'dynamodb:ConditionCheckItem',
+        ],
+        resources: [props.families.tableArn],
+      }),
+    );
     this.apiFunction.addToRolePolicy(
       new iam.PolicyStatement({
         actions: ['dynamodb:GetItem', 'dynamodb:PutItem'],
-        resources: [props.families.tableArn, props.requestRecords.tableArn],
+        resources: [props.requestRecords.tableArn],
+      }),
+    );
+    this.apiFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: [
+          'dynamodb:GetItem',
+          'dynamodb:PutItem',
+          'dynamodb:UpdateItem',
+          'dynamodb:ConditionCheckItem',
+        ],
+        resources: [props.invitations.tableArn],
+      }),
+    );
+    this.apiFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ['dynamodb:Query'],
+        resources: [`${props.users.tableArn}/index/familyId-index`],
       }),
     );
     this.lineFunction.addToRolePolicy(
@@ -136,6 +184,26 @@ export class AppStack extends Stack {
           'dynamodb:DeleteItem',
         ],
         resources: [props.processedLineEvents.tableArn],
+      }),
+    );
+    // U3: お知らせ先の登録・解除（TransactWriteItems は項目ごとの Put/Update/Delete の許可で確かめられる）。
+    // ConditionCheck は使わないので ConditionCheckItem は足さない
+    this.lineFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ['dynamodb:GetItem', 'dynamodb:PutItem', 'dynamodb:DeleteItem'],
+        resources: [props.notificationGroups.tableArn],
+      }),
+    );
+    this.lineFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ['dynamodb:GetItem', 'dynamodb:UpdateItem'],
+        resources: [props.families.tableArn],
+      }),
+    );
+    this.apiFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ['dynamodb:GetItem'],
+        resources: [props.notificationGroups.tableArn],
       }),
     );
 
@@ -244,12 +312,12 @@ export class AppStack extends Stack {
     entry: 'api' | 'line',
     props: AppStackProps,
     environment: Record<string, string>,
-  ): nodejs.NodejsFunction {
+  ): { fn: nodejs.NodejsFunction; logGroup: logs.LogGroup } {
     const logGroup = new logs.LogGroup(this, `${logicalId}LogGroup`, {
       retention: logs.RetentionDays.ONE_MONTH,
       removalPolicy: RemovalPolicy.DESTROY,
     });
-    return new nodejs.NodejsFunction(this, `${logicalId}Function`, {
+    const fn = new nodejs.NodejsFunction(this, `${logicalId}Function`, {
       entry: path.join(ENTRIES_DIR, `${entry}.ts`),
       handler: 'handler',
       depsLockFilePath: LOCK_FILE,
@@ -268,5 +336,6 @@ export class AppStack extends Stack {
         externalModules: ['@aws-sdk/*'],
       },
     });
+    return { fn, logGroup };
   }
 }

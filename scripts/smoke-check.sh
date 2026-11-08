@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 反映後の確かめ（cicd-pipeline.md の 4 つ）。
+# 反映後の確かめ（全 10 件: 1・2・3 が各 1 件、3b が U2 の 5 件と U3 の 1 件、4 が 1 件）。
 # 使い方: scripts/smoke-check.sh <CloudFront の URL> <api の関数 URL>
 #   例: scripts/smoke-check.sh https://dxxxx.cloudfront.net https://xxxx.lambda-url.ap-northeast-1.on.aws/
 set -euo pipefail
@@ -43,6 +43,17 @@ check "GET /v1/me (セッションなし)" 401 "${base}/v1/me"
 # 3. /line/webhook が line に届き、署名を確かめている: 署名なしは 401
 check "POST /line/webhook (署名なし)" 401 -X POST -H 'Content-Type: application/json' --data '{"destination":"smoke","events":[]}' "${base}/line/webhook"
 
+# 3b. U2 の 5 つの操作がセッションなしで 401（形の合った印を使うので、印の形で 404 になることはない）
+smoke_token="AAAAAAAAAAAAAAAAAAAAAA"
+json='Content-Type: application/json'
+check "GET /v1/family/members (セッションなし)" 401 "${base}/v1/family/members"
+check "GET /v1/family/invitation (セッションなし)" 401 "${base}/v1/family/invitation"
+check "POST /v1/family/invitations (セッションなし)" 401 -X POST -H "$json" --data '{}' "${base}/v1/family/invitations"
+check "GET /v1/invitations/:token (セッションなし)" 401 "${base}/v1/invitations/${smoke_token}"
+check "POST /v1/invitations/:token/accept (セッションなし)" 401 -X POST -H "$json" --data '{}' "${base}/v1/invitations/${smoke_token}/accept"
+
+# 3b. U3 のお知らせ先の読み取りがセッションなしで 401
+check "GET /v1/family/notification-group (セッションなし)" 401 "${base}/v1/family/notification-group"
 # 4. CloudFront を通さない要求を断っている: 関数 URL を直接呼ぶと 403
 check "api の関数 URL を直接呼ぶ" 403 "${api_direct}/v1/me"
 

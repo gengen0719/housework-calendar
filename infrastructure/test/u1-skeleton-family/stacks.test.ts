@@ -92,13 +92,15 @@ describe('U1 CDK stacks', () => {
     expect(groups.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('DynamoDB は 4 つで、オンデマンド、GSI と TTL がある', () => {
+  it('DynamoDB は 6 つ（U2 で Invitations、U3 で NotificationGroups を追加）で、オンデマンド、GSI と TTL がある', () => {
     const data = t('Housework-staging-Data');
-    data.resourceCountIs('AWS::DynamoDB::Table', 4);
+    data.resourceCountIs('AWS::DynamoDB::Table', 6);
     data.allResourcesProperties('AWS::DynamoDB::Table', { BillingMode: 'PAY_PER_REQUEST' });
     data.hasResourceProperties('AWS::DynamoDB::Table', {
       KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }],
-      GlobalSecondaryIndexes: [Match.objectLike({ IndexName: 'lineUserId-index' })],
+      GlobalSecondaryIndexes: Match.arrayWith([
+        Match.objectLike({ IndexName: 'lineUserId-index' }),
+      ]),
     });
     data.hasResourceProperties('AWS::DynamoDB::Table', {
       KeySchema: [{ AttributeName: 'webhookEventId', KeyType: 'HASH' }],
@@ -118,7 +120,7 @@ describe('U1 CDK stacks', () => {
       t('Housework-production-Data').findResources('AWS::DynamoDB::Table'),
     );
     const stg = Object.values(t('Housework-staging-Data').findResources('AWS::DynamoDB::Table'));
-    expect(prod).toHaveLength(4);
+    expect(prod).toHaveLength(6);
     for (const r of prod) expect(r.DeletionPolicy).toBe('Retain');
     for (const r of stg) expect(r.DeletionPolicy).toBe('Delete');
   });

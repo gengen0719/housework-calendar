@@ -1,0 +1,29 @@
+{
+  "stage": "infrastructure-design",
+  "unit": "u2-invitation",
+  "upstream_ids": [
+    "NFR1.8", "NFR1.9", "NFR1.10",
+    "NFR2.15",
+    "NFR3.3",
+    "NFR4.26",
+    "NFR6.3",
+    "NFR7.7", "NFR7.8", "NFR7.9", "NFR7.10",
+    "NFR8.5",
+    "NFR10.3"
+  ],
+  "coverage": [
+    { "id": "NFR1.8", "status": "OK", "target": "infrastructure-specification.md DynamoDB Invitations TTL ttl (expiry + 7 days)" },
+    { "id": "NFR1.9", "status": "OK", "target": "infrastructure-specification.md no new stack, Lambda or paid service; 費用の見込み; abuse stop via put-function-concurrency 0" },
+    { "id": "NFR1.10", "status": "OK", "target": "infrastructure-specification.md no push API permission or parameter added (share is client-side via LIFF)" },
+    { "id": "NFR2.15", "status": "OK", "target": "infrastructure-specification.md CloudWatch Logs metric filter InvitationInvalidCount (defaultValue 0, log group exposed from createFunction); monitoring-design.md Alerts" },
+    { "id": "NFR3.3", "status": "OK", "target": "infrastructure-specification.md Deployment (handlers added to existing Lambda api)" },
+    { "id": "NFR4.26", "status": "OK", "target": "infrastructure-specification.md CloudFront/function URL access logs stay disabled; monitoring-design.md Logs & Tracing" },
+    { "id": "NFR6.3", "status": "OK", "target": "infrastructure-specification.md Invitations RemovalPolicy.RETAIN in production; cicd-pipeline.md 前の版に戻す" },
+    { "id": "NFR7.7", "status": "OK", "target": "monitoring-design.md SLIs / SLOs (REQUEST_END durationMs by route template)" },
+    { "id": "NFR7.8", "status": "OK", "target": "monitoring-design.md SLIs / SLOs" },
+    { "id": "NFR7.9", "status": "OK", "target": "monitoring-design.md SLIs / SLOs" },
+    { "id": "NFR7.10", "status": "OK", "target": "monitoring-design.md SLIs / SLOs" },
+    { "id": "NFR8.5", "status": "OK", "target": "cicd-pipeline.md ci.yml unchanged (coverage 80% gate applies to U2 code); CDK permission tests" },
+    { "id": "NFR10.3", "status": "OK", "target": "cicd-pipeline.md 反映の順番 and README (shareTargetPicker enabled per LIFF app); smoke check per Q1 answer A" }
+  ]
+}

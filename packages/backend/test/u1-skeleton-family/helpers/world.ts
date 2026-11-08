@@ -9,6 +9,8 @@ import {
   EVENTS_TABLE,
   FAMILIES_TABLE,
   installFakeDynamo,
+  INVITATIONS_TABLE,
+  NOTIFICATION_GROUPS_TABLE,
   REQUEST_RECORDS_TABLE,
   USERS_TABLE,
 } from './fakeDynamo';
@@ -116,6 +118,8 @@ export function setupWorld() {
   process.env.PROCESSED_LINE_EVENTS_TABLE = EVENTS_TABLE;
   process.env.FAMILIES_TABLE = FAMILIES_TABLE;
   process.env.REQUEST_RECORDS_TABLE = REQUEST_RECORDS_TABLE;
+  process.env.INVITATIONS_TABLE = INVITATIONS_TABLE;
+  process.env.NOTIFICATION_GROUPS_TABLE = NOTIFICATION_GROUPS_TABLE;
   resetConfigCache();
   setRequestId(undefined);
   const dynamo = installFakeDynamo();

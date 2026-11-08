@@ -45,6 +45,31 @@ export interface Family {
 /** 201 の本文。GET /v1/me の family と同じ形（役割は作った人なので常に admin） */
 export type CreateFamilyResponse = MeFamily;
 
+/** GET /v1/family/members の 1 件（LINE のユーザー ID は含めない。U2） */
+export interface Member {
+  userId: string;
+  displayName: string;
+  role: Role;
+}
+
+/** POST /v1/family/invitations、GET /v1/family/invitation（U2）。expiresAt は UTC の ISO 8601 */
+export interface InvitationView {
+  url: string;
+  expiresAt: string;
+}
+
+/** GET /v1/invitations/:token（U2） */
+export interface InvitationPreview {
+  familyName: string;
+  expiresAt: string;
+}
+
+/** GET /v1/family/notification-group（U3）。グループ ID は含めない。registeredAt は UTC の ISO 8601。お知らせ先がないときの本文は null */
+export interface NotificationGroupView {
+  groupName: string | null;
+  registeredAt: string;
+}
+
 /** 画面用 API の失敗の形 */
 export interface ApiError {
   error: {

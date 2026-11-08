@@ -3,7 +3,12 @@ import type {
   CreateFamilyResponse,
   CreateSessionRequest,
   CreateSessionResponse,
+  InvitationPreview,
+  InvitationView,
   Me,
+  MeFamily,
+  Member,
+  NotificationGroupView,
   Reason,
 } from '@housework/shared';
 import { IDEMPOTENCY_KEY_HEADER, isReason } from '@housework/shared';
@@ -73,5 +78,52 @@ export function createFamily(
     token,
     body,
     headers: { [IDEMPOTENCY_KEY_HEADER]: idempotencyKey },
+  });
+}
+
+const idempotent = (key: string) => ({ [IDEMPOTENCY_KEY_HEADER]: key });
+const invitationPath = (invitationToken: string) =>
+  `/v1/invitations/${encodeURIComponent(invitationToken)}`;
+
+/** メンバーの一覧（家族のメンバー全員が見られる。BR3.11） */
+export function listMembers(token: string): Promise<Member[]> {
+  return request('GET', '/v1/family/members', { token });
+}
+
+/** お知らせ先のグループの名前と登録した時刻。なければ null（家族のメンバー全員が見られる。グループ ID は返らない） */
+export function getNotificationGroup(token: string): Promise<NotificationGroupView | null> {
+  return request('GET', '/v1/family/notification-group', { token });
+}
+
+/** いま使える招待。なければ null（管理者だけ。BR3.12） */
+export function getCurrentInvitation(token: string): Promise<InvitationView | null> {
+  return request('GET', '/v1/family/invitation', { token });
+}
+
+/** 招待用のリンクを作る（作り直しも同じ。管理者だけ。BR3.5 のため識別子が要る） */
+export function createInvitation(token: string, idempotencyKey: string): Promise<InvitationView> {
+  return request('POST', '/v1/family/invitations', {
+    token,
+    headers: idempotent(idempotencyKey),
+  });
+}
+
+/** 招待を開く。開いただけでは参加しない（BR3.9） */
+export function previewInvitation(
+  token: string,
+  invitationToken: string,
+): Promise<InvitationPreview> {
+  return request('GET', invitationPath(invitationToken), { token });
+}
+
+/** 招待に参加する。応答は GET /v1/me の family と同じ形 */
+export function acceptInvitation(
+  token: string,
+  invitationToken: string,
+  idempotencyKey: string,
+): Promise<MeFamily> {
+  return request('POST', `${invitationPath(invitationToken)}/accept`, {
+    token,
+    headers: idempotent(idempotencyKey),
   });
 }

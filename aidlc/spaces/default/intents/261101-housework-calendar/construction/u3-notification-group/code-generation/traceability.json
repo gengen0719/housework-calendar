@@ -1,0 +1,28 @@
+{
+  "stage": "code-generation",
+  "unit": "u3-notification-group",
+  "upstream_ids": [
+    "AC1.2.1", "AC1.2.2", "AC1.2.3", "AC1.2.4", "AC1.2.5",
+    "BR4.1", "BR4.2", "BR4.3", "BR4.4", "BR4.5", "BR4.6", "BR4.7", "BR4.8", "BR4.9", "BR4.10", "BR4.11", "BR4.12", "BR4.13"
+  ],
+  "coverage": [
+    { "id": "AC1.2.1", "status": "OK", "target": "packages/backend/test/u3-notification-group/register-group.feature" },
+    { "id": "AC1.2.2", "status": "OK", "target": "packages/backend/test/u3-notification-group/register-group.feature" },
+    { "id": "AC1.2.3", "status": "OK", "target": "packages/backend/test/u3-notification-group/register-group.feature" },
+    { "id": "AC1.2.4", "status": "OK", "target": "packages/frontend/test/u3-notification-group/screens.feature" },
+    { "id": "AC1.2.5", "status": "OK", "target": "packages/backend/test/u3-notification-group/unregister-and-gate.feature" },
+    { "id": "BR4.1", "status": "OK", "target": "packages/backend/src/handlers/line/joinHandler.ts" },
+    { "id": "BR4.2", "status": "OK", "target": "packages/backend/src/handlers/line/groupCommand.ts" },
+    { "id": "BR4.3", "status": "OK", "target": "packages/backend/src/services/groupCommandGate.ts, packages/backend/src/handlers/line/groupEventHandler.ts" },
+    { "id": "BR4.4", "status": "OK", "target": "packages/backend/src/services/groupCommandGate.ts" },
+    { "id": "BR4.5", "status": "OK", "target": "packages/backend/src/repositories/notificationGroupRepository.ts" },
+    { "id": "BR4.6", "status": "OK", "target": "packages/backend/src/repositories/familyRepository.ts" },
+    { "id": "BR4.7", "status": "OK", "target": "packages/backend/src/handlers/line/groupEventHandler.ts" },
+    { "id": "BR4.8", "status": "OK", "target": "packages/backend/src/services/lineApiService.ts" },
+    { "id": "BR4.9", "status": "OK", "target": "packages/backend/src/handlers/line/leaveHandler.ts" },
+    { "id": "BR4.10", "status": "OK", "target": "packages/backend/src/services/groupCommandGate.ts" },
+    { "id": "BR4.11", "status": "OK", "target": "packages/frontend/src/pages/CalendarFramePage.tsx" },
+    { "id": "BR4.12", "status": "OK", "target": "packages/frontend/src/pages/FamilySettingsPage.tsx" },
+    { "id": "BR4.13", "status": "OK", "target": "packages/backend/src/handlers/line/groupCommand.ts" }
+  ]
+}

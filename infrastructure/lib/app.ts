@@ -63,6 +63,8 @@ export function buildApp(app: App = new App()): App {
       families: data.families,
       processedLineEvents: data.processedLineEvents,
       requestRecords: data.requestRecords,
+      invitations: data.invitations,
+      notificationGroups: data.notificationGroups,
       originVerifySecret,
       frontendDistPath,
       reservedConcurrency,

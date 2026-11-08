@@ -1,0 +1,24 @@
+{
+  "stage": "infrastructure-design",
+  "unit": "u3-notification-group",
+  "upstream_ids": [
+    "NFR1.12", "NFR1.14",
+    "NFR3.4",
+    "NFR6.4",
+    "NFR7.12", "NFR7.13", "NFR7.15",
+    "NFR8.6",
+    "NFR10.4", "NFR10.5"
+  ],
+  "coverage": [
+    { "id": "NFR1.12", "status": "OK", "target": "infrastructure-specification.md no push permission or parameter added; 費用の見込み (reply only)" },
+    { "id": "NFR1.14", "status": "OK", "target": "infrastructure-specification.md no new stack, Lambda or paid service" },
+    { "id": "NFR3.4", "status": "OK", "target": "infrastructure-specification.md 費用の見込み (plain chat not written); monitoring-design.md Logs & Tracing" },
+    { "id": "NFR6.4", "status": "OK", "target": "infrastructure-specification.md NotificationGroups RemovalPolicy.RETAIN in production; cicd-pipeline.md 前の版に戻す" },
+    { "id": "NFR7.12", "status": "OK", "target": "monitoring-design.md SLIs / SLOs" },
+    { "id": "NFR7.13", "status": "OK", "target": "monitoring-design.md SLIs / SLOs" },
+    { "id": "NFR7.15", "status": "OK", "target": "monitoring-design.md SLIs / SLOs" },
+    { "id": "NFR8.6", "status": "OK", "target": "cicd-pipeline.md ci.yml unchanged (coverage gate applies to U3 code); CDK permission tests" },
+    { "id": "NFR10.4", "status": "OK", "target": "cicd-pipeline.md 反映の順番 and README (allow group chats per Messaging API channel)" },
+    { "id": "NFR10.5", "status": "OK", "target": "cicd-pipeline.md README に足すこと (困ったとき)" }
+  ]
+}

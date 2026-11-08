@@ -13,6 +13,8 @@ export class DataStack extends Stack {
   readonly families: dynamodb.Table;
   readonly processedLineEvents: dynamodb.Table;
   readonly requestRecords: dynamodb.Table;
+  readonly invitations: dynamodb.Table;
+  readonly notificationGroups: dynamodb.Table;
 
   constructor(scope: Construct, id: string, props: DataStackProps) {
     super(scope, id, props);
@@ -33,6 +35,13 @@ export class DataStack extends Stack {
       partitionKey: { name: 'lineUserId', type: dynamodb.AttributeType.STRING },
       projectionType: dynamodb.ProjectionType.ALL,
     });
+    // U2: 家族のメンバーの一覧（CloudFormation は 1 回の更新で GSI を 1 つしか足せない）
+    this.users.addGlobalSecondaryIndex({
+      indexName: 'familyId-index',
+      partitionKey: { name: 'familyId', type: dynamodb.AttributeType.STRING },
+      projectionType: dynamodb.ProjectionType.INCLUDE,
+      nonKeyAttributes: ['displayName', 'role', 'familyJoinedAt'],
+    });
 
     this.families = new dynamodb.Table(this, 'Families', {
       ...common,
@@ -50,6 +59,19 @@ export class DataStack extends Stack {
       partitionKey: { name: 'userId', type: dynamodb.AttributeType.STRING },
       sortKey: { name: 'idempotencyKey', type: dynamodb.AttributeType.STRING },
       timeToLiveAttribute: 'expiresAt',
+    });
+
+    // U2: 招待（期限 + 7 日で TTL により消える）
+    this.invitations = new dynamodb.Table(this, 'Invitations', {
+      ...common,
+      partitionKey: { name: 'token', type: dynamodb.AttributeType.STRING },
+      timeToLiveAttribute: 'ttl',
+    });
+
+    // U3: お知らせ先のグループ（TTL なし。1 グループ 1 家族）
+    this.notificationGroups = new dynamodb.Table(this, 'NotificationGroups', {
+      ...common,
+      partitionKey: { name: 'groupId', type: dynamodb.AttributeType.STRING },
     });
   }
 }

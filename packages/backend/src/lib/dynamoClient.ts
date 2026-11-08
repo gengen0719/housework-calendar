@@ -13,4 +13,8 @@ export const tables = {
   families: () => requireEnv('FAMILIES_TABLE'),
   processedLineEvents: () => requireEnv('PROCESSED_LINE_EVENTS_TABLE'),
   requestRecords: () => requireEnv('REQUEST_RECORDS_TABLE'),
+  /** 画面用の Lambda だけが持つ（U2） */
+  invitations: () => requireEnv('INVITATIONS_TABLE'),
+  /** お知らせ先のグループ（U3）。LINE 用と画面用の両方の Lambda が持つ */
+  notificationGroups: () => requireEnv('NOTIFICATION_GROUPS_TABLE'),
 };

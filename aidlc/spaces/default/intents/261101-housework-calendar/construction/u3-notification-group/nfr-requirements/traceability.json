@@ -1,0 +1,18 @@
+{
+  "stage": "nfr-requirements",
+  "unit": "u3-notification-group",
+  "upstream_ids": ["NFR1", "NFR2", "NFR3", "NFR4", "NFR5", "NFR6", "NFR7", "NFR8", "NFR9", "NFR10", "NFR11"],
+  "coverage": [
+    { "id": "NFR1", "status": "OK", "target": "NFR1.12, NFR1.13, NFR1.14, NFR1.15" },
+    { "id": "NFR2", "status": "OK", "target": "NFR2.16, NFR2.17, NFR2.18, NFR2.19, NFR2.20, NFR2.21, NFR2.22, NFR2.23" },
+    { "id": "NFR3", "status": "OK", "target": "NFR3.4" },
+    { "id": "NFR4", "status": "OK", "target": "NFR4.27, NFR4.28, NFR4.29, NFR4.30, NFR4.31, NFR4.32, NFR4.33" },
+    { "id": "NFR5", "status": "OK", "target": "NFR5.8, NFR5.9" },
+    { "id": "NFR6", "status": "OK", "target": "NFR6.4" },
+    { "id": "NFR7", "status": "OK", "target": "NFR7.12, NFR7.13, NFR7.14, NFR7.15, NFR7.16" },
+    { "id": "NFR8", "status": "OK", "target": "NFR8.6" },
+    { "id": "NFR9", "status": "OK", "target": "NFR9.3" },
+    { "id": "NFR10", "status": "OK", "target": "NFR10.4, NFR10.5" },
+    { "id": "NFR11", "status": "OK", "target": "NFR11.2" }
+  ]
+}

@@ -55,6 +55,8 @@ describe('家族を作る操作の識別子', () => {
         if (url === '/v1/me') {
           return Response.json({ userId: 'u', displayName: '花子', family: null });
         }
+        // U3: 管理者のカレンダーの枠はお知らせ先を読む。この確かめの対象ではない
+        if (url === '/v1/family/notification-group') return Response.json(null);
         keys.push(headers.get('Idempotency-Key'));
         attempt += 1;
         if (attempt === 1) throw new TypeError('Failed to fetch');

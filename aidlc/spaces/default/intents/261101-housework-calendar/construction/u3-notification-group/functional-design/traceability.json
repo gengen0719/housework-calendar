@@ -1,0 +1,18 @@
+{
+  "stage": "functional-design",
+  "unit": "u3-notification-group",
+  "upstream_ids": ["AC1.2.1", "AC1.2.2", "AC1.2.3", "AC1.2.4", "AC1.2.5"],
+  "coverage": [
+    { "id": "AC1.2.1", "status": "OK", "target": "BR4.1, BR4.2, BR4.3, BR4.5, BR4.7, BR4.8" },
+    { "id": "AC1.2.2", "status": "OK", "target": "BR4.6" },
+    { "id": "AC1.2.3", "status": "OK", "target": "BR4.3" },
+    { "id": "AC1.2.4", "status": "OK", "target": "BR4.11" },
+    { "id": "AC1.2.5", "status": "OK", "target": "BR4.10" }
+  ],
+  "reverse": [
+    { "id": "BR4.4", "status": "N/A", "target": "functional-design Q5 decision (non-member register attempt)" },
+    { "id": "BR4.9", "status": "N/A", "target": "functional-design Q3 decision (leave event clears registration)" },
+    { "id": "BR4.12", "status": "N/A", "target": "functional-design Q6 decision (group name in family settings)" },
+    { "id": "BR4.13", "status": "N/A", "target": "FR1.5 (register attempt outside a group: 1:1 guide, room ignored; review R-05)" }
+  ]
+}
