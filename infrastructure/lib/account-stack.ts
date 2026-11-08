@@ -123,10 +123,11 @@ export class AccountStack extends Stack {
       }),
     });
 
-    // CDK の bootstrap のロールを引き受けて反映する
+    // CDK の bootstrap のロールを引き受けて反映する。
+    // CDK はセッションにタグを付けて引き受けるので、sts:TagSession も要る（bootstrap のロールの信頼ポリシーもこれを前提にしている）
     role.addToPolicy(
       new iam.PolicyStatement({
-        actions: ['sts:AssumeRole'],
+        actions: ['sts:AssumeRole', 'sts:TagSession'],
         resources: [
           `arn:${Aws.PARTITION}:iam::${Aws.ACCOUNT_ID}:role/cdk-${qualifier}-*-role-${Aws.ACCOUNT_ID}-${REGION}`,
         ],
