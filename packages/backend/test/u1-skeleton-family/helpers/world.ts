@@ -102,6 +102,12 @@ export function stubLineFetch(options: LineStubOptions = {}) {
   return { calls, replies: () => calls.filter((c) => c.url.includes('/message/reply')) };
 }
 
+/** 入口ごとに Lambda のロールが読めるパラメータの頭（infrastructure/lib/app-stack.ts と同じ） */
+const LAMBDA_PARAMETER_PREFIXES: Record<string, string[]> = {
+  api: ['jwt/', 'line/', 'cloudfront/'],
+  line: ['line/', 'cloudfront/'],
+};
+
 export function setupWorld() {
   process.env.ENV = 'test';
   process.env.ENTRY = 'line';
@@ -114,12 +120,25 @@ export function setupWorld() {
   setRequestId(undefined);
   const dynamo = installFakeDynamo();
   const ssm = mockClient(SSMClient);
-  ssm.on(GetParametersCommand).callsFake((input: { Names: string[] }) => ({
-    Parameters: input.Names.map((name) => ({
-      Name: name,
-      Value: PARAMETERS[name.slice(SSM_PREFIX.length + 1)],
-    })),
-  }));
+  ssm.on(GetParametersCommand).callsFake((input: { Names: string[] }) => {
+    // 本物の権限と同じく、LINE 用の受け口は line/* と cloudfront/* しか読めない
+    // （infrastructure/lib/app-stack.ts の grantParameters）
+    const allowed = LAMBDA_PARAMETER_PREFIXES[process.env.ENTRY ?? 'api'] ?? [];
+    const denied = input.Names.filter(
+      (name) => !allowed.some((p) => name.startsWith(`${SSM_PREFIX}/${p}`)),
+    );
+    if (denied.length > 0) {
+      throw Object.assign(new Error(`AccessDeniedException: ${denied.join(', ')}`), {
+        name: 'AccessDeniedException',
+      });
+    }
+    return {
+      Parameters: input.Names.map((name) => ({
+        Name: name,
+        Value: PARAMETERS[name.slice(SSM_PREFIX.length + 1)],
+      })),
+    };
+  });
   return { ...dynamo, ssm };
 }
 
