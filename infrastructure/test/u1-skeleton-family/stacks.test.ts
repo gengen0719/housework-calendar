@@ -255,6 +255,14 @@ describe('U1 CDK stacks', () => {
     account.hasResourceProperties('AWS::Budgets::Budget', {
       Budget: Match.objectLike({ BudgetLimit: { Amount: 1, Unit: 'USD' }, TimeUnit: 'MONTHLY' }),
     });
+    // CDK は bootstrap のロールをタグ付きで引き受けるので、TagSession も許していること
+    account.hasResourceProperties('AWS::IAM::Policy', {
+      PolicyDocument: Match.objectLike({
+        Statement: Match.arrayWith([
+          Match.objectLike({ Action: ['sts:AssumeRole', 'sts:TagSession'], Effect: 'Allow' }),
+        ]),
+      }),
+    });
     const json = JSON.stringify(account.toJSON());
     expect(json).toContain('/housework-calendar/staging/cloudfront/*');
     expect(json).toContain('/housework-calendar/production/cloudfront/*');
