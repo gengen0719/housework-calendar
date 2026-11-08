@@ -4,8 +4,8 @@ export type LogLevel = 'info' | 'warn' | 'error';
 /** この名前に当てはまる項目は、値を伏せる。 */
 const REDACTED_KEY = /secret|token|authorization|signature|password|body|cookie/i;
 
-/** 名前がちょうど一致する項目も伏せる（グループの名前・会話の本文・表示名。NFR5.8、NFR5.9）。 */
-const REDACTED_EXACT_KEY = /^(groupName|text|display_?name)$/i;
+/** 名前がちょうど一致する項目も伏せる（グループの名前・会話の本文・表示名・お手伝いの種類の名前と説明。NFR5.8、NFR5.9、NFR2.27）。 */
+const REDACTED_EXACT_KEY = /^(groupName|text|display_?name|name|description)$/i;
 
 /** 印の先頭 4 文字だけを書く項目（招待のログ。NFR5.7）。印の全体ではないので伏せない。 */
 const ALLOWED_KEY = 'tokenPrefix';
@@ -13,12 +13,15 @@ const ALLOWED_KEY = 'tokenPrefix';
 /**
  * ログに書く項目。`token` という名前の項目は型で受け付けない（印の全体を書かせない。NFR4.26）。
  * `groupName`・`text`・`displayName` も同じ（グループの名前・会話の本文・表示名を書かせない。NFR5.8）。
+ * `name`・`description` も同じ（お手伝いの種類の名前と説明を書かせない。U4 の NFR2.27）。
  */
 export type LogData = Record<string, unknown> & {
   token?: never;
   groupName?: never;
   text?: never;
   displayName?: never;
+  name?: never;
+  description?: never;
 };
 
 let currentRequestId: string | undefined;

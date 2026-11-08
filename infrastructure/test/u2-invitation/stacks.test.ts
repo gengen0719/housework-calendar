@@ -5,6 +5,7 @@ import { App } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { buildApp } from '../../lib/app.js';
+import { FAKE_ORIGIN_VERIFY_SECRET } from '../fixtures/fakeSecrets.js';
 
 let distDir: string;
 let templates: Record<string, Template>;
@@ -19,7 +20,7 @@ beforeAll(() => {
   fs.writeFileSync(path.join(distDir, 'index.html'), '<!doctype html><title>test</title>');
   const app = buildApp(
     new App({
-      context: { originVerifySecret: 'dummy-secret-for-u2-tests', frontendDistPath: distDir },
+      context: { originVerifySecret: FAKE_ORIGIN_VERIFY_SECRET, frontendDistPath: distDir },
     }),
   );
   templates = {};

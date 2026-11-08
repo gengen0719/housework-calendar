@@ -11,10 +11,15 @@ import {
   REQUEST_RECORDS_TABLE,
 } from '../u1-skeleton-family/helpers/fakeDynamo';
 import { setupWorld } from '../u1-skeleton-family/helpers/world';
+import {
+  ATTR_PREVIOUS_TOKEN_PLACEHOLDER,
+  FAKE_NEW_INVITE_TOKEN,
+  FAKE_PREVIOUS_INVITE_TOKEN,
+} from '../fixtures/fakeSecrets';
 import { FAMILY_ID, KEY_1, LIFF_URL, NOW, PEOPLE, seedFamily, seedUser } from './helpers/seed';
 
 const invitation: Invitation = {
-  token: 'NewTokenNewTokenNewTok',
+  token: FAKE_NEW_INVITE_TOKEN,
   invitationId: 'inv-new',
   familyId: FAMILY_ID,
   createdByUserId: PEOPLE.mother.userId,
@@ -35,7 +40,7 @@ describe('作り直しのトランザクションの組み立て', () => {
     const { items, kinds } = familyRepository.buildRotateInvitationItems(
       {
         familyId: FAMILY_ID,
-        previousToken: 'PrevPrevPrevPrevPrevPr',
+        previousToken: FAKE_PREVIOUS_INVITE_TOKEN,
         previousInvitationExists: true,
         invitation,
         record,
@@ -50,7 +55,7 @@ describe('作り直しのトランザクションの組み立て', () => {
     const { items, kinds } = familyRepository.buildRotateInvitationItems(
       {
         familyId: FAMILY_ID,
-        previousToken: 'PrevPrevPrevPrevPrevPr',
+        previousToken: FAKE_PREVIOUS_INVITE_TOKEN,
         previousInvitationExists: false,
         invitation,
         record,
@@ -75,7 +80,7 @@ describe('作り直しのトランザクションの組み立て', () => {
     const { items } = familyRepository.buildRotateInvitationItems(
       {
         familyId: FAMILY_ID,
-        previousToken: 'PrevPrevPrevPrevPrevPr',
+        previousToken: FAKE_PREVIOUS_INVITE_TOKEN,
         previousInvitationExists: true,
         invitation,
         record,
@@ -96,7 +101,7 @@ describe('作り直しのトランザクションの組み立て', () => {
     expect(update.ExpressionAttributeValues).toEqual({
       ':token': invitation.token,
       ':invitationId': 'inv-new',
-      ':previousToken': 'PrevPrevPrevPrevPrevPr',
+      [ATTR_PREVIOUS_TOKEN_PLACEHOLDER]: FAKE_PREVIOUS_INVITE_TOKEN,
     });
   });
 
@@ -117,7 +122,9 @@ describe('作り直しのトランザクションの組み立て', () => {
       target: FAMILY_ID,
       result: view,
     });
-    expect(put.ConditionExpression).toBe('attribute_not_exists(idempotencyKey)');
+    expect(put.ConditionExpression).toBe(
+      'attribute_not_exists(idempotencyKey) OR expiresAt <= :now',
+    );
   });
 
   describe('取り消しの理由の読み分け', () => {

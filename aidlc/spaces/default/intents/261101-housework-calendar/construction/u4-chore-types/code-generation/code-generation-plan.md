@@ -79,25 +79,25 @@
 
 ### 土台
 
-- [ ] **Step 1: 骨組みと設定の置き場所**（全ストーリーの土台）
+- [x] **Step 1: 骨組みと設定の置き場所**（全ストーリーの土台）
   - U4 のテストのフォルダ `packages/shared/test/u4-chore-types/`、`packages/backend/test/u4-chore-types/`、`packages/frontend/test/u4-chore-types/`、`infrastructure/test/u4-chore-types/` を作る
   - `lib/dynamoClient.ts` の `tables` に `choreTypes()`（環境変数 `CHORE_TYPES_TABLE`）を足す
   - テスト用の偽の DynamoDB（`test/u1-skeleton-family/helpers/fakeDynamo.ts`）に `ChoreTypes`（PK `familyId`、SK `sk`）、`begins_with` の Query、続き（LastEvaluatedKey）を返す差し替えを足す（U1〜U3 のテストは通ったまま）
-- [ ] **Step 2: テストの道具を動かせるようにする**
+- [x] **Step 2: テストの道具を動かせるようにする**
   - U1〜U3 の Vitest・`@amiceli/vitest-cucumber`・カバレッジの設定をそのまま使う（新しい道具は入れない）
   - 最初の空の筋書き 1 つで、`unit-test-instructions.md` の U4 のコマンドが動くことを確かめる
 
 ### 機能のまとまり A: 共有パッケージ（C10、入力の確かめ）
 
-- [ ] **Step 3: テストを書く**（US2.1）— `packages/shared/test/u4-chore-types/`:
+- [x] **Step 3: テストを書く**（US2.1）— `packages/shared/test/u4-chore-types/`:
   - `messages.test.ts`: 新しい理由の印（`INVALID_CHORE_TYPE_NAME`、`CHORE_TYPE_NAME_TAKEN`、`INVALID_DESCRIPTION`、`INVALID_REQUEST`、`CHORE_TYPE_STATE_CHANGED`）と文言、`CHORE_TYPE_IN_USE` の文言、重なりの 2 通りの文言、名前の欄の案内（「皿洗い（追加分）」）、U1〜U3 の印が消えていない
   - `choreTypeValidation.test.ts`: 名前（NFC、前後の空白と全角の空白、1〜20 コードポイント、絵文字、制御文字）、単価（0、整数、-1、1.5、`"100"`、空、2^53）、説明（100 コードポイント、改行は許す、ほかの制御文字は断る、空）
-- [ ] **Step 4: 作る** — `packages/shared/src/`: `reasons.ts`、`messages.ts`、`api-types.ts`（`ChoreType`、`ChoreTypeInput`）、`choreTypeValidation.ts`（`normalizeChoreName`、`validateUnitPrice`、`normalizeDescription`）
-- [ ] **Step 5: 通す、整える** — Step 3 のテストが通るまで直し、通ったまま整える
+- [x] **Step 4: 作る** — `packages/shared/src/`: `reasons.ts`、`messages.ts`、`api-types.ts`（`ChoreType`、`ChoreTypeInput`）、`choreTypeValidation.ts`（`normalizeChoreName`、`validateUnitPrice`、`normalizeDescription`）
+- [x] **Step 5: 通す、整える** — Step 3 のテストが通るまで直し、通ったまま整える
 
 ### 機能のまとまり B: 一覧と登録（AC2.1.1〜AC2.1.3、BR5.1〜BR5.6、BR5.10〜BR5.12）
 
-- [ ] **Step 6: 筋書きを書く** — `packages/backend/test/u4-chore-types/create-chore-type.feature` と `create-chore-type.steps.ts`。場面:
+- [x] **Step 6: 筋書きを書く** — `packages/backend/test/u4-chore-types/create-chore-type.feature` と `create-chore-type.steps.ts`。場面:
   - 管理者が「皿洗い 100 円」を説明つきで登録すると、一覧に「皿洗い 100 円」が出る（AC2.1.1）
   - 単価に -1、1.5、空、`"100"` を入れると 422 `INVALID_UNIT_PRICE` で、何も登録されない（AC2.1.2）
   - 名前が空・21 文字・改行入り、説明が 101 文字なら 422
@@ -109,12 +109,12 @@
   - 一覧は「使う」を登録した順、そのあとに「使わない」。子供も見られる。メンバーでない人は 403。ほかの家族の種類は出ない
   - 一覧は続きのある読み取りでも全件がそろう
   - ログに種類の名前と説明が出ない
-- [ ] **Step 7: 作る** — `repositories/choreTypeRepository.ts`（種類と名前の印、一覧の Query と続き、強い整合性の読み取り）、`services/choreTypeService.ts`（`list`、`create`）、`handlers/choreType/list.ts`、`handlers/choreType/create.ts`、`entries/api.ts`（2 つの操作）、`models.ts`（`RequestOperation` に `createChoreType`）、`lib/logger.ts`（`name`・`description` を型と実行時の伏せ字で禁止。U1〜U3 のログに `name` がないことを確かめる）
-- [ ] **Step 8: 通す、整える** — Step 6 の筋書きと U1〜U3 のテストが通るまで直す。単体テスト（`choreTypeRepository`、登録のトランザクションと取り消しの読み分け、伏せ字と型のテスト。各 5〜8 件）を足す
+- [x] **Step 7: 作る** — `repositories/choreTypeRepository.ts`（種類と名前の印、一覧の Query と続き、強い整合性の読み取り）、`services/choreTypeService.ts`（`list`、`create`）、`handlers/choreType/list.ts`、`handlers/choreType/create.ts`、`entries/api.ts`（2 つの操作）、`models.ts`（`RequestOperation` に `createChoreType`）、`lib/logger.ts`（`name`・`description` を型と実行時の伏せ字で禁止。U1〜U3 のログに `name` がないことを確かめる）
+- [x] **Step 8: 通す、整える** — Step 6 の筋書きと U1〜U3 のテストが通るまで直す。単体テスト（`choreTypeRepository`、登録のトランザクションと取り消しの読み分け、伏せ字と型のテスト。各 5〜8 件）を足す
 
 ### 機能のまとまり C: 変更・使わない・使う・消す（AC2.1.4〜AC2.1.7、BR5.7〜BR5.10）
 
-- [ ] **Step 9: 筋書きを書く** — `packages/backend/test/u4-chore-types/update-chore-type.feature` と `update-chore-type.steps.ts`。場面:
+- [x] **Step 9: 筋書きを書く** — `packages/backend/test/u4-chore-types/update-chore-type.feature` と `update-chore-type.steps.ts`。場面:
   - 単価を 100 円から 120 円に変えると、C7 `getCurrentUnitPrice` が 120 を返す（AC2.1.4 の U4 の部分）
   - 名前を変えると、古い名前で別の種類を登録できる。新しい名前がほかの種類と重なると 409
   - 2 つの種類を同時に同じ名前に変えると、1 つだけが変わる
@@ -128,12 +128,12 @@
   - ほかの家族の種類の ID には、本文が正しくても誤っていても 404。形の違う ID も 404
   - 子供が変更・PATCH・消すをしようとすると 403
   - トランザクションが思いがけない Code で断られると 500
-- [ ] **Step 10: 作る** — `services/choreTypeService.ts`（`update`、`setActive`、`getCurrentUnitPrice`、`delete`）、`services/calendarPort.ts`（C8 `isChoreTypeAssigned` の仮の窓口。差し替えられる形）、`repositories/choreTypeRepository.ts`（改名と消すのトランザクション、条件 `name = :oldName`、`active = false`）、`handlers/choreType/{update,setActive,remove}.ts`、`entries/api.ts`（3 つの操作）
-- [ ] **Step 11: 通す、整える** — Step 9 の筋書きが通るまで直す。単体テスト（改名・消すのトランザクションと読み分け、`getCurrentUnitPrice`、`calendarPort` の差し替え。各 5〜8 件）を足す
+- [x] **Step 10: 作る** — `services/choreTypeService.ts`（`update`、`setActive`、`getCurrentUnitPrice`、`delete`）、`services/calendarPort.ts`（C8 `isChoreTypeAssigned` の仮の窓口。差し替えられる形）、`repositories/choreTypeRepository.ts`（改名と消すのトランザクション、条件 `name = :oldName`、`active = false`）、`handlers/choreType/{update,setActive,remove}.ts`、`entries/api.ts`（3 つの操作）
+- [x] **Step 11: 通す、整える** — Step 9 の筋書きが通るまで直す。単体テスト（改名・消すのトランザクションと読み分け、`getCurrentUnitPrice`、`calendarPort` の差し替え。各 5〜8 件）を足す
 
 ### 機能のまとまり D: 画面（AC2.1.1〜AC2.1.3、AC2.1.6、AC2.1.7、BR5.4、BR5.11、NFR9.4）
 
-- [ ] **Step 12: 筋書きを書く** — `packages/frontend/test/u4-chore-types/screens.feature` と `screens.steps.tsx`（LIFF と API は差し替え）。場面:
+- [x] **Step 12: 筋書きを書く** — `packages/frontend/test/u4-chore-types/screens.feature` と `screens.steps.tsx`（LIFF と API は差し替え）。場面:
   - 「家族の設定」から「お手伝いの種類」に進むと一覧が出る。「使わない」は下にまとまり、文字で「使わない」と出る
   - 管理者が「追加」を押すと、名前の欄の下に「1 日に 2 回以上あるお手伝いは『皿洗い（追加分）』のように分けて登録します」が出る
   - 単価に -1 を入れて保存すると、「単価は 0 円以上の整数で入力してください」と出て、入力した内容が残る（AC2.1.2）
@@ -143,21 +143,21 @@
   - 「消す」を押すと確かめが出て、消えると一覧からなくなる。409 なら「『使わない』にしました」の文言、404 なら「すでに消えています」が出て、一覧が読み直される
   - 子供には「追加」などのボタンが出ない（AC2.1.3）
   - 名前と説明の中のタグは文字として出る。説明の改行がそのまま出る
-- [ ] **Step 13: 作る** — `packages/frontend/src/`: `pages/ChoreTypesPage.tsx`、`pages/FamilySettingsPage.tsx`（「お手伝いの種類」へ進むボタン）、`App.tsx`（画面の切り替え）、`api/client.ts`（5 つの操作）。MUI のテーマ（U1）と共有の確かめの関数を使う
-- [ ] **Step 14: 通す、整える** — Step 12 の筋書きと U1〜U3 の画面のテストが通るまで直し、通ったまま整える
+- [x] **Step 13: 作る** — `packages/frontend/src/`: `pages/ChoreTypesPage.tsx`、`pages/FamilySettingsPage.tsx`（「お手伝いの種類」へ進むボタン）、`App.tsx`（画面の切り替え）、`api/client.ts`（5 つの操作）。MUI のテーマ（U1）と共有の確かめの関数を使う
+- [x] **Step 14: 通す、整える** — Step 12 の筋書きと U1〜U3 の画面のテストが通るまで直し、通ったまま整える
 
 ### 環境と組み立ての設定
 
-- [ ] **Step 15: AWS CDK の構成**（`infrastructure/`）
+- [x] **Step 15: AWS CDK の構成**（`infrastructure/`）
   - `data-stack.ts`: `ChoreTypes` テーブル（PK `familyId`、SK `sk`、TTL なし、`AWS_MANAGED`、本番 `RETAIN`、`tableName` は指定しない）
   - `app-stack.ts`: `AppStackProps` に `choreTypes`。`api` の環境変数 `CHORE_TYPES_TABLE`。`api` の許可に `ChoreTypes` の GetItem・Query・PutItem・UpdateItem・DeleteItem だけを足す（`ConditionCheckItem`・`Scan` は足さない。`line` には足さない）
   - `app.ts`: Data スタックから `choreTypes` を渡す
   - `infrastructure/test/u4-chore-types/stacks.test.ts`: テーブル、キー、`RETAIN`/`DESTROY`、環境変数、`api` の許可がちょうど 5 つ、`line` に `ChoreTypes` の許可がないこと（10 件ほど）。U1 のテストのテーブル数の期待も直す
-- [ ] **Step 16: 反映後の確かめ** — `scripts/smoke-check.sh` の U3 の確かめのあとに、`cicd-pipeline.md` の 3d〜3h（セッションなしの GET・POST・PUT・PATCH・DELETE が 401）を足す。先頭コメントを「全 15 件」にし、`3b` の番号の重なりを直す。ワークフローは変えない
+- [x] **Step 16: 反映後の確かめ** — `scripts/smoke-check.sh` の U3 の確かめのあとに、`cicd-pipeline.md` の 3d〜3h（セッションなしの GET・POST・PUT・PATCH・DELETE が 401）を足す。先頭コメントを「全 15 件」にし、`3b` の番号の重なりを直す。ワークフローは変えない
 
 ### 書類と対応表
 
-- [ ] **Step 17: 書類**
+- [x] **Step 17: 書類**
   - `README.md`: お手伝いの種類の画面の使い方（1 日に何回もあるお手伝いは「皿洗い（追加分）」のように分けて登録する）、ステージングでの手の確かめの手順、U5 を反映したあとは `ChoreTypes` も U4 のコードも戻さず前に進んで直すこと
   - `docs/contract-changes-u4.md`（U4 で足した契約: C1 の 5 つの操作の本文と応答と `PATCH` の追加、C7 の結果の決まりと `setActive`、C8 の仮の窓口と U5 への引き継ぎ（ConditionCheck、強い整合性の確かめ）、C10 の印と文言。U9 への引き継ぎ: 合計が安全な整数を超えるときの扱い）
 

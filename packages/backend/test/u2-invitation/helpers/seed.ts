@@ -4,14 +4,15 @@ import type { Family, User } from '../../../src/models';
 import { signSession } from '../../../src/services/tokenService';
 import { apiRequest, SIGNING_SECRET } from '../../u1-skeleton-family/helpers/world';
 import type { Table } from '../../u1-skeleton-family/helpers/fakeDynamo';
+import { FAKE_IDEMPOTENCY_KEY_1, FAKE_IDEMPOTENCY_KEY_2 } from '../../fixtures/fakeSecrets';
 
 /** テストの中で作る決まった値（本物ではない） */
 export const FAMILY_ID = 'fam-yamada';
 export const FAMILY_NAME = '山田家';
 export const FAMILY_CREATED_AT = '2026-11-01T00:00:00.000Z';
 export const NOW = new Date('2026-11-02T00:00:00.000Z');
-export const KEY_1 = '00000000-0000-4000-8000-000000000001'; // gitleaks:allow テスト用の作り物の Idempotency-Key
-export const KEY_2 = '00000000-0000-4000-8000-000000000002'; // gitleaks:allow テスト用の作り物の Idempotency-Key
+export const KEY_1 = FAKE_IDEMPOTENCY_KEY_1;
+export const KEY_2 = FAKE_IDEMPOTENCY_KEY_2;
 export const LIFF_URL = 'https://liff.line.me/test-liff-id';
 
 export const PEOPLE = {

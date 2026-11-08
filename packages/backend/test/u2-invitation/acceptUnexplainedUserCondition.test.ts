@@ -3,9 +3,10 @@ import { TransactWriteCommand } from '@aws-sdk/lib-dynamodb';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as familyMemberService from '../../src/services/familyMemberService';
 import { setupWorld } from '../u1-skeleton-family/helpers/world';
+import { FAKE_VALID_INVITE_TOKEN } from '../fixtures/fakeSecrets';
 import { FAMILY_ID, KEY_1, NOW, PEOPLE, seedFamily, seedUser } from './helpers/seed';
 
-const TOKEN = 'ValidValidValidValid12';
+const TOKEN = FAKE_VALID_INVITE_TOKEN;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 describe('acceptInvitation: 利用者の条件で断られたが理由が読み直しても見つからないとき（R-06）', () => {

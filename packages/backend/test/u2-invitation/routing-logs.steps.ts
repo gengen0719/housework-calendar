@@ -9,13 +9,14 @@ import {
   stubLineFetch,
   VALID_ID_TOKEN,
 } from '../u1-skeleton-family/helpers/world';
+import { FAKE_IDEMPOTENCY_KEY_1, FAKE_MIXED_CASE_INVITE_TOKEN } from '../fixtures/fakeSecrets';
 
 const feature = await loadFeature('packages/backend/test/u2-invitation/routing-logs.feature');
 
 /** テストの中で作る決まった 22 文字の印（本物ではない） */
-const TOKEN = 'AbCdEfGhIjKlMnOpQrStUv';
+const TOKEN = FAKE_MIXED_CASE_INVITE_TOKEN;
 const INVITATION_ROUTE = 'GET /v1/invitations/:token';
-const KEY_1 = '00000000-0000-4000-8000-000000000001'; // gitleaks:allow テスト用の作り物の Idempotency-Key
+const KEY_1 = FAKE_IDEMPOTENCY_KEY_1;
 /** 本物の窓口。場面の中で差し替えたあと、場面ごとに戻す */
 const REAL_INVITATION_ROUTE = routes[INVITATION_ROUTE];
 

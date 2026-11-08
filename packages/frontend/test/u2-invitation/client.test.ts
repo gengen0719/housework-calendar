@@ -7,9 +7,10 @@ import {
   listMembers,
   previewInvitation,
 } from '../../src/api/client';
+import { FAKE_IDEMPOTENCY_KEY, FAKE_INVITE_TOKEN } from '../fixtures/fakeSecrets';
 
-const TOKEN = 'abcdefghijklmnopqrstuv';
-const KEY = '11111111-1111-4111-8111-111111111111';
+const TOKEN = FAKE_INVITE_TOKEN;
+const KEY = FAKE_IDEMPOTENCY_KEY;
 let fetchMock: ReturnType<typeof vi.fn>;
 
 function respond(status: number, body?: unknown): void {

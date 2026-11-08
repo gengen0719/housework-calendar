@@ -70,6 +70,29 @@ export interface NotificationGroupView {
   registeredAt: string;
 }
 
+/** お手伝いの種類（U4。entities.md の ChoreType）。家族の ID は返さない。日時は UTC の ISO 8601。説明がなければ description はない */
+export interface ChoreType {
+  choreTypeId: string;
+  name: string;
+  unitPrice: number;
+  description?: string;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+/** POST・PUT /v1/chore-types の本文（U4）。active は含めない */
+export interface ChoreTypeInput {
+  name: string;
+  unitPrice: number;
+  description?: string;
+}
+
+/** PATCH /v1/chore-types/:choreTypeId の本文（U4） */
+export interface SetChoreTypeActiveRequest {
+  active: boolean;
+}
+
 /** 画面用 API の失敗の形 */
 export interface ApiError {
   error: {
@@ -83,3 +106,8 @@ export const IDEMPOTENCY_KEY_HEADER = 'Idempotency-Key';
 /** 家族の名前の長さ（前後の空白を除いて 1〜20 文字。BR1.9） */
 export const FAMILY_NAME_MIN_LENGTH = 1;
 export const FAMILY_NAME_MAX_LENGTH = 20;
+
+/** 種類の名前（1〜20 文字）と説明（100 文字まで）の長さ。コードポイントで数える（BR5.2、BR5.6） */
+export const CHORE_TYPE_NAME_MIN_LENGTH = 1;
+export const CHORE_TYPE_NAME_MAX_LENGTH = 20;
+export const CHORE_TYPE_DESCRIPTION_MAX_LENGTH = 100;

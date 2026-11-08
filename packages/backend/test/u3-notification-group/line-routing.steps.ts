@@ -3,6 +3,7 @@ import type { APIGatewayProxyStructuredResultV2 } from 'aws-lambda';
 import { expect, vi } from 'vitest';
 import { handler } from '../../src/entries/line';
 import type { User } from '../../src/models';
+import { FAKE_WRONG_LINE_SIGNATURE } from '../fixtures/fakeSecrets';
 import {
   followEvent,
   HANAKO_LINE_ID,
@@ -167,7 +168,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
             leaveEvent('evt-leave-1'),
             postbackEvent('evt-pb-3', 'action=group.register'),
           ];
-          signature = 'bm90LXRoZS1yaWdodC1zaWduYXR1cmU=';
+          signature = FAKE_WRONG_LINE_SIGNATURE;
         },
       );
       When('Webhook が届く', send);

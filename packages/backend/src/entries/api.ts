@@ -3,6 +3,11 @@ import type {
   APIGatewayProxyStructuredResultV2,
   Context,
 } from 'aws-lambda';
+import { createChoreType } from '../handlers/choreType/create';
+import { listChoreTypes } from '../handlers/choreType/list';
+import { removeChoreType } from '../handlers/choreType/remove';
+import { setChoreTypeActive } from '../handlers/choreType/setActive';
+import { updateChoreType } from '../handlers/choreType/update';
 import { createFamily } from '../handlers/family/createFamily';
 import { getMe } from '../handlers/family/getMe';
 import { getNotificationGroup } from '../handlers/family/getNotificationGroup';
@@ -71,6 +76,38 @@ export const routes: Record<string, Route> = {
       status: 201,
       body: await createFamily(auth, parseJsonBody(event), event.headers, now),
     };
+  },
+  // U4: お手伝いの種類の一覧（メンバー全員）と登録（管理者だけ。権限の確かめは各ハンドラーで requireMembership → requireAdmin）
+  'GET /v1/chore-types': async ({ event, config, now }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return { status: 200, body: await listChoreTypes(auth) };
+  },
+  'POST /v1/chore-types': async ({ event, config, now }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return {
+      status: 201,
+      body: await createChoreType(auth, parseJsonBody(event), event.headers, now),
+    };
+  },
+  // U4: 変更（PUT）・使わない／使う（PATCH）・消す（DELETE）。ID の形と種類の確かめは各ハンドラーで（本文の確かめより先に 404）
+  'PUT /v1/chore-types/:choreTypeId': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return {
+      status: 200,
+      body: await updateChoreType(auth, params.choreTypeId ?? '', parseJsonBody(event), now),
+    };
+  },
+  'PATCH /v1/chore-types/:choreTypeId': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return {
+      status: 200,
+      body: await setChoreTypeActive(auth, params.choreTypeId ?? '', parseJsonBody(event), now),
+    };
+  },
+  'DELETE /v1/chore-types/:choreTypeId': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    await removeChoreType(auth, params.choreTypeId ?? '', now);
+    return { status: 204, body: undefined };
   },
   // U2: 家族のメンバーの一覧（メンバー全員）と招待（管理者だけ。権限の確かめは各ハンドラーで requireMembership → requireAdmin）
   'GET /v1/family/members': async ({ event, config, now }) => {

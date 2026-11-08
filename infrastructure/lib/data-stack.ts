@@ -15,6 +15,7 @@ export class DataStack extends Stack {
   readonly requestRecords: dynamodb.Table;
   readonly invitations: dynamodb.Table;
   readonly notificationGroups: dynamodb.Table;
+  readonly choreTypes: dynamodb.Table;
 
   constructor(scope: Construct, id: string, props: DataStackProps) {
     super(scope, id, props);
@@ -72,6 +73,13 @@ export class DataStack extends Stack {
     this.notificationGroups = new dynamodb.Table(this, 'NotificationGroups', {
       ...common,
       partitionKey: { name: 'groupId', type: dynamodb.AttributeType.STRING },
+    });
+
+    // U4: お手伝いの種類（種類と名前の印を同じ家族の中に置く。TTL なし。本番は RETAIN）
+    this.choreTypes = new dynamodb.Table(this, 'ChoreTypes', {
+      ...common,
+      partitionKey: { name: 'familyId', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'sk', type: dynamodb.AttributeType.STRING },
     });
   }
 }

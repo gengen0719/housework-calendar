@@ -50,6 +50,7 @@ export interface AppStackProps extends StackProps {
   requestRecords: dynamodb.ITable;
   invitations: dynamodb.ITable;
   notificationGroups: dynamodb.ITable;
+  choreTypes: dynamodb.ITable;
   /** CloudFront が元に付ける秘密のヘッダー `X-Origin-Verify` の値（CDK のコンテキストから） */
   originVerifySecret: string;
   /** ビルド済みの画面（packages/frontend/dist）のあるフォルダ */
@@ -88,6 +89,7 @@ export class AppStack extends Stack {
       REQUEST_RECORDS_TABLE: props.requestRecords.tableName,
       INVITATIONS_TABLE: props.invitations.tableName,
       NOTIFICATION_GROUPS_TABLE: props.notificationGroups.tableName,
+      CHORE_TYPES_TABLE: props.choreTypes.tableName,
       ENV: envName,
       ENTRY: 'api',
     });
@@ -204,6 +206,20 @@ export class AppStack extends Stack {
       new iam.PolicyStatement({
         actions: ['dynamodb:GetItem'],
         resources: [props.notificationGroups.tableArn],
+      }),
+    );
+
+    // U4: お手伝いの種類（api だけ。Scan と ConditionCheckItem は足さない。ConditionCheckItem は U5 で足す。line には足さない）
+    this.apiFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: [
+          'dynamodb:GetItem',
+          'dynamodb:Query',
+          'dynamodb:PutItem',
+          'dynamodb:UpdateItem',
+          'dynamodb:DeleteItem',
+        ],
+        resources: [props.choreTypes.tableArn],
       }),
     );
 

@@ -2,9 +2,10 @@ import { TransactWriteCommand } from '@aws-sdk/lib-dynamodb';
 import { beforeEach, describe, expect, it } from 'vitest';
 import * as familyRepository from '../../src/repositories/familyRepository';
 import { setupWorld } from './helpers/world';
+import { FAKE_IDEMPOTENCY_KEY_1 } from '../fixtures/fakeSecrets';
 
 const NOW = new Date('2026-11-01T00:00:00.000Z');
-const KEY = '00000000-0000-4000-8000-000000000001'; // gitleaks:allow テスト用の作り物の Idempotency-Key
+const KEY = FAKE_IDEMPOTENCY_KEY_1;
 
 const family = {
   familyId: 'fam-1',

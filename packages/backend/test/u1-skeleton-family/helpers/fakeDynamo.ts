@@ -22,6 +22,7 @@ export const FAMILIES_TABLE = 'Families-test';
 export const REQUEST_RECORDS_TABLE = 'RequestRecords-test';
 export const INVITATIONS_TABLE = 'Invitations-test';
 export const NOTIFICATION_GROUPS_TABLE = 'NotificationGroups-test';
+export const CHORE_TYPES_TABLE = 'ChoreTypes-test';
 
 /** 表ごとの主キーの名前（並び順どおりに「#」でつないでメモリ上の鍵にする）。 */
 const KEY_NAMES: Record<string, string[]> = {
@@ -31,6 +32,7 @@ const KEY_NAMES: Record<string, string[]> = {
   [REQUEST_RECORDS_TABLE]: ['userId', 'idempotencyKey'],
   [INVITATIONS_TABLE]: ['token'],
   [NOTIFICATION_GROUPS_TABLE]: ['groupId'],
+  [CHORE_TYPES_TABLE]: ['familyId', 'sk'],
 };
 
 /** `familyId-index` の射影（INCLUDE: displayName、role、familyJoinedAt。キーの userId と familyId は常に入る） */
@@ -144,11 +146,17 @@ export function installFakeDynamo() {
     [REQUEST_RECORDS_TABLE]: new Map(),
     [INVITATIONS_TABLE]: new Map(),
     [NOTIFICATION_GROUPS_TABLE]: new Map(),
+    [CHORE_TYPES_TABLE]: new Map(),
   };
   /** 結果整合の再現: 索引（familyId-index）の Query の結果から隠す利用者 */
   const hiddenFromFamilyIndex = new Set<string>();
   /** 競合の再現: 次の TransactWriteItems を評価する直前に 1 回だけ呼ぶ（「読んだあとに別の書き込みが先に入った」状態を作る） */
-  const hooks: { beforeNextTransaction?: () => void } = {};
+  const hooks: {
+    beforeNextTransaction?: () => void;
+    /** 競合の再現: 次の UpdateItem を評価する直前に 1 回だけ呼ぶ */
+    beforeNextUpdate?: () => void;
+    queryPageSize?: number;
+  } = {};
 
   const table = (name: string | undefined): Table => {
     const found = name ? tables[name] : undefined;
@@ -217,16 +225,45 @@ export function installFakeDynamo() {
   });
 
   mock.on(DeleteCommand).callsFake((input) => {
+    if (input.TableName === CHORE_TYPES_TABLE) {
+      // ChoreTypes（U4）は条件式を本当に評価する
+      const existing = table(input.TableName).get(keyOf(input.TableName, input.Key));
+      if (
+        !conditionHolds(existing, input.ConditionExpression, {
+          names: input.ExpressionAttributeNames,
+          values: input.ExpressionAttributeValues,
+        })
+      )
+        throw conditionFailed();
+    }
     table(input.TableName).delete(keyOf(input.TableName, input.Key));
     return {};
   });
 
   mock.on(UpdateCommand).callsFake((input) => {
+    const hook = hooks.beforeNextUpdate;
+    if (hook) {
+      hooks.beforeNextUpdate = undefined;
+      hook();
+    }
     const t = table(input.TableName);
     const existing = t.get(keyOf(input.TableName, input.Key));
-    if (input.ConditionExpression?.includes('attribute_exists(') && !existing)
+    if (input.TableName === CHORE_TYPES_TABLE) {
+      // ChoreTypes（U4）は条件式を本当に評価する（attribute_exists、name = :oldName、active = :false など）
+      if (
+        !conditionHolds(existing, input.ConditionExpression, {
+          names: input.ExpressionAttributeNames,
+          values: input.ExpressionAttributeValues,
+        })
+      )
+        throw conditionFailed();
+    } else if (input.ConditionExpression?.includes('attribute_exists(') && !existing) {
       throw conditionFailed();
+    }
     applyUpdate(input.TableName, input.Key, input);
+    if (input.ReturnValues === 'ALL_NEW') {
+      return { Attributes: { ...t.get(keyOf(input.TableName, input.Key)) } };
+    }
     return {};
   });
 
@@ -308,6 +345,25 @@ export function installFakeDynamo() {
   mock.on(QueryCommand).callsFake((input) => {
     const t = table(input.TableName);
     const values: Record<string, unknown> = input.ExpressionAttributeValues ?? {};
+    if (input.TableName === CHORE_TYPES_TABLE) {
+      // `familyId = :f AND begins_with(sk, :p)`。sk の昇順。hooks.queryPageSize があれば、その件数ごとに LastEvaluatedKey を返す
+      const sorted = [...t.values()]
+        .filter(
+          (item) =>
+            item.familyId === values[':f'] && String(item.sk).startsWith(String(values[':p'])),
+        )
+        .sort((a, b) => String(a.sk).localeCompare(String(b.sk)));
+      const startKey = input.ExclusiveStartKey as { sk?: string } | undefined;
+      const from = startKey ? sorted.findIndex((item) => item.sk === startKey.sk) + 1 : 0;
+      const size = hooks.queryPageSize ?? sorted.length;
+      const page = sorted.slice(from, from + Math.max(size, 1));
+      const last = page[page.length - 1];
+      const more = from + page.length < sorted.length && last !== undefined;
+      return {
+        Items: page.map((item) => ({ ...item })),
+        ...(more ? { LastEvaluatedKey: { familyId: last.familyId, sk: last.sk } } : {}),
+      };
+    }
     if (input.IndexName === 'familyId-index') {
       const familyId = values[':familyId'];
       const items = [...t.values()]
@@ -338,6 +394,7 @@ export function installFakeDynamo() {
     requestRecords: tables[REQUEST_RECORDS_TABLE] as Table,
     invitations: tables[INVITATIONS_TABLE] as Table,
     notificationGroups: tables[NOTIFICATION_GROUPS_TABLE] as Table,
+    choreTypes: tables[CHORE_TYPES_TABLE] as Table,
     hiddenFromFamilyIndex,
     hooks,
   };

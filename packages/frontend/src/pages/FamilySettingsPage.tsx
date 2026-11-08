@@ -17,6 +17,8 @@ interface Props {
   role: Role;
   authorized: Authorized;
   onBack: () => void;
+  /** 「お手伝いの種類」の画面へ進む（U4）。渡さなければボタンは出さない */
+  onOpenChoreTypes?: () => void;
   /** お知らせ先の読み込み結果（U3。App が読む）。渡さなければ表示しない */
   notificationGroup?: NotificationGroupState;
 }
@@ -33,6 +35,7 @@ export function FamilySettingsPage({
   role,
   authorized,
   onBack,
+  onOpenChoreTypes,
   notificationGroup,
 }: Props) {
   const isAdmin = role === 'admin';
@@ -44,6 +47,16 @@ export function FamilySettingsPage({
       <MemberList authorized={authorized} />
       <NotificationGroupSection state={notificationGroup} />
       {isAdmin && <InvitationSection familyName={familyName} authorized={authorized} />}
+      {onOpenChoreTypes && (
+        <Button
+          variant="contained"
+          onClick={onOpenChoreTypes}
+          sx={{ alignSelf: 'flex-start' }}
+          data-testid="open-chore-types-button"
+        >
+          お手伝いの種類
+        </Button>
+      )}
       <Button
         variant="outlined"
         onClick={onBack}

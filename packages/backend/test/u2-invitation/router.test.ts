@@ -1,10 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { matchRoute } from '../../src/lib/router';
+import {
+  FAKE_MIXED_CASE_INVITE_TOKEN,
+  ROUTE_KEY_INVITATION_ACCEPT,
+  ROUTE_KEY_INVITATION_PREVIEW,
+} from '../fixtures/fakeSecrets';
 
 const table = {
   'POST /v1/sessions': 'sessions',
-  'GET /v1/invitations/:token': 'preview',
-  'POST /v1/invitations/:token/accept': 'accept',
+  [ROUTE_KEY_INVITATION_PREVIEW]: 'preview',
+  [ROUTE_KEY_INVITATION_ACCEPT]: 'accept',
   'GET /v1/invitations/mine': 'exact-mine',
 };
 
@@ -21,7 +26,7 @@ describe('router: パスの型の照合', () => {
   it(':name の部分が印として取り出され、route にはパスの型が入る', () => {
     const match = matchRoute(table, 'GET', '/v1/invitations/AbCdEfGhIjKlMnOpQrStUv');
     expect(match?.route).toBe('/v1/invitations/:token');
-    expect(match?.params).toEqual({ token: 'AbCdEfGhIjKlMnOpQrStUv' });
+    expect(match?.params).toEqual({ token: FAKE_MIXED_CASE_INVITE_TOKEN });
     expect(match?.handler).toBe('preview');
   });
 

@@ -58,10 +58,23 @@ npx vitest run packages/backend/test/u4-chore-types/update-chore-type.feature
 - ログ: `console` への出力を集め、種類の名前と説明が含まれないことを確かめる。型のテストは `@ts-expect-error` で `name` を渡すとエラーになることを確かめる
 - 本物の AWS や LINE にはつながない
 
+## 必須: ステージングでの手動の確認（DynamoDB の式）
+
+単体テストの DynamoDB は代役（`fakeDynamo.ts`）で、条件式は代役が再現して評価しています。更新の式（`UpdateExpression` の `SET` と `REMOVE`、`#name` `#description` などの別名、予約語）が本物の DynamoDB で通るかは、テストでは確かめていません。式の誤りは、本番で `ValidationException` になるまで見えません。そこで、U4 の変更を本番に反映する前に、**ステージングで次の 4 つを一通り動かして確かめます（必須）**。
+
+| 操作 | 確かめること |
+|------|-------------|
+| 改名（PUT で名前を変える） | 200 で新しい名前になる。古い名前で、別の種類を新しく登録できる。`ValidationException` が出ない |
+| 説明を消す（PUT で `description` なし） | 200 で説明がなくなる（`REMOVE` が通る）。ほかの項目（単価など）は変わらない |
+| 「使う」「使わない」の切り替え（PATCH） | 200 で `active` が変わる。続けて逆にも切り替えられる |
+| 消す（DELETE） | 204 で一覧から消える。同じ名前で登録し直せる（名前の印も消えている）。使われている場合の 409 は C8 がつながるまで確かめられない |
+
+確かめ方: ステージングの画面（LIFF）の「お手伝いの種類」から操作するか、ステージングの API に管理者のセッションで直接リクエストします。CloudWatch Logs に `ValidationException` や `INTERNAL`（500）が出ていないことも見ます。結果（日付、確かめた人、4 つの結果）は `code-summary.md` に残します。余力があれば、`dynamodb-local` で式だけを確かめるテストを 1 本足します（任意）。
+
 ## テストのデータ
 
 - 筋書きの例の名前は要件のとおり（お母さん、太郎、花子、次郎）。種類は「皿洗い」「皿洗い（追加分）」「洗濯物たたみ」など
-- 種類の ID、`Idempotency-Key` はテストの中で作る決まった UUID
+- 種類の ID、`Idempotency-Key` はテストの中で作る決まった UUID。UUID や鍵らしく見える値は、直接書かず `test/fixtures/fakeSecrets.ts` に置いて import する（ESLint が止める。README 参照）
 - JWT の鍵はテスト用の決まった値（本物の値は使わない）
 
 ## 実行の前に必要なこと

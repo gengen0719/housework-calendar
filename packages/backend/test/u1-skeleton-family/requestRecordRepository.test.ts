@@ -1,11 +1,14 @@
+import { GetCommand } from '@aws-sdk/lib-dynamodb';
 import { beforeEach, describe, expect, it } from 'vitest';
 import * as requestRecordRepository from '../../src/repositories/requestRecordRepository';
+import { REQUEST_RECORD_PUT_CONDITION } from '../../src/repositories/requestRecordRepository';
 import { REQUEST_RECORDS_TABLE } from './helpers/fakeDynamo';
 import { setupWorld } from './helpers/world';
+import { FAKE_IDEMPOTENCY_KEY_1 } from '../fixtures/fakeSecrets';
 
 const NOW = new Date('2026-11-01T00:00:00.000Z');
 const NOW_SECONDS = NOW.getTime() / 1000;
-const KEY = '00000000-0000-4000-8000-000000000001'; // gitleaks:allow テスト用の作り物の Idempotency-Key
+const KEY = FAKE_IDEMPOTENCY_KEY_1;
 
 const result = {
   familyId: 'fam-1',
@@ -50,14 +53,28 @@ describe('requestRecordRepository', () => {
     expect(await requestRecordRepository.find('user-1', KEY, NOW)).toBeUndefined();
   });
 
-  it('書き込みの項目は 24 時間後を期限にし、同じ組があれば失敗する条件を付ける', () => {
+  it('読み取りは強い整合性（同時の要求で負けた側が、勝った側の記録をすぐ読めるように）', async () => {
+    await requestRecordRepository.find('user-1', KEY, NOW);
+    const call = world.mock.commandCalls(GetCommand)[0];
+    expect(call?.args[0].input).toMatchObject({
+      TableName: REQUEST_RECORDS_TABLE,
+      Key: { userId: 'user-1', idempotencyKey: KEY },
+      ConsistentRead: true,
+    });
+  });
+
+  it('書き込みの項目は 24 時間後を期限にし、同じ組があれば失敗する条件を付ける（期限切れの記録は上書きできる）', () => {
     const put = requestRecordRepository.buildPutItem(
       { userId: 'user-1', idempotencyKey: KEY, operation: 'createFamily', result },
       NOW,
     ).Put;
     expect(put.TableName).toBe(REQUEST_RECORDS_TABLE);
     expect(put.Item.expiresAt).toBe(NOW_SECONDS + 24 * 60 * 60);
-    expect(put.ConditionExpression).toBe('attribute_not_exists(idempotencyKey)');
+    expect(put.ConditionExpression).toBe(REQUEST_RECORD_PUT_CONDITION);
+    expect(put.ConditionExpression).toBe(
+      'attribute_not_exists(idempotencyKey) OR expiresAt <= :now',
+    );
+    expect(put.ExpressionAttributeValues).toEqual({ ':now': NOW_SECONDS });
     expect(put.Item).toMatchObject({ userId: 'user-1', idempotencyKey: KEY, result });
   });
 });

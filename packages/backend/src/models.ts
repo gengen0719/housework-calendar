@@ -1,4 +1,19 @@
-import type { FriendStatus, InvitationView, MeFamily, Role } from '@housework/shared';
+import type { ChoreType, FriendStatus, InvitationView, MeFamily, Role } from '@housework/shared';
+
+/**
+ * お手伝いの種類の保存された形（entities.md の ChoreType、U4）。日時は UTC の ISO 8601。
+ * 説明がなければ description はない。テーブルの項目は sk（`TYPE#<choreTypeId>`）を足した形（choreTypeRepository）。
+ */
+export interface ChoreTypeRecord {
+  familyId: string;
+  choreTypeId: string;
+  name: string;
+  unitPrice: number;
+  description?: string;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 
 /** 家族（entities.md の Family）。管理者は 1 人だけ。 */
 export interface Family {
@@ -35,7 +50,8 @@ export interface Invitation {
 }
 
 /** 送り直しを見分ける操作の名前（BR3.5） */
-export type RequestOperation = 'createFamily' | 'createInvitation' | 'acceptInvitation';
+export type RequestOperation =
+  'createFamily' | 'createInvitation' | 'acceptInvitation' | 'createChoreType';
 
 /**
  * 操作の送り直しを見分ける記録（entities.md の RequestRecord）。expiresAt は TTL 用の UNIX 秒。
@@ -46,8 +62,8 @@ export interface RequestRecord {
   idempotencyKey: string;
   operation: RequestOperation;
   target?: string;
-  /** 前に返した結果の本文（createFamily と acceptInvitation は MeFamily、createInvitation は InvitationView） */
-  result: MeFamily | InvitationView;
+  /** 前に返した結果の本文（createFamily と acceptInvitation は MeFamily、createInvitation は InvitationView、createChoreType は ChoreType） */
+  result: MeFamily | InvitationView | ChoreType;
   expiresAt: number;
 }
 

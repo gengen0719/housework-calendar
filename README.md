@@ -214,6 +214,42 @@ cd infrastructure
 npx cdk synth --quiet -c originVerifySecret=dummy -c githubOwner=o -c githubRepo=r -c budgetEmail=a@example.com
 ```
 
+## テストの作り物の秘密の値と、push 前の秘密の情報の検査
+
+CI の gitleaks は、値の「ランダムっぽさ」（エントロピー）で鍵を見つけます。そのため、テスト用の作り物の値でも、どれが検出されるかを事前には読めません。検出されると CI が止まるので、次の決まりで防ぎます。
+
+- 秘密の値に見えるもの（鍵、トークン、印、パスワードなど。名前に `secret` / `token` / `key` などを含むものも）は、テストの中に直接書きません。
+- 置く場所は、各パッケージの `test/fixtures/fakeSecrets.ts` だけです（`infrastructure`、`packages/backend`、`packages/frontend`）。`FAKE_*` の名前で export し、テストから import します。
+- `fakeSecrets.ts` の各行の終わりには `// gitleaks:allow テスト用の作り物の値` を付けます。本物の値は絶対に置きません。
+- ESLint（`eslint.config.js` の最後のブロック）が、`test/` 以下（`fakeSecrets.ts` を除く）での直書きを error にします。`npm run lint` と CI で止まります。
+- `.gitleaksignore` には足しません。
+
+### ESLint は補助です。最終の防御は `npm run secrets:scan`
+
+ESLint が止めるのは、TypeScript のテスト（`**/test/**`）にある次のものだけです。
+
+- 名前が `secret` / `token` / `password` / `passwd` / `credential` / `api_key` / `authorization` を含む、または `key` で始まる・終わる・`_key` を含む変数やプロパティ（`'Idempotency-Key'` のような文字列のキーも）に、直接書いた文字列（8 文字以上）、式のないテンプレートリテラル、文字列の連結を入れたもの。
+- UUID の形の文字列（名前によらない）。
+- 20 文字以上で、英数字と `_ - + / = .` だけでできていて、英字と数字の両方を含み、先頭が `/` でない文字列（名前によらない）。`import` / `require` / `vi.mock` / `loadFeature` の引数は除きます。
+
+最後の「20 文字以上」の絞り込みは、意図して狭めています。英数字と記号だけの 20 文字以上を全部止めると、CDK のスタック名（`Housework-staging-App`）、エラーの理由（`SERVICE_TEMPORARILY_UNAVAILABLE`）、API のパス、`describe` の名前など、無害な文字列が 200 件以上も止まり、使えなくなるためです。英字だけの値や、名前も形も秘密らしくない値は、ESLint では止まりません。
+
+次のものは ESLint の対象外です。**`.feature`（例の表）、シェルスクリプト、YAML（`.github/workflows/*.yml` の `originVerifySecret=ci-dummy-…` など）、JSON、README は gitleaks に任せます。** ESLint が通ったことは、gitleaks が通ることを意味しません。
+
+push の前に、手元で次を実行して確かめます。
+
+```bash
+brew install gitleaks   # 1 回だけ（8.19 以上が必要。古ければ brew upgrade gitleaks）
+npm run secrets:scan
+```
+
+`secrets:scan` は次の 2 つを調べます（検出された値は伏せて表示されます）。
+
+1. Git の履歴（コミット済みの内容）: `gitleaks git --redact --no-banner -v`。CI の gitleaks と同じ範囲です。
+2. 作業ツリー全体（まだ `git add` していない新しいファイルも含む）: `gitleaks dir . --redact --no-banner -v`。
+
+どちらも、リポジトリ直下の `.gitleaks.toml` を読みます。この設定は既定のルールをそのまま使い（`[extend] useDefault = true`）、`node_modules`・`dist`・`cdk.out`・`coverage` のフォルダだけを読み飛ばします（`[allowlist] paths`）。これらはどれも `.gitignore` の対象で Git に入らないため（`git ls-files` で 1 件もないことを確かめ済み）、CI の gitleaks（履歴の検査。`gitleaks-action` もこのファイルを自動で読みます）の結果は、この 4 つのフォルダを読み飛ばす以外は変わりません。
+
 ## 反映の流れ
 
 - `ci.yml`: プルリクエストと `main` への push。Prettier、ESLint、tsc、Vitest とカバレッジ、gitleaks、`cdk synth`。AWS の権限は付けません。
@@ -304,7 +340,7 @@ aws lambda put-function-concurrency \
 4. 子供のアカウントでグループに「登録」と送ると、「お知らせ先を登録できるのは管理者だけです」と返ります。
 5. 公式アカウントをグループから外します。画面を開き直すと、「お知らせ先: 登録されていません」と出ます（管理者のカレンダーの枠の画面には「お知らせ先のグループが登録されていません」が出ます）。
 
-`scripts/smoke-check.sh` は、セッションなしで `GET /v1/family/notification-group` が 401 になることも確かめます（全 10 件）。LINE の join・登録・leave は署名のある Webhook が必要なので、スクリプトでは確かめません。
+`scripts/smoke-check.sh` は、セッションなしで `GET /v1/family/notification-group` が 401 になることも確かめます（U4 のあとは全 15 件のうちの 1 件）。LINE の join・登録・leave は署名のある Webhook が必要なので、スクリプトでは確かめません。
 
 ### テーブルまで前の版に戻すとき（2 回に分ける）
 
@@ -317,6 +353,38 @@ U2 の `Invitations` を戻すときも同じ手順です。
 
 - `NotificationGroups` は本番では `RETAIN` なので、戻してもスタックから外れるだけで消えません。もう一度反映すると、新しい空のテーブルができ、前のお知らせ先は引き継がれません。
 - `Families.notificationGroupId` に古い値が残っても、管理者がグループで登録し直すと置き換わります。ステージングは `DESTROY` なので、戻すとテーブルは消えますが、同じく登録し直しで置き換わります。
+
+## U4（お手伝いの種類）の反映と運用
+
+### お手伝いの種類の画面の使い方
+
+「家族の設定」の「お手伝いの種類」を押すと、種類の一覧が出ます。管理者は次のことができます。子供は一覧を見るだけで、ボタンは出ません。
+
+- **追加:** 名前（1〜20 文字）、単価（0 円以上の整数）、説明（なくてもかまいません。100 文字まで）を入れて保存します。
+- **変更:** 名前・単価・説明を直します。単価を変えても、すでに付いた記録の金額は変わらず、このあとに付く記録から新しい単価になります。
+- **使わない／使う:** 「使わない」にすると、新しい割り当てで選べなくなります。過去の記録とお小遣いはそのまま残ります。「使う」で戻せます。
+- **消す:** 割り当てに一度も使われていない種類だけ消せます。使われたことがある種類は消せず、自動で「使わない」になります。
+
+名前は、同じ家族の中で重ねられません。1 日に 2 回以上あるお手伝いは、「皿洗い」と「皿洗い（追加分）」のように、別の名前の種類に分けて登録します。同じ名前の「使わない」種類があるときは、新しく登録せず「使う」に戻すか、別の名前にします。
+
+### ステージングでの手の確かめ（作り手が手で行う）
+
+1. 管理者のアカウントで「家族の設定」→「お手伝いの種類」を開き、「皿洗い 100 円」を説明つきで追加します。一覧に「皿洗い　100 円」が出ます。
+2. 同じ名前でもう一度追加すると、「皿洗い（追加分）」のように別の名前で登録するよう案内が出て、入力が残ります。
+3. 単価に `-1` や `1.5` を入れて保存すると、「単価は 0 円以上の整数で入力してください」と出ます。
+4. 「皿洗い」の単価を 120 円に変えます。一覧が 120 円になります。
+5. 「使わない」を押して確かめに答えると、一覧の下の「使わない」に移ります。「使う」で戻ります。
+6. 「消す」を押して確かめに答えると、一覧からなくなります（U5 ができるまでは、割り当てがないので常に消せます）。
+7. 子供のアカウントで同じ画面を開くと、一覧だけが見え、ボタンは出ません。
+8. PUT・PATCH・DELETE が CloudFront を通って届くことは、上の 4〜6 の操作で確かめられます（`scripts/smoke-check.sh` はセッションなしの 401 だけを確かめます）。
+
+`scripts/smoke-check.sh` は、セッションなしで `GET`・`POST /v1/chore-types` と、`PUT`・`PATCH`・`DELETE /v1/chore-types/{id}` が 401 になることも確かめます（全 15 件）。
+
+### U5 を反映したあとの戻し方（前に進んで直す）
+
+U5 を反映したあとは、`ChoreTypes` のテーブルも U4 のコードも前の版に戻しません。U5 の割り当てが、`ChoreTypes` の種類を使います。戻すと、割り当てが指している種類が消え、お小遣いの内訳が壊れます。`ChoreTypes` は本番では `RETAIN` ですが、スタックから外すと、もう一度反映したときに新しい空のテーブルができ、前の種類は引き継がれません。
+
+問題が起きたときは、U4 を含む新しい修正のコミットを `main` に取り込み、前に進んで直します（U2 の `Invitations`、U3 の `NotificationGroups` のテーブルを戻すときの 2 回に分ける手順も、U5 を反映する前の話です）。
 
 ## 既知の課題
 

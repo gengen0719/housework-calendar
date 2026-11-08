@@ -10,9 +10,10 @@ import {
   USERS_TABLE,
 } from '../u1-skeleton-family/helpers/fakeDynamo';
 import { setupWorld } from '../u1-skeleton-family/helpers/world';
+import { FAKE_VALID_INVITE_TOKEN } from '../fixtures/fakeSecrets';
 import { FAMILY_ID, KEY_1, NOW, PEOPLE } from './helpers/seed';
 
-const TOKEN = 'ValidValidValidValid12';
+const TOKEN = FAKE_VALID_INVITE_TOKEN;
 const result = {
   familyId: FAMILY_ID,
   name: '山田家',
@@ -81,7 +82,9 @@ describe('参加のトランザクションの組み立て', () => {
       target: hashToken(TOKEN),
     });
     expect(JSON.stringify(put?.Item)).not.toContain(TOKEN);
-    expect(put?.ConditionExpression).toBe('attribute_not_exists(idempotencyKey)');
+    expect(put?.ConditionExpression).toBe(
+      'attribute_not_exists(idempotencyKey) OR expiresAt <= :now',
+    );
   });
 
   it('acceptInvitation は 1 回の TransactWriteItems で 4 件を送る', async () => {

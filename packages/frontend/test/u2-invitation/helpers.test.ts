@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { formatExpiry } from '../../src/invitation/formatExpiry';
+import { FAKE_INVITE_TOKEN } from '../fixtures/fakeSecrets';
 import {
   readInvitationParam,
   removeInvitationParam,
@@ -11,7 +12,7 @@ const liff = vi.hoisted(() => ({
 }));
 vi.mock('@line/liff', () => ({ default: liff }));
 
-const TOKEN = 'abcdefghijklmnopqrstuv';
+const TOKEN = FAKE_INVITE_TOKEN;
 
 describe('readInvitationParam', () => {
   it('22 文字の印を読む', () => {

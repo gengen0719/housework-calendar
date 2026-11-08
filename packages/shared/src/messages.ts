@@ -16,7 +16,7 @@ export const MESSAGES: Record<Reason, string> = {
   NOTIFICATION_GROUP_NOT_REGISTERED: 'お知らせ先のグループが登録されていません',
   GROUP_NOT_REGISTERED: 'このグループは家族のお知らせ先として登録されていません',
   INVALID_UNIT_PRICE: '単価は 0 円以上の整数で入力してください',
-  CHORE_TYPE_IN_USE: 'この種類は割り当てに使われているため消せません',
+  CHORE_TYPE_IN_USE: '割り当てに使われたことがあるので消せません。『使わない』にしてください',
   CHORE_TYPE_INACTIVE: '使わない種類は割り当てられません',
   ASSIGNMENT_OVERLAP: '同じ日の同じお手伝いに担当が 2 人います',
   OVERWRITE_CONFIRMATION_REQUIRED: '変わる担当を確認してください',
@@ -40,7 +40,46 @@ export const MESSAGES: Record<Reason, string> = {
   SERVICE_TEMPORARILY_UNAVAILABLE: '表示できませんでした。もう一度お試しください',
   IDEMPOTENCY_KEY_REUSED: '操作の識別子が正しくありません。もう一度お試しください',
   GROUP_USED_BY_OTHER_FAMILY: 'このグループはほかの家族のお知らせ先になっています',
+  INVALID_CHORE_TYPE_NAME: '名前を 1〜20 文字で入力してください',
+  CHORE_TYPE_NAME_TAKEN:
+    '同じ名前の種類があります。1 日に 2 回以上あるお手伝いは『皿洗い（追加分）』のように、別の名前で登録してください',
+  INVALID_DESCRIPTION: '説明は 100 文字までで入力してください',
+  INVALID_REQUEST: '操作の内容が正しくありません。もう一度お試しください',
+  CHORE_TYPE_STATE_CHANGED: '状態が変わりました。もう一度お試しください',
 };
+
+/** お手伝いの種類の画面で使う文言（理由の印ではない。U4）。 */
+export const CHORE_TYPE_NAME_TAKEN_INACTIVE =
+  '『使わない』になっている同じ名前の種類があります。『使う』に戻すか、別の名前で登録してください';
+
+/** 名前が重なったときの文言。相手が「使う」なら別の名前を勧め、「使わない」なら「使う」に戻す案内にする（BR5.3）。 */
+export function choreTypeNameTakenMessage(conflictActive: boolean): string {
+  return conflictActive ? MESSAGES.CHORE_TYPE_NAME_TAKEN : CHORE_TYPE_NAME_TAKEN_INACTIVE;
+}
+
+/** 名前の欄の下の案内（BR5.4） */
+export const CHORE_TYPE_NAME_HINT =
+  '1 日に 2 回以上あるお手伝いは『皿洗い（追加分）』のように分けて登録します';
+
+/** 単価を変える画面の注意（BR5.7） */
+export const CHORE_TYPE_PRICE_CHANGE_NOTE =
+  '単価を変えると、このあとに付く記録から新しい単価になります';
+
+/** 「使わない」を押したときの確かめ（BR5.8） */
+export const CHORE_TYPE_DEACTIVATE_CONFIRM =
+  '使わないにすると、新しい割り当てで選べなくなります。過去の記録とお小遣いはそのまま残ります';
+
+/** 「消す」を押したときの確かめ（BR5.9） */
+export const CHORE_TYPE_DELETE_CONFIRM = 'この種類を消しますか？ 消すと元に戻せません';
+
+/** 消そうとして 409 CHORE_TYPE_IN_USE になったとき、種類を「使わない」にしたことを伝える文言（AC2.1.6） */
+export const CHORE_TYPE_IN_USE_DEACTIVATED =
+  '割り当てに使われたことがあるので消せません。『使わない』にしました';
+
+/** 消そうとして 404 になったときの文言 */
+export const CHORE_TYPE_ALREADY_GONE = 'すでに消えています';
+/** 変更を保存しようとして 404 になったとき（ほかの人が先に消した）の文言 */
+export const CHORE_TYPE_NO_LONGER_EXISTS = 'この種類はもうありません';
 
 /** LINE のグループへの返事の文言（理由の印ではない。U3）。 */
 export const NOTIFICATION_GROUP_ADMIN_ONLY = 'お知らせ先を登録できるのは管理者だけです';

@@ -4,6 +4,7 @@ import { describeFeature, loadFeature } from '@amiceli/vitest-cucumber';
 import { expect, vi } from 'vitest';
 import { INVITATION_NOT_FRIEND_HINT, INVITATION_SHARE_TEXT, MESSAGES } from '@housework/shared';
 import { App } from '../../src/App';
+import { FAKE_INVITE_TOKEN, FAKE_SESSION_TOKEN } from '../fixtures/fakeSecrets';
 // LIFF は差し替える（本物の LINE にはつながない）
 const liff = vi.hoisted(() => ({
   init: vi.fn(),
@@ -29,13 +30,13 @@ interface RecordedCall {
 type Route = (call: RecordedCall) => FakeResponse | 'network';
 let routes: Record<string, Route>;
 let calls: RecordedCall[];
-const TOKEN = 'abcdefghijklmnopqrstuv';
+const TOKEN = FAKE_INVITE_TOKEN;
 const INVITE_URL = `https://example.test/?invitation=${TOKEN}`;
 const NEW_URL = 'https://example.test/?invitation=NEWNEWNEWNEWNEWNEWNEWN';
 const EXPIRES_AT = '2026-11-02T01:30:00.000Z';
 const EXPIRES_TEXT = '2026年11月2日 10:30';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
-const SESSION = { sessionToken: 'session-token-1', expiresAt: '2026-11-01T01:00:00.000Z' };
+const SESSION = { sessionToken: FAKE_SESSION_TOKEN, expiresAt: '2026-11-01T01:00:00.000Z' };
 const adminFamily = { familyId: 'fam-1', name: '田中家', role: 'admin' as const };
 const childFamily = { ...adminFamily, role: 'child' as const };
 const HANAKO = { userId: 'user-hanako', displayName: '花子' };

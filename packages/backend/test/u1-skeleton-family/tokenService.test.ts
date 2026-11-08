@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
 import { describe, expect, it } from 'vitest';
 import { SESSION_TTL_SECONDS, signSession, verifySession } from '../../src/services/tokenService';
+import { FAKE_ANOTHER_SIGNING_SECRET, FAKE_SIGNING_SECRET } from '../fixtures/fakeSecrets';
 
-const SECRET = 'test-signing-secret-0123456789abcdef'; // gitleaks:allow テスト用の作り物の鍵
+const SECRET = FAKE_SIGNING_SECRET;
 const NOW = new Date('2026-11-01T00:00:00.000Z');
 
 function decode(token: string): Record<string, unknown> {
@@ -40,7 +41,7 @@ describe('tokenService', () => {
   });
 
   it('別の鍵で署名されたトークンは UNAUTHENTICATED', () => {
-    const { token } = signSession('user-1', 'another-secret-0123456789abcdef', NOW);
+    const { token } = signSession('user-1', FAKE_ANOTHER_SIGNING_SECRET, NOW);
     expect(verifySession(token, SECRET, NOW).ok).toBe(false);
   });
 

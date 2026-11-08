@@ -1,9 +1,10 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import * as familyMemberService from '../../src/services/familyMemberService';
 import { setupWorld } from '../u1-skeleton-family/helpers/world';
+import { FAKE_OTHER_INVITE_TOKEN, FAKE_VALID_INVITE_TOKEN } from '../fixtures/fakeSecrets';
 import { FAMILY_ID, FAMILY_NAME, NOW, PEOPLE, seedFamily } from './helpers/seed';
 
-const TOKEN = 'ValidValidValidValid12';
+const TOKEN = FAKE_VALID_INVITE_TOKEN;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 let world: ReturnType<typeof setupWorld>;
@@ -67,7 +68,7 @@ describe('resolveUsableInvitation', () => {
   it('家族のいまの印がこの印と違えば INVITATION_INVALID（active のままでも断る）', async () => {
     seedInvitation();
     const family = world.families.get(FAMILY_ID);
-    if (family) family.currentInvitationToken = 'OtherOtherOtherOther12';
+    if (family) family.currentInvitationToken = FAKE_OTHER_INVITE_TOKEN;
     const result = await familyMemberService.resolveUsableInvitation(TOKEN, NOW);
     expect(result).toEqual({ ok: false, reason: 'INVITATION_INVALID' });
   });

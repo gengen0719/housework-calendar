@@ -4,8 +4,9 @@ import type { Invitation } from '../../src/models';
 import * as invitationRepository from '../../src/repositories/invitationRepository';
 import { INVITATIONS_TABLE } from '../u1-skeleton-family/helpers/fakeDynamo';
 import { setupWorld } from '../u1-skeleton-family/helpers/world';
+import { FAKE_MIXED_CASE_INVITE_TOKEN } from '../fixtures/fakeSecrets';
 
-const TOKEN = 'AbCdEfGhIjKlMnOpQrStUv';
+const TOKEN = FAKE_MIXED_CASE_INVITE_TOKEN;
 const NOW = new Date('2026-11-02T00:00:00.000Z');
 
 const invitation: Invitation = {

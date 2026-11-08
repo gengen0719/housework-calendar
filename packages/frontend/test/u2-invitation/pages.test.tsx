@@ -5,10 +5,11 @@ import { ApiFailure } from '../../src/api/client';
 import type { Authorized } from '../../src/hooks/useSession';
 import { FamilySettingsPage } from '../../src/pages/FamilySettingsPage';
 import { InvitationPage } from '../../src/pages/InvitationPage';
+import { FAKE_INVITE_TOKEN } from '../fixtures/fakeSecrets';
 
 vi.mock('@line/liff', () => ({ default: {} }));
 
-const TOKEN = 'abcdefghijklmnopqrstuv';
+const TOKEN = FAKE_INVITE_TOKEN;
 const MEMBERS = [{ userId: 'u1', displayName: '花子', role: 'admin' }];
 
 /** 呼び出しごとに用意した結果を順に返す（Error なら失敗にする） */

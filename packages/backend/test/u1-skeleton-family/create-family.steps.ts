@@ -12,6 +12,7 @@ import {
   SIGNING_SECRET,
   stubLineFetch,
 } from './helpers/world';
+import { FAKE_IDEMPOTENCY_KEY_1, FAKE_NOT_A_UUID_IDEMPOTENCY_KEY } from '../fixtures/fakeSecrets';
 
 const feature = await loadFeature('packages/backend/test/u1-skeleton-family/create-family.feature');
 
@@ -25,7 +26,7 @@ let currentKey: string;
 
 const START = new Date('2026-11-01T00:00:00.000Z');
 const HANAKO_USER_ID = 'user-hanako';
-const KEY_1 = '00000000-0000-4000-8000-000000000001'; // gitleaks:allow テスト用の作り物の Idempotency-Key
+const KEY_1 = FAKE_IDEMPOTENCY_KEY_1;
 
 function seedHanako(withFamily: boolean): void {
   const user: User = {
@@ -205,7 +206,9 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     Given('家族に入っていない友だちの花子さんがセッションを持っている', () => seedHanako(false));
     When('花子さんが印なしと UUID でない印で家族を作ろうとする', async () => {
       responses.push(await postFamily('田中家', {}));
-      responses.push(await postFamily('田中家', { 'idempotency-key': 'not-a-uuid' }));
+      responses.push(
+        await postFamily('田中家', { 'idempotency-key': FAKE_NOT_A_UUID_IDEMPOTENCY_KEY }),
+      );
     });
     Then('どちらも 400 で理由は IDEMPOTENCY_KEY_REQUIRED になる', () => {
       expect(responses).toHaveLength(2);

@@ -16,15 +16,21 @@ import {
   seedUser,
   type PersonKey,
 } from './helpers/seed';
+import {
+  FAKE_MALFORMED_INVITE_TOKEN,
+  FAKE_ROTATED_INVITE_TOKEN,
+  FAKE_SUZUKI_INVITE_TOKEN,
+  FAKE_UNKNOWN_INVITE_TOKEN,
+} from '../fixtures/fakeSecrets';
 
 const feature = await loadFeature('packages/backend/test/u2-invitation/accept-invitation.feature');
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const SUZUKI_FAMILY_ID = 'fam-suzuki';
 /** テストの中で作る決まった 22 文字の印（本物ではない） */
-const SUZUKI_TOKEN = 'SuzukiSuzukiSuzukiSuzu';
-const UNKNOWN_TOKEN = 'UnknownUnknownUnknown1';
-const MALFORMED_TOKEN = 'not-a-valid-token';
+const SUZUKI_TOKEN = FAKE_SUZUKI_INVITE_TOKEN;
+const UNKNOWN_TOKEN = FAKE_UNKNOWN_INVITE_TOKEN;
+const MALFORMED_TOKEN = FAKE_MALFORMED_INVITE_TOKEN;
 
 let world: ReturnType<typeof setupWorld>;
 let response: APIGatewayProxyStructuredResultV2;
@@ -362,7 +368,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
           const old = world.invitations.get(currentToken);
           if (old) old.status = 'replaced';
           const family = world.families.get(FAMILY_ID);
-          if (family) family.currentInvitationToken = 'RotatedRotatedRotated1';
+          if (family) family.currentInvitationToken = FAKE_ROTATED_INVITE_TOKEN;
         };
       });
       When('花子さんが招待に参加する', async () => void (response = await accept('hanako')));

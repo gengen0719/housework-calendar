@@ -11,24 +11,36 @@ import {
   installFakeDynamo,
   INVITATIONS_TABLE,
   NOTIFICATION_GROUPS_TABLE,
+  CHORE_TYPES_TABLE,
   REQUEST_RECORDS_TABLE,
   USERS_TABLE,
 } from './fakeDynamo';
+import {
+  FAKE_CHANNEL_ACCESS_TOKEN,
+  FAKE_CHANNEL_SECRET,
+  FAKE_ORIGIN_SECRET,
+  FAKE_SIGNING_SECRET,
+  FAKE_VALID_ID_TOKEN,
+  SSM_NAME_JWT_SIGNING_SECRET,
+  SSM_NAME_LINE_CHANNEL_ACCESS_TOKEN,
+  SSM_NAME_LINE_CHANNEL_SECRET,
+  SSM_NAME_ORIGIN_VERIFY_SECRET,
+} from '../../fixtures/fakeSecrets';
 
 export const SSM_PREFIX = '/housework-calendar/test';
-export const CHANNEL_SECRET = 'test-channel-secret';
-export const ORIGIN_SECRET = 'test-origin-secret';
+export const CHANNEL_SECRET = FAKE_CHANNEL_SECRET;
+export const ORIGIN_SECRET = FAKE_ORIGIN_SECRET;
 export const LIFF_URL = 'https://liff.line.me/test-liff-id';
 export const LOGIN_CHANNEL_ID = '1234567890';
-export const SIGNING_SECRET = 'test-signing-secret-0123456789abcdef'; // gitleaks:allow テスト用の作り物の鍵
+export const SIGNING_SECRET = FAKE_SIGNING_SECRET;
 
 const PARAMETERS: Record<string, string> = {
-  'line/channel-secret': CHANNEL_SECRET,
-  'line/channel-access-token': 'test-access-token',
+  [SSM_NAME_LINE_CHANNEL_SECRET]: CHANNEL_SECRET,
+  [SSM_NAME_LINE_CHANNEL_ACCESS_TOKEN]: FAKE_CHANNEL_ACCESS_TOKEN,
   'line/login-channel-id': LOGIN_CHANNEL_ID,
   'line/liff-url': LIFF_URL,
-  'jwt/signing-secret': SIGNING_SECRET,
-  'cloudfront/origin-verify-secret': ORIGIN_SECRET,
+  [SSM_NAME_JWT_SIGNING_SECRET]: SIGNING_SECRET,
+  [SSM_NAME_ORIGIN_VERIFY_SECRET]: ORIGIN_SECRET,
 };
 
 export interface FetchCall {
@@ -37,7 +49,7 @@ export interface FetchCall {
   body?: unknown;
 }
 
-export const VALID_ID_TOKEN = 'valid-id-token';
+export const VALID_ID_TOKEN = FAKE_VALID_ID_TOKEN;
 
 /** LINE の verify の差し替え。status が 200 のとき body が応答の中身になる。'throw' は通信の失敗。 */
 export type VerifyResult = { status: number; body?: unknown } | 'throw';
@@ -120,6 +132,7 @@ export function setupWorld() {
   process.env.REQUEST_RECORDS_TABLE = REQUEST_RECORDS_TABLE;
   process.env.INVITATIONS_TABLE = INVITATIONS_TABLE;
   process.env.NOTIFICATION_GROUPS_TABLE = NOTIFICATION_GROUPS_TABLE;
+  process.env.CHORE_TYPES_TABLE = CHORE_TYPES_TABLE;
   resetConfigCache();
   setRequestId(undefined);
   const dynamo = installFakeDynamo();
