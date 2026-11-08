@@ -1,0 +1,10 @@
+# gitleaks が見逃してよいと確かめ済みの検出（Fingerprint ごと）。
+# どれも U1 のテストだけで使う作り物の値（Idempotency-Key の UUID と、テスト用の JWT の鍵）で、本物の秘密の情報ではない。
+# 今のファイルでは各行に `// gitleaks:allow` を付けてある。ここに並べているのは、印を付ける前のコミット 337830e の検出。
+# ここに足すのは、テスト用の値だと確かめたものだけにする。本物の鍵が見つかったら、足さずに鍵を作り直すこと。
+337830e53b653bba7295daeb94305f11fcfd1551:packages/backend/test/u1-skeleton-family/familyRepository.test.ts:generic-api-key:7
+337830e53b653bba7295daeb94305f11fcfd1551:packages/backend/test/u1-skeleton-family/createFamilyService.test.ts:generic-api-key:7
+337830e53b653bba7295daeb94305f11fcfd1551:packages/backend/test/u1-skeleton-family/requestRecordRepository.test.ts:generic-api-key:8
+337830e53b653bba7295daeb94305f11fcfd1551:packages/backend/test/u1-skeleton-family/tokenService.test.ts:generic-api-key:5
+337830e53b653bba7295daeb94305f11fcfd1551:packages/backend/test/u1-skeleton-family/create-family.steps.ts:generic-api-key:28
+337830e53b653bba7295daeb94305f11fcfd1551:packages/backend/test/u1-skeleton-family/helpers/world.ts:generic-api-key:21
