@@ -5,6 +5,7 @@ import { expect, vi } from 'vitest';
 import { INVITATION_NOT_FRIEND_HINT, INVITATION_SHARE_TEXT, MESSAGES } from '@housework/shared';
 import { App } from '../../src/App';
 import { FAKE_INVITE_TOKEN, FAKE_SESSION_TOKEN } from '../fixtures/fakeSecrets';
+import { defaultCalendarResponse } from '../u5-assignment-calendar/helpers/calendarStub';
 // LIFF は差し替える（本物の LINE にはつながない）
 const liff = vi.hoisted(() => ({
   init: vi.fn(),
@@ -74,7 +75,9 @@ function installFakeApi(): void {
       };
       calls.push(call);
       const route = routes[`${method} ${input}`];
-      if (!route) return new Response('{}', { status: 404 });
+      if (!route) {
+        return defaultCalendarResponse(method, input) ?? new Response('{}', { status: 404 });
+      }
       const result = route(call);
       if (result === 'network') throw new TypeError('Failed to fetch');
       return new Response(result.body === undefined ? null : JSON.stringify(result.body), {
@@ -371,7 +374,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
             body: childFamily,
           });
           fireEvent.click(screen.getByTestId('join-button'));
-          expect(await screen.findByTestId('calendar-frame-page')).toBeInTheDocument();
+          expect(await screen.findByTestId('calendar-page')).toBeInTheDocument();
           expect(screen.getByTestId('family-name')).toHaveTextContent('田中家');
           const [post] = callsTo('POST', `/v1/invitations/${TOKEN}/accept`);
           expect(post?.headers.get('Idempotency-Key')).toMatch(UUID);
@@ -478,7 +481,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
       And('「カレンダーへ」を押すとカレンダーの枠に進む', async () => {
         expect(screen.getByTestId('go-calendar-button')).toHaveTextContent('カレンダーへ');
         fireEvent.click(screen.getByTestId('go-calendar-button'));
-        expect(await screen.findByTestId('calendar-frame-page')).toBeInTheDocument();
+        expect(await screen.findByTestId('calendar-page')).toBeInTheDocument();
       });
     },
   );
@@ -497,7 +500,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
             'すでに家族に入っています',
           );
           fireEvent.click(screen.getByTestId('go-calendar-button'));
-          expect(await screen.findByTestId('calendar-frame-page')).toBeInTheDocument();
+          expect(await screen.findByTestId('calendar-page')).toBeInTheDocument();
           expect(screen.getByTestId('family-name')).toHaveTextContent('田中家');
         },
       );
@@ -538,7 +541,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
         '通信が戻ったあとで「もう一度」を押すと同じ識別子で送り直されカレンダーの枠が出る',
         async () => {
           fireEvent.click(screen.getByTestId('retry-button'));
-          expect(await screen.findByTestId('calendar-frame-page')).toBeInTheDocument();
+          expect(await screen.findByTestId('calendar-page')).toBeInTheDocument();
           const posts = callsTo('POST', `/v1/invitations/${TOKEN}/accept`);
           expect(posts).toHaveLength(2);
           expect(posts[0]?.headers.get('Idempotency-Key')).toMatch(UUID);

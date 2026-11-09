@@ -1,4 +1,14 @@
-import type { ChoreType, FriendStatus, InvitationView, MeFamily, Role } from '@housework/shared';
+import type {
+  ChoreType,
+  DutyOrigin,
+  DutyStatus,
+  FriendStatus,
+  InvitationView,
+  MeFamily,
+  Role,
+} from '@housework/shared';
+
+export type { DutyOrigin, DutyStatus };
 
 /**
  * お手伝いの種類の保存された形（entities.md の ChoreType、U4）。日時は UTC の ISO 8601。
@@ -13,6 +23,64 @@ export interface ChoreTypeRecord {
   active: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+/** 割り当ての 1 行（種類ごとの子供と曜日。曜日は 0=日曜〜6=土曜） */
+export interface AssignmentRuleRecord {
+  choreTypeId: string;
+  childUserId: string;
+  weekdays: number[];
+}
+
+/**
+ * 月の割り当て（U5）。Calendar の項目は sk（`M#<month>#A`）を足した形。
+ * choreTypeIds（文字列の集合）は使用の確かめ用で、行が 0 行のときは置かない。
+ */
+export interface AssignmentRecord {
+  familyId: string;
+  month: string;
+  rules: AssignmentRuleRecord[];
+  choreTypeIds?: Set<string>;
+  updatedAt: string;
+  updatedByUserId: string;
+}
+
+/**
+ * 日ごとの担当（U5）。Calendar の項目は sk（`M#<month>#D#<date>#<choreTypeId>`）を足した形。
+ * recordedAt・recordedBy・unitPrice は U6〜U8 が書く（U5 は読むだけ）。
+ */
+export interface DutyRecord {
+  dutyId: string;
+  familyId: string;
+  month: string;
+  date: string;
+  choreTypeId: string;
+  childUserId: string;
+  status: DutyStatus;
+  origin: DutyOrigin;
+  version: number;
+  createdAt: string;
+  updatedAt: string;
+  recordedAt?: string;
+  recordedBy?: string;
+  unitPrice?: number;
+}
+
+/** 月の状態（確定したか。U7 が書く）。Calendar の項目は sk（`M#<month>#S`）を足した形。 */
+export interface MonthStateRecord {
+  familyId: string;
+  month: string;
+  confirmed: boolean;
+  confirmedAt?: string;
+}
+
+/** 担当の ID から担当の場所を引く印。Calendar の項目は sk（`DID#<dutyId>`）を足した形。 */
+export interface DutyRefRecord {
+  familyId: string;
+  dutyId: string;
+  month: string;
+  date: string;
+  choreTypeId: string;
 }
 
 /** 家族（entities.md の Family）。管理者は 1 人だけ。 */

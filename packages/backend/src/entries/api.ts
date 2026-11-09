@@ -16,14 +16,29 @@ import { createInvitation } from '../handlers/invitation/create';
 import { acceptInvitation } from '../handlers/invitation/accept';
 import { getCurrentInvitation } from '../handlers/invitation/getCurrent';
 import { previewInvitation } from '../handlers/invitation/preview';
+import { changeDutyChild } from '../handlers/calendar/changeDutyChild';
+import { getAssignment } from '../handlers/calendar/getAssignment';
+import { getCalendar } from '../handlers/calendar/getCalendar';
+import { saveAssignment } from '../handlers/calendar/saveAssignment';
 import { createSession } from '../handlers/session/createSession';
 import { getConfig, type AppConfig } from '../lib/config';
 import { ApiError } from '../lib/errors';
 import { errorResponse, json } from '../lib/http';
-import { describeError, logger, setRequestId } from '../lib/logger';
+import { describeError, logger, setRequestId, takeRequestMetrics } from '../lib/logger';
+import { readJsonBody } from '../lib/requestBody';
 import { matchRoute } from '../lib/router';
 import { requireAuth } from '../middleware/requireAuth';
 import { verifyOriginHeader } from '../middleware/verifyOriginHeader';
+import { setCalendarPort } from '../services/calendarPort';
+import * as calendarService from '../services/calendarService';
+
+/**
+ * composition root: C7（種類）の「消す」が使う C8 の窓口に、U5 の本物を取り付ける（BR6.10）。
+ * 向きは entries/api → calendarService → choreTypeService → calendarPort で、輪を作らない
+ * （choreTypeService は calendarPort の形だけに頼り、calendarService を import しない）。
+ * 読み込んだ時点で取り付く。LINE の入口（entries/line）は種類を消さないので取り付けない。
+ */
+setCalendarPort({ isChoreTypeAssigned: calendarService.isChoreTypeAssigned });
 
 interface RouteInput {
   event: APIGatewayProxyEventV2;
@@ -31,6 +46,8 @@ interface RouteInput {
   now: Date;
   /** パスの型の `:name` の部分（例: 招待の印 `token`）。ログには書かない */
   params: Record<string, string>;
+  /** Lambda の残り時間（ミリ秒）。時間切れの前に書き込みを止めるために使う（U5）。ないときは見ない */
+  remainingTimeMs?: () => number;
 }
 
 interface RouteResult {
@@ -109,6 +126,34 @@ export const routes: Record<string, Route> = {
     await removeChoreType(auth, params.choreTypeId ?? '', now);
     return { status: 204, body: undefined };
   },
+  // U5: 月の割り当て。読む（メンバー全員）と保存（管理者だけ。権限の確かめは各ハンドラーで requireMembership → requireAdmin）。
+  // 本文は保存の中で必要になった時点で読む（64 KB まで。413）
+  'GET /v1/months/:month/assignment': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return { status: 200, body: await getAssignment(auth, params.month ?? '') };
+  },
+  'PUT /v1/months/:month/assignment': async ({ event, config, now, params, remainingTimeMs }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return {
+      status: 200,
+      body: await saveAssignment(auth, params.month ?? '', () => readJsonBody(event), {
+        now,
+        ...(remainingTimeMs ? { remainingTimeMs } : {}),
+      }),
+    };
+  },
+  // U5: 月のカレンダー（メンバー全員。子供も）と、日ごとの担当の子供の変更（管理者だけ。本文は担当の 404 のあとで読む）
+  'GET /v1/months/:month/calendar': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return { status: 200, body: await getCalendar(auth, params.month ?? '', now) };
+  },
+  'PATCH /v1/duties/:dutyId': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return {
+      status: 200,
+      body: await changeDutyChild(auth, params.dutyId ?? '', () => readJsonBody(event), { now }),
+    };
+  },
   // U2: 家族のメンバーの一覧（メンバー全員）と招待（管理者だけ。権限の確かめは各ハンドラーで requireMembership → requireAdmin）
   'GET /v1/family/members': async ({ event, config, now }) => {
     const auth = await requireAuth(event.headers, config.signingSecret, now);
@@ -147,7 +192,7 @@ export const routes: Record<string, Route> = {
 /** 画面用 API の受け口（Lambda 関数 URL）。決まりで断るときは `{ error: { reason, details? } }`。思いがけない失敗は 500。 */
 export async function handler(
   event: APIGatewayProxyEventV2,
-  context?: Pick<Context, 'awsRequestId'>,
+  context?: Partial<Pick<Context, 'awsRequestId' | 'getRemainingTimeInMillis'>>,
 ): Promise<APIGatewayProxyStructuredResultV2> {
   const startedAt = Date.now();
   setRequestId(context?.awsRequestId ?? event.requestContext?.requestId);
@@ -163,7 +208,14 @@ export async function handler(
       return json(403, { error: { reason: 'FORBIDDEN' } });
     }
     if (!match) throw new ApiError(404, 'NOT_FOUND');
-    const result = await match.handler({ event, config, now: new Date(), params: match.params });
+    const remaining = context?.getRemainingTimeInMillis;
+    const result = await match.handler({
+      event,
+      config,
+      now: new Date(),
+      params: match.params,
+      ...(remaining ? { remainingTimeMs: () => remaining.call(context) } : {}),
+    });
     return json(result.status, result.body);
   } catch (err) {
     if (err instanceof ApiError) {
@@ -173,6 +225,11 @@ export async function handler(
     logger.error({ event: 'REQUEST_ERROR', path, ...describeError(err) });
     return json(500, { error: { reason: 'INTERNAL' } });
   } finally {
-    logger.info({ event: 'REQUEST_END', path, durationMs: Date.now() - startedAt });
+    logger.info({
+      event: 'REQUEST_END',
+      path,
+      durationMs: Date.now() - startedAt,
+      ...takeRequestMetrics(),
+    });
   }
 }

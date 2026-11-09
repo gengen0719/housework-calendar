@@ -18,6 +18,28 @@ export const FAKE_IDEMPOTENCY_KEY_2 = '00000000-0000-4000-8000-000000000002'; //
 export const FAKE_CHORE_TYPE_ID_1 = '11111111-1111-4111-8111-111111111111'; // gitleaks:allow テスト用の作り物の値
 export const FAKE_CHORE_TYPE_ID_2 = '22222222-2222-4222-8222-222222222222'; // gitleaks:allow テスト用の作り物の値
 export const FAKE_CHORE_TYPE_ID_3 = '33333333-3333-4333-8333-333333333333'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_CHORE_TYPE_ID_4 = '88888888-8888-4888-8888-888888888884'; // gitleaks:allow テスト用の作り物の値
+
+// 担当の ID（U5。UUID の形）
+export const FAKE_DUTY_ID_1 = '44444444-4444-4444-8444-444444444441'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_DUTY_ID_2 = '44444444-4444-4444-8444-444444444442'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_DUTY_ID_3 = '44444444-4444-4444-8444-444444444443'; // gitleaks:allow テスト用の作り物の値
+// 子供の ID（U5。UUID の形。3 人）
+export const FAKE_CHILD_USER_ID_1 = '55555555-5555-4555-8555-555555555551'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_CHILD_USER_ID_2 = '55555555-5555-4555-8555-555555555552'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_CHILD_USER_ID_3 = '55555555-5555-4555-8555-555555555553'; // gitleaks:allow テスト用の作り物の値
+// ほかの家族の ID（U5。UUID の形）
+export const FAKE_OTHER_FAMILY_ID = '66666666-6666-4666-8666-666666666661'; // gitleaks:allow テスト用の作り物の値
+// ほかの家族の種類の ID と、同じ家族のもう 1 人の管理者の ID（U5。UUID の形）
+export const FAKE_OTHER_CHORE_TYPE_ID = '77777777-7777-4777-8777-777777777771'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_ADMIN_USER_ID = '99999999-9999-4999-8999-999999999991'; // gitleaks:allow テスト用の作り物の値
+// 大文字の UUID（U5。「小文字だけ通す」の確認用）
+export const FAKE_UPPERCASE_UUID = 'AAAAAAAA-AAAA-4AAA-8AAA-AAAAAAAAAAAA'; // gitleaks:allow テスト用の作り物の値
+// 上書きの確かめの印（U5。64 文字の 16 進数。形は正しいが合わない印）
+export const FAKE_CHANGES_HASH_MISMATCH =
+  '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'; // gitleaks:allow テスト用の作り物の値
+// 形が正しくない印（U5。64 文字の 16 進数ではない）
+export const FAKE_CHANGES_HASH_MALFORMED = 'not-a-hex-hash'; // gitleaks:allow テスト用の作り物の値
 
 // UUID ではない冪等キー（400 の確認用）
 export const FAKE_NOT_A_UUID_IDEMPOTENCY_KEY = 'not-a-uuid'; // gitleaks:allow テスト用の作り物の値

@@ -1,0 +1,18 @@
+{
+  "stage": "nfr-requirements",
+  "unit": "u5-assignment-calendar",
+  "upstream_ids": ["NFR1", "NFR2", "NFR3", "NFR4", "NFR5", "NFR6", "NFR7", "NFR8", "NFR9", "NFR10", "NFR11"],
+  "coverage": [
+    { "id": "NFR1", "status": "OK", "target": "NFR1.19, NFR1.20, NFR1.21, NFR1.22" },
+    { "id": "NFR2", "status": "OK", "target": "NFR2.28, NFR2.29, NFR2.30, NFR2.31, NFR2.32" },
+    { "id": "NFR3", "status": "OK", "target": "NFR3.6" },
+    { "id": "NFR4", "status": "OK", "target": "NFR4.42, NFR4.43, NFR4.44, NFR4.45, NFR4.46, NFR4.47, NFR4.48, NFR4.49, NFR4.50, NFR4.51, NFR4.52" },
+    { "id": "NFR5", "status": "N/A", "target": "no new secrets in U5 (inherits NFR5.1-NFR5.9 from u1-u3)" },
+    { "id": "NFR6", "status": "OK", "target": "NFR6.6" },
+    { "id": "NFR7", "status": "OK", "target": "NFR7.20, NFR7.21, NFR7.22, NFR7.23, NFR7.24" },
+    { "id": "NFR8", "status": "OK", "target": "NFR8.9, NFR8.10" },
+    { "id": "NFR9", "status": "OK", "target": "NFR9.5" },
+    { "id": "NFR10", "status": "N/A", "target": "no environment-specific setting in U5 (inherits u1-skeleton-family NFR10.1, NFR10.2)" },
+    { "id": "NFR11", "status": "OK", "target": "NFR11.4" }
+  ]
+}

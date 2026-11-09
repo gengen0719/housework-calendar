@@ -19,4 +19,6 @@ export const tables = {
   notificationGroups: () => requireEnv('NOTIFICATION_GROUPS_TABLE'),
   /** お手伝いの種類と名前の印（U4）。画面用の Lambda だけが持つ */
   choreTypes: () => requireEnv('CHORE_TYPES_TABLE'),
+  /** 割り当て・日ごとの担当・月の状態（U5）。画面用の Lambda だけが持つ */
+  calendar: () => requireEnv('CALENDAR_TABLE'),
 };

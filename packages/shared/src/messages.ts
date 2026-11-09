@@ -1,3 +1,4 @@
+import { weekdayOf } from './jstDate';
 import { isReason, type Reason } from './reasons';
 
 /**
@@ -46,7 +47,51 @@ export const MESSAGES: Record<Reason, string> = {
   INVALID_DESCRIPTION: '説明は 100 文字までで入力してください',
   INVALID_REQUEST: '操作の内容が正しくありません。もう一度お試しください',
   CHORE_TYPE_STATE_CHANGED: '状態が変わりました。もう一度お試しください',
+  INVALID_MONTH: '月の指定が正しくありません',
+  INVALID_ASSIGNMENT: '割り当ての入力に誤りがあります',
+  MONTH_NOT_EDITABLE: '割り当てを入力できるのは今月と来月だけです',
+  PAYLOAD_TOO_LARGE: '送る内容が大きすぎます',
 };
+
+/** カレンダーと割り当ての画面で使う文言（理由の印ではない。U5）。 */
+export const NO_ASSIGNMENT_MESSAGE = 'この月の割り当てはまだありません';
+export const NO_DUTY_LABEL = '担当なし';
+export const MONTH_CONFIRMED_LABEL = '確定済み';
+export const OVERWRITE_CONFIRM_HEADING = '次の担当が上書きされます';
+export const COPY_LAST_MONTH_LABEL = '先月と同じにする';
+export const CALENDAR_LOAD_FAILED_RETRY = '読み込み直す';
+
+/** 「先月と同じにする」の結果の文言 2 つ（BR6.17） */
+export const COPY_LAST_MONTH_SKIPPED_INACTIVE = '使わないお手伝いは入れませんでした';
+export const COPY_LAST_MONTH_NONE = '先月の割り当てはありません';
+
+/** 保存が 500 になったときの文言と、一部が書き換わっていることがある旨（NFR2.28） */
+export const ASSIGNMENT_SAVE_FAILED = '保存できませんでした。もう一度保存してください';
+export const ASSIGNMENT_SAVE_FAILED_PARTIAL_NOTE =
+  '一部の担当だけが書き換わっていることがあります。もう一度保存すると、そろいます';
+
+const WEEKDAY_LABELS = ['日', '月', '火', '水', '木', '金', '土'] as const;
+
+/** 日付（`YYYY-MM-DD`）を「1月4日」の形にする。 */
+function monthAndDay(date: string): string {
+  const [, month, day] = date.split('-').map(Number) as [number, number, number];
+  return `${month}月${day}日`;
+}
+
+/** 重なりの一行: 「1月4日(月) の皿洗いに担当が 2 人います」（AC3.1.6） */
+export function assignmentOverlapMessage(date: string, choreName: string): string {
+  return `${monthAndDay(date)}(${WEEKDAY_LABELS[weekdayOf(date)]}) の${choreName}に担当が 2 人います`;
+}
+
+/** 上書きの一覧の一行: 「1月22日 皿洗い: 太郎 → 花子」（AC3.1.5） */
+export function overwriteChangeMessage(
+  date: string,
+  choreName: string,
+  fromName: string,
+  toName: string,
+): string {
+  return `${monthAndDay(date)} ${choreName}: ${fromName} → ${toName}`;
+}
 
 /** お手伝いの種類の画面で使う文言（理由の印ではない。U4）。 */
 export const CHORE_TYPE_NAME_TAKEN_INACTIVE =

@@ -66,6 +66,7 @@ export function buildApp(app: App = new App()): App {
       invitations: data.invitations,
       notificationGroups: data.notificationGroups,
       choreTypes: data.choreTypes,
+      calendar: data.calendar,
       originVerifySecret,
       frontendDistPath,
       reservedConcurrency,

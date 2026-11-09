@@ -20602,3 +20602,4108 @@
 **Message Id**: 1a4387f2
 
 ---
+
+## Human Turn
+**Timestamp**: 2026-11-08T13:34:05Z
+**Event**: HUMAN_TURN
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Origin**: person
+**Source**: typed
+**Message Id**: e60d9938
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:36:19Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/entities.md
+**Context**: construction > u5-assignment-calendar > functional-design > entities.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:36:58Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Context**: construction > u5-assignment-calendar > functional-design > rules.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:37:06Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/functional-spec.md
+**Context**: construction > u5-assignment-calendar > functional-design > functional-spec.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:37:06Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/traceability.json
+**Context**: construction > u5-assignment-calendar > functional-design > traceability.json
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:37:08Z
+**Event**: SENSOR_FIRED
+**Fire id**: 57fff530
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/entities.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:37:08Z
+**Event**: SENSOR_PASSED
+**Fire id**: 57fff530
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/entities.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:37:08Z
+**Event**: SENSOR_FIRED
+**Fire id**: 75024104
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:37:09Z
+**Event**: SENSOR_PASSED
+**Fire id**: 75024104
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:37:09Z
+**Event**: SENSOR_FIRED
+**Fire id**: dad35d60
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/functional-spec.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:37:09Z
+**Event**: SENSOR_PASSED
+**Fire id**: dad35d60
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/functional-spec.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:37:09Z
+**Event**: SENSOR_FIRED
+**Fire id**: 089de3a0
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:37:09Z
+**Event**: SENSOR_PASSED
+**Fire id**: 089de3a0
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/traceability.json
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:37:09Z
+**Event**: SENSOR_FIRED
+**Fire id**: e5f6f754
+**Sensor ID**: upstream-coverage
+**Stage slug**: functional-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/entities.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:37:09Z
+**Event**: SENSOR_PASSED
+**Fire id**: e5f6f754
+**Sensor ID**: upstream-coverage
+**Stage slug**: functional-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/entities.md
+**Duration ms**: 52
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-08T13:37:09Z
+**Event**: REVIEW_REQUESTED
+**Stage**: functional-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:e13e374dae7263fcd3766d3fa04ca800f88094331ce6f4a55ab07be07d3070cc
+**Request Id**: review:39f798fa0e2b21019fbbde4957a9a016
+**Review File**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.39f798fa0e2b21019fbbde4957a9a016.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T13:37:23Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architecture-reviewer-agent
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:39:26Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.39f798fa0e2b21019fbbde4957a9a016.review.md
+**Context**: .aidlc-engine > reviews > functional-design > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 1.39f798fa0e2b21019fbbde4957a9a016.review.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:39:31Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.39f798fa0e2b21019fbbde4957a9a016.review.md
+**Context**: .aidlc-engine > reviews > functional-design > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 1.39f798fa0e2b21019fbbde4957a9a016.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T13:39:44Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**Verdict: NOT-READY.** Major findings are R-01, R-02 and R-03. The review file is written at the path you gave. Its only verdict line is the header's 
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.39f798fa0e2b21019fbbde4957a9a016.review.md=de69efd9340239fc665cf24d58da73e91de17e3ace0caf749e8fa04d4ae2883f
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-08T13:39:52Z
+**Event**: REVIEW_COMPLETED
+**Stage**: functional-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Verdict**: NOT-READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:e13e374dae7263fcd3766d3fa04ca800f88094331ce6f4a55ab07be07d3070cc
+**Artifact Fingerprint**: sha256:e13e374dae7263fcd3766d3fa04ca800f88094331ce6f4a55ab07be07d3070cc
+**Request Id**: review:39f798fa0e2b21019fbbde4957a9a016
+**Review Record**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:86d2e1a0ba6110c34f158eee5e91aea1d9165f2d5e4e4d24927937a32829be37
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:18Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Context**: construction > u5-assignment-calendar > functional-design > rules.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:18Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Context**: construction > u5-assignment-calendar > functional-design > rules.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:24Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Context**: construction > u5-assignment-calendar > functional-design > rules.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:28Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Context**: construction > u5-assignment-calendar > functional-design > rules.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:32Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Context**: construction > u5-assignment-calendar > functional-design > rules.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:35Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Context**: construction > u5-assignment-calendar > functional-design > rules.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:36Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/entities.md
+**Context**: construction > u5-assignment-calendar > functional-design > entities.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:43Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/entities.md
+**Context**: construction > u5-assignment-calendar > functional-design > entities.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:44Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/functional-spec.md
+**Context**: construction > u5-assignment-calendar > functional-design > functional-spec.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:49Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/functional-spec.md
+**Context**: construction > u5-assignment-calendar > functional-design > functional-spec.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:54Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/functional-spec.md
+**Context**: construction > u5-assignment-calendar > functional-design > functional-spec.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:40:56Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/traceability.json
+**Context**: construction > u5-assignment-calendar > functional-design > traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:41:05Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Context**: construction > u5-assignment-calendar > functional-design > rules.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:41:06Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/traceability.json
+**Context**: construction > u5-assignment-calendar > functional-design > traceability.json
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-08T13:41:08Z
+**Event**: REVIEW_REQUESTED
+**Stage**: functional-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 2
+**Artifact Fingerprint**: sha256:4eb6d27ccf21ed5c36e0a4928db2fcb5823400cc1130680b48afe155c8296743
+**Request Id**: review:51eb45b14f18d19495f6a1abf85a8ddb
+**Review File**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T13:41:19Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architecture-reviewer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T13:42:02Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n判定は READY です。レビューは指定のパスに書きました。\n\n- **前回の指摘:** R-01〜R-08 はすべて解決していました。\n  - Major の R-01〜R-03 は直っています。\n    - R-01: 「初めての保存」の判定が、割り当ての記録が保存済みかどうかに統一されました。\n
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:42:09Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md
+**Context**: .aidlc-engine > reviews > functional-design > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 2.51eb45b14f18d19495f6a1abf85a8ddb.review.md
+
+---
+
+## Error Logged
+**Timestamp**: 2026-11-08T13:42:10Z
+**Event**: ERROR_LOGGED
+**Tool**: aidlc-log
+**Command**: aidlc-log engine log review --stage functional-design --reviewer aidlc-architecture-reviewer-agent --unit u5-assignment-calendar --iteration 2 --verdict READY --project-dir <project-dir>
+**Error**: Refusing REVIEW_COMPLETED for "functional-design": the findings report could not be read: a Prior findings row names an ID the review context does not list, or repeats an ID. Write the whole review again with the required Prior findings and New findings tables. Rerun this review request with --retry-pending and dispatch the reviewer once more.
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:42:14Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Context**: construction > u5-assignment-calendar > functional-design > rules.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:42:16Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/functional-spec.md
+**Context**: construction > u5-assignment-calendar > functional-design > functional-spec.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:42:23Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Context**: construction > u5-assignment-calendar > functional-design > rules.md
+
+---
+
+## Error Logged
+**Timestamp**: 2026-11-08T13:42:33Z
+**Event**: ERROR_LOGGED
+**Tool**: aidlc-log
+**Command**: aidlc-log engine log review --stage functional-design --reviewer aidlc-architecture-reviewer-agent --unit u5-assignment-calendar --iteration 2 --retry-pending --project-dir <project-dir>
+**Error**: Refusing review retry for "functional-design": declared artifacts no longer match the bytes from REVIEW_REQUESTED iteration 2. A retry re-dispatches that exact request and cannot rebaseline changed content. Restore the requested artifact bytes before retrying. It never got a verdict, so request it again instead: `aidlc engine log review --stage functional-design --reviewer aidlc-architecture-reviewer-agent --unit u5-assignment-calendar --iteration 2 --project-dir /Users/gengen0719/WorkSpaces/private_project/housework-calendar`.
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-08T13:42:43Z
+**Event**: REVIEW_REQUESTED
+**Stage**: functional-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 2
+**Artifact Fingerprint**: sha256:6731eee6c3d535f118aa8f567abee7afca8bb73dbf81766e08a786a1f9bcf7a5
+**Request Id**: review:3eaf757b72f3993db4b5bd4b17925d0e
+**Replaces Request Id**: review:51eb45b14f18d19495f6a1abf85a8ddb
+**Review File**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.3eaf757b72f3993db4b5bd4b17925d0e.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T13:43:14Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architecture-reviewer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T13:43:39Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n判定: READY（反復 2）。\n\n前回の指摘は直っています。割り当ての保存、日ごとの変更、カレンダーの表示は、上流の AC3.1.x・AC4.1.x と C1・C8・C10 に対応しています。受け入れ条件の対応表と traceability.json の間にも食い違いはありません。\n\n新しい指摘は 
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.3eaf757b72f3993db4b5bd4b17925d0e.review.md=f41f34098562688c913fc2875422541e6207f6210235a7c1bcebd2d454bb2467
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:43:48Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.3eaf757b72f3993db4b5bd4b17925d0e.review.md
+**Context**: .aidlc-engine > reviews > functional-design > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 2.3eaf757b72f3993db4b5bd4b17925d0e.review.md
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-08T13:43:49Z
+**Event**: REVIEW_COMPLETED
+**Stage**: functional-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 2
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:6731eee6c3d535f118aa8f567abee7afca8bb73dbf81766e08a786a1f9bcf7a5
+**Artifact Fingerprint**: sha256:6731eee6c3d535f118aa8f567abee7afca8bb73dbf81766e08a786a1f9bcf7a5
+**Request Id**: review:3eaf757b72f3993db4b5bd4b17925d0e
+**Review Record**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.json
+**Review Record Digest**: sha256:133354378fec90238131b08eb36142e0adf3a519178a4dd22e152f3477ed8871
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:43:51Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: functional-design
+**Tool**: Edit
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:43:57Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Context**: construction > u5-assignment-calendar > functional-design > rules.md
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-08T13:44:00Z
+**Event**: UNIT_STARTED
+**Stage**: functional-design
+**Unit**: u5-assignment-calendar
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-08T13:44:07Z
+**Event**: UNIT_COMPLETED
+**Stage**: functional-design
+**Unit**: u5-assignment-calendar
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:45:08Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > security-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:45:15Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/performance-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > performance-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:45:26Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/scalability-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > scalability-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:45:31Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > reliability-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:45:40Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/observability-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > observability-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:45:45Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/tech-stack-decisions.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > tech-stack-decisions.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:45:45Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/traceability.json
+**Context**: construction > u5-assignment-calendar > nfr-requirements > traceability.json
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:45:47Z
+**Event**: SENSOR_FIRED
+**Fire id**: fefd2e74
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/performance-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:45:47Z
+**Event**: SENSOR_PASSED
+**Fire id**: fefd2e74
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/performance-requirements.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:45:47Z
+**Event**: SENSOR_FIRED
+**Fire id**: e65b9143
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:45:47Z
+**Event**: SENSOR_PASSED
+**Fire id**: e65b9143
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:45:47Z
+**Event**: SENSOR_FIRED
+**Fire id**: 34d57fb9
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/scalability-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:45:47Z
+**Event**: SENSOR_PASSED
+**Fire id**: 34d57fb9
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/scalability-requirements.md
+**Duration ms**: 53
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:45:48Z
+**Event**: SENSOR_FIRED
+**Fire id**: ad80e550
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:45:48Z
+**Event**: SENSOR_PASSED
+**Fire id**: ad80e550
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:45:48Z
+**Event**: SENSOR_FIRED
+**Fire id**: 095fb8da
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/observability-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:45:48Z
+**Event**: SENSOR_PASSED
+**Fire id**: 095fb8da
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/observability-requirements.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:45:48Z
+**Event**: SENSOR_FIRED
+**Fire id**: 92886c33
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/tech-stack-decisions.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:45:48Z
+**Event**: SENSOR_PASSED
+**Fire id**: 92886c33
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/tech-stack-decisions.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:45:48Z
+**Event**: SENSOR_FIRED
+**Fire id**: 288c3a04
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:45:48Z
+**Event**: SENSOR_PASSED
+**Fire id**: 288c3a04
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/traceability.json
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T13:45:48Z
+**Event**: SENSOR_FIRED
+**Fire id**: df9d98fb
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/performance-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T13:45:48Z
+**Event**: SENSOR_PASSED
+**Fire id**: df9d98fb
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/performance-requirements.md
+**Duration ms**: 67
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-08T13:45:48Z
+**Event**: REVIEW_REQUESTED
+**Stage**: nfr-requirements
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:d784fbbb57ebcfd4e18cc9458d025c5c4189a9e0b3e121be5db14dc57408a6bc
+**Request Id**: review:d05ddbc06959bd2b90f4b2223b1594e0
+**Review File**: .aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.d05ddbc06959bd2b90f4b2223b1594e0.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T13:46:00Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architecture-reviewer-agent
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T13:48:15Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.d05ddbc06959bd2b90f4b2223b1594e0.review.md
+**Context**: .aidlc-engine > reviews > nfr-requirements > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 1.d05ddbc06959bd2b90f4b2223b1594e0.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T13:48:25Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n判定: READY（Critical 0 件、Major 1 件、Minor 7 件）。\n\nレビューは指定のパスに書きました。指定の書式には Date の行がなく、ブリーフにも日時の指定がなかったので、Date の行は入れていません。\n\n指摘の一覧:\n1. Major: reliability-req
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.d05ddbc06959bd2b90f4b2223b1594e0.review.md=00c744053998f663ffce09332adb6c1a18c4a75fe3f68a781f341f0e8b61e6a3
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:48:49Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.d05ddbc06959bd2b90f4b2223b1594e0.review.md
+**Context**: .aidlc-engine > reviews > nfr-requirements > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 1.d05ddbc06959bd2b90f4b2223b1594e0.review.md
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-08T13:48:49Z
+**Event**: REVIEW_COMPLETED
+**Stage**: nfr-requirements
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:d784fbbb57ebcfd4e18cc9458d025c5c4189a9e0b3e121be5db14dc57408a6bc
+**Artifact Fingerprint**: sha256:d784fbbb57ebcfd4e18cc9458d025c5c4189a9e0b3e121be5db14dc57408a6bc
+**Request Id**: review:d05ddbc06959bd2b90f4b2223b1594e0
+**Review Record**: .aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:f5e11948e80bd6b4cedadd0ab5b814787a7c15601251e2f18796b8765337571c
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:48:53Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:48:59Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > reliability-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:49:00Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:49:02Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > security-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:49:02Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:49:04Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > security-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:49:05Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/scalability-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:49:06Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/scalability-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > scalability-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:49:06Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:49:10Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > reliability-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:49:10Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:49:12Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > reliability-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:49:12Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/performance-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:49:16Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/performance-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > performance-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:49:17Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/tech-stack-decisions.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:49:18Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/tech-stack-decisions.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > tech-stack-decisions.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:49:18Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:49:19Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/traceability.json
+**Context**: construction > u5-assignment-calendar > nfr-requirements > traceability.json
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T13:49:19Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T13:49:33Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/traceability.json
+**Context**: construction > u5-assignment-calendar > nfr-requirements > traceability.json
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-08T13:49:36Z
+**Event**: UNIT_STARTED
+**Stage**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-08T13:49:42Z
+**Event**: UNIT_COMPLETED
+**Stage**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T13:53:19Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architect-agent
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:02:12Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:02:50Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:02:59Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:03:29Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:03:47Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > performance-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:04:23Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/observability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > observability-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:04:34Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md
+**Context**: construction > u5-assignment-calendar > nfr-design > logical-components.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:04:40Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/traceability.json
+**Context**: construction > u5-assignment-calendar > nfr-design > traceability.json
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T14:04:57Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architect-agent
+**Message**: U5 の NFR Design の成果物を 7 ファイル書きました。人への質問はしていません。`aidlc engine` は実行しておらず、gitleaks とテストも走らせていません。確認したのは `traceability.json` の形だけで、31 件の ID がすべて対応づいています。\n\n書いた場所は `<record>/construction/u5-assignment-calen
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:05:06Z
+**Event**: SENSOR_FIRED
+**Fire id**: 3d42bcf5
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:05:06Z
+**Event**: SENSOR_PASSED
+**Fire id**: 3d42bcf5
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md
+**Duration ms**: 54
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: 0331dd17
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: 0331dd17
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Duration ms**: 53
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: 28f741ad
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: 28f741ad
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: 49591a64
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: 49591a64
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Duration ms**: 55
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: 9e67fde3
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/observability-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: 9e67fde3
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/observability-design.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: 12dbfcbb
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: 12dbfcbb
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: c3524aed
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: c3524aed
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/traceability.json
+**Duration ms**: 53
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: 825efa44
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: 825efa44
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md
+**Duration ms**: 52
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-08T14:05:07Z
+**Event**: REVIEW_REQUESTED
+**Stage**: nfr-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:257c9c89af9329bac927316b2501804a4c055bd1919641b52d950bcbb4baec01
+**Request Id**: review:c7332057d3d458fc26faa4af5c326c01
+**Review File**: .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T14:05:23Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architecture-reviewer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T14:11:42Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n判定: **NOT-READY**。Major が 2 件あります。\n\nレビューは指定のファイルに書きました。エンジンのコマンドは実行していません。\n\n**Major（2 件）**\n1. **PATCH の書き込み条件に `version` と `dutyId` がありません。**\n   - 対象は 
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=815a45c4781c58e94bc27cc439c526f6cb99685170812377d18fafdf36cab819
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:11:49Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md
+**Context**: .aidlc-engine > reviews > nfr-design > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 1.c7332057d3d458fc26faa4af5c326c01.review.md
+
+---
+
+## Error Logged
+**Timestamp**: 2026-11-08T14:11:49Z
+**Event**: ERROR_LOGGED
+**Tool**: aidlc-log
+**Command**: aidlc-log engine log review --stage nfr-design --reviewer aidlc-architecture-reviewer-agent --unit u5-assignment-calendar --iteration 1 --verdict NOT-READY --project-dir <project-dir>
+**Error**: Refusing REVIEW_COMPLETED for "nfr-design": the findings report could not be read: the findings report could not be read: no table follows the Prior findings heading; write its header row | ID | Now | Severity | Note | and the separator row | --- | --- | --- | --- |. Write the whole review again with the required Prior findings and New findings tables. Write the whole review again with the required Prior findings and New findings tables. Rerun this review request with --retry-pending and dispatch the reviewer once more.
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-08T14:11:55Z
+**Event**: REVIEW_REQUESTED
+**Stage**: nfr-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Retry**: pending-request
+**Artifact Fingerprint**: sha256:257c9c89af9329bac927316b2501804a4c055bd1919641b52d950bcbb4baec01
+**Request Id**: review:c7332057d3d458fc26faa4af5c326c01
+**Review File**: .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T14:12:07Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architecture-reviewer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T14:13:48Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n判定: READY (iteration 1)\n\n指定のパスにレビュー全体を書き直しました。ただし、そのパスにファイルは残っていませんでした。`.../reviews/nfr-design/units/u5-assignment-calendar/` の下は空だったので、新規に作成しています。\n\n形式
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:14:13Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md
+**Context**: .aidlc-engine > reviews > nfr-design > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 1.c7332057d3d458fc26faa4af5c326c01.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T14:14:13Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architect-agent
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:16:38Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:16:44Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:16:46Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:16:57Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:16:59Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:17:07Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:17:14Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:17:17Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:17:18Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:17:23Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:17:32Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:17:45Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:17:51Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:17:56Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:17:59Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:11Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:13Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:23Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:25Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:27Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:36Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:42Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:43Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:47Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:53Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:56Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:58Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > performance-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:18:59Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > performance-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:05Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > performance-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:07Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > performance-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:09Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md
+**Context**: construction > u5-assignment-calendar > nfr-design > logical-components.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:12Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md
+**Context**: construction > u5-assignment-calendar > nfr-design > logical-components.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:14Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md
+**Context**: construction > u5-assignment-calendar > nfr-design > logical-components.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:20Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md
+**Context**: construction > u5-assignment-calendar > nfr-design > logical-components.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:21Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md
+**Context**: construction > u5-assignment-calendar > nfr-design > logical-components.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:30Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md
+**Context**: construction > u5-assignment-calendar > nfr-design > logical-components.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:19:30Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:31Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > reliability-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:19:31Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:32Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > reliability-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:19:33Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:35Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > security-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:19:36Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:37Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > security-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:19:37Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:38Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > security-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:19:39Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:41Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > security-requirements.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:19:41Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:19:51Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > security-requirements.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T14:20:18Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architect-agent
+**Message**: 8 件の指摘すべてに対応しました。エンジンのコマンドは実行していません。ドキュメントだけの修正なので、ビルドとテストは実行していません。確認したのは次の 2 点です。\n- `traceability.json` が JSON として読めること。\n- 15 行を超えるコードブロックが、ファイル木以外に残っていないこと。\n\nnfr-design の 7 ファイルのほか、nfr-requirements
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:20:25Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-08T14:20:27Z
+**Event**: REVIEW_REQUESTED
+**Stage**: nfr-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:341e7205059e60b664574c29b71e6e4c279c0bb8e6a44587ac9874d69de14eef
+**Request Id**: review:462dc16fa12c5699823ff1f896a9d908
+**Replaces Request Id**: review:c7332057d3d458fc26faa4af5c326c01
+**Review File**: .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.462dc16fa12c5699823ff1f896a9d908.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T14:20:42Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architecture-reviewer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T14:25:26Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n判定は READY です。Critical と Major はなく、Minor が 6 件あります。\n\nレビューは指定の 1 ファイルに書きました。エンジンのコマンドは実行していません。確かめたのは、文書の読み取りと grep・awk による数え上げ、既存コードとの突き合わせです。\n\n確かめて問題がな
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.462dc16fa12c5699823ff1f896a9d908.review.md=ef30f6e70375fc485880f548ddfc15e7f166d7cf28ec2003496e2c29dbaddc42
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:25:32Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.462dc16fa12c5699823ff1f896a9d908.review.md
+**Context**: .aidlc-engine > reviews > nfr-design > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 1.462dc16fa12c5699823ff1f896a9d908.review.md
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-08T14:25:33Z
+**Event**: REVIEW_COMPLETED
+**Stage**: nfr-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:341e7205059e60b664574c29b71e6e4c279c0bb8e6a44587ac9874d69de14eef
+**Artifact Fingerprint**: sha256:341e7205059e60b664574c29b71e6e4c279c0bb8e6a44587ac9874d69de14eef
+**Request Id**: review:462dc16fa12c5699823ff1f896a9d908
+**Review Record**: .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:3b56d2dd566390c2293c433ab7489ede142a803f6b198e5b49ce97248a2fe3b7
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T14:25:47Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architect-agent
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:14Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:16Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:16Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:18Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:19Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:21Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:21Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:23Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:23Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:26Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:27Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:29Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:29Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:30Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:31Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:37Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > security-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:37Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:38Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > reliability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:39Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:41Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > performance-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:42Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:43Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:43Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:45Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:45Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:46Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:47Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:48Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:48Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:50Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:50Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:51Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:51Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:58Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:58Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:58Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:59Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:26:59Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md
+**Context**: construction > u5-assignment-calendar > nfr-design > scalability-design.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:26:59Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:27:01Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md
+**Context**: construction > u5-assignment-calendar > nfr-design > logical-components.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:27:01Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:27:03Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/traceability.json
+**Context**: construction > u5-assignment-calendar > nfr-design > traceability.json
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:27:03Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:27:04Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/traceability.json
+**Context**: construction > u5-assignment-calendar > nfr-design > traceability.json
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:27:04Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:27:05Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/traceability.json
+**Context**: construction > u5-assignment-calendar > nfr-design > traceability.json
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T14:27:19Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architect-agent
+**Message**: U5 の NFR Design の 6 件を反映しました。`traceability.json` は JSON として読めることを確認済みです。エンジンのコマンドは実行していません。`reviews/` と `.aidlc-engine/` にも触れていません。\n\n1. **PUT のチャンクの条件**（`reliability-design.md`、`security-design.md`）\n 
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-08T14:27:26Z
+**Event**: UNIT_STARTED
+**Stage**: nfr-design
+**Unit**: u5-assignment-calendar
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-08T14:27:26Z
+**Event**: UNIT_COMPLETED
+**Stage**: nfr-design
+**Unit**: u5-assignment-calendar
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T14:28:19Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-aws-platform-agent
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:31:56Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/infrastructure-specification.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > infrastructure-specification.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:32:53Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/monitoring-design.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > monitoring-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:33:00Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T14:33:38Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-aws-platform-agent
+**Message**: `infrastructure-design/` に4ファイルを書きました。設計文書だけで、AWS への変更、`cdk deploy`、`aidlc engine` コマンドは実行していません。CDK のテストやスモークチェックの実行もしていません。\n\n場所は `aidlc/spaces/default/intents/261101-housework-calendar/construction/
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:33:46Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/traceability.json
+**Context**: construction > u5-assignment-calendar > infrastructure-design > traceability.json
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:33:48Z
+**Event**: SENSOR_FIRED
+**Fire id**: e29d6622
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/infrastructure-specification.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:33:48Z
+**Event**: SENSOR_PASSED
+**Fire id**: e29d6622
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/infrastructure-specification.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:33:48Z
+**Event**: SENSOR_FIRED
+**Fire id**: fc36b7d4
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/monitoring-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:33:48Z
+**Event**: SENSOR_PASSED
+**Fire id**: fc36b7d4
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/monitoring-design.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:33:48Z
+**Event**: SENSOR_FIRED
+**Fire id**: 73826cea
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:33:48Z
+**Event**: SENSOR_PASSED
+**Fire id**: 73826cea
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:33:48Z
+**Event**: SENSOR_FIRED
+**Fire id**: f4d806b7
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:33:48Z
+**Event**: SENSOR_PASSED
+**Fire id**: f4d806b7
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/traceability.json
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T14:33:48Z
+**Event**: SENSOR_FIRED
+**Fire id**: 587fbfec
+**Sensor ID**: upstream-coverage
+**Stage slug**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/infrastructure-specification.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T14:33:48Z
+**Event**: SENSOR_PASSED
+**Fire id**: 587fbfec
+**Sensor ID**: upstream-coverage
+**Stage slug**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/infrastructure-specification.md
+**Duration ms**: 52
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-08T14:33:48Z
+**Event**: REVIEW_REQUESTED
+**Stage**: infrastructure-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:fe3cde9bf8e452ab52c7619670475ffd78f4ca90ee9384768b4c6d34e670e98a
+**Request Id**: review:ceb52f43145e853171b38d38da878c5a
+**Review File**: .aidlc-engine/reviews/infrastructure-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.ceb52f43145e853171b38d38da878c5a.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T14:34:02Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architecture-reviewer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T14:38:25Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n判定は NOT-READY です。Critical はなく、Major が 1 件、Minor が 6 件です。cdk、テスト、エンジンのコマンドは実行せず、既存コードとの読み合わせだけで確かめました。\n\n**Major（1 件）**\n- 場所は `cicd-pipeline.md` の「前の版に戻す
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/infrastructure-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.ceb52f43145e853171b38d38da878c5a.review.md=0802725c5a06a52c8bbffea19e8327d4605aa4761389e409738b20e9d9fe141f
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:38:33Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/infrastructure-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.ceb52f43145e853171b38d38da878c5a.review.md
+**Context**: .aidlc-engine > reviews > infrastructure-design > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 1.ceb52f43145e853171b38d38da878c5a.review.md
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-08T14:38:33Z
+**Event**: REVIEW_COMPLETED
+**Stage**: infrastructure-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Verdict**: NOT-READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:fe3cde9bf8e452ab52c7619670475ffd78f4ca90ee9384768b4c6d34e670e98a
+**Artifact Fingerprint**: sha256:fe3cde9bf8e452ab52c7619670475ffd78f4ca90ee9384768b4c6d34e670e98a
+**Request Id**: review:ceb52f43145e853171b38d38da878c5a
+**Review Record**: .aidlc-engine/reviews/infrastructure-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:5eeac992b930ed7c67895da88ab2a374f77e55e708dc743d205d446d89082291
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T14:38:51Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-aws-platform-agent
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:39:29Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:39:30Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:39:32Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:39:34Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:39:37Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:39:45Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:39:48Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/monitoring-design.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > monitoring-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:39:50Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/monitoring-design.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > monitoring-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:39:51Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/traceability.json
+**Context**: construction > u5-assignment-calendar > infrastructure-design > traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:39:52Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/traceability.json
+**Context**: construction > u5-assignment-calendar > infrastructure-design > traceability.json
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T14:40:07Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-aws-platform-agent
+**Message**: 指摘 7 件を反映しました。`traceability.json` は JSON として読めることを確認済みです。\n\n指摘の全文のファイルは、指定のパスでは見つかりませんでした。そのため、依頼文に書かれた内容をもとに直しています。\n\n1. **項目がないことの確かめ（`cicd-pipeline.md`、`monitoring-design.md`）**\n   - 判断をログに頼らない形にしました
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:40:12Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/infrastructure-specification.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > infrastructure-specification.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:40:12Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/infrastructure-specification.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > infrastructure-specification.md
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-08T14:40:15Z
+**Event**: REVIEW_REQUESTED
+**Stage**: infrastructure-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 2
+**Artifact Fingerprint**: sha256:4038c734b1fb66de6da961e084434f20dc3ca4439aeffe2eb2bb31ac19d1256d
+**Request Id**: review:d9cd5da98d715ac78a9de43d6e1a5604
+**Review File**: .aidlc-engine/reviews/infrastructure-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.d9cd5da98d715ac78a9de43d6e1a5604.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T14:40:36Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architecture-reviewer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T14:42:49Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n判定: READY(iteration 2)\n\n前回の R-01〜R-07 は、すべて Fixed と判定しました。\n\n- R-01(Major): ログに頼らない読み取りだけの確かめになりました。主な方法は強い整合性の `scan --select COUNT --consistent-read` 
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/infrastructure-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.d9cd5da98d715ac78a9de43d6e1a5604.review.md=ffddbbf10397ade600cddb074bf199f2b235a2256bebfb5504deddd5a91197bc
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:42:56Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/infrastructure-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.d9cd5da98d715ac78a9de43d6e1a5604.review.md
+**Context**: .aidlc-engine > reviews > infrastructure-design > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 2.d9cd5da98d715ac78a9de43d6e1a5604.review.md
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-08T14:42:57Z
+**Event**: REVIEW_COMPLETED
+**Stage**: infrastructure-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 2
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:4038c734b1fb66de6da961e084434f20dc3ca4439aeffe2eb2bb31ac19d1256d
+**Artifact Fingerprint**: sha256:4038c734b1fb66de6da961e084434f20dc3ca4439aeffe2eb2bb31ac19d1256d
+**Request Id**: review:d9cd5da98d715ac78a9de43d6e1a5604
+**Review Record**: .aidlc-engine/reviews/infrastructure-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.json
+**Review Record Digest**: sha256:5bbf91500698bd5609ffb428759a24d590de804397dd1bd6b0ca39ed6e38a342
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:43:07Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: infrastructure-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:43:09Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:43:09Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: infrastructure-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:43:16Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:43:16Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: infrastructure-design
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:43:18Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u5-assignment-calendar > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-08T14:43:21Z
+**Event**: UNIT_STARTED
+**Stage**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-08T14:43:21Z
+**Event**: UNIT_COMPLETED
+**Stage**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Plan Approval Blocked
+**Timestamp**: 2026-11-08T14:43:28Z
+**Event**: PLAN_APPROVAL_BLOCKED
+**Guard**: plan-approval-guard
+**Reason**: rules-arriving
+**Tool**: Bash
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Stage**: code-generation
+**Unit**: (missing marker)
+
+---
+
+## Plan Approval Blocked
+**Timestamp**: 2026-11-08T14:44:32Z
+**Event**: PLAN_APPROVAL_BLOCKED
+**Guard**: plan-approval-guard
+**Reason**: plan-approval
+**Tool**: Task
+**Target**: aidlc-developer-agent
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Stage**: code-generation
+**Unit**: u5-assignment-calendar
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T14:44:54Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: general-task-execution
+
+---
+
+## Plan Approval Blocked
+**Timestamp**: 2026-11-08T14:46:04Z
+**Event**: PLAN_APPROVAL_BLOCKED
+**Guard**: plan-approval-guard
+**Reason**: plan-approval
+**Tool**: Bash
+**Target**: cd <project-dir> && sed -n 1,120p packages/backend/test/u1-skeleton-family/helpers/fakeDynamo.ts; grep -n "Tra
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Stage**: code-generation
+**Unit**: u5-assignment-calendar
+
+---
+
+## Plan Approval Blocked
+**Timestamp**: 2026-11-08T14:46:29Z
+**Event**: PLAN_APPROVAL_BLOCKED
+**Guard**: plan-approval-guard
+**Reason**: plan-approval
+**Tool**: Bash
+**Target**: cd <project-dir> && sed -n 195,216p README.md; sed -n 357,392p README.md; R=aidlc/spaces/default/intents/26110
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Stage**: code-generation
+**Unit**: u5-assignment-calendar
+
+---
+
+## Plan Approval Blocked
+**Timestamp**: 2026-11-08T14:46:29Z
+**Event**: PLAN_APPROVAL_BLOCKED
+**Guard**: plan-approval-guard
+**Reason**: plan-approval
+**Tool**: Bash
+**Target**: cd <project-dir> && sed -n 195,240p infrastructure/lib/app-stack.ts; sed -n 40,70p infrastructure/lib/app-stac
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Stage**: code-generation
+**Unit**: u5-assignment-calendar
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:51:09Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:51:38Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T14:51:44Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/unit-test-instructions.md
+**Context**: construction > u5-assignment-calendar > code-generation > unit-test-instructions.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T14:51:55Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: general-task-execution
+**Message**: 計画書 2 つを書きました。アプリのコード、テスト、設定ファイル、README には触れていません。`aidlc` のコマンドも実行していません。\n\n書いたファイルは `construction/u5-assignment-calendar/code-generation/` の `code-generation-plan.md` と `unit-test-instructions.md` です。
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T14:52:02Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/unit-test-instructions.md
+**Context**: construction > u5-assignment-calendar > code-generation > unit-test-instructions.md
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-08T14:52:35Z
+**Event**: HUMAN_TURN
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Origin**: person
+**Source**: typed
+**Message Id**: 14aba3e0
+
+---
+
+## Plan Approval Recorded
+**Timestamp**: 2026-11-08T14:52:40Z
+**Event**: PLAN_APPROVAL_RECORDED
+**Stage**: code-generation
+**Details**: Approve Plan
+**Checkpoint**: plan-approval
+**Plan Target**: unit:u5-assignment-calendar
+**Intent**: 01a1967f-db0b-7bae-aec4-e42e999878c1
+**Directive Epoch**: sha256:01c60b426bd93f878a86bf0deb7d840fc9ae77abbd1a4f071e056f79e122149c
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+**Approval Fingerprint**: sha256:v3:74f280947a346f0ffad7c62323e770b98a2327b24a4edc8c0380fb06fe733a9a
+**Questions File**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-questions.md
+**Questions SHA-256**: b145ffc57df3efc8f4897805edd8af4cca1880fbcc3a5e43470689c7396e096a
+**Prompt SHA-256**: ae733b71cccf5bacc6109fefd59f0bb7a5cda7076596026794455cc6c69331d8
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Asked By**: engine
+**Person Reply**: 1
+**Message Id**: 14aba3e0
+**Unit**: u5-assignment-calendar
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T14:53:11Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: instruction
+**Grant**: none
+**Actor**: subagent
+**Stage**: code-generation
+**Tool**: Task
+**Details**: dispatch of aidlc-developer-agent
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T14:53:11Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-developer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T15:12:57Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Message**: Batch 1(Step 1〜3)と Batch 2(Step 4〜6)が終わりました。確認コマンドはすべて通っています(全体 1445 件が成功)。\n\n## 作った・変えたファイル\n**バックエンド(src)**\n- `lib/dynamoClient.ts`: `tables.calendar()`(環境変数 `CALENDAR_TABLE`)を追加\n- `models.ts`: `Assig
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T15:13:16Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: instruction
+**Grant**: none
+**Actor**: subagent
+**Stage**: code-generation
+**Tool**: Task
+**Details**: dispatch of aidlc-developer-agent
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T15:13:17Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-developer-agent
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:29:44Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:29:45Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:29:45Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:29:47Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:29:47Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:29:58Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T15:31:46Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Message**: バッチ 3（Step 7〜12）が終わりました。確認コマンドは最後まで全部通っています。\n\n- **format:check / lint / tsc（shared・backend・frontend・infrastructure）:** すべて通りました。\n- **`npm test`:** 78 ファイル、1641 件が通りました。U1〜U4 のテストも通ったままです。\n- **行カバレッジ:*
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T15:32:05Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: instruction
+**Grant**: none
+**Actor**: subagent
+**Stage**: code-generation
+**Tool**: Task
+**Details**: dispatch of aidlc-developer-agent
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T15:32:05Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-developer-agent
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:42:42Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:42:43Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:42:45Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:42:45Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T15:42:59Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Message**: Batch 4(Step 13〜18)は終わり、確認コマンドは全部通りました。\n\n## 作った・変えたファイル\n- **本体**\n  - 新規: `handlers/calendar/getCalendar.ts`、`handlers/calendar/changeDutyChild.ts`\n  - 変更: `services/calendarService.ts`、`repositories/c
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:43:17Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T15:43:17Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T15:43:18Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: instruction
+**Grant**: none
+**Actor**: subagent
+**Stage**: code-generation
+**Tool**: Task
+**Details**: dispatch of aidlc-developer-agent
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T15:43:19Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-developer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T17:12:57Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Message**: Sub-agent execution failed: aborted
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T17:13:29Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: instruction
+**Grant**: none
+**Actor**: subagent
+**Stage**: code-generation
+**Tool**: Task
+**Details**: dispatch of aidlc-developer-agent
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T17:13:29Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-developer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T22:26:20Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Message**: Step 19〜21 は終わり、確認コマンドは全部通りました。整形・lint・4 パッケージの tsc・`npm test` が成功し、86 ファイル 1859 件が全部通っています。行カバレッジは全体 97.07% で、下限の 80% を超えています。\n\n## 変えたファイル\n\n前の担当者の `client.ts`、`useMonthCalendar.ts`、`CalendarPage.tsx`
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T22:26:39Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T22:26:39Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T22:26:40Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T22:26:41Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: instruction
+**Grant**: none
+**Actor**: subagent
+**Stage**: code-generation
+**Tool**: Task
+**Details**: dispatch of aidlc-developer-agent
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T22:26:41Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-developer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T22:57:47Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Message**: Sub-agent execution failed: Model stream stalled: no data received for 300000ms
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T22:58:42Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: instruction
+**Grant**: none
+**Actor**: subagent
+**Stage**: code-generation
+**Tool**: Task
+**Details**: dispatch of aidlc-developer-agent
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T22:58:42Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-developer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T23:11:44Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Message**: Sub-agent execution failed: aborted
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T23:16:14Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: instruction
+**Grant**: none
+**Actor**: subagent
+**Stage**: code-generation
+**Tool**: Task
+**Details**: dispatch of aidlc-developer-agent
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T23:16:14Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-developer-agent
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T23:16:32Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T23:16:32Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T23:18:40Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T23:19:05Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Message**: 画面の単体テスト 4 ファイルを書き、確認コマンドは全部通りました(format、lint、型検査、画面のテスト 409 件)。テストは 31 件増え、元の 378 件と合わせて 409 件です。\n\n`packages/frontend/test/u5-assignment-calendar/` に書いたファイルと件数は次のとおりです。\n- **`useMonthCalendar.test.tsx
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T23:19:25Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: instruction
+**Grant**: none
+**Actor**: subagent
+**Stage**: code-generation
+**Tool**: Task
+**Details**: dispatch of aidlc-developer-agent
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T23:19:25Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-developer-agent
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T23:21:39Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T23:21:40Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T23:21:50Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Message**: Batch 6(Step 25〜28)を作りました。確認コマンドは全部通り、テストは 92 ファイル・1952 件が成功しました。\n\n**作った・変えたファイル**\n- 新規: `infrastructure/test/u5-assignment-calendar/stacks.test.ts`(19 件)\n- 変更: `infrastructure/lib/data-stack.ts`、`app
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T23:22:07Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T23:22:07Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-generation-plan.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T23:22:09Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: instruction
+**Grant**: none
+**Actor**: subagent
+**Stage**: code-generation
+**Tool**: Task
+**Details**: dispatch of aidlc-developer-agent
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T23:22:09Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-developer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T23:25:17Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Message**: Batch 7（Step 29〜31）は済みで、確認コマンドはすべて通りました。ただし `npm run secrets:scan` は、gitleaks がこのマシンに入っていないため動かせていません。\n\n**変えたファイル**\n- `README.md`:\n  - U5 の節を追加しました。画面の使い方、保存の途中で失敗したときの直し方、手の確かめ 12 の表、コールドスタートの測り方、費用の
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T23:26:09Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/source-manifest.json
+**Context**: construction > u5-assignment-calendar > code-generation > source-manifest.json
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T23:26:11Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: instruction
+**Grant**: none
+**Actor**: subagent
+**Stage**: code-generation
+**Tool**: Task
+**Details**: dispatch of aidlc-developer-agent
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T23:26:11Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-developer-agent
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T23:38:45Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/traceability.json
+**Context**: construction > u5-assignment-calendar > code-generation > traceability.json
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T23:38:56Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Message**: `code-summary.md` と `traceability.json` を `<rec>` に書きました。`traceability.json` は JSON として読め、64 件すべての target がファイルとして実在します。\n\n件数は 64 件(AC 15、NFR 31、BR 18)で、すべて `OK` です。\n\n- **AC:** AC3.1.1〜AC3.1.8 と AC4.1.
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T23:39:04Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-summary.md
+**Context**: construction > u5-assignment-calendar > code-generation > code-summary.md
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T23:39:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: 90a1ea64
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T23:39:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: 90a1ea64
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md
+**Duration ms**: 53
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T23:39:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: 920afd03
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/unit-test-instructions.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T23:39:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: 920afd03
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/unit-test-instructions.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T23:39:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: 17c301de
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-summary.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T23:39:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: 17c301de
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-summary.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-08T23:39:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: b0e332c9
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-08T23:39:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: b0e332c9
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u5-assignment-calendar
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/traceability.json
+**Duration ms**: 52
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-08T23:39:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u4-chore-types
+**Checkpoint**: review-receipt
+**Changed**: README.md, infrastructure/lib/app-stack.ts, infrastructure/lib/app.ts, infrastructure/lib/data-stack.ts, infrastructure/test/u1-skeleton-family/stacks.test.ts, infrastructure/test/u4-chore-types/stacks.test.ts, packages/backend/src/entries/api.ts, packages/backend/src/lib/dynamoClient.ts, packages/backend/src/lib/logger.ts, packages/backend/src/models.ts (and 19 more)
+**Recorded**: sha256:aee849c22bbcfbee99dcf73670cde627ba8b8ffde2bbaae6a2810287f6ccec04
+**Current**: sha256:44ac314d10161abd6ee0aecb17d04e27023ad51a00e39dc4c5892b537f1bbe85
+**Details**: README.md, infrastructure/lib/app-stack.ts, infrastructure/lib/app.ts, infrastructure/lib/data-stack.ts, infrastructure/test/u1-skeleton-family/stacks.test.ts, infrastructure/test/u4-chore-types/stacks.test.ts, packages/backend/src/entries/api.ts, packages/backend/src/lib/dynamoClient.ts, packages/backend/src/lib/logger.ts, packages/backend/src/models.ts (and 19 more) changed after the chore types Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-08T23:39:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u3-notification-group
+**Checkpoint**: review-receipt
+**Changed**: infrastructure/test/u3-notification-group/stacks.test.ts, packages/backend/src/repositories/notificationGroupRepository.ts, packages/backend/src/services/familyMemberService.ts, packages/backend/test/u3-notification-group/groupCommandGate.test.ts, packages/backend/test/u3-notification-group/line-routing.steps.ts, packages/backend/test/u3-notification-group/register-group.feature, packages/backend/test/u3-notification-group/register-group.steps.ts, packages/backend/test/u3-notification-group/registerNotificationGroupTransaction.test.ts, packages/backend/test/u3-notification-group/unregisterNotificationGroup.test.ts, packages/frontend/src/hooks/useNotificationGroup.ts (and 4 more)
+**Recorded**: sha256:f09dada0c1d23295ce4ae547392d477f4a5995495b2988b1c7b45689e9b9cfe0
+**Current**: sha256:c4de6934df6076e84ac1dc3892fabdac49d4e9baab35a3a83f047925866be696
+**Details**: infrastructure/test/u3-notification-group/stacks.test.ts, packages/backend/src/repositories/notificationGroupRepository.ts, packages/backend/src/services/familyMemberService.ts, packages/backend/test/u3-notification-group/groupCommandGate.test.ts, packages/backend/test/u3-notification-group/line-routing.steps.ts, packages/backend/test/u3-notification-group/register-group.feature, packages/backend/test/u3-notification-group/register-group.steps.ts, packages/backend/test/u3-notification-group/registerNotificationGroupTransaction.test.ts, packages/backend/test/u3-notification-group/unregisterNotificationGroup.test.ts, packages/frontend/src/hooks/useNotificationGroup.ts (and 4 more) changed after the notification group Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-08T23:39:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u2-invitation
+**Checkpoint**: review-receipt
+**Changed**: eslint.config.js, infrastructure/test/u2-invitation/stacks.test.ts, packages/backend/src/repositories/requestRecordRepository.ts, packages/backend/test/u2-invitation/accept-invitation.steps.ts, packages/backend/test/u2-invitation/acceptInvitationTransaction.test.ts, packages/backend/test/u2-invitation/acceptUnexplainedUserCondition.test.ts, packages/backend/test/u2-invitation/helpers/seed.ts, packages/backend/test/u2-invitation/invitationRepository.test.ts, packages/backend/test/u2-invitation/resolveUsableInvitation.test.ts, packages/backend/test/u2-invitation/rotateInvitation.test.ts (and 8 more)
+**Recorded**: sha256:8bd6e3c103e77a722dfd50e19f76db65bd1dce46c3bac8f86881444b25c7f6ac
+**Current**: sha256:b4d69c97a2e446e96128819ee2d3921f57c164c162a5495f8a583faf041e0fea
+**Details**: eslint.config.js, infrastructure/test/u2-invitation/stacks.test.ts, packages/backend/src/repositories/requestRecordRepository.ts, packages/backend/test/u2-invitation/accept-invitation.steps.ts, packages/backend/test/u2-invitation/acceptInvitationTransaction.test.ts, packages/backend/test/u2-invitation/acceptUnexplainedUserCondition.test.ts, packages/backend/test/u2-invitation/helpers/seed.ts, packages/backend/test/u2-invitation/invitationRepository.test.ts, packages/backend/test/u2-invitation/resolveUsableInvitation.test.ts, packages/backend/test/u2-invitation/rotateInvitation.test.ts (and 8 more) changed after the invitation Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-08T23:39:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u1-skeleton-family
+**Checkpoint**: review-receipt
+**Changed**: .prettierignore, infrastructure/lib/account-stack.ts, package.json, packages/backend/src/handlers/calendar/changeDutyChild.ts, packages/backend/src/handlers/calendar/getAssignment.ts, packages/backend/src/handlers/calendar/getCalendar.ts, packages/backend/src/handlers/calendar/params.ts, packages/backend/src/handlers/calendar/saveAssignment.ts, packages/backend/src/lib/config.ts, packages/backend/src/lib/requestBody.ts (and 24 more)
+**Recorded**: sha256:d1dae5a48615067ed3c30ece18b6033b55030e10c290497eabc8002398c08d01
+**Current**: sha256:825b7af11deb8d0e51939492972e6652bb5c5b74e358a511fd7dfd8df69fea9f
+**Details**: .prettierignore, infrastructure/lib/account-stack.ts, package.json, packages/backend/src/handlers/calendar/changeDutyChild.ts, packages/backend/src/handlers/calendar/getAssignment.ts, packages/backend/src/handlers/calendar/getCalendar.ts, packages/backend/src/handlers/calendar/params.ts, packages/backend/src/handlers/calendar/saveAssignment.ts, packages/backend/src/lib/config.ts, packages/backend/src/lib/requestBody.ts (and 24 more) changed after the skeleton family Unit was reviewed; carrying on.
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-08T23:39:08Z
+**Event**: REVIEW_REQUESTED
+**Stage**: code-generation
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:1f9c777d53be37a583ad2f04bbfb50bfec954149e514150fb11c3d2f4c9efe6b
+**Request Id**: review:3a975a0ea8e3224e9e2cdec9ad462076
+**Source Fingerprint**: 9dd1c8b594a36efd08da9f0cbb5908b1824b6822f3ffc212c130a03740f4233b
+**Unit Source Fingerprint**: sha256:be60e64b768e6bb108bdcb8cb7fab0886a7ffe9177d1200f579c709af2884c4d
+**Review File**: .aidlc-engine/reviews/code-generation/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.3a975a0ea8e3224e9e2cdec9ad462076.review.md
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T23:39:27Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architecture-reviewer-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T23:43:03Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n判定: READY（Critical 0、Major 0、Minor 4）。レビューは指定のファイル 1 つだけに書きました。\n\n確認コマンドはすべて通りました。`format:check`、`lint`、4 パッケージの `tsc`、`npm test` です。行カバレッジは 97.14%（文 95
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/code-generation/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.3a975a0ea8e3224e9e2cdec9ad462076.review.md=ab82b1ea9335f696e6433bf8eaecaddbc237d8ebf804f7b495d194b96e91b547
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T23:43:13Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/code-generation/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.3a975a0ea8e3224e9e2cdec9ad462076.review.md
+**Context**: .aidlc-engine > reviews > code-generation > units > u5-assignment-calendar > 924f2e3cbd1e4ff0 > 1.3a975a0ea8e3224e9e2cdec9ad462076.review.md
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-08T23:43:13Z
+**Event**: REVIEW_COMPLETED
+**Stage**: code-generation
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u5-assignment-calendar
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:1f9c777d53be37a583ad2f04bbfb50bfec954149e514150fb11c3d2f4c9efe6b
+**Artifact Fingerprint**: sha256:1f9c777d53be37a583ad2f04bbfb50bfec954149e514150fb11c3d2f4c9efe6b
+**Request Id**: review:3a975a0ea8e3224e9e2cdec9ad462076
+**Request Source Fingerprint**: 9dd1c8b594a36efd08da9f0cbb5908b1824b6822f3ffc212c130a03740f4233b
+**Source Fingerprint**: 9dd1c8b594a36efd08da9f0cbb5908b1824b6822f3ffc212c130a03740f4233b
+**Source Listing**: sha256:72101b6c11ea771da29c69be76dbb56281760278d2454433a209a43b568d3fbe
+**Unit Source Fingerprint**: sha256:be60e64b768e6bb108bdcb8cb7fab0886a7ffe9177d1200f579c709af2884c4d
+**Review Record**: .aidlc-engine/reviews/code-generation/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:b949a5207eb3a218082ebecf2d72f4fdbb2dc55bfa94d0cc00bf8ad77a4f8e36
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-08T23:43:38Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-08T23:43:45Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md
+**Context**: construction > u5-assignment-calendar > nfr-requirements > security-requirements.md
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-08T23:44:03Z
+**Event**: UNIT_STARTED
+**Stage**: code-generation
+**Unit**: u5-assignment-calendar
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-08T23:44:04Z
+**Event**: UNIT_COMPLETED
+**Stage**: code-generation
+**Unit**: u5-assignment-calendar
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-08T23:44:21Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: functional-design
+**Unit**: u5-assignment-calendar
+**Checkpoint**: review-receipt
+**Changed**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md
+**Recorded**: sha256:6731eee6c3d535f118aa8f567abee7afca8bb73dbf81766e08a786a1f9bcf7a5
+**Current**: sha256:d4d98cca7df44e3338c19267167f9688f99b2e392cd02bb29d2b765db94daa93
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/rules.md changed after the assignment calendar Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-08T23:44:21Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: nfr-requirements
+**Unit**: u5-assignment-calendar
+**Checkpoint**: review-receipt
+**Changed**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/scalability-requirements.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/performance-requirements.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/tech-stack-decisions.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/traceability.json
+**Recorded**: sha256:d784fbbb57ebcfd4e18cc9458d025c5c4189a9e0b3e121be5db14dc57408a6bc
+**Current**: sha256:d80e04b861438686b4f93980b442680a81f35dd059e7e880dacec50a6faf9fe8
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/reliability-requirements.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/scalability-requirements.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/performance-requirements.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/tech-stack-decisions.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/traceability.json changed after the assignment calendar Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-08T23:44:21Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: nfr-design
+**Unit**: u5-assignment-calendar
+**Checkpoint**: review-receipt
+**Changed**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/traceability.json
+**Recorded**: sha256:341e7205059e60b664574c29b71e6e4c279c0bb8e6a44587ac9874d69de14eef
+**Current**: sha256:352009ad7d8570c3e01db79df557ed455f53f4713873ad5f85c3310d4815c612
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/reliability-design.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/performance-design.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/scalability-design.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/logical-components.md, aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/traceability.json changed after the assignment calendar Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-08T23:44:21Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: infrastructure-design
+**Unit**: u5-assignment-calendar
+**Checkpoint**: review-receipt
+**Changed**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md
+**Recorded**: sha256:4038c734b1fb66de6da961e084434f20dc3ca4439aeffe2eb2bb31ac19d1256d
+**Current**: sha256:dabc87926204c388db8da6a92cb82e6cda9c19f35553606d31d4c828fc8fc35d
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md changed after the assignment calendar Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-08T23:44:21Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u5-assignment-calendar
+**Checkpoint**: review-receipt
+**Changed**: (paths unavailable)
+**Recorded**: sha256:1f9c777d53be37a583ad2f04bbfb50bfec954149e514150fb11c3d2f4c9efe6b
+**Current**: sha256:1ffa2ea80cad83224cf0922a142490c607fb3f18069d89c3e433ea9b607563f9
+**Details**: The assignment calendar Unit's Code Generation documents changed after they were reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-08T23:44:21Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u5-assignment-calendar
+**Checkpoint**: review-receipt
+**Changed**: docs/contract-changes-u5.md
+**Recorded**: sha256:be60e64b768e6bb108bdcb8cb7fab0886a7ffe9177d1200f579c709af2884c4d
+**Current**: sha256:06e53983e407f344be49829f2ddaba343da821643580cf61eb18e4b2265c6111
+**Details**: docs/contract-changes-u5.md changed after the assignment calendar Unit was reviewed; carrying on.
+
+---
+
+## Checkpoint Verification Recorded
+**Timestamp**: 2026-11-08T23:44:37Z
+**Event**: CHECKPOINT_VERIFICATION_RECORDED
+**Unit**: u5-assignment-calendar
+**Kind**: unit
+**Stage**: code-generation
+**Stages**: functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation
+**Verification Id**: b6b64d79-695b-4b08-9dc3-8549196d1798
+**Fingerprint**: sha256:879e032a1a48bcbd7887a6b9c19795f24b187164ad8a4230a94d309e7fdda93b
+**Command SHA-256**: d627b40b8f8333ac3908513cffe51b7c69127393ee6a6a5479a92ede78c13c53
+**Exit Code**: 0
+**Verified**: true
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Checkpoint Verification Recorded
+**Timestamp**: 2026-11-08T23:45:04Z
+**Event**: CHECKPOINT_VERIFICATION_RECORDED
+**Unit**: u5-assignment-calendar
+**Kind**: unit
+**Stage**: code-generation
+**Stages**: functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation
+**Verification Id**: d8b2915c-3102-443c-907a-642ac3479777
+**Fingerprint**: sha256:879e032a1a48bcbd7887a6b9c19795f24b187164ad8a4230a94d309e7fdda93b
+**Command SHA-256**: d627b40b8f8333ac3908513cffe51b7c69127393ee6a6a5479a92ede78c13c53
+**Exit Code**: 0
+**Verified**: true
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Gate Approved
+**Timestamp**: 2026-11-08T23:45:12Z
+**Event**: GATE_APPROVED
+**Unit**: u5-assignment-calendar
+**Stage**: code-generation
+**Stages**: functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation
+**Gate Stages**: functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation
+**Gate Scope**: unit-end
+**Checkpoint**: construction-unit
+**Fingerprint**: sha256:879e032a1a48bcbd7887a6b9c19795f24b187164ad8a4230a94d309e7fdda93b
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+**Run floors**: {"functional-design":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","nfr-requirements":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","nfr-design":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","infrastructure-design":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","code-generation":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1"}
+**Verification Command SHA-256**: d627b40b8f8333ac3908513cffe51b7c69127393ee6a6a5479a92ede78c13c53
+**Verification Id**: d8b2915c-3102-443c-907a-642ac3479777
+**Approved Evidence**: {"functional-design":["sha256:6731eee6c3d535f118aa8f567abee7afca8bb73dbf81766e08a786a1f9bcf7a5",null],"nfr-requirements":["sha256:d784fbbb57ebcfd4e18cc9458d025c5c4189a9e0b3e121be5db14dc57408a6bc",null],"nfr-design":["sha256:341e7205059e60b664574c29b71e6e4c279c0bb8e6a44587ac9874d69de14eef",null],"infrastructure-design":["sha256:4038c734b1fb66de6da961e084434f20dc3ca4439aeffe2eb2bb31ac19d1256d",null],"code-generation":["sha256:1f9c777d53be37a583ad2f04bbfb50bfec954149e514150fb11c3d2f4c9efe6b","sha256:be60e64b768e6bb108bdcb8cb7fab0886a7ffe9177d1200f579c709af2884c4d"]}
+**Autonomous**: true
+**Review Finding Dispositions**: {"version":1,"dispositions":[{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md","id":"R-01","fingerprint":"sha256:7f7e638e67a3050e85be7cb433426297fe46d43d2915270ba9fc5649224f35e8","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/code-generation/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:b949a5207eb3a218082ebecf2d72f4fdbb2dc55bfa94d0cc00bf8ad77a4f8e36"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md","id":"R-02","fingerprint":"sha256:bafee840e847e493bfe4527a1218db319e9eeb5e8724fb1947e1bfbda32e4d87","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/code-generation/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:b949a5207eb3a218082ebecf2d72f4fdbb2dc55bfa94d0cc00bf8ad77a4f8e36"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md","id":"R-03","fingerprint":"sha256:1651de97099fa15ed6225c196f9ea813fa00b886e50ad37e9dd90f96ce84e9a0","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/code-generation/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:b949a5207eb3a218082ebecf2d72f4fdbb2dc55bfa94d0cc00bf8ad77a4f8e36"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/code-generation/code-generation-plan.md","id":"R-04","fingerprint":"sha256:fcb5cf5e1b9fe3aee3e51fba0d95ab807db6ce9c06b5649d859a589316525f98","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/code-generation/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:b949a5207eb3a218082ebecf2d72f4fdbb2dc55bfa94d0cc00bf8ad77a4f8e36"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/functional-design/functional-spec.md","id":"R-01","fingerprint":"sha256:c8c8f0df31452f34d5c1c56c860c59a097c1d7b3340fc7587b82b880505fff08","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.json","digest":"sha256:133354378fec90238131b08eb36142e0adf3a519178a4dd22e152f3477ed8871"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md","id":"R-08","fingerprint":"sha256:dbd75a3630d8a276915273e129437c05b6c0810b38a32ae3fc36500464196057","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/infrastructure-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.json","digest":"sha256:5bbf91500698bd5609ffb428759a24d590de804397dd1bd6b0ca39ed6e38a342"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/infrastructure-design/cicd-pipeline.md","id":"R-09","fingerprint":"sha256:528245ff0992c1ee4da697b1898d28ff65a61bef657fd4c8f751108ce470631a","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/infrastructure-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.json","digest":"sha256:5bbf91500698bd5609ffb428759a24d590de804397dd1bd6b0ca39ed6e38a342"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md","id":"R-01","fingerprint":"sha256:ffbb9c58a5cfb957757c3283a95b8a7a2f6e131ba1befaba3a7697c7e5cec429","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:3b56d2dd566390c2293c433ab7489ede142a803f6b198e5b49ce97248a2fe3b7"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md","id":"R-02","fingerprint":"sha256:f901b1eeac5641dd3164cd25f0e87a7d9bfbc4ea550195720a5b5deda20f3171","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:3b56d2dd566390c2293c433ab7489ede142a803f6b198e5b49ce97248a2fe3b7"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md","id":"R-03","fingerprint":"sha256:6184a00ba59329e20a8603cf89a55af114c21aef2e891d0b367404e88d5ac012","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:3b56d2dd566390c2293c433ab7489ede142a803f6b198e5b49ce97248a2fe3b7"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md","id":"R-04","fingerprint":"sha256:0720cc3f7e1a3da4ab2aa50aadb2818031290d9ea3d9da86d5718c70dec7213d","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:3b56d2dd566390c2293c433ab7489ede142a803f6b198e5b49ce97248a2fe3b7"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md","id":"R-05","fingerprint":"sha256:810f721043869cc2bde556c27b880995f106035b7759dc9974f5f737bf5bee33","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:3b56d2dd566390c2293c433ab7489ede142a803f6b198e5b49ce97248a2fe3b7"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-design/security-design.md","id":"R-06","fingerprint":"sha256:26cc70acc7c992afab3d7e3e323af78a5ed84f449c697ef387b7caa4f1334ee0","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:3b56d2dd566390c2293c433ab7489ede142a803f6b198e5b49ce97248a2fe3b7"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md","id":"R-01","fingerprint":"sha256:8306665c7a6c44d7532c3f78e7476eeb44598deb41459303e68a596ed48b28cc","status":"Changed after review","decided_at_severity":"Major","reviewed_record":{"path":".aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:f5e11948e80bd6b4cedadd0ab5b814787a7c15601251e2f18796b8765337571c"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md","id":"R-02","fingerprint":"sha256:7b76946a690e1b583bf8b758cdef05b824f9b1ebc4e4a5e93a6b3b5dfa56256c","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:f5e11948e80bd6b4cedadd0ab5b814787a7c15601251e2f18796b8765337571c"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md","id":"R-03","fingerprint":"sha256:c78fcef755f6c14a308d9982d34eefdf8c818a239eba0685fccd7427916278e5","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:f5e11948e80bd6b4cedadd0ab5b814787a7c15601251e2f18796b8765337571c"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md","id":"R-04","fingerprint":"sha256:59ef19eb3cbd423314aafa82a061e5996ac5d5fcb399c389210c34eb3065438c","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:f5e11948e80bd6b4cedadd0ab5b814787a7c15601251e2f18796b8765337571c"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md","id":"R-05","fingerprint":"sha256:ba6298497264c7fcc9dd75da483e1c65a10a4bda115b8b7abf061d1d06ca7b09","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:f5e11948e80bd6b4cedadd0ab5b814787a7c15601251e2f18796b8765337571c"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md","id":"R-06","fingerprint":"sha256:9eea51864faab07a9831a04ed53e55be430f98e371a5e1bdb7e2cef4afb1f96f","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:f5e11948e80bd6b4cedadd0ab5b814787a7c15601251e2f18796b8765337571c"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md","id":"R-07","fingerprint":"sha256:fa5e25a5ead723f4a0a4522d6902fc8841a64d5e8c7676e95abbad7ec9d18fef","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:f5e11948e80bd6b4cedadd0ab5b814787a7c15601251e2f18796b8765337571c"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u5-assignment-calendar/nfr-requirements/security-requirements.md","id":"R-08","fingerprint":"sha256:4cce6a76acb1c1973fe7bec56be70fd1fc4c32a1b555c6b6fc4a4b5fe9d23785","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-requirements/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.json","digest":"sha256:f5e11948e80bd6b4cedadd0ab5b814787a7c15601251e2f18796b8765337571c"}}]}
+
+---
+
+## Subagent Dispatched
+**Timestamp**: 2026-11-08T23:45:38Z
+**Event**: SUBAGENT_DISPATCHED
+**Agent Type**: aidlc-architect-agent
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-08T23:46:21Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architect-agent
+**Message**: 質問ファイルを作りました。質問は 5 問で、`[Answer]:` はすべて空欄です。設計の成果物は書いておらず、エンジンのコマンドも実行していません。\n\nファイルは `aidlc/spaces/default/intents/261101-housework-calendar/construction/u6-recording/functional-design/functional-desig
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-08T23:46:27Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u6-recording/functional-design/functional-design-questions.md
+**Context**: construction > u6-recording > functional-design > functional-design-questions.md
+
+---
+
+## Decision Recorded
+**Timestamp**: 2026-11-08T23:46:27Z
+**Event**: DECISION_RECORDED
+**Stage**: functional-design
+**Decision**: U6（記録）の機能設計の質問 5 問をファイルに書き、答えを待つ
+**Options**: done
+**Unit**: u6-recording
+
+---

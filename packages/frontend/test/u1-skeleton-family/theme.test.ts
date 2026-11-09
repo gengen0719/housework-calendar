@@ -54,6 +54,42 @@ describe('テーマ（NFR9.1）', () => {
     }
   });
 
+  // U5（NFR9.5）: 全画面の色の組と押す場所
+  it.each(['済', '未', '×', '確定済み', '無効のボタン', 'リンク', '入力欄の枠', '今日の印'])(
+    '「%s」の色の組が確かめの対象に入っている（U5）',
+    (label) => {
+      expect(textBackgroundPairs.some(([name]) => name.includes(label))).toBe(true);
+    },
+  );
+
+  it('色の組はどれも文字・背景とも 6 桁の色で書かれている（U5）', () => {
+    for (const [, text, background] of textBackgroundPairs) {
+      expect(text).toMatch(/^#[0-9a-f]{6}$/);
+      expect(background).toMatch(/^#[0-9a-f]{6}$/);
+    }
+  });
+
+  it('ボタン・リストの行・アイコンボタン・チェックボックス・メニューの項目の押す場所が 44×44 px 以上（U5）', () => {
+    const components = theme.components as Record<
+      string,
+      { styleOverrides?: { root?: Record<string, number> } } | undefined
+    >;
+    for (const name of [
+      'MuiButton',
+      'MuiListItemButton',
+      'MuiIconButton',
+      'MuiCheckbox',
+      'MuiMenuItem',
+    ]) {
+      const root = components[name]?.styleOverrides?.root;
+      expect(root, `${name} の大きさの指定`).toBeDefined();
+      if (['MuiButton', 'MuiIconButton', 'MuiCheckbox'].includes(name)) {
+        expect(root?.minWidth).toBeGreaterThanOrEqual(MIN_TOUCH_TARGET_PX);
+      }
+      expect(root?.minHeight).toBeGreaterThanOrEqual(MIN_TOUCH_TARGET_PX);
+    }
+  });
+
   it('ボタンの押す場所が 44×44 px 以上', () => {
     const button = theme.components?.MuiButton?.styleOverrides?.root as Record<string, number>;
     const iconButton = theme.components?.MuiIconButton?.styleOverrides?.root as Record<

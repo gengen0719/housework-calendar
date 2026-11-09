@@ -6,6 +6,7 @@ import { vi } from 'vitest';
 import { resetConfigCache } from '../../../src/lib/config';
 import { setRequestId } from '../../../src/lib/logger';
 import {
+  CALENDAR_TABLE,
   EVENTS_TABLE,
   FAMILIES_TABLE,
   installFakeDynamo,
@@ -133,6 +134,7 @@ export function setupWorld() {
   process.env.INVITATIONS_TABLE = INVITATIONS_TABLE;
   process.env.NOTIFICATION_GROUPS_TABLE = NOTIFICATION_GROUPS_TABLE;
   process.env.CHORE_TYPES_TABLE = CHORE_TYPES_TABLE;
+  process.env.CALENDAR_TABLE = CALENDAR_TABLE;
   resetConfigCache();
   setRequestId(undefined);
   const dynamo = installFakeDynamo();
@@ -157,6 +159,20 @@ export function setupWorld() {
     };
   });
   return { ...dynamo, ssm };
+}
+
+/**
+ * 「いま」を指定の時刻に固定する（U5。日本時間の日付の境目の確かめ用）。Date だけを偽物にする。
+ * 使ったあとは resetNow() で戻す。
+ */
+export function setNow(iso: string): void {
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(new Date(iso));
+}
+
+/** setNow で固定した時刻を戻す。 */
+export function resetNow(): void {
+  vi.useRealTimers();
 }
 
 export function sign(body: string | Buffer, secret = CHANNEL_SECRET): string {

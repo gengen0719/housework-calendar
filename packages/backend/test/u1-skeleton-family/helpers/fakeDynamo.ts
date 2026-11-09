@@ -8,6 +8,7 @@ import {
   GetCommand,
   PutCommand,
   QueryCommand,
+  ScanCommand,
   TransactWriteCommand,
   UpdateCommand,
 } from '@aws-sdk/lib-dynamodb';
@@ -16,6 +17,24 @@ import { mockClient } from 'aws-sdk-client-mock';
 export type Item = Record<string, unknown>;
 export type Table = Map<string, Item>;
 
+export interface ReadLogEntry {
+  operation: 'Get' | 'Query' | 'Scan';
+  table: string;
+  consistent: boolean;
+}
+
+export interface FakeDynamoHooks {
+  /** 競合の再現: 次の TransactWriteItems を評価する直前に 1 回だけ呼ぶ（「読んだあとに別の書き込みが先に入った」状態を作る） */
+  beforeNextTransaction?: () => void;
+  /** 競合の再現: 次の UpdateItem を評価する直前に 1 回だけ呼ぶ */
+  beforeNextUpdate?: () => void;
+  queryPageSize?: number;
+  beforeTransaction(n: number, fn: () => void): void;
+  failTransaction(n: number, code: string): void;
+  transactionSizes: number[];
+  readLog: ReadLogEntry[];
+}
+
 export const USERS_TABLE = 'Users-test';
 export const EVENTS_TABLE = 'ProcessedLineEvents-test';
 export const FAMILIES_TABLE = 'Families-test';
@@ -23,6 +42,7 @@ export const REQUEST_RECORDS_TABLE = 'RequestRecords-test';
 export const INVITATIONS_TABLE = 'Invitations-test';
 export const NOTIFICATION_GROUPS_TABLE = 'NotificationGroups-test';
 export const CHORE_TYPES_TABLE = 'ChoreTypes-test';
+export const CALENDAR_TABLE = 'Calendar-test';
 
 /** 表ごとの主キーの名前（並び順どおりに「#」でつないでメモリ上の鍵にする）。 */
 const KEY_NAMES: Record<string, string[]> = {
@@ -33,7 +53,13 @@ const KEY_NAMES: Record<string, string[]> = {
   [INVITATIONS_TABLE]: ['token'],
   [NOTIFICATION_GROUPS_TABLE]: ['groupId'],
   [CHORE_TYPES_TABLE]: ['familyId', 'sk'],
+  [CALENDAR_TABLE]: ['familyId', 'sk'],
 };
+
+/** 条件式・Query を本当に評価する表（U4 の ChoreTypes、U5 の Calendar） */
+const EVALUATED_TABLES: string[] = [CHORE_TYPES_TABLE, CALENDAR_TABLE];
+const isEvaluated = (name: string | undefined): boolean =>
+  name !== undefined && EVALUATED_TABLES.includes(name);
 
 /** `familyId-index` の射影（INCLUDE: displayName、role、familyJoinedAt。キーの userId と familyId は常に入る） */
 const FAMILY_INDEX_ATTRIBUTES = ['userId', 'familyId', 'displayName', 'role', 'familyJoinedAt'];
@@ -80,24 +106,47 @@ function conditionHolds(
       const present = existing !== undefined && existing[attr(fn[2] as string)] !== undefined;
       return fn[1] === 'attribute_exists' ? present : !present;
     }
+    const contains = /^contains\(([#\w]+),\s*(:\w+)\)$/.exec(part);
+    if (contains) {
+      const target = existing?.[attr(contains[1] as string)];
+      const wanted = values[contains[2] as string];
+      if (target instanceof Set) return target.has(wanted);
+      if (Array.isArray(target)) return target.includes(wanted);
+      if (typeof target === 'string') return target.includes(String(wanted));
+      return false;
+    }
+    const beginsWith = /^begins_with\(([#\w]+),\s*(:\w+)\)$/.exec(part);
+    if (beginsWith) {
+      const target = existing?.[attr(beginsWith[1] as string)];
+      return (
+        typeof target === 'string' && target.startsWith(String(values[beginsWith[2] as string]))
+      );
+    }
     const cmp = /^([#\w]+)\s*(=|<>|>=|<=|>|<)\s*(:\w+)$/.exec(part);
     if (cmp) {
       const left = existing?.[attr(cmp[1] as string)];
       const right = values[cmp[3] as string];
       if (left === undefined) return false;
+      // 数どうしは数として、そのほかは文字として比べる
+      const order = (): number => {
+        if (typeof left === 'number' && typeof right === 'number') return left - right;
+        const a = String(left);
+        const b = String(right);
+        return a < b ? -1 : a > b ? 1 : 0;
+      };
       switch (cmp[2]) {
         case '=':
           return left === right;
         case '<>':
           return left !== right;
         case '>':
-          return String(left) > String(right) || Number(left) > Number(right);
+          return order() > 0;
         case '<':
-          return String(left) < String(right);
+          return order() < 0;
         case '>=':
-          return String(left) >= String(right);
+          return order() >= 0;
         default:
-          return String(left) <= String(right);
+          return order() <= 0;
       }
     }
     throw new Error(`fakeDynamo が知らない条件: ${part}`);
@@ -147,16 +196,28 @@ export function installFakeDynamo() {
     [INVITATIONS_TABLE]: new Map(),
     [NOTIFICATION_GROUPS_TABLE]: new Map(),
     [CHORE_TYPES_TABLE]: new Map(),
+    [CALENDAR_TABLE]: new Map(),
   };
   /** 結果整合の再現: 索引（familyId-index）の Query の結果から隠す利用者 */
   const hiddenFromFamilyIndex = new Set<string>();
   /** 競合の再現: 次の TransactWriteItems を評価する直前に 1 回だけ呼ぶ（「読んだあとに別の書き込みが先に入った」状態を作る） */
-  const hooks: {
-    beforeNextTransaction?: () => void;
-    /** 競合の再現: 次の UpdateItem を評価する直前に 1 回だけ呼ぶ */
-    beforeNextUpdate?: () => void;
-    queryPageSize?: number;
-  } = {};
+  const beforeTransactionByCount = new Map<number, () => void>();
+  const failTransactionByCount = new Map<number, string>();
+  const hooks: FakeDynamoHooks = {
+    queryPageSize: undefined,
+    /** n 回目（1 から数える）のトランザクションを評価する直前に、別の書き込みを入れる（U5） */
+    beforeTransaction(n: number, fn: () => void): void {
+      beforeTransactionByCount.set(n, fn);
+    },
+    /** n 回目のトランザクションを、指定の Code（TransactionConflict、ThrottlingError など）で断る（U5） */
+    failTransaction(n: number, code: string): void {
+      failTransactionByCount.set(n, code);
+    },
+    /** これまでのトランザクションの回数と、各回の項目数 */
+    transactionSizes: [],
+    /** 読み取り（Get、Query、Scan）の記録。強い整合性で読んだかを残す（U5。NFR1.20〜NFR1.22） */
+    readLog: [],
+  };
 
   const table = (name: string | undefined): Table => {
     const found = name ? tables[name] : undefined;
@@ -188,7 +249,15 @@ export function installFakeDynamo() {
       .filter((part) => part.trim() !== '')
       .map((part) => part.trim().split(/\s*=\s*/) as [string, string]);
     for (const [rawName, valueRef] of assignments) {
-      target[names[rawName] ?? rawName] = values[valueRef];
+      const attributeName = names[rawName] ?? rawName;
+      // `SET #version = #version + :one` の形（足し算）
+      const sum = /^([#\w]+)\s*\+\s*(:\w+)$/.exec(valueRef);
+      if (sum) {
+        const base = target[names[sum[1] as string] ?? (sum[1] as string)];
+        target[attributeName] = Number(base ?? 0) + Number(values[sum[2] as string]);
+      } else {
+        target[attributeName] = values[valueRef];
+      }
     }
     const removals = /^\s*REMOVE\s+/.test(setPart)
       ? setPart.replace(/^\s*REMOVE\s+/, '')
@@ -204,7 +273,16 @@ export function installFakeDynamo() {
     const key = keyOf(input.TableName, input.Item);
     const existing = t.get(key);
     const condition: string | undefined = input.ConditionExpression;
-    if (condition?.includes('attribute_not_exists(webhookEventId)')) {
+    if (input.TableName === CALENDAR_TABLE) {
+      // Calendar（U5）は条件式を本当に評価する
+      if (
+        !conditionHolds(existing, condition, {
+          names: input.ExpressionAttributeNames,
+          values: input.ExpressionAttributeValues,
+        })
+      )
+        throw conditionFailed();
+    } else if (condition?.includes('attribute_not_exists(webhookEventId)')) {
       const values = input.ExpressionAttributeValues ?? {};
       const retryable =
         existing !== undefined &&
@@ -220,13 +298,18 @@ export function installFakeDynamo() {
 
   mock.on(GetCommand).callsFake((input) => {
     const t = table(input.TableName);
+    hooks.readLog.push({
+      operation: 'Get',
+      table: String(input.TableName),
+      consistent: input.ConsistentRead === true,
+    });
     const item = t.get(keyOf(input.TableName, input.Key));
     return { Item: item ? { ...item } : undefined };
   });
 
   mock.on(DeleteCommand).callsFake((input) => {
-    if (input.TableName === CHORE_TYPES_TABLE) {
-      // ChoreTypes（U4）は条件式を本当に評価する
+    if (isEvaluated(input.TableName)) {
+      // ChoreTypes（U4）と Calendar（U5）は条件式を本当に評価する
       const existing = table(input.TableName).get(keyOf(input.TableName, input.Key));
       if (
         !conditionHolds(existing, input.ConditionExpression, {
@@ -248,8 +331,8 @@ export function installFakeDynamo() {
     }
     const t = table(input.TableName);
     const existing = t.get(keyOf(input.TableName, input.Key));
-    if (input.TableName === CHORE_TYPES_TABLE) {
-      // ChoreTypes（U4）は条件式を本当に評価する（attribute_exists、name = :oldName、active = :false など）
+    if (isEvaluated(input.TableName)) {
+      // ChoreTypes（U4）と Calendar（U5）は条件式を本当に評価する（attribute_exists、name = :oldName、active = :false など）
       if (
         !conditionHolds(existing, input.ConditionExpression, {
           names: input.ExpressionAttributeNames,
@@ -301,12 +384,50 @@ export function installFakeDynamo() {
 
   /** TransactWriteItems: すべての条件を先に確かめ、1 つでも外れたら何も書かない。 */
   mock.on(TransactWriteCommand).callsFake((input) => {
+    const items: TransactItem[] = input.TransactItems ?? [];
+    // 1 回の取引は 100 項目まで、同じ項目への操作は 1 つまで（本物の DynamoDB と同じ）
+    if (items.length > 100) {
+      throw Object.assign(new Error('Member must have length less than or equal to 100'), {
+        name: 'ValidationException',
+      });
+    }
+    const seen = new Set<string>();
+    for (const entry of items) {
+      const op = entry.Put ?? entry.Update ?? entry.Delete ?? entry.ConditionCheck;
+      if (!op) continue;
+      const source = entry.Put ? entry.Put.Item : (op as { Key: Item }).Key;
+      const identity = `${op.TableName}/${keyOf(op.TableName, source)}`;
+      if (seen.has(identity)) {
+        throw Object.assign(
+          new Error('Transaction request cannot include multiple operations on one item'),
+          { name: 'ValidationException' },
+        );
+      }
+      seen.add(identity);
+    }
+    hooks.transactionSizes.push(items.length);
+    const count = hooks.transactionSizes.length;
     const hook = hooks.beforeNextTransaction;
     if (hook) {
       hooks.beforeNextTransaction = undefined;
       hook();
     }
-    const items: TransactItem[] = input.TransactItems ?? [];
+    const nth = beforeTransactionByCount.get(count);
+    if (nth) {
+      beforeTransactionByCount.delete(count);
+      nth();
+    }
+    const failCode = failTransactionByCount.get(count);
+    if (failCode) {
+      failTransactionByCount.delete(count);
+      throw new TransactionCanceledException({
+        message: 'Transaction cancelled, please refer cancellation reasons for specific reasons',
+        $metadata: {},
+        CancellationReasons: items.map((_, index) => ({
+          Code: index === 0 ? failCode : 'None',
+        })),
+      });
+    }
     const reasons = items.map((entry) => {
       const op = entry.Put ?? entry.Update ?? entry.Delete ?? entry.ConditionCheck;
       if (!op) throw new Error('fakeDynamo が知らない取引の項目');
@@ -345,22 +466,46 @@ export function installFakeDynamo() {
   mock.on(QueryCommand).callsFake((input) => {
     const t = table(input.TableName);
     const values: Record<string, unknown> = input.ExpressionAttributeValues ?? {};
-    if (input.TableName === CHORE_TYPES_TABLE) {
-      // `familyId = :f AND begins_with(sk, :p)`。sk の昇順。hooks.queryPageSize があれば、その件数ごとに LastEvaluatedKey を返す
+    hooks.readLog.push({
+      operation: 'Query',
+      table: String(input.TableName),
+      consistent: input.ConsistentRead === true,
+    });
+    if (isEvaluated(input.TableName)) {
+      // `familyId = :f AND begins_with(sk, :p)`。sk の昇順。hooks.queryPageSize（または Limit）があれば、その件数ごとに LastEvaluatedKey を返す。
+      // FilterExpression は 1 ページを読んだあとに当てる（本物と同じ）。ProjectionExpression があれば、その属性だけ返す
       const sorted = [...t.values()]
         .filter(
           (item) =>
             item.familyId === values[':f'] && String(item.sk).startsWith(String(values[':p'])),
         )
-        .sort((a, b) => String(a.sk).localeCompare(String(b.sk)));
+        .sort((a, b) => (String(a.sk) < String(b.sk) ? -1 : String(a.sk) > String(b.sk) ? 1 : 0));
       const startKey = input.ExclusiveStartKey as { sk?: string } | undefined;
       const from = startKey ? sorted.findIndex((item) => item.sk === startKey.sk) + 1 : 0;
-      const size = hooks.queryPageSize ?? sorted.length;
+      const size = hooks.queryPageSize ?? input.Limit ?? sorted.length;
       const page = sorted.slice(from, from + Math.max(size, 1));
       const last = page[page.length - 1];
       const more = from + page.length < sorted.length && last !== undefined;
+      const names: Record<string, string> = input.ExpressionAttributeNames ?? {};
+      const projection: string[] | undefined = input.ProjectionExpression
+        ? String(input.ProjectionExpression)
+            .split(',')
+            .map((part) => part.trim())
+            .map((part) => names[part] ?? part)
+        : undefined;
+      const items = page
+        .filter((item) => conditionHolds(item, input.FilterExpression, { names, values }))
+        .map((item) =>
+          projection
+            ? Object.fromEntries(
+                projection
+                  .filter((name) => item[name] !== undefined)
+                  .map((name) => [name, item[name]]),
+              )
+            : { ...item },
+        );
       return {
-        Items: page.map((item) => ({ ...item })),
+        Items: items,
         ...(more ? { LastEvaluatedKey: { familyId: last.familyId, sk: last.sk } } : {}),
       };
     }
@@ -386,6 +531,16 @@ export function installFakeDynamo() {
     return { Items: items };
   });
 
+  /** Scan は使わない（NFR1.20、NFR1.22）。呼ばれたら記録して失敗させる */
+  mock.on(ScanCommand).callsFake((input) => {
+    hooks.readLog.push({
+      operation: 'Scan',
+      table: String(input.TableName),
+      consistent: input.ConsistentRead === true,
+    });
+    throw new Error('Scan は使えません');
+  });
+
   return {
     mock,
     users: tables[USERS_TABLE] as Table,
@@ -395,6 +550,7 @@ export function installFakeDynamo() {
     invitations: tables[INVITATIONS_TABLE] as Table,
     notificationGroups: tables[NOTIFICATION_GROUPS_TABLE] as Table,
     choreTypes: tables[CHORE_TYPES_TABLE] as Table,
+    calendar: tables[CALENDAR_TABLE] as Table,
     hiddenFromFamilyIndex,
     hooks,
   };
