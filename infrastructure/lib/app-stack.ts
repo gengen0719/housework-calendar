@@ -51,6 +51,7 @@ export interface AppStackProps extends StackProps {
   invitations: dynamodb.ITable;
   notificationGroups: dynamodb.ITable;
   choreTypes: dynamodb.ITable;
+  calendar: dynamodb.ITable;
   /** CloudFront が元に付ける秘密のヘッダー `X-Origin-Verify` の値（CDK のコンテキストから） */
   originVerifySecret: string;
   /** ビルド済みの画面（packages/frontend/dist）のあるフォルダ */
@@ -90,6 +91,7 @@ export class AppStack extends Stack {
       INVITATIONS_TABLE: props.invitations.tableName,
       NOTIFICATION_GROUPS_TABLE: props.notificationGroups.tableName,
       CHORE_TYPES_TABLE: props.choreTypes.tableName,
+      CALENDAR_TABLE: props.calendar.tableName,
       ENV: envName,
       ENTRY: 'api',
     });
@@ -209,7 +211,8 @@ export class AppStack extends Stack {
       }),
     );
 
-    // U4: お手伝いの種類（api だけ。Scan と ConditionCheckItem は足さない。ConditionCheckItem は U5 で足す。line には足さない）
+    // U4: お手伝いの種類（api だけ。Scan は足さない。line には足さない）。
+    // ConditionCheckItem は U5 で足した（割り当ての保存の取引で「使う」の確かめに使う）
     this.apiFunction.addToRolePolicy(
       new iam.PolicyStatement({
         actions: [
@@ -218,8 +221,24 @@ export class AppStack extends Stack {
           'dynamodb:PutItem',
           'dynamodb:UpdateItem',
           'dynamodb:DeleteItem',
+          'dynamodb:ConditionCheckItem',
         ],
         resources: [props.choreTypes.tableArn],
+      }),
+    );
+
+    // U5: 割り当てと日ごとの担当（api だけ。Scan・BatchGetItem・BatchWriteItem は足さない。索引なし。line には足さない）
+    this.apiFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: [
+          'dynamodb:GetItem',
+          'dynamodb:Query',
+          'dynamodb:PutItem',
+          'dynamodb:UpdateItem',
+          'dynamodb:DeleteItem',
+          'dynamodb:ConditionCheckItem',
+        ],
+        resources: [props.calendar.tableArn],
       }),
     );
 

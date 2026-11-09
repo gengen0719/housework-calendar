@@ -2,7 +2,12 @@ import '@testing-library/jest-dom/vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { App } from '../../src/App';
-import { CalendarFramePage } from '../../src/pages/CalendarFramePage';
+import type { Authorized } from '../../src/hooks/useSession';
+import { CalendarPage } from '../../src/pages/CalendarPage';
+import {
+  defaultCalendarResponse,
+  emptyMonthCalendar,
+} from '../u5-assignment-calendar/helpers/calendarStub';
 
 const liff = vi.hoisted(() => ({
   init: vi.fn(),
@@ -18,20 +23,51 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-describe('CalendarFramePage', () => {
-  it('2026 年 11 月は日曜から始まり 30 日分の枠と今日の印が出る', () => {
-    render(<CalendarFramePage familyName="田中家" today={new Date(2026, 10, 15)} />);
-    expect(screen.getByTestId('calendar-month')).toHaveTextContent('2026年11月');
-    const cells = screen.getAllByRole('gridcell');
-    expect(cells).toHaveLength(30);
-    expect(cells[14]).toHaveAttribute('aria-current', 'date');
-    expect(cells[14]).toHaveTextContent('15');
-    expect(cells[0]).not.toHaveAttribute('aria-current');
+/** 応答の today の月のカレンダーを返す差し替え（CalendarPage が月と今日の位置を応答だけで決めることの確かめ） */
+function stubCalendar(today: string): void {
+  vi.stubGlobal(
+    'fetch',
+    vi.fn(async (url: string) => {
+      const match = /^\/v1\/months\/(\d{4}-\d{2})\/calendar$/.exec(url);
+      if (!match) return new Response('{}', { status: 404 });
+      return Response.json(emptyMonthCalendar(match[1] as string, today));
+    }),
+  );
+}
+
+const authorized: Authorized = (call) => call('token');
+
+describe('CalendarPage', () => {
+  beforeEach(() => {
+    Element.prototype.scrollIntoView = vi.fn();
+  });
+  afterEach(() => {
+    delete (Element.prototype as { scrollIntoView?: unknown }).scrollIntoView;
   });
 
-  it('月の初めが水曜なら前に 3 つの空きの枠が付く（2026 年 7 月）', () => {
-    render(<CalendarFramePage familyName="田中家" today={new Date(2026, 6, 1)} />);
-    expect(screen.getAllByRole('gridcell')).toHaveLength(3 + 31);
+  it('2026 年 11 月は 30 日分の行と今日の印が出る', async () => {
+    stubCalendar('2026-11-15');
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-11-15T03:00:00.000Z'));
+    render(<CalendarPage familyName="田中家" authorized={authorized} />);
+    const rows = await screen.findAllByTestId('day-row');
+    vi.useRealTimers();
+    expect(screen.getByTestId('calendar-month')).toHaveTextContent('2026年11月');
+    expect(rows).toHaveLength(30);
+    expect(rows[14]).toHaveAttribute('aria-current', 'date');
+    expect(rows[14]).toHaveTextContent('15日(日)');
+    expect(rows[0]).not.toHaveAttribute('aria-current');
+  });
+
+  it('31 日ある月（2026 年 7 月）は 31 日分の行が出る', async () => {
+    stubCalendar('2026-07-01');
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-07-01T03:00:00.000Z'));
+    render(<CalendarPage familyName="田中家" authorized={authorized} />);
+    const rows = await screen.findAllByTestId('day-row');
+    vi.useRealTimers();
+    expect(rows).toHaveLength(31);
+    expect(rows[0]).toHaveTextContent('1日(水)');
   });
 });
 
@@ -57,6 +93,9 @@ describe('家族を作る操作の識別子', () => {
         }
         // U3: 管理者のカレンダーの枠はお知らせ先を読む。この確かめの対象ではない
         if (url === '/v1/family/notification-group') return Response.json(null);
+        // U5: カレンダーの読み込みは、この確かめの対象ではない
+        const calendar = defaultCalendarResponse(init?.method ?? 'GET', url);
+        if (calendar) return calendar;
         keys.push(headers.get('Idempotency-Key'));
         attempt += 1;
         if (attempt === 1) throw new TypeError('Failed to fetch');
@@ -72,7 +111,7 @@ describe('家族を作る操作の識別子', () => {
       '表示できませんでした。もう一度お試しください',
     );
     fireEvent.click(screen.getByTestId('save-family-button'));
-    await waitFor(() => expect(screen.getByTestId('calendar-frame-page')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId('calendar-page')).toBeInTheDocument());
 
     expect(keys).toHaveLength(2);
     expect(keys[0]).toBeTruthy();

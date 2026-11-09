@@ -80,12 +80,14 @@ const lambdaVariables = (entry: 'api' | 'line'): Record<string, unknown> => {
   return fn?.Properties.Environment?.Variables ?? {};
 };
 
+// U5 で Calendar が同じキーの形になったため、キーの形ではなく論理 ID が ChoreTypes で始まるテーブルを探す
+const findChoreTypesResources = (name: string): Array<Record<string, unknown>> =>
+  Object.entries(t(name).findResources('AWS::DynamoDB::Table'))
+    .filter(([id]) => id.startsWith('ChoreTypes'))
+    .map(([, r]) => r as unknown as Record<string, unknown>);
+
 const findChoreTypes = (name: string): Array<{ DeletionPolicy: string }> =>
-  Object.values(
-    t(name).findResources('AWS::DynamoDB::Table', {
-      Properties: { KeySchema: CHORE_TYPES_KEY_SCHEMA },
-    }),
-  ) as Array<{ DeletionPolicy: string }>;
+  findChoreTypesResources(name) as Array<{ DeletionPolicy: string }>;
 
 describe('U4 CDK: Data スタック', () => {
   it('ChoreTypes テーブル: PK familyId・SK sk・TTL なし・オンデマンド・AWS 管理の暗号化', () => {
@@ -98,11 +100,9 @@ describe('U4 CDK: Data スタック', () => {
   });
 
   it('ChoreTypes に tableName を指定していない', () => {
-    const tables = Object.values(
-      t('Housework-staging-Data').findResources('AWS::DynamoDB::Table', {
-        Properties: { KeySchema: CHORE_TYPES_KEY_SCHEMA },
-      }),
-    ) as Array<{ Properties: Record<string, unknown> }>;
+    const tables = findChoreTypesResources('Housework-staging-Data') as Array<{
+      Properties: Record<string, unknown>;
+    }>;
     expect(tables).toHaveLength(1);
     expect(tables[0]?.Properties.TableName).toBeUndefined();
   });
@@ -128,8 +128,10 @@ describe('U4 CDK: App スタックの環境変数', () => {
 });
 
 describe('U4 CDK: App スタックの権限', () => {
-  it('api の ChoreTypes: GetItem・Query・PutItem・UpdateItem・DeleteItem がちょうど 5 つ', () => {
+  // U5 で ConditionCheckItem を足した（5 → 6）
+  it('api の ChoreTypes: GetItem・Query・PutItem・UpdateItem・DeleteItem・ConditionCheckItem がちょうど 6 つ', () => {
     expect(actionsOnTable(apiStatements(), 'ChoreTypes')).toEqual([
+      'dynamodb:ConditionCheckItem',
       'dynamodb:DeleteItem',
       'dynamodb:GetItem',
       'dynamodb:PutItem',
@@ -138,10 +140,10 @@ describe('U4 CDK: App スタックの権限', () => {
     ]);
   });
 
-  it('api の ChoreTypes に Scan と ConditionCheckItem がない', () => {
+  it('api の ChoreTypes に Scan がない（ConditionCheckItem は U5 で足した）', () => {
     const actions = actionsOnTable(apiStatements(), 'ChoreTypes');
     expect(actions).not.toContain('dynamodb:Scan');
-    expect(actions).not.toContain('dynamodb:ConditionCheckItem');
+    expect(actions).toContain('dynamodb:ConditionCheckItem');
   });
 
   it('api の ChoreTypes の許可は、テーブル本体だけを資源にする（索引を含まない）', () => {

@@ -5,6 +5,7 @@ import { expect, vi } from 'vitest';
 import { MESSAGES, NOTIFICATION_GROUP_HOWTO } from '@housework/shared';
 import { App } from '../../src/App';
 import { FAKE_SESSION_TOKEN } from '../fixtures/fakeSecrets';
+import { defaultCalendarResponse } from '../u5-assignment-calendar/helpers/calendarStub';
 
 // LIFF は差し替える（本物の LINE にはつながない）
 const liff = vi.hoisted(() => ({
@@ -54,6 +55,8 @@ function installFakeApi(): void {
         return respond(200, [{ ...HANAKO, role: 'admin' }]);
       }
       if (method === 'GET' && input === '/v1/family/invitation') return respond(200, null);
+      const calendar = defaultCalendarResponse(method, input);
+      if (calendar) return calendar;
       if (method === 'GET' && input === PATH) {
         return respond(notificationGroup.status, notificationGroup.body);
       }
@@ -77,7 +80,7 @@ const callsToGroup = () => calls.filter((c) => c.method === 'GET' && c.path === 
 
 async function loaded(): Promise<void> {
   await waitFor(() => expect(screen.queryByTestId('loading')).toBeNull());
-  await screen.findByTestId('calendar-frame-page');
+  await screen.findByTestId('calendar-page');
 }
 
 async function goToSettings(): Promise<void> {

@@ -93,6 +93,107 @@ export interface SetChoreTypeActiveRequest {
   active: boolean;
 }
 
+/** 担当の状態（未・済・×） */
+export type DutyStatus = 'todo' | 'done' | 'skipped';
+
+/** 担当の出どころ（割り当てから作った・管理者が変えた・引き受けた。U5） */
+export type DutyOrigin = 'rule' | 'manual' | 'swap';
+
+/**
+ * 日ごとの担当（U5。契約 C1 の Duty）。date は日本時間の日付、recordedAt は UTC の ISO 8601。
+ * 記録がなければ recordedAt・recordedBy・recordedByName・unitPrice は null。
+ * version は担当が変わるたびに増える（U6〜U8 が条件に使う）。
+ */
+export interface Duty {
+  dutyId: string;
+  date: string;
+  choreTypeId: string;
+  choreName: string;
+  childUserId: string;
+  status: DutyStatus;
+  origin: DutyOrigin;
+  version: number;
+  recordedAt: string | null;
+  recordedBy: string | null;
+  recordedByName: string | null;
+  unitPrice: number | null;
+}
+
+/** MonthCalendar.children の 1 件（その家族の子供） */
+export interface CalendarChild {
+  userId: string;
+  displayName: string;
+}
+
+/** MonthCalendar.choreTypes の 1 件（担当に出てくる種類。「使わない」も含む） */
+export interface CalendarChoreType {
+  choreTypeId: string;
+  name: string;
+  active: boolean;
+}
+
+/**
+ * GET /v1/months/:month/calendar、PUT の 200（U5）。today は裏側の日本時間の今日。
+ * hasAssignment は割り当ての記録が保存されているか（行が 0 行でも true）。
+ */
+export interface MonthCalendar {
+  month: string;
+  confirmed: boolean;
+  hasAssignment: boolean;
+  today: string;
+  duties: Duty[];
+  children: CalendarChild[];
+  choreTypes: CalendarChoreType[];
+}
+
+/** 割り当ての 1 行（種類ごとの子供と曜日。曜日は 0=日曜〜6=土曜） */
+export interface AssignmentRule {
+  choreTypeId: string;
+  childUserId: string;
+  weekdays: number[];
+}
+
+/** GET /v1/months/:month/assignment（U5） */
+export interface AssignmentView {
+  month: string;
+  rules: AssignmentRule[];
+  exists: boolean;
+}
+
+/** PUT /v1/months/:month/assignment の本文（U5）。confirmedChangesHash は上書きの確かめの印（64 文字の 16 進数） */
+export interface SaveAssignmentRequest {
+  rules: AssignmentRule[];
+  confirmedChangesHash?: string;
+}
+
+/** PATCH /v1/duties/:dutyId の本文（U5） */
+export interface ChangeDutyChildRequest {
+  childUserId: string;
+}
+
+/**
+ * 409 OVERWRITE_CONFIRMATION_REQUIRED の details.changes の 1 件（U5）。
+ * 作り直したあとにその日のその種類の担当がなければ toChildUserId は null（画面は「なし」と出す）。
+ */
+export interface OverwriteChange {
+  date: string;
+  choreTypeId: string;
+  fromChildUserId: string;
+  toChildUserId: string | null;
+}
+
+/** 422 ASSIGNMENT_OVERLAP の details.overlaps の 1 件（U5）。weekday は 0=日曜〜6=土曜 */
+export interface OverlapItem {
+  date: string;
+  weekday: number;
+  choreTypeId: string;
+  childUserIds: string[];
+}
+
+/** 割り当ての入力の上限（NFR4.46）: 行は 200 まで、種類は 90 まで */
+export const ASSIGNMENT_MAX_RULES = 200;
+export const ASSIGNMENT_MAX_CHORE_TYPES = 90;
+
 /** 画面用 API の失敗の形 */
 export interface ApiError {
   error: {

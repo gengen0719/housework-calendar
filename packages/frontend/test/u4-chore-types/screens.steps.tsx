@@ -14,6 +14,7 @@ import {
 } from '@housework/shared';
 import { App } from '../../src/App';
 import { FAKE_SESSION_TOKEN } from '../fixtures/fakeSecrets';
+import { defaultCalendarResponse } from '../u5-assignment-calendar/helpers/calendarStub';
 
 // LIFF は差し替える（本物の LINE にはつながない）
 const liff = vi.hoisted(() => ({
@@ -91,6 +92,8 @@ function installFakeApi(): void {
       }
       if (method === 'GET' && input === '/v1/family/invitation') return respond(200, null);
       if (method === 'GET' && input === '/v1/family/notification-group') return respond(200, null);
+      const calendar = defaultCalendarResponse(method, input);
+      if (calendar) return calendar;
       if (method === 'GET' && input === '/v1/chore-types') return respond(200, sortedForList());
       if (method === 'POST' && input === '/v1/chore-types') {
         if (createFailure) return respond(createFailure.status, createFailure.body);
@@ -141,7 +144,7 @@ function openAs(person: 'admin' | 'child', initial: ChoreType[]): void {
 
 async function goToChoreTypes(): Promise<void> {
   await waitFor(() => expect(screen.queryByTestId('loading')).toBeNull());
-  await screen.findByTestId('calendar-frame-page');
+  await screen.findByTestId('calendar-page');
   fireEvent.click(screen.getByTestId('open-settings-button'));
   fireEvent.click(await screen.findByTestId('open-chore-types-button'));
   await screen.findByTestId('chore-types-page');

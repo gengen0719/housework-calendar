@@ -1,0 +1,398 @@
+{
+  "stage": "code-generation",
+  "unit": "u5-assignment-calendar",
+  "upstream_ids": [
+    "AC3.1.1",
+    "AC3.1.2",
+    "AC3.1.3",
+    "AC3.1.4",
+    "AC3.1.5",
+    "AC3.1.6",
+    "AC3.1.7",
+    "AC3.1.8",
+    "AC4.1.1",
+    "AC4.1.2",
+    "AC4.1.3",
+    "AC4.1.4",
+    "AC4.1.5",
+    "AC4.1.6",
+    "AC4.1.7",
+    "NFR1.19",
+    "NFR1.20",
+    "NFR1.21",
+    "NFR1.22",
+    "NFR2.28",
+    "NFR2.29",
+    "NFR2.30",
+    "NFR2.31",
+    "NFR2.32",
+    "NFR3.6",
+    "NFR4.42",
+    "NFR4.43",
+    "NFR4.44",
+    "NFR4.45",
+    "NFR4.46",
+    "NFR4.47",
+    "NFR4.48",
+    "NFR4.49",
+    "NFR4.50",
+    "NFR4.51",
+    "NFR4.52",
+    "NFR6.6",
+    "NFR7.20",
+    "NFR7.21",
+    "NFR7.22",
+    "NFR7.23",
+    "NFR7.24",
+    "NFR8.9",
+    "NFR8.10",
+    "NFR9.5",
+    "NFR11.4",
+    "BR6.1",
+    "BR6.2",
+    "BR6.3",
+    "BR6.4",
+    "BR6.5",
+    "BR6.6",
+    "BR6.7",
+    "BR6.8",
+    "BR6.9",
+    "BR6.10",
+    "BR6.11",
+    "BR6.12",
+    "BR6.13",
+    "BR6.14",
+    "BR6.15",
+    "BR6.16",
+    "BR6.17",
+    "BR6.18"
+  ],
+  "coverage": [
+    {
+      "id": "AC3.1.1",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-assignment.feature"
+    },
+    {
+      "id": "AC3.1.2",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/change-duty.feature"
+    },
+    {
+      "id": "AC3.1.3",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/change-duty.feature"
+    },
+    {
+      "id": "AC3.1.4",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-assignment.feature"
+    },
+    {
+      "id": "AC3.1.5",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/overwrite-confirmation.feature"
+    },
+    {
+      "id": "AC3.1.6",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-assignment.feature"
+    },
+    {
+      "id": "AC3.1.7",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-assignment.feature"
+    },
+    {
+      "id": "AC3.1.8",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-assignment.feature"
+    },
+    {
+      "id": "AC4.1.1",
+      "status": "OK",
+      "target": "packages/frontend/test/u5-assignment-calendar/calendar.feature"
+    },
+    {
+      "id": "AC4.1.2",
+      "status": "OK",
+      "target": "packages/frontend/test/u5-assignment-calendar/calendar.feature"
+    },
+    {
+      "id": "AC4.1.3",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/view-calendar.feature"
+    },
+    {
+      "id": "AC4.1.4",
+      "status": "OK",
+      "target": "packages/frontend/test/u5-assignment-calendar/calendar.feature"
+    },
+    {
+      "id": "AC4.1.5",
+      "status": "OK",
+      "target": "packages/frontend/test/u5-assignment-calendar/calendar.feature"
+    },
+    {
+      "id": "AC4.1.6",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/view-calendar.feature",
+      "note": "速さの前提（読み取り回数）だけを確かめた。実際の速さはステージングで作り手が測るまで確定ではない（Build and Test で記録）"
+    },
+    {
+      "id": "AC4.1.7",
+      "status": "OK",
+      "target": "packages/frontend/test/u1-skeleton-family/theme.test.ts"
+    },
+    {
+      "id": "NFR1.19",
+      "status": "OK",
+      "target": "infrastructure/test/u5-assignment-calendar/stacks.test.ts",
+      "note": "構成（オンデマンド、追加の有料サービスなし）だけを確かめた。請求額 0 円は最初の請求で確かめるまで確定ではない"
+    },
+    {
+      "id": "NFR1.20",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/view-calendar.feature"
+    },
+    {
+      "id": "NFR1.21",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/view-calendar.feature"
+    },
+    {
+      "id": "NFR1.22",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/isChoreTypeAssigned.test.ts"
+    },
+    {
+      "id": "NFR2.28",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/saveAssignmentTransaction.test.ts"
+    },
+    {
+      "id": "NFR2.29",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-resilience.feature"
+    },
+    {
+      "id": "NFR2.30",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/change-duty.feature"
+    },
+    {
+      "id": "NFR2.31",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/calendarRepository.test.ts"
+    },
+    {
+      "id": "NFR2.32",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/logRedaction.test.ts"
+    },
+    {
+      "id": "NFR3.6",
+      "status": "OK",
+      "target": "infrastructure/test/u1-skeleton-family/stacks.test.ts"
+    },
+    {
+      "id": "NFR4.42",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/change-duty.feature"
+    },
+    {
+      "id": "NFR4.43",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/view-calendar.feature"
+    },
+    {
+      "id": "NFR4.44",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/change-duty.feature"
+    },
+    {
+      "id": "NFR4.45",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-assignment.feature"
+    },
+    {
+      "id": "NFR4.46",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-assignment.feature"
+    },
+    {
+      "id": "NFR4.47",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-assignment.feature"
+    },
+    {
+      "id": "NFR4.48",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/change-duty.feature"
+    },
+    {
+      "id": "NFR4.49",
+      "status": "OK",
+      "target": "packages/frontend/test/u5-assignment-calendar/calendar.feature"
+    },
+    {
+      "id": "NFR4.50",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-resilience.feature"
+    },
+    {
+      "id": "NFR4.51",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/changesHash.test.ts"
+    },
+    {
+      "id": "NFR4.52",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-assignment.feature"
+    },
+    {
+      "id": "NFR6.6",
+      "status": "OK",
+      "target": "infrastructure/test/u5-assignment-calendar/stacks.test.ts"
+    },
+    {
+      "id": "NFR7.20",
+      "status": "OK",
+      "target": "packages/frontend/test/u5-assignment-calendar/useMonthCalendar.test.tsx",
+      "note": "速さの前提だけを確かめた。実際の速さはステージングで測るまで確定ではない（Build and Test で記録）"
+    },
+    {
+      "id": "NFR7.21",
+      "status": "OK",
+      "target": "packages/frontend/test/u5-assignment-calendar/useMonthCalendar.test.tsx",
+      "note": "速さの前提だけを確かめた。実際の速さはステージングで測るまで確定ではない（Build and Test で記録）"
+    },
+    {
+      "id": "NFR7.22",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-resilience.feature",
+      "note": "書き込みのまとまりの数だけを確かめた。実際の速さはステージングで測るまで確定ではない（Build and Test で記録）"
+    },
+    {
+      "id": "NFR7.23",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/change-duty.feature",
+      "note": "読み書きの回数だけを確かめた。実際の速さはステージングで測るまで確定ではない（Build and Test で記録）"
+    },
+    {
+      "id": "NFR7.24",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-assignment.feature"
+    },
+    {
+      "id": "NFR8.9",
+      "status": "OK",
+      "target": "packages/backend/test/u5-assignment-calendar/save-assignment.feature"
+    },
+    {
+      "id": "NFR8.10",
+      "status": "OK",
+      "target": "packages/shared/test/u5-assignment-calendar/jstDate.test.ts"
+    },
+    {
+      "id": "NFR9.5",
+      "status": "OK",
+      "target": "packages/frontend/test/u1-skeleton-family/theme.test.ts"
+    },
+    {
+      "id": "NFR11.4",
+      "status": "OK",
+      "target": "packages/shared/test/u5-assignment-calendar/jstDate.test.ts"
+    },
+    {
+      "id": "BR6.1",
+      "status": "OK",
+      "target": "packages/backend/src/handlers/calendar/saveAssignment.ts"
+    },
+    {
+      "id": "BR6.2",
+      "status": "OK",
+      "target": "packages/backend/src/services/calendarService.ts"
+    },
+    {
+      "id": "BR6.3",
+      "status": "OK",
+      "target": "packages/backend/src/services/calendarService.ts"
+    },
+    {
+      "id": "BR6.4",
+      "status": "OK",
+      "target": "packages/backend/src/services/assignmentPlanner.ts"
+    },
+    {
+      "id": "BR6.5",
+      "status": "OK",
+      "target": "packages/backend/src/services/assignmentPlanner.ts"
+    },
+    {
+      "id": "BR6.6",
+      "status": "OK",
+      "target": "packages/backend/src/services/assignmentPlanner.ts"
+    },
+    {
+      "id": "BR6.7",
+      "status": "OK",
+      "target": "packages/backend/src/services/changesHash.ts"
+    },
+    {
+      "id": "BR6.8",
+      "status": "OK",
+      "target": "packages/backend/src/repositories/calendarRepository.ts"
+    },
+    {
+      "id": "BR6.9",
+      "status": "OK",
+      "target": "packages/backend/src/services/calendarService.ts"
+    },
+    {
+      "id": "BR6.10",
+      "status": "OK",
+      "target": "packages/backend/src/services/calendarPort.ts"
+    },
+    {
+      "id": "BR6.11",
+      "status": "OK",
+      "target": "packages/frontend/src/pages/CalendarPage.tsx"
+    },
+    {
+      "id": "BR6.12",
+      "status": "OK",
+      "target": "packages/frontend/src/hooks/useMonthCalendar.ts"
+    },
+    {
+      "id": "BR6.13",
+      "status": "OK",
+      "target": "packages/frontend/src/pages/DayDetail.tsx"
+    },
+    {
+      "id": "BR6.14",
+      "status": "OK",
+      "target": "packages/frontend/src/pages/CalendarPage.tsx"
+    },
+    {
+      "id": "BR6.15",
+      "status": "OK",
+      "target": "packages/backend/src/handlers/calendar/getCalendar.ts"
+    },
+    {
+      "id": "BR6.16",
+      "status": "OK",
+      "target": "packages/frontend/src/pages/CalendarPage.tsx"
+    },
+    {
+      "id": "BR6.17",
+      "status": "OK",
+      "target": "packages/frontend/src/pages/AssignmentPage.tsx"
+    },
+    {
+      "id": "BR6.18",
+      "status": "OK",
+      "target": "packages/backend/src/services/calendarService.ts"
+    }
+  ]
+}

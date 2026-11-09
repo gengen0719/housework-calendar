@@ -3,7 +3,7 @@ import { CircularProgress, Container, Typography } from '@mui/material';
 import { MESSAGES } from '@housework/shared';
 import { useNotificationGroup } from './hooks/useNotificationGroup';
 import { useSession } from './hooks/useSession';
-import { CalendarFramePage } from './pages/CalendarFramePage';
+import { CalendarPage } from './pages/CalendarPage';
 import { ChoreTypesPage } from './pages/ChoreTypesPage';
 import { ErrorRetry } from './pages/ErrorRetry';
 import { FamilySettingsPage } from './pages/FamilySettingsPage';
@@ -83,8 +83,9 @@ export function App() {
           );
         }
         return (
-          <CalendarFramePage
+          <CalendarPage
             familyName={family.name}
+            authorized={authorized}
             role={family.role}
             notificationGroup={notificationGroup}
             onOpenSettings={() => setShowSettings(true)}

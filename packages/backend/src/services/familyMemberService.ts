@@ -79,6 +79,19 @@ export async function findUserByLineId(lineUserId: string): Promise<Result<User,
   return user ? ok(user) : err('NOT_FOUND');
 }
 
+/**
+ * その家族の子供を 1 人、強い整合性で確かめる（C6 findFamilyChild。U5 の割り当てと担当の変更が使う）。
+ * 利用者がいない、ほかの家族の人、管理者は、どれも同じ NOT_FOUND。結果整合の索引は使わない。
+ */
+export async function findFamilyChild(
+  ctx: FamilyContext,
+  userId: string,
+): Promise<Result<{ userId: string; displayName: string }, 'NOT_FOUND'>> {
+  const user = await userRepository.findById(userId, { consistent: true });
+  if (!user || user.familyId !== ctx.familyId || user.role !== 'child') return err('NOT_FOUND');
+  return ok({ userId: user.userId, displayName: user.displayName });
+}
+
 export async function getUserStatus(userId: string): Promise<Result<UserStatus, 'NOT_FOUND'>> {
   const user = await userRepository.findById(userId, { consistent: true });
   if (!user) return err('NOT_FOUND');

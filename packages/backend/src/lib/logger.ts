@@ -26,6 +26,29 @@ export type LogData = Record<string, unknown> & {
 
 let currentRequestId: string | undefined;
 
+/** REQUEST_END に足す、その要求の数字（件数だけ。名前や中身は入れない。U5 の NFR2.32） */
+export interface RequestMetrics {
+  dutyCount?: number;
+}
+
+let requestMetrics: RequestMetrics = {};
+let firstRequestOfEnvironment = true;
+
+export function setRequestMetrics(metrics: RequestMetrics): void {
+  requestMetrics = { ...requestMetrics, ...metrics };
+}
+
+/**
+ * REQUEST_END に書く数字を取り出し、次の要求のために空にする。
+ * coldStart は、この実行環境の最初の要求だけ true（NFR7.20 の測定で、コールドスタートを分けて見るため）。
+ */
+export function takeRequestMetrics(): RequestMetrics & { coldStart: boolean } {
+  const taken = { ...requestMetrics, coldStart: firstRequestOfEnvironment };
+  requestMetrics = {};
+  firstRequestOfEnvironment = false;
+  return taken;
+}
+
 export function setRequestId(requestId: string | undefined): void {
   currentRequestId = requestId;
 }

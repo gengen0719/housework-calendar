@@ -5,6 +5,7 @@ import { expect, vi } from 'vitest';
 import { MESSAGES } from '@housework/shared';
 import { App } from '../../src/App';
 import { FAKE_SESSION_TOKEN } from '../fixtures/fakeSecrets';
+import { defaultCalendarResponse } from '../u5-assignment-calendar/helpers/calendarStub';
 
 // LIFF は差し替える（本物の LINE にはつながない）
 const liff = vi.hoisted(() => ({
@@ -51,7 +52,9 @@ function installFakeApi(): void {
       };
       calls.push(call);
       const route = routes[`${method} ${input}`];
-      if (!route) return new Response('{}', { status: 404 });
+      if (!route) {
+        return defaultCalendarResponse(method, input) ?? new Response('{}', { status: 404 });
+      }
       const result = route(call);
       if (result === 'network') throw new TypeError('Failed to fetch');
       return new Response(result.body === undefined ? null : JSON.stringify(result.body), {
@@ -122,7 +125,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     });
     And('家族を作る入口やカレンダーの枠は出ない', () => {
       expect(screen.queryByTestId('create-family-button')).toBeNull();
-      expect(screen.queryByTestId('calendar-frame-page')).toBeNull();
+      expect(screen.queryByTestId('calendar-page')).toBeNull();
     });
   });
 
@@ -150,13 +153,13 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
         fireEvent.click(screen.getByTestId('save-family-button'));
       });
       Then('家族の名前「田中家」と今月のカレンダーの枠が出る', async () => {
-        expect(await screen.findByTestId('calendar-frame-page')).toBeInTheDocument();
+        expect(await screen.findByTestId('calendar-page')).toBeInTheDocument();
         expect(screen.getByTestId('family-name')).toHaveTextContent('田中家');
         const now = new Date();
         expect(screen.getByTestId('calendar-month')).toHaveTextContent(
           `${now.getFullYear()}年${now.getMonth() + 1}月`,
         );
-        expect(screen.getByTestId('calendar-grid')).toBeInTheDocument();
+        expect(await screen.findByTestId('calendar-grid')).toBeInTheDocument();
       });
       And('家族を作る要求には操作ごとの識別子が付いている', () => {
         const [post] = callsTo('POST', '/v1/families');
@@ -262,7 +265,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
           body: { ...HANAKO, family: family('田中家') },
         });
         fireEvent.click(screen.getByTestId('retry-button'));
-        expect(await screen.findByTestId('calendar-frame-page')).toBeInTheDocument();
+        expect(await screen.findByTestId('calendar-page')).toBeInTheDocument();
         expect(screen.getByTestId('family-name')).toHaveTextContent('田中家');
       });
     },
@@ -312,7 +315,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
         const meCalls = callsTo('GET', '/v1/me');
         expect(meCalls).toHaveLength(2);
         expect(meCalls[1]?.headers.get('Authorization')).toBe('Bearer session-token-2');
-        expect(screen.getByTestId('calendar-frame-page')).toBeInTheDocument();
+        expect(screen.getByTestId('calendar-page')).toBeInTheDocument();
       });
     },
   );
