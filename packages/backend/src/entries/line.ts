@@ -9,6 +9,7 @@ import { handleJoin } from '../handlers/line/joinHandler';
 import { handleLeave } from '../handlers/line/leaveHandler';
 import { handleMessage } from '../handlers/line/messageHandler';
 import { handlePostback } from '../handlers/line/postbackHandler';
+import { parseRecordCommand } from '../handlers/line/recordCommand';
 import { handleUnfollow } from '../handlers/line/unfollowHandler';
 import { WebhookBodySchema, type LineEvent } from '../handlers/line/types';
 import { getConfig } from '../lib/config';
@@ -43,7 +44,11 @@ const handlers: Record<string, EventRoute> = {
   leave: { accepts: always, handle: handleLeave },
   unfollow: { accepts: always, handle: handleUnfollow },
   message: { accepts: isGroupOperation, handle: handleMessage },
-  postback: { accepts: isGroupOperation, handle: handlePostback },
+  // postback は、グループの操作か、1 対 1 の記録の操作（U6。record.list / record.do）を受け付ける（security-design.md）
+  postback: {
+    accepts: (event) => isGroupOperation(event) || parseRecordCommand(event) !== null,
+    handle: handlePostback,
+  },
 };
 
 /** 1 件のイベントを、二度処理しないようにして扱う（BR2.7）。思いがけない失敗は記録を消して投げる。 */

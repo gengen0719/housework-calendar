@@ -1,0 +1,86 @@
+{
+  "stage": "nfr-requirements",
+  "unit": "u6-recording",
+  "upstream_ids": [
+    "NFR1",
+    "NFR2",
+    "NFR3",
+    "NFR4",
+    "NFR5",
+    "NFR6",
+    "NFR7",
+    "NFR8",
+    "NFR9",
+    "NFR10",
+    "NFR11"
+  ],
+  "coverage": [
+    {
+      "id": "NFR1",
+      "status": "OK",
+      "target": "NFR1.23, NFR1.24, NFR1.25, NFR1.26, NFR1.27, NFR1.28, NFR1.29"
+    },
+    {
+      "id": "NFR2",
+      "status": "OK",
+      "target": "NFR2.33, NFR2.34, NFR2.35, NFR2.36, NFR2.37, NFR2.38, NFR2.39, NFR2.40, NFR2.41, NFR2.42, NFR2.43; the 15-minute notice to the maker is handed to u10 (NFR2.43), u6 only leaves INTERNAL/500 in the logs"
+    },
+    {
+      "id": "NFR3",
+      "status": "OK",
+      "target": "NFR3.7, NFR3.8, NFR3.9, NFR3.10"
+    },
+    {
+      "id": "NFR4",
+      "status": "OK",
+      "target": "NFR4.53, NFR4.54, NFR4.55, NFR4.56, NFR4.57, NFR4.58, NFR4.59, NFR4.60, NFR4.61, NFR4.62, NFR4.63, NFR4.64"
+    },
+    {
+      "id": "NFR5",
+      "status": "OK",
+      "target": "NFR5.10, NFR5.11, NFR5.12"
+    },
+    {
+      "id": "NFR6",
+      "status": "OK",
+      "target": "NFR6.7"
+    },
+    {
+      "id": "NFR7",
+      "status": "OK",
+      "target": "NFR7.25, NFR7.26, NFR7.27, NFR7.28, NFR7.29, NFR7.30, NFR7.31, NFR7.32; AC5.1.15 (deferred from functional-design) is received by NFR7.25, NFR7.26, NFR7.30"
+    },
+    {
+      "id": "NFR8",
+      "status": "OK",
+      "target": "NFR8.11, NFR8.12"
+    },
+    {
+      "id": "NFR9",
+      "status": "OK",
+      "target": "NFR9.6, NFR9.7"
+    },
+    {
+      "id": "NFR10",
+      "status": "OK",
+      "target": "NFR10.6, NFR10.7"
+    },
+    {
+      "id": "NFR11",
+      "status": "OK",
+      "target": "NFR11.5, NFR11.6"
+    }
+  ],
+  "reverse": [
+    {
+      "id": "AC5.1.15",
+      "status": "OK",
+      "target": "NFR7.25, NFR7.26, NFR7.30 (received as Deferred from u6 functional-design)"
+    },
+    {
+      "id": "BR7.17",
+      "status": "OK",
+      "target": "NFR2.37, NFR2.38 (functional-design BR7.17 revised 2026-11-09: reply only on INTERNAL, other unexpected exceptions return 500 without reply)"
+    }
+  ]
+}

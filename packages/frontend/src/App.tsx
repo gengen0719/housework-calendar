@@ -86,6 +86,7 @@ export function App() {
           <CalendarPage
             familyName={family.name}
             authorized={authorized}
+            currentUserId={state.me.userId}
             role={family.role}
             notificationGroup={notificationGroup}
             onOpenSettings={() => setShowSettings(true)}

@@ -51,6 +51,13 @@ export const MESSAGES: Record<Reason, string> = {
   INVALID_ASSIGNMENT: '割り当ての入力に誤りがあります',
   MONTH_NOT_EDITABLE: '割り当てを入力できるのは今月と来月だけです',
   PAYLOAD_TOO_LARGE: '送る内容が大きすぎます',
+  // U6 で足した印
+  DUTY_CHANGED: 'この担当は先に変更されました',
+  DUTY_ALREADY_DONE: 'この担当はすでに『済』になっています',
+  // NOT_TODAY_DUTY は LINE の中だけで使う。返事は DUTY_CHANGED と同じ文言（functional-spec の表）
+  NOT_TODAY_DUTY: 'この担当は先に変更されました',
+  ADMIN_RECORD_GUIDE: 'お手伝いの記録は子供のメニューです。記録の修正は画面からできます',
+  JOIN_FAMILY_FIRST: '先に家族に参加してください',
 };
 
 /** カレンダーと割り当ての画面で使う文言（理由の印ではない。U5）。 */
@@ -155,6 +162,39 @@ export function INVITATION_SHARE_TEXT(input: {
   url: string;
 }): string {
   return `${input.familyName}の家事カレンダーに招待します。\n${input.expiresAtText}まで使えます。\n${input.url}`;
+}
+
+/** 記録（U6）で使う文言。理由の印ではない。LINE と画面の両方が引く（C10）。 */
+export const RECORD_LIST_HEADING = 'どのお手伝いを記録しますか';
+export const RECORD_CONFIRM_BUTTON = '記録する';
+export const RECORD_CANCEL_BUTTON = 'やめる';
+/** 選択肢が 12 件を超えたときに添える案内（BR7.2） */
+export const RECORD_OVERFLOW_NOTE = 'ほかの担当はアプリから記録してください';
+/** 取引が 2 回続けて断られたとき（INTERNAL）の記録用の文言（functional-spec の表） */
+export const RECORD_FAILED_MESSAGE = 'うまく記録できませんでした。もう一度お試しください';
+
+/** 日付（`YYYY-MM-DD`）を「1/5」の形（月/日）にする。 */
+function monthSlashDay(date: string): string {
+  const [, month, day] = date.split('-').map(Number) as [number, number, number];
+  return `${month}/${day}`;
+}
+
+/** 記録したときの返事: 「皿洗いを記録しました（16:42）」（BR7.9）。time は日本時間の HH:mm。 */
+export function recordedMessage(choreName: string, time: string): string {
+  return `${choreName}を記録しました（${time}）`;
+}
+
+/** 画面の確認の問いかけ: 「1/5 皿洗いを記録しますか」（BR7.10）。 */
+export function recordConfirmQuestion(date: string, choreName: string): string {
+  return `${monthSlashDay(date)} ${choreName}を記録しますか`;
+}
+
+/** 選べない担当の 1 行: 「皿洗い（済 16:42）」「掃除機（×）」（BR7.2、AC5.1.3）。 */
+export function doneDutyLabel(choreName: string, time: string): string {
+  return `${choreName}（済 ${time}）`;
+}
+export function skippedDutyLabel(choreName: string): string {
+  return `${choreName}（×）`;
 }
 
 /** 理由の印から文言を引く。未知の印には INTERNAL の文言を返す。 */

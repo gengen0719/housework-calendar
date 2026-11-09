@@ -154,7 +154,9 @@ describe('U2 CDK: App スタック', () => {
     const json = JSON.stringify(statements);
     expect(json).not.toContain('Invitations');
     expect(json).not.toContain('familyId-index');
-    expect(statements.flatMap(actionsOf)).not.toContain('dynamodb:ConditionCheckItem');
+    // U2 の時点では line に ConditionCheckItem はなかったが、U6 で Calendar・ChoreTypes の取引のために足した。
+    // U2 が確かめたいのは Invitations と familyId-index に届かないこと。ConditionCheckItem の有無は
+    // U6 後の line 全体の期待（infrastructure/test/u6-recording/stacks.test.ts）で確かめる。
   });
 
   it('メトリクスフィルタ InvitationInvalidCount: 名前空間・値 1・defaultValue 0', () => {

@@ -82,6 +82,49 @@ export async function loadMonth(familyId: string, month: string): Promise<MonthI
   return result;
 }
 
+/**
+ * ある日の担当だけを読む（U6。`familyId = :f AND begins_with(sk, 'M#<month>#D#<date>#')`。強い整合性）。
+ * 続き（LastEvaluatedKey）があれば最後まで読む。担当の数で読み取りの回数が大きく増えない（NFR1.20、NFR1.21）。
+ */
+export async function listDutiesOn(familyId: string, date: string): Promise<DutyRecord[]> {
+  const month = date.slice(0, 7);
+  const prefix = `M#${month}#D#${date}#`;
+  const duties: DutyRecord[] = [];
+  let startKey: Record<string, unknown> | undefined;
+  do {
+    const page = await docClient.send(
+      new QueryCommand({
+        TableName: tables.calendar(),
+        KeyConditionExpression: '#familyId = :f AND begins_with(#sk, :p)',
+        ExpressionAttributeNames: { '#familyId': 'familyId', '#sk': 'sk' },
+        ExpressionAttributeValues: { ':f': familyId, ':p': prefix },
+        ConsistentRead: true,
+        ...(startKey ? { ExclusiveStartKey: startKey } : {}),
+      }),
+    );
+    for (const raw of page.Items ?? []) {
+      duties.push(stripSortKey(raw as WithSortKey<DutyRecord>));
+    }
+    startKey = page.LastEvaluatedKey;
+  } while (startKey);
+  return duties;
+}
+
+/** 月の状態を 1 つ読む（U6。`M#<month>#S`。強い整合性）。なければ undefined（記録のない月は確定していない扱い）。 */
+export async function getMonthState(
+  familyId: string,
+  month: string,
+): Promise<MonthStateRecord | undefined> {
+  const result = await docClient.send(
+    new GetCommand({
+      TableName: tables.calendar(),
+      Key: { familyId, sk: monthStateSortKey(month) },
+      ConsistentRead: true,
+    }),
+  );
+  return result.Item ? stripSortKey(result.Item as WithSortKey<MonthStateRecord>) : undefined;
+}
+
 /** 割り当てを 1 つ読む（強い整合性）。 */
 export async function getAssignment(
   familyId: string,
@@ -301,6 +344,75 @@ export function buildChangeChildItem(
       },
     },
   };
+}
+
+/** C7 の ChoreTypes の ConditionCheck: 単価が読んだ値のまま（U6。BR7.7、NFR4.50） */
+export function buildUnitPriceGuard(familyId: string, choreTypeId: string, unitPrice: number) {
+  return {
+    ConditionCheck: {
+      TableName: tables.choreTypes(),
+      Key: { familyId, sk: typeSortKey(choreTypeId) },
+      ConditionExpression: '#unitPrice = :price',
+      ExpressionAttributeNames: { '#unitPrice': 'unitPrice' },
+      ExpressionAttributeValues: { ':price': unitPrice },
+    },
+  };
+}
+
+/**
+ * 記録の取引の 3 項目（U6。BR7.6、BR7.7、reliability-design.md の「取引の形」）。
+ * - 項目 0: 担当の Update（status=done、recordedAt/recordedBy/unitPrice/updatedAt を書き、version+1）。
+ *   条件は status=todo・version・dutyId・childUserId。書く 6 項目だけ（origin・childUserId・date・choreTypeId は変えない）。
+ * - 項目 1: 月の状態の ConditionCheck（確定していない。buildMonthGuard）。月は担当の month（今日の月ではない）
+ * - 項目 2: 種類の ConditionCheck（単価が読んだ値のまま。buildUnitPriceGuard）
+ * 条件式・更新式に出る属性名は、予約語かどうかにかかわらず、すべて # の別名で置き換える（NFR4.50）。
+ * 項目がなければ status=todo の条件が成り立たず断られる（担当を作らない。NFR4.64）。
+ */
+export function buildRecordItems(
+  duty: DutyRecord,
+  unitPrice: number,
+  ctx: { userId: string },
+  now: Date,
+): TransactItems {
+  const at = now.toISOString();
+  return [
+    {
+      Update: {
+        TableName: tables.calendar(),
+        Key: {
+          familyId: duty.familyId,
+          sk: dutySortKey(duty.month, duty.date, duty.choreTypeId),
+        },
+        UpdateExpression:
+          'SET #status = :done, #recordedAt = :now, #recordedBy = :by, ' +
+          '#unitPrice = :price, #updatedAt = :now, #version = #version + :one',
+        ConditionExpression:
+          '#status = :todo AND #version = :v AND #dutyId = :id AND #childUserId = :by',
+        ExpressionAttributeNames: {
+          '#status': 'status',
+          '#recordedAt': 'recordedAt',
+          '#recordedBy': 'recordedBy',
+          '#unitPrice': 'unitPrice',
+          '#updatedAt': 'updatedAt',
+          '#version': 'version',
+          '#dutyId': 'dutyId',
+          '#childUserId': 'childUserId',
+        },
+        ExpressionAttributeValues: {
+          ':done': 'done',
+          ':todo': 'todo',
+          ':now': at,
+          ':by': ctx.userId,
+          ':price': unitPrice,
+          ':one': 1,
+          ':v': duty.version,
+          ':id': duty.dutyId,
+        },
+      },
+    },
+    buildMonthGuard(duty.familyId, duty.month),
+    buildUnitPriceGuard(duty.familyId, duty.choreTypeId, unitPrice),
+  ];
 }
 
 /** 割り当ての Put。行が 0 行のときは choreTypeIds を置かない（空の集合は書けない） */

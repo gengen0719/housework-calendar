@@ -17,6 +17,7 @@ import { acceptInvitation } from '../handlers/invitation/accept';
 import { getCurrentInvitation } from '../handlers/invitation/getCurrent';
 import { previewInvitation } from '../handlers/invitation/preview';
 import { changeDutyChild } from '../handlers/calendar/changeDutyChild';
+import { recordDuty } from '../handlers/calendar/recordDuty';
 import { getAssignment } from '../handlers/calendar/getAssignment';
 import { getCalendar } from '../handlers/calendar/getCalendar';
 import { saveAssignment } from '../handlers/calendar/saveAssignment';
@@ -152,6 +153,14 @@ export const routes: Record<string, Route> = {
     return {
       status: 200,
       body: await changeDutyChild(auth, params.dutyId ?? '', () => readJsonBody(event), { now }),
+    };
+  },
+  // U6: 画面から担当を記録する（子供本人だけ。本文は担当の 404 のあとで読む）
+  'POST /v1/duties/:dutyId/record': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return {
+      status: 200,
+      body: await recordDuty(auth, params.dutyId ?? '', () => readJsonBody(event), { now }),
     };
   },
   // U2: 家族のメンバーの一覧（メンバー全員）と招待（管理者だけ。権限の確かめは各ハンドラーで requireMembership → requireAdmin）

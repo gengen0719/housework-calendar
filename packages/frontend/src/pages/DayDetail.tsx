@@ -3,6 +3,7 @@ import { Button, Stack, TextField, Typography } from '@mui/material';
 import { NO_DUTY_LABEL, getMessage, type CalendarChild, type Duty } from '@housework/shared';
 import { ApiFailure, changeDutyChild } from '../api/client';
 import { STATUS_LABEL, childName, formatTimeJst, longDayLabel } from '../calendar/format';
+import { DutyRecordAction } from '../components/DutyRecordAction';
 import type { Authorized } from '../hooks/useSession';
 import { colors } from '../theme';
 
@@ -18,20 +19,29 @@ interface Props {
   children: readonly CalendarChild[];
   isAdmin: boolean;
   authorized: Authorized;
-  /** 担当の子供を変えられたとき（応答の担当で画面を差し替える） */
+  /** いまログインしている利用者の ID（自分の担当だけに「やった」を出す。U6） */
+  currentUserId?: string;
+  /** この月が確定しているか（確定した月は記録できない。U6）。省略時は未確定として扱う */
+  confirmed?: boolean;
+  /** 裏側の日本時間の今日（明日以降の判断。端末の時計は使わない。U6）。省略時は記録のボタンは出さない */
+  today?: string;
+  /** 担当の子供を変えられたとき、または記録できたとき（応答の担当で画面を差し替える） */
   onChanged: (duty: Duty) => void;
-  /** 変更が断られたとき、見えている画面は残したまま読み直す */
+  /** 変更・記録が断られたとき、見えている画面は残したまま読み直す */
   onRefresh: () => void;
   onClose: () => void;
 }
 
-/** 日の詳細: 種類・子供・状態・記録した時刻（日本時間）・記録した人（AC4.1.2）。管理者だけ「未」の担当の子供を変えられる（AC3.1.2）。 */
+/** 日の詳細: 種類・子供・状態・記録した時刻（日本時間）・記録した人（AC4.1.2）。管理者だけ「未」の担当の子供を変えられる（AC3.1.2）。子供は自分の「未」の担当を記録できる（U6）。 */
 export function DayDetail({
   date,
   duties,
   children: kids,
   isAdmin,
   authorized,
+  currentUserId,
+  confirmed = false,
+  today = '',
   onChanged,
   onRefresh,
   onClose,
@@ -55,6 +65,9 @@ export function DayDetail({
           kids={kids}
           isAdmin={isAdmin}
           authorized={authorized}
+          currentUserId={currentUserId}
+          confirmed={confirmed}
+          today={today}
           onChanged={onChanged}
           onRefresh={onRefresh}
         />
@@ -76,11 +89,24 @@ interface DutyProps {
   kids: readonly CalendarChild[];
   isAdmin: boolean;
   authorized: Authorized;
+  currentUserId?: string;
+  confirmed: boolean;
+  today: string;
   onChanged: (duty: Duty) => void;
   onRefresh: () => void;
 }
 
-function DutyDetail({ duty, kids, isAdmin, authorized, onChanged, onRefresh }: DutyProps) {
+function DutyDetail({
+  duty,
+  kids,
+  isAdmin,
+  authorized,
+  currentUserId,
+  confirmed,
+  today,
+  onChanged,
+  onRefresh,
+}: DutyProps) {
   const [changing, setChanging] = useState(false);
   const [selected, setSelected] = useState(duty.childUserId);
   const [busy, setBusy] = useState(false);
@@ -126,6 +152,16 @@ function DutyDetail({ duty, kids, isAdmin, authorized, onChanged, onRefresh }: D
           記録した人: <span data-testid="detail-recorder">{duty.recordedByName}</span>
         </Typography>
       )}
+      <DutyRecordAction
+        duty={duty}
+        confirmed={confirmed}
+        today={today}
+        currentUserId={currentUserId}
+        isAdmin={isAdmin}
+        authorized={authorized}
+        onChanged={onChanged}
+        onRefresh={onRefresh}
+      />
       {isAdmin && duty.status === 'todo' && !changing && (
         <Button
           variant="outlined"

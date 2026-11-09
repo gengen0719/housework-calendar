@@ -21,6 +21,7 @@ import {
   type Role,
 } from '@housework/shared';
 import { STATUS_LABEL, childName, dayLabel, monthHeading } from '../calendar/format';
+import { DutyRecordAction } from '../components/DutyRecordAction';
 import { useMonthCalendar } from '../hooks/useMonthCalendar';
 import type { NotificationGroupState } from '../hooks/useNotificationGroup';
 import type { Authorized } from '../hooks/useSession';
@@ -42,6 +43,8 @@ const STATUS_COLOR = {
 interface Props {
   familyName: string;
   authorized: Authorized;
+  /** いまログインしている利用者の ID（子供は自分の担当だけ記録できる。U6） */
+  currentUserId?: string;
   /** 「家族の設定」へ進む（U2）。渡さなければボタンは出さない */
   onOpenSettings?: () => void;
   /** 自分の役割とお知らせ先の読み込み結果（U3）。管理者で、お知らせ先がないと分かったときだけ登録の案内を出す */
@@ -53,6 +56,7 @@ interface Props {
 export function CalendarPage({
   familyName,
   authorized,
+  currentUserId,
   onOpenSettings,
   role,
   notificationGroup,
@@ -114,6 +118,7 @@ export function CalendarPage({
             calendar={calendar}
             selectedDate={selectedDate}
             isAdmin={isAdmin}
+            currentUserId={currentUserId}
             authorized={authorized}
             onSelect={(date) => setSelectedDate((current) => (current === date ? undefined : date))}
             onChanged={(duty) =>
@@ -189,6 +194,7 @@ interface DayListProps {
   calendar: MonthCalendar;
   selectedDate: string | undefined;
   isAdmin: boolean;
+  currentUserId?: string;
   authorized: Authorized;
   onSelect: (date: string) => void;
   onChanged: (duty: Duty) => void;
@@ -199,6 +205,7 @@ function DayList({
   calendar,
   selectedDate,
   isAdmin,
+  currentUserId,
   authorized,
   onSelect,
   onChanged,
@@ -228,6 +235,9 @@ function DayList({
           children={calendar.children}
           isAdmin={isAdmin}
           authorized={authorized}
+          currentUserId={currentUserId}
+          confirmed={calendar.confirmed}
+          today={calendar.today}
           onChanged={onChanged}
           onRefresh={onRefresh}
           onClose={() => onSelect(selectedDate)}
@@ -282,6 +292,29 @@ function DayList({
                   ))}
                 </Stack>
               </ListItemButton>
+              {/* 自分の担当の「やった」ボタン・記録できない理由（BR7.10）。ボタンは行の外に置く（入れ子の押しボタンを避ける） */}
+              {duties.some(
+                (duty) => !isAdmin && duty.childUserId === currentUserId && duty.status !== 'done',
+              ) && (
+                <Stack spacing={0.5} sx={{ px: 2, pb: 1 }} data-testid="day-record-actions">
+                  {duties
+                    .filter((duty) => !isAdmin && duty.childUserId === currentUserId)
+                    .map((duty) => (
+                      <DutyRecordAction
+                        key={duty.dutyId}
+                        duty={duty}
+                        confirmed={calendar.confirmed}
+                        today={calendar.today}
+                        currentUserId={currentUserId}
+                        isAdmin={isAdmin}
+                        authorized={authorized}
+                        showChoreName
+                        onChanged={onChanged}
+                        onRefresh={onRefresh}
+                      />
+                    ))}
+                </Stack>
+              )}
             </Box>
           );
         })}

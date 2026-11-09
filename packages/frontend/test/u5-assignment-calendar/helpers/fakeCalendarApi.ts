@@ -64,6 +64,8 @@ interface FakeState {
   saveAnswers: FakeResponse[];
   /** 担当の変更（PATCH）の答え。空なら受けた担当を書き換えて 200 */
   patchAnswers: FakeResponse[];
+  /** 記録（POST /record）の答え。順に使い、尽きたら最後の答えを使う。空なら受けた担当を「済」にして 200（U6） */
+  recordAnswers: FakeResponse[];
 }
 
 export const fake: FakeState = {
@@ -77,6 +79,7 @@ export const fake: FakeState = {
   calendarFails: false,
   saveAnswers: [],
   patchAnswers: [],
+  recordAnswers: [],
 };
 
 export function resetFake(): void {
@@ -93,6 +96,7 @@ export function resetFake(): void {
   fake.calendarFails = false;
   fake.saveAnswers = [];
   fake.patchAnswers = [];
+  fake.recordAnswers = [];
 }
 
 let dutySequence = 0;
@@ -207,6 +211,25 @@ export function installFakeApi(): void {
           if (answer) return respond(answer.status, answer.body);
           return respond(200, makeCalendar(month));
         }
+      }
+      const recordMatch = /^\/v1\/duties\/(.+)\/record$/.exec(input);
+      if (method === 'POST' && recordMatch) {
+        const answer = nextAnswer(fake.recordAnswers);
+        if (answer) return respond(answer.status, answer.body);
+        const found = Object.values(fake.calendars)
+          .flatMap((c) => c.duties)
+          .find((d) => d.dutyId === recordMatch[1]);
+        if (!found) return respond(404, { error: { reason: 'NOT_FOUND' } });
+        const self = fake.role === 'admin' ? HANAKO : TARO;
+        return respond(200, {
+          ...found,
+          status: 'done',
+          recordedAt: '2026-11-15T07:42:00.000Z',
+          recordedBy: self.userId,
+          recordedByName: self.displayName,
+          unitPrice: 100,
+          version: found.version + 1,
+        });
       }
       const dutyMatch = /^\/v1\/duties\/(.+)$/.exec(input);
       if (method === 'PATCH' && dutyMatch) {
