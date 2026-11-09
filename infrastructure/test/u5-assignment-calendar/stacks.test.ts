@@ -139,8 +139,10 @@ describe('U5 CDK: App スタックの環境変数', () => {
     expect(lambdaVariables('api').CALENDAR_TABLE).toBeDefined();
   });
 
-  it('line に CALENDAR_TABLE はない', () => {
-    expect(lambdaVariables('line').CALENDAR_TABLE).toBeUndefined();
+  // U5 の時点では line に CALENDAR_TABLE はなかったが、U6 で line が Calendar を読み書きするために足した。
+  // U6 後の正しい期待（line に CALENDAR_TABLE がある）は infrastructure/test/u6-recording/stacks.test.ts を参照。
+  it('line に CALENDAR_TABLE がある（U6 で追加）', () => {
+    expect(lambdaVariables('line').CALENDAR_TABLE).toBeDefined();
   });
 });
 
@@ -190,7 +192,9 @@ describe('U5 CDK: App スタックの権限', () => {
     expect(actionsOnTable(apiStatements(), 'Users')).toContain('dynamodb:GetItem');
   });
 
-  it('line に Calendar も ChoreTypes も含む文がない', () => {
+  // U6 で line に Calendar・ChoreTypes の許可を足したため、この U5 時点の不変条件は成り立たなくなった。
+  // コメントの予告どおりスキップにする。U6 後の正しい期待は infrastructure/test/u6-recording/stacks.test.ts を参照。
+  it.skip('line に Calendar も ChoreTypes も含む文がない（U5 の時点の確認。U6 で追加されたのでスキップ）', () => {
     const json = JSON.stringify(lineStatements());
     expect(json).not.toContain('Calendar');
     expect(json).not.toContain('ChoreTypes');

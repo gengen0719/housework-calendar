@@ -12,6 +12,14 @@ const JST_FORMAT = new Intl.DateTimeFormat('en-CA', {
   day: '2-digit',
 });
 
+/** 時刻（HH:mm）の整形のインスタンスも、モジュールの先頭で 1 つだけ作る（U6）。 */
+const JST_TIME_FORMAT = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Asia/Tokyo',
+  hour: '2-digit',
+  minute: '2-digit',
+  hourCycle: 'h23',
+});
+
 const MONTH_PATTERN = /^(\d{4})-(\d{2})$/;
 const MIN_YEAR = 2000;
 const MAX_YEAR = 2100;
@@ -23,6 +31,17 @@ export function jstDateOf(at: Date): string {
   const parts = JST_FORMAT.formatToParts(at);
   const pick = (type: string): string => parts.find((part) => part.type === type)?.value ?? '';
   return `${pick('year')}-${pick('month')}-${pick('day')}`;
+}
+
+/**
+ * ある瞬間の、日本時間の時刻（`HH:mm`、24 時間表記。U6）。記録した時刻の表示に使う。
+ * 入力は Date か、UTC の ISO 8601 の文字列。
+ */
+export function jstTimeOf(instant: Date | string): string {
+  const at = typeof instant === 'string' ? new Date(instant) : instant;
+  const parts = JST_TIME_FORMAT.formatToParts(at);
+  const pick = (type: string): string => parts.find((part) => part.type === type)?.value ?? '';
+  return `${pick('hour')}:${pick('minute')}`;
 }
 
 /** 月の形（`YYYY-MM`、2000-01〜2100-12）を確かめて、年と月を返す。違えば null。 */

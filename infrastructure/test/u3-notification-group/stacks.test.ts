@@ -145,8 +145,16 @@ describe('U3 CDK: App スタックの権限', () => {
     expect(json).not.toContain('RequestRecords');
   });
 
-  it('line に ConditionCheckItem がない', () => {
-    expect(lineStatements().flatMap(actionsOf)).not.toContain('dynamodb:ConditionCheckItem');
+  it('line の NotificationGroups と Families に ConditionCheckItem がない（U3 の取引は ConditionCheck を使わない）', () => {
+    // U6 で line に Calendar・ChoreTypes の ConditionCheckItem を足したため、line 全体での「ない」は
+    // 成り立たなくなった。U3 が確かめたいのは U3 の 2 つのテーブルの取引で ConditionCheck を使わないこと。
+    // U6 後の line 全体の正しい期待は infrastructure/test/u6-recording/stacks.test.ts を参照。
+    expect(actionsOnTable(lineStatements(), 'NotificationGroups')).not.toContain(
+      'dynamodb:ConditionCheckItem',
+    );
+    expect(actionsOnTable(lineStatements(), 'Families')).not.toContain(
+      'dynamodb:ConditionCheckItem',
+    );
   });
 
   it('api の NotificationGroups: GetItem だけ', () => {

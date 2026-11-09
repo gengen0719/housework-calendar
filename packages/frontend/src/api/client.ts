@@ -4,6 +4,8 @@ import type {
   CreateSessionRequest,
   CreateSessionResponse,
   AssignmentView,
+  RecordDutyRequest,
+  RecordDutyResponse,
   ChoreType,
   ChoreTypeInput,
   InvitationPreview,
@@ -233,5 +235,19 @@ export function changeDutyChild(token: string, dutyId: string, childUserId: stri
   return request('PATCH', `/v1/duties/${encodeURIComponent(dutyId)}`, {
     token,
     body: { childUserId },
+  });
+}
+
+/** 担当を記録する（子供が自分の「未」の担当を記録。U6）。見せた時点の version を送る。応答は記録後の担当 */
+export function recordDuty(
+  token: string,
+  dutyId: string,
+  body: RecordDutyRequest,
+  signal?: AbortSignal,
+): Promise<RecordDutyResponse> {
+  return request('POST', `/v1/duties/${encodeURIComponent(dutyId)}/record`, {
+    token,
+    body,
+    ...(signal ? { signal } : {}),
   });
 }

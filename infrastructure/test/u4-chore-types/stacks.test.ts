@@ -122,8 +122,10 @@ describe('U4 CDK: App スタックの環境変数', () => {
     expect(lambdaVariables('api').CHORE_TYPES_TABLE).toBeDefined();
   });
 
-  it('line に CHORE_TYPES_TABLE はない', () => {
-    expect(lambdaVariables('line').CHORE_TYPES_TABLE).toBeUndefined();
+  // U4 の時点では line に CHORE_TYPES_TABLE はなかったが、U6 で line が ChoreTypes を読むために足した。
+  // U6 後の正しい期待（line に CHORE_TYPES_TABLE がある）は infrastructure/test/u6-recording/stacks.test.ts を参照。
+  it('line に CHORE_TYPES_TABLE がある（U6 で追加）', () => {
+    expect(lambdaVariables('line').CHORE_TYPES_TABLE).toBeDefined();
   });
 });
 
@@ -154,7 +156,10 @@ describe('U4 CDK: App スタックの権限', () => {
     expect(JSON.stringify(statements[0]?.Resource)).not.toContain('/index/');
   });
 
-  it('line に ChoreTypes の許可がない', () => {
+  // U6 で line に ChoreTypes の許可（GetItem・Query・ConditionCheckItem）を足したため、この U4 時点の
+  // 不変条件は成り立たなくなった。コメントの予告どおりスキップにする。
+  // U6 後の正しい期待は infrastructure/test/u6-recording/stacks.test.ts を参照。
+  it.skip('line に ChoreTypes の許可がない（U4 の時点の確認。U6 で追加されたのでスキップ）', () => {
     expect(JSON.stringify(lineStatements())).not.toContain('ChoreTypes');
   });
 

@@ -1,0 +1,281 @@
+{
+  "stage": "infrastructure-design",
+  "unit": "u6-recording",
+  "upstream_ids": [
+    "NFR1.23", "NFR1.24", "NFR1.25", "NFR1.26", "NFR1.27", "NFR1.28",
+    "NFR2.33", "NFR2.34", "NFR2.35", "NFR2.37", "NFR2.38", "NFR2.39",
+    "NFR2.40", "NFR2.41", "NFR2.42", "NFR2.43",
+    "NFR3.7", "NFR3.8", "NFR3.9", "NFR3.10",
+    "NFR4.53", "NFR4.54", "NFR4.55", "NFR4.56", "NFR4.57", "NFR4.58", "NFR4.59",
+    "NFR4.60", "NFR4.61", "NFR4.62", "NFR4.63", "NFR4.64",
+    "NFR5.10", "NFR5.11", "NFR5.12",
+    "NFR6.7",
+    "NFR7.25", "NFR7.26", "NFR7.27", "NFR7.28", "NFR7.29", "NFR7.30", "NFR7.31", "NFR7.32",
+    "NFR8.11", "NFR8.12",
+    "NFR9.6", "NFR9.7",
+    "NFR10.6", "NFR10.7",
+    "NFR11.5", "NFR11.6"
+  ],
+  "coverage": [
+    {
+      "id": "NFR1.23",
+      "status": "OK",
+      "target": "infrastructure-specification.md 費用の見込み（Lambda の呼び出し増分は月 0 円。無料枠の 0.1% 未満）; scalability-design.md の量の見積もりを引用"
+    },
+    {
+      "id": "NFR1.24",
+      "status": "OK",
+      "target": "infrastructure-specification.md Infrastructure Services（reply のみ。push/multicast/broadcast なし。LINE の無料のメッセージ数を使わない）; cicd-pipeline.md（送信数の前後比較をステージングで行う）"
+    },
+    {
+      "id": "NFR1.25",
+      "status": "OK",
+      "target": "infrastructure-specification.md Deployment（新しいテーブル・Lambda・索引・指標・アラームを足さない）; monitoring-design.md（メトリクスフィルターもアラームもダッシュボードも足さない）; cicd-pipeline.md CDK のスタックテスト（テーブル・Lambda・ロググループ・MetricFilter の数が U6 の前後で同じ）"
+    },
+    {
+      "id": "NFR1.26",
+      "status": "OK",
+      "target": "infrastructure-specification.md Infrastructure Services（GetItem・Query だけ。Scan・BatchGetItem なし）; cicd-pipeline.md CDK のスタックテスト（line の Calendar に Scan がない）"
+    },
+    {
+      "id": "NFR1.27",
+      "status": "OK",
+      "target": "cicd-pipeline.md ステージングでの手での確かめ（送信数の前後比較）; infrastructure-specification.md 費用の見込み（reply は無料のメッセージ数に数えられない前提。ステージングで確かめる）"
+    },
+    {
+      "id": "NFR1.28",
+      "status": "OK",
+      "target": "infrastructure-specification.md（Lambda の起動中にリッチメニューの API を呼ばない）; cicd-pipeline.md（リッチメニューの設定は作り手が 1 回実行するスクリプト）"
+    },
+    {
+      "id": "NFR2.33",
+      "status": "OK",
+      "target": "infrastructure-specification.md Lambda のロールの権限（Calendar は UpdateItem のみ。PutItem・DeleteItem なし。担当を作らない・消さない）; cicd-pipeline.md CDK のスタックテスト（PutItem・DeleteItem が含まれない）"
+    },
+    {
+      "id": "NFR2.34",
+      "status": "OK",
+      "target": "infrastructure-specification.md Infrastructure Services（TransactWriteItems の確かめは項目ごとの許可で足りる。GetItem・UpdateItem・ConditionCheckItem が line に付く）; インフラの追加なし（読み直しはアプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.35",
+      "status": "OK",
+      "target": "infrastructure-specification.md（処理済みの記録は U1 の ProcessedLineEvents。二度処理しない記録の権限は既存のまま）; インフラの追加なし（二重押しはアプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.37",
+      "status": "OK",
+      "target": "インフラの追加なし。失敗の分け方（(a)(b)(c)）はアプリのコードで満たす; cicd-pipeline.md（500 で LINE が再送する動きは U1 の ProcessedLineEvents の既存の権限で動く）"
+    },
+    {
+      "id": "NFR2.38",
+      "status": "OK",
+      "target": "infrastructure-specification.md（読み取りの失敗は書き込みに進まない。インフラの追加なし）; Lambda の既存の権限（Users・ProcessedLineEvents）は変えない"
+    },
+    {
+      "id": "NFR2.39",
+      "status": "OK",
+      "target": "インフラの追加なし（onDutyRecorded フックはアプリのコードで満たす）; infrastructure-specification.md（新しい AWS サービスを呼ばない）"
+    },
+    {
+      "id": "NFR2.40",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing（DUTY_RECORDED・DUTY_RECORD_REJECTED など U6 のできごとのログ。line と api の既存ロググループを使う）"
+    },
+    {
+      "id": "NFR2.41",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing（書かないもの: LINE のユーザー ID・表示名・reply トークン・data の全文・単価）; インフラの追加なし（型と伏せ字はアプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.42",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing（LINE_EVENT_IGNORED は type だけ。data の全文を書かない）; インフラの追加なし"
+    },
+    {
+      "id": "NFR2.43",
+      "status": "OK",
+      "target": "monitoring-design.md 失敗の見つけ方（event と reason で検索できる。問い合わせ 3・4）; 指標・アラームは U10 で足す"
+    },
+    {
+      "id": "NFR3.7",
+      "status": "OK",
+      "target": "infrastructure-specification.md（署名の確かめが先。形の外れた record.* は begin の書き込みなし）; インフラの追加なし（accepts の判定はアプリのコードで満たす）"
+    },
+    {
+      "id": "NFR3.8",
+      "status": "OK",
+      "target": "インフラの追加なし（MAX_RECORD_CHOICES=12 と文字列の切り方はアプリのコードで満たす）; infrastructure-specification.md（LINE の reply のみ、メッセージは 3 通以内）"
+    },
+    {
+      "id": "NFR3.9",
+      "status": "OK",
+      "target": "infrastructure-specification.md Deployment（line の Lambda: 256 MB・30 秒・ARM64 のまま。同時実行の上限は U1 の変数）; cicd-pipeline.md CDK のスタックテスト（MemorySize 256・Timeout 30 が変わらない）"
+    },
+    {
+      "id": "NFR3.10",
+      "status": "OK",
+      "target": "インフラの追加なし（書く 6 項目だけを更新式に出すのはアプリのコードで満たす）; infrastructure-specification.md（Calendar の UpdateItem のみ。PutItem・DeleteItem なし）"
+    },
+    {
+      "id": "NFR4.53",
+      "status": "OK",
+      "target": "infrastructure-specification.md（署名の確かめは既存の line の Lambda が先に行う。インフラの追加なし）; cicd-pipeline.md スモークチェック 3.（署名なしは 401）"
+    },
+    {
+      "id": "NFR4.54",
+      "status": "OK",
+      "target": "インフラの追加なし（postback の data の正規表現確認はアプリのコードで満たす）; cicd-pipeline.md（形の外れた data は LINE_EVENT_IGNORED で終わる）"
+    },
+    {
+      "id": "NFR4.55",
+      "status": "OK",
+      "target": "インフラの追加なし（source.type = user のみ受け付けるのはアプリのコードで満たす）"
+    },
+    {
+      "id": "NFR4.56",
+      "status": "OK",
+      "target": "infrastructure-specification.md（oneToOneGate の判定はアプリのコード。インフラの追加なし。Users の lineUserId-index の Query 権限は既存の line の権限で足りる）"
+    },
+    {
+      "id": "NFR4.57",
+      "status": "OK",
+      "target": "infrastructure-specification.md Lambda のロールの権限（familyId の範囲で探す。dutyId は ctx.familyId の下だけ。インフラの追加なし）"
+    },
+    {
+      "id": "NFR4.58",
+      "status": "OK",
+      "target": "infrastructure-specification.md Lambda のロールの権限（reply のみ。push/multicast/broadcast の権限を line に足さない）"
+    },
+    {
+      "id": "NFR4.59",
+      "status": "OK",
+      "target": "infrastructure-specification.md（取引の条件: status・version・dutyId・childUserId・月確定・単価。インフラ側は UpdateItem と ConditionCheckItem の許可で支える）"
+    },
+    {
+      "id": "NFR4.60",
+      "status": "OK",
+      "target": "cicd-pipeline.md スモークチェック 3m（POST /v1/duties/:dutyId/record がセッションなしで 401）; インフラの追加なし（確かめの順番はアプリのコードで満たす）"
+    },
+    {
+      "id": "NFR4.61",
+      "status": "OK",
+      "target": "インフラの追加なし（本文の zod と strip、値は裏側が決めるのはアプリのコードで満たす）; cicd-pipeline.md スモークチェック 3m（本文が空でも 401 で止まる）"
+    },
+    {
+      "id": "NFR4.62",
+      "status": "OK",
+      "target": "インフラの追加なし（画面の文字は React のエスケープ。dangerouslySetInnerHTML なし）"
+    },
+    {
+      "id": "NFR4.63",
+      "status": "OK",
+      "target": "infrastructure-specification.md Lambda のロールの権限（line の Calendar: GetItem・Query・UpdateItem・ConditionCheckItem の 4 つ。ChoreTypes: GetItem・Query・ConditionCheckItem の 3 つ。環境変数 CALENDAR_TABLE・CHORE_TYPES_TABLE を追加）; cicd-pipeline.md CDK のスタックテスト（許可が 4 つ・3 つ。PutItem・DeleteItem・Scan などがない）"
+    },
+    {
+      "id": "NFR4.64",
+      "status": "OK",
+      "target": "infrastructure-specification.md Lambda のロールの権限（足さないもの: PutItem・DeleteItem・BatchGetItem・BatchWriteItem・Scan・dynamodb:*・Users の familyId-index・jwt/* SSM。line の既存の権限は増やさない）; cicd-pipeline.md CDK のスタックテスト（禁止アクションが含まれない）"
+    },
+    {
+      "id": "NFR5.10",
+      "status": "OK",
+      "target": "infrastructure-specification.md（CALENDAR_TABLE・CHORE_TYPES_TABLE はテーブル名のみ。秘密の情報なし。新しい SSM パラメータ・GitHub Variables なし）; cicd-pipeline.md 秘密の情報（スクリプトの値は例として <作り物の値>）"
+    },
+    {
+      "id": "NFR5.11",
+      "status": "OK",
+      "target": "cicd-pipeline.md 秘密の情報（テストに本物の LINE のユーザー ID・グループ ID・トークン・署名の鍵を使わない。gitleaks が CI で通ること）"
+    },
+    {
+      "id": "NFR5.12",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing（書かないもの: LINE のユーザー ID・表示名・reply トークン・data・単価）; infrastructure-specification.md（ログに出さない項目のインフラ的な守りは LogData の型でアプリ側が満たす）"
+    },
+    {
+      "id": "NFR6.7",
+      "status": "OK",
+      "target": "infrastructure-specification.md（Calendar は本番で RETAIN。U5 の設定のまま変えない）; cicd-pipeline.md CDK のスタックテスト（本番 Calendar の DeletionPolicy = Retain が変わらない）; 戻す手順（記録済みデータは壊れない）"
+    },
+    {
+      "id": "NFR7.25",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs（LINE の実機で 20 回、95% が 3 秒以内）; cicd-pipeline.md ステージングでの手での確かめ 10; infrastructure-specification.md Deployment（大きさは 3 秒を超えたときだけ見直す）"
+    },
+    {
+      "id": "NFR7.26",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs（選択肢の返事の時間）; cicd-pipeline.md ステージングでの手での確かめ 10"
+    },
+    {
+      "id": "NFR7.27",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs（LINE_EVENT_DONE.durationMs の 95% が 2,000 ms 以内）; monitoring-design.md 問い合わせ 1"
+    },
+    {
+      "id": "NFR7.28",
+      "status": "OK",
+      "target": "infrastructure-specification.md（ChoreTypes は Query 1 回で名前を読む。担当の種類ごとの GetItem を繰り返さない。ADR-U6-03）; インフラの追加なし（呼び出し回数の確かめは単体テストで満たす）"
+    },
+    {
+      "id": "NFR7.29",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs（POST /v1/duties/:dutyId/record の durationMs）; monitoring-design.md 問い合わせ 5"
+    },
+    {
+      "id": "NFR7.30",
+      "status": "OK",
+      "target": "cicd-pipeline.md ステージングでの手での確かめ 10・11（測り方、コールドスタートを含めて 20 回、環境変数を手で書き換えない）; README に足すこと（速さの測り方）"
+    },
+    {
+      "id": "NFR7.31",
+      "status": "OK",
+      "target": "インフラの追加なし（reply は 1 回で送り直さない。取引を 2 回断らせても 3 回目の書き込みがないのはアプリのコードで満たす）"
+    },
+    {
+      "id": "NFR7.32",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing（LINE_EVENT_DONE に action を追加。record.do と record.list を分けて読める）; monitoring-design.md 問い合わせ 1"
+    },
+    {
+      "id": "NFR8.11",
+      "status": "OK",
+      "target": "cicd-pipeline.md ワークフロー（ci.yml 変更なし。行カバレッジ 80% の下限が U6 のコードにも掛かる）; CDK のスタックテスト（u6-recording/stacks.test.ts の競合と失敗の筋書きはアプリのテストへ引き継ぎ）"
+    },
+    {
+      "id": "NFR8.12",
+      "status": "OK",
+      "target": "インフラの追加なし（自動のテストに時間の目標を入れない。呼び出し回数の上限だけ単体テストで確かめる）"
+    },
+    {
+      "id": "NFR9.6",
+      "status": "OK",
+      "target": "インフラの追加なし（LINE の返事の altText・色・押す場所の大きさはアプリのコードで満たす）; cicd-pipeline.md（ci.yml の Vitest が theme の単体テストを実行する）"
+    },
+    {
+      "id": "NFR9.7",
+      "status": "OK",
+      "target": "インフラの追加なし（画面の色・大きさ・確認の動き・aria-busy はアプリのコードで満たす）; cicd-pipeline.md ワークフロー（ci.yml の Vitest が実行する）"
+    },
+    {
+      "id": "NFR10.6",
+      "status": "OK",
+      "target": "infrastructure-specification.md（リッチメニューの設定スクリプトは --env 必須。既定で本番を選ばない）; cicd-pipeline.md 秘密の情報（トークンは SSM から読む）"
+    },
+    {
+      "id": "NFR10.7",
+      "status": "OK",
+      "target": "cicd-pipeline.md README に足すこと（リッチメニューの設定・確認・取り消し・Webhook の再送の確認手順）"
+    },
+    {
+      "id": "NFR11.5",
+      "status": "OK",
+      "target": "インフラの追加なし（今日の日付は日本時間で入口で 1 回決める。Lambda の TZ 環境変数に頼らない。jstDate.ts はアプリのコードで満たす）; infrastructure-specification.md Deployment（環境変数は CALENDAR_TABLE・CHORE_TYPES_TABLE のみ）"
+    },
+    {
+      "id": "NFR11.6",
+      "status": "OK",
+      "target": "インフラの追加なし（日付またぎの担当の確かめは jstDate.ts とアプリのコードで満たす）"
+    }
+  ]
+}

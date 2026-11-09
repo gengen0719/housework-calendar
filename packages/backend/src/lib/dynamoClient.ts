@@ -17,8 +17,8 @@ export const tables = {
   invitations: () => requireEnv('INVITATIONS_TABLE'),
   /** お知らせ先のグループ（U3）。LINE 用と画面用の両方の Lambda が持つ */
   notificationGroups: () => requireEnv('NOTIFICATION_GROUPS_TABLE'),
-  /** お手伝いの種類と名前の印（U4）。画面用の Lambda だけが持つ */
+  /** お手伝いの種類と名前の印（U4）。画面用と LINE 用（U6 で読むだけ）の両方の Lambda が持つ */
   choreTypes: () => requireEnv('CHORE_TYPES_TABLE'),
-  /** 割り当て・日ごとの担当・月の状態（U5）。画面用の Lambda だけが持つ */
+  /** 割り当て・日ごとの担当・月の状態（U5）。画面用と LINE 用（U6）の両方の Lambda が持つ */
   calendar: () => requireEnv('CALENDAR_TABLE'),
 };

@@ -87,3 +87,31 @@ export const ROUTE_KEY_INVITATION_ACCEPT = 'POST /v1/invitations/:token/accept';
 
 // ログで秘密の値を伏せたあとに残る目印（秘密ではないが、idToken などの項目に入る文字列）
 export const REDACTED_MARKER = '[REDACTED]'; // gitleaks:allow テスト用の作り物の値
+
+// U6（記録）で足す作り物の値
+// 家族に入っていない人の LINE のユーザー ID（1 対 1 の入口の確認用）
+export const FAKE_OUTSIDER_LINE_ID = 'U_outsider_u6'; // gitleaks:allow テスト用の作り物の値
+// どの利用者の記録にもない LINE のユーザー ID（「記録なし」の確認用）
+export const FAKE_UNKNOWN_LINE_ID = 'U_unknown_u6'; // gitleaks:allow テスト用の作り物の値
+// HMAC の鍵（64 文字の 16 進数。U6 の筋書きで鍵らしい値が要るとき用）
+export const FAKE_HMAC_SECRET_U6 =
+  'abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789'; // gitleaks:allow テスト用の作り物の値
+
+// U6（記録）の筋書き・単体テストで使う、作り物の担当 ID と種類 ID（UUID の形）。
+// 連番で多数の担当・種類が要る場面は、下のヘルパーで index から作る（直書きを避ける）。
+export const FAKE_U6_DUTY_ID_A = '00000000-0000-4000-8000-0000000000a1'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U6_DUTY_ID_B = '00000000-0000-4000-8000-0000000000b2'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U6_DUTY_ID_C = '00000000-0000-4000-8000-0000000000c3'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U6_DUTY_ID_D = '00000000-0000-4000-8000-0000000000d4'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U6_DUTY_ID_E = '00000000-0000-4000-8000-0000000000e5'; // gitleaks:allow テスト用の作り物の値
+
+/** index（0〜999）から作り物の担当 ID を作る。UUID の形だが本物ではない。 */
+export const fakeU6DutyId = (index: number): string =>
+  `00000000-0000-4000-8000-0000000d${String(index).padStart(4, '0')}`; // gitleaks:allow テスト用の作り物の値
+
+/** index（0〜999）から作り物の種類 ID を作る。UUID の形だが本物ではない。 */
+export const fakeU6ChoreTypeId = (index: number): string =>
+  `aaaaaaaa-aaaa-4aaa-8aaa-0000000c${String(index).padStart(4, '0')}`; // gitleaks:allow テスト用の作り物の値
+
+// U6（記録）: 家族の中に存在しない担当 ID（NOT_FOUND / 404 の確認用）。UUID の形だが本物ではない。
+export const FAKE_U6_NONEXISTENT_DUTY_ID = '00000000-0000-4000-8000-0000000000ee'; // gitleaks:allow テスト用の作り物の値

@@ -171,6 +171,14 @@ export interface ChangeDutyChildRequest {
   childUserId: string;
 }
 
+/** POST /v1/duties/:dutyId/record の本文（U6）。見せた時点の担当の version だけを送る */
+export interface RecordDutyRequest {
+  version: number;
+}
+
+/** POST /v1/duties/:dutyId/record の 200 の本文（U6）。記録後の担当（U5 の Duty をそのまま使う） */
+export type RecordDutyResponse = Duty;
+
 /**
  * 409 OVERWRITE_CONFIRMATION_REQUIRED の details.changes の 1 件（U5）。
  * 作り直したあとにその日のその種類の担当がなければ toChildUserId は null（画面は「なし」と出す）。

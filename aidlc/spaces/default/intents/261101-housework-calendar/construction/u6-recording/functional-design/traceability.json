@@ -1,0 +1,125 @@
+{
+  "stage": "functional-design",
+  "unit": "u6-recording",
+  "upstream_ids": [
+    "AC5.1.1",
+    "AC5.1.2",
+    "AC5.1.3",
+    "AC5.1.4",
+    "AC5.1.5",
+    "AC5.1.6",
+    "AC5.1.7",
+    "AC5.1.8",
+    "AC5.1.9",
+    "AC5.1.10",
+    "AC5.1.11",
+    "AC5.1.12",
+    "AC5.1.13",
+    "AC5.1.14",
+    "AC5.1.15"
+  ],
+  "coverage": [
+    {
+      "id": "AC5.1.1",
+      "status": "OK",
+      "target": "BR7.1, BR7.2, BR7.3, BR7.4, BR7.6, BR7.15"
+    },
+    {
+      "id": "AC5.1.2",
+      "status": "OK",
+      "target": "BR7.9"
+    },
+    {
+      "id": "AC5.1.3",
+      "status": "OK",
+      "target": "BR7.2"
+    },
+    {
+      "id": "AC5.1.4",
+      "status": "OK",
+      "target": "BR7.8"
+    },
+    {
+      "id": "AC5.1.5",
+      "status": "OK",
+      "target": "BR7.2"
+    },
+    {
+      "id": "AC5.1.6",
+      "status": "OK",
+      "target": "BR7.2"
+    },
+    {
+      "id": "AC5.1.7",
+      "status": "OK",
+      "target": "BR7.4, BR7.9, BR7.10"
+    },
+    {
+      "id": "AC5.1.8",
+      "status": "OK",
+      "target": "BR7.4, BR7.10"
+    },
+    {
+      "id": "AC5.1.9",
+      "status": "OK",
+      "target": "BR7.4, BR7.10"
+    },
+    {
+      "id": "AC5.1.10",
+      "status": "OK",
+      "target": "BR7.4, BR7.10"
+    },
+    {
+      "id": "AC5.1.11",
+      "status": "OK",
+      "target": "BR7.4, BR7.10"
+    },
+    {
+      "id": "AC5.1.12",
+      "status": "OK",
+      "target": "BR7.4"
+    },
+    {
+      "id": "AC5.1.13",
+      "status": "OK",
+      "target": "BR7.7, BR7.12"
+    },
+    {
+      "id": "AC5.1.14",
+      "status": "OK",
+      "target": "BR7.11"
+    },
+    {
+      "id": "AC5.1.15",
+      "status": "Deferred",
+      "target": "nfr-requirements (u6-recording)"
+    }
+  ],
+  "reverse": [
+    {
+      "id": "BR7.5",
+      "status": "N/A",
+      "target": "addition from functional-design Q3 (re-show choices when the chosen duty changed; refines FR5.3 and FR5.4)"
+    },
+    {
+      "id": "BR7.13",
+      "status": "N/A",
+      "target": "decision from functional-design Q5 (no self-cancel in u6; cancel stays with the admin in u7 per FR6.2)"
+    },
+    {
+      "id": "BR7.14",
+      "status": "N/A",
+      "target": "FR7.5 handover to u8-swap (onDutyRecorded hook; mirrors onDutyReassigned from u5)"
+    },
+    {
+      "id": "BR7.16",
+      "status": "N/A",
+      "target": "NFR2 and NFR4 logging rule (no names or secrets in logs)"
+    },
+    {
+      "id": "BR7.17",
+      "status": "N/A",
+      "target": "supports AC5.1.15 (deferred to nfr-requirements for u6-recording): keeps reads and writes minimal; revised 2026-11-09 (NFR review R-01): reply only on INTERNAL, other unexpected exceptions return 500 without reply"
+    }
+  ]
+}

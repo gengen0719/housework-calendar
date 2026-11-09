@@ -202,6 +202,7 @@ npx vitest run u1-skeleton-family --coverage \
   --coverage.include='packages/*/src/**' --coverage.include='infrastructure/lib/**'   # U1 のテストとカバレッジ
 npx vitest run u2-invitation   # U2 のテスト
 npx vitest run u5-assignment-calendar   # U5 のテスト
+npx vitest run u6-recording    # U6 のテスト
 npx vitest run --coverage      # すべて（行 80% 以上が下限。下げません）
 npx prettier --check .
 npx eslint .
@@ -379,7 +380,7 @@ U2 の `Invitations` を戻すときも同じ手順です。
 7. 子供のアカウントで同じ画面を開くと、一覧だけが見え、ボタンは出ません。
 8. PUT・PATCH・DELETE が CloudFront を通って届くことは、上の 4〜6 の操作で確かめられます（`scripts/smoke-check.sh` はセッションなしの 401 だけを確かめます）。
 
-`scripts/smoke-check.sh` は、セッションなしで `GET`・`POST /v1/chore-types` と、`PUT`・`PATCH`・`DELETE /v1/chore-types/{id}` が 401 になることも確かめます（全 19 件。U5 の分は次の節）。
+`scripts/smoke-check.sh` は、セッションなしで `GET`・`POST /v1/chore-types` と、`PUT`・`PATCH`・`DELETE /v1/chore-types/{id}` が 401 になることも確かめます（全 20 件。U5・U6 の分は次の節）。
 
 ### U5 を反映したあとの戻し方（前に進んで直す）
 
@@ -422,7 +423,7 @@ U5 を反映したあとは、`ChoreTypes` のテーブルも U4 のコードも
 | 11  | 速さを測る（コールドスタートを含めて 20 回ずつ）                                             | 95% が 3 秒以内。結果は `build-and-test` の記録に残す                                           |
 | 12  | CloudWatch で `Calendar` の `ConsumedWriteCapacityUnits`・`ConsumedReadCapacityUnits` を見る | 確かめの量に見合う。見込みから大きく外れていない                                                |
 
-`scripts/smoke-check.sh` は、セッションなしで `GET`・`PUT /v1/months/{month}/assignment`、`GET /v1/months/{month}/calendar`、`PATCH /v1/duties/{dutyId}` が 401 になることも確かめます（U5 の 4 件。全 19 件）。書き込みはしません。
+`scripts/smoke-check.sh` は、セッションなしで `GET`・`PUT /v1/months/{month}/assignment`、`GET /v1/months/{month}/calendar`、`PATCH /v1/duties/{dutyId}` が 401 になることも確かめます（U5 の 4 件。全 20 件）。書き込みはしません。
 
 ### コールドスタートの測り方（手 11 の補足）
 
@@ -457,6 +458,47 @@ U5 を反映したあとは、`Calendar` のテーブルも U5 のコードも�
 問題が起きたときは、修正のコミットを `main` に取り込み、前に進んで直します。**本番の `Calendar` のデータは、手で書き換えません。** 割り当てが壊れたと思ったときは、まず管理者が割り当てを保存し直します。収まらないときは、直す手順をコードとして用意し、プルリクエスト、CI、ステージングでの確認を通してから本番に反映します。
 
 例外として、U5 を本番に反映する前、または本番の `Calendar` に項目が 1 件もないと読み取りだけで確かめられたとき（`aws dynamodb scan --select COUNT --consistent-read` で 0 件）は、U3・U4 と同じく 2 回に分けて戻せます。1 回目に App が `Calendar` を使わない形（`CALENDAR_TABLE`、権限、`AppStackProps` の `calendar`）を反映し、2 回目に Data から `Calendar` を外します。0 件と確かめられないときは「前に進んで直す」にします。ステージングは `DESTROY` なので、テーブルごと作り直せます。
+
+## U6（記録）の反映と運用
+
+U6 は、子供が LINE のリッチメニュー「やった」と画面から、今日（画面は過去の日も）の担当を記録できるようにします。記録すると担当が「済」になり、お手伝いの名前と記録した時刻、そのときの単価を担当に書き写します。配備で足すのは `line` の Lambda の環境変数 2 つ（`CALENDAR_TABLE`・`CHORE_TYPES_TABLE`）と権限 2 文だけで、テーブル・Lambda・索引・指標・アラームは足しません。
+
+### リッチメニューを設定する（環境ごとに 1 回）
+
+LINE のリッチメニュー（画面の下の「やった」ボタン）は、CDK ではなく `scripts/setup-rich-menu.ts` で設定します。チャネルアクセストークンは、スクリプトが実行時にパラメータストア（`/housework-calendar/<env>/line/channel-access-token`）から読みます。**トークンの値は、コマンドにもファイルにも書きません**（値は `<作り物の値>`）。手元の AWS CLI のプロファイルにそのパラメータを読む権限が要ります。
+
+```bash
+npx tsx scripts/setup-rich-menu.ts --env staging set      # メニューを作って全員に適用する
+npx tsx scripts/setup-rich-menu.ts --env staging get      # 今の設定を確認する
+npx tsx scripts/setup-rich-menu.ts --env staging delete   # 設定を取り消す
+```
+
+- **`--env staging|production` は必須です。** 指定がないとスクリプトは止まります（既定で本番を選ばないため）。本番に設定するときは `--env production` にします。
+- `set` はメニューを作って全員に適用します。メニューの画像はまだ付かないので、作成後に表示される案内に従い、LINE Developers のコンソールか `POST /v2/bot/richmenu/{id}/content` で画像を登録します。
+- ボタンを押すと postback `action=record.list` が LINE から届き、`line` の Lambda が今日の記録できる担当の選択肢を本人にだけ返します。
+- スクリプトは Calendar にも ChoreTypes にも触れません（記録のデータは読み書きしません）。
+
+### 返事の速さを測る（NFR7.30。3 秒の目標）
+
+「記録する／やった」を押してから返事が届くまでを、**ステージングで 20 回**測り、95%（20 回中 19 回）が 3 秒以内であることを確かめます。測りは本番ではやりません（本番にテストデータを入れないため）。
+
+1. ステージングのスマホの LINE で、子供のアカウントでリッチメニュー「やった」を押し、選択肢から 1 件を押します。画面録画をしておき、押した瞬間から返事の表示までの時間を読み取ります。
+2. コールドスタートを含めるため、数十分以上あけるか、コードが変わる反映をはさんで、新しい実行環境でも測ります。`line` のログの `DUTY_RECORDED` に `durationMs` と `route = line` が出ます（LINE のユーザー ID・表示名は出ません）。
+3. 結果は `build-and-test` の記録に残します。3 秒を超える回が多いときだけ、`line` の Lambda のメモリを 256 MB から 512 MB に上げることを検討します（無料枠に収まるかを先に確かめます）。
+
+### ステージングでの手の確かめ（作り手が手で行う）
+
+1. 子供のアカウントでリッチメニュー「やった」を押すと、今日の「未」の担当の選択肢が本人にだけ届きます（グループには何も届きません）。
+2. 選択肢から 1 件を押すと「{お手伝い}を記録しました（{時:分}）」が返り、もう一度同じボタンを押しても記録は 1 件のまま、同じ時刻が返ります（二重押しの確かめ）。
+3. 管理者のアカウントで「やった」を押すと、「お手伝いの記録は子供のメニューです。記録の修正は画面からできます」だけが返ります。家族に入っていない人には「先に家族に参加してください」だけが返ります。
+4. 画面（LIFF）で、子供が自分の今日の「未」の担当の「やった」を押し、「{月}/{日} {お手伝い}を記録しますか」の確認で「記録する」を押すと、「済」に変わります。明日以降・「×」・確定済みの月の担当にはボタンが出ず、理由の文字が出ます。
+5. `line` のログに `DUTY_RECORDED` が出ること、LINE への呼び出しが reply だけであることを確かめます。
+
+`scripts/smoke-check.sh` は、セッションなしで `POST /v1/duties/{dutyId}/record` が 401 になることも確かめます（U6 の 1 件。全 20 件）。リッチメニューの押下は署名のある Webhook が要るので、スクリプトでは確かめません。
+
+### U6 を反映したあとの戻し方
+
+U6 を反映したあとは、記録済みの担当（`recordedAt`・`recordedBy`・`unitPrice`）が `Calendar` に残ります。前の版に戻すと `line` の環境変数と権限が消えますが、担当の項目の形は U5 のままなので、記録済みデータは壊れません。U5 と同じく、問題が起きたら修正のコミットを `main` に取り込み、前に進んで直します。**本番の `Calendar` のデータは、手で書き換えません。**
 
 ## 既知の課題
 

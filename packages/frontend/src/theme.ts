@@ -27,6 +27,12 @@ export const colors = {
   link: '#0b57d0',
   /** 入力欄の枠の色 */
   inputBorder: '#5f6b76',
+  /** 「やった」ボタン（記録。U6）。背景とその上の文字（NFR9.7） */
+  recordButton: '#0b6b4a',
+  recordButtonText: '#ffffff',
+  /** 確認ダイアログ（記録。U6）。見出しと本文の文字と、ダイアログの背景 */
+  dialogText: '#1f2933',
+  dialogBackground: '#ffffff',
 } as const;
 
 /** 文字の色と背景の色の組（色の差を単体テストで確かめる） */
@@ -53,6 +59,9 @@ export const textBackgroundPairs: ReadonlyArray<readonly [string, string, string
   ['入力欄の枠 / 紙', colors.inputBorder, colors.backgroundPaper],
   ['入力欄の枠 / 背景', colors.inputBorder, colors.backgroundDefault],
   ['今日の印 / 紙', colors.primaryMain, colors.backgroundPaper],
+  // U6（記録）で足す色
+  ['「やった」ボタンの文字 / ボタン', colors.recordButtonText, colors.recordButton],
+  ['確認ダイアログの文字 / ダイアログ', colors.dialogText, colors.dialogBackground],
 ];
 
 const touchTarget = { minWidth: MIN_TOUCH_TARGET_PX, minHeight: MIN_TOUCH_TARGET_PX };

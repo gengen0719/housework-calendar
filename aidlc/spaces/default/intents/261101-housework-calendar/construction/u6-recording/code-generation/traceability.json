@@ -1,0 +1,389 @@
+{
+  "stage": "code-generation",
+  "unit": "u6-recording",
+  "upstream_ids": [
+    "AC5.1.1",
+    "AC5.1.2",
+    "AC5.1.3",
+    "AC5.1.4",
+    "AC5.1.5",
+    "AC5.1.6",
+    "AC5.1.7",
+    "AC5.1.8",
+    "AC5.1.9",
+    "AC5.1.10",
+    "AC5.1.11",
+    "AC5.1.12",
+    "AC5.1.13",
+    "AC5.1.14",
+    "AC5.1.15",
+    "BR7.1",
+    "BR7.2",
+    "BR7.3",
+    "BR7.4",
+    "BR7.5",
+    "BR7.6",
+    "BR7.7",
+    "BR7.8",
+    "BR7.9",
+    "BR7.10",
+    "BR7.11",
+    "BR7.12",
+    "BR7.13",
+    "BR7.14",
+    "BR7.15",
+    "BR7.16",
+    "BR7.17",
+    "NFR1.20",
+    "NFR1.21",
+    "NFR1.25",
+    "NFR2.33",
+    "NFR2.34",
+    "NFR2.35",
+    "NFR2.36",
+    "NFR2.39",
+    "NFR4.50",
+    "NFR4.53",
+    "NFR4.54",
+    "NFR4.55",
+    "NFR4.56",
+    "NFR4.57",
+    "NFR4.58",
+    "NFR4.59",
+    "NFR4.60",
+    "NFR4.61",
+    "NFR4.62",
+    "NFR4.63",
+    "NFR4.64",
+    "NFR5.10",
+    "NFR7.30",
+    "NFR8.9",
+    "NFR9.7",
+    "NFR10.6",
+    "NFR10.7",
+    "NFR11.5",
+    "NFR11.6"
+  ],
+  "coverage": [
+    {
+      "id": "AC5.1.1",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-do-line.feature"
+    },
+    {
+      "id": "AC5.1.2",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-do-line.feature"
+    },
+    {
+      "id": "AC5.1.3",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-list.feature"
+    },
+    {
+      "id": "AC5.1.4",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-do-line.feature"
+    },
+    {
+      "id": "AC5.1.5",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-list.feature"
+    },
+    {
+      "id": "AC5.1.6",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-list.feature"
+    },
+    {
+      "id": "AC5.1.7",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-api.feature"
+    },
+    {
+      "id": "AC5.1.8",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-api.feature"
+    },
+    {
+      "id": "AC5.1.9",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-api.feature"
+    },
+    {
+      "id": "AC5.1.10",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-api.feature"
+    },
+    {
+      "id": "AC5.1.11",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-api.feature"
+    },
+    {
+      "id": "AC5.1.12",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-api.feature"
+    },
+    {
+      "id": "AC5.1.13",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-do-line.feature",
+      "note": "担当に書き写した単価まで（この U6 の範囲）。お小遣いの額の表示は U9 に渡す"
+    },
+    {
+      "id": "AC5.1.14",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-do-line.feature"
+    },
+    {
+      "id": "AC5.1.15",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-resilience.feature",
+      "note": "読み書きの回数と外部呼び出しを最小に絞るところまで確かめた。実際の速さ（20 回中 19 回が 3 秒以内）はステージングで作り手が測るまで確定ではない（Build and Test で記録）"
+    },
+    {
+      "id": "BR7.1",
+      "status": "OK",
+      "target": "packages/backend/src/services/oneToOneGate.ts"
+    },
+    {
+      "id": "BR7.2",
+      "status": "OK",
+      "target": "packages/backend/src/services/recordingService.ts"
+    },
+    {
+      "id": "BR7.3",
+      "status": "OK",
+      "target": "packages/shared/src/jstDate.ts"
+    },
+    {
+      "id": "BR7.4",
+      "status": "OK",
+      "target": "packages/backend/src/services/recordingService.ts"
+    },
+    {
+      "id": "BR7.5",
+      "status": "OK",
+      "target": "packages/backend/src/handlers/line/recordHandler.ts"
+    },
+    {
+      "id": "BR7.6",
+      "status": "OK",
+      "target": "packages/backend/src/repositories/calendarRepository.ts"
+    },
+    {
+      "id": "BR7.7",
+      "status": "OK",
+      "target": "packages/backend/src/services/recordingService.ts"
+    },
+    {
+      "id": "BR7.8",
+      "status": "OK",
+      "target": "packages/backend/src/services/recordingService.ts"
+    },
+    {
+      "id": "BR7.9",
+      "status": "OK",
+      "target": "packages/backend/src/handlers/line/recordHandler.ts"
+    },
+    {
+      "id": "BR7.10",
+      "status": "OK",
+      "target": "packages/frontend/src/pages/CalendarPage.tsx"
+    },
+    {
+      "id": "BR7.11",
+      "status": "OK",
+      "target": "packages/shared/src/jstDate.ts"
+    },
+    {
+      "id": "BR7.12",
+      "status": "OK",
+      "target": "packages/backend/src/repositories/calendarRepository.ts"
+    },
+    {
+      "id": "BR7.13",
+      "status": "OK",
+      "target": "packages/backend/src/services/recordingService.ts"
+    },
+    {
+      "id": "BR7.14",
+      "status": "OK",
+      "target": "packages/backend/src/services/dutyRecordedHook.ts"
+    },
+    {
+      "id": "BR7.15",
+      "status": "OK",
+      "target": "scripts/setup-rich-menu.ts"
+    },
+    {
+      "id": "BR7.16",
+      "status": "OK",
+      "target": "packages/backend/src/services/recordingService.ts"
+    },
+    {
+      "id": "BR7.17",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-resilience.feature"
+    },
+    {
+      "id": "NFR1.20",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-do-line.feature"
+    },
+    {
+      "id": "NFR1.21",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-list.feature"
+    },
+    {
+      "id": "NFR1.25",
+      "status": "OK",
+      "target": "infrastructure/test/u6-recording/stacks.test.ts"
+    },
+    {
+      "id": "NFR2.33",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/calendarRepository.recordItems.test.ts"
+    },
+    {
+      "id": "NFR2.34",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/calendarRepository.recordItems.test.ts"
+    },
+    {
+      "id": "NFR2.35",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-resilience.feature"
+    },
+    {
+      "id": "NFR2.36",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-resilience.feature"
+    },
+    {
+      "id": "NFR2.39",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/dutyRecordedHook.test.ts"
+    },
+    {
+      "id": "NFR4.50",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/calendarRepository.recordItems.test.ts"
+    },
+    {
+      "id": "NFR4.53",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/recordCommand.test.ts"
+    },
+    {
+      "id": "NFR4.54",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/recordCommand.test.ts"
+    },
+    {
+      "id": "NFR4.55",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/recordCommand.test.ts"
+    },
+    {
+      "id": "NFR4.56",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/one-to-one-gate.feature"
+    },
+    {
+      "id": "NFR4.57",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-do-line.feature"
+    },
+    {
+      "id": "NFR4.58",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-do-line.feature"
+    },
+    {
+      "id": "NFR4.59",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/calendarRepository.recordItems.test.ts"
+    },
+    {
+      "id": "NFR4.60",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-api.feature"
+    },
+    {
+      "id": "NFR4.61",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-api.feature"
+    },
+    {
+      "id": "NFR4.62",
+      "status": "OK",
+      "target": "packages/frontend/test/u6-recording/calendar-record.feature"
+    },
+    {
+      "id": "NFR4.63",
+      "status": "OK",
+      "target": "infrastructure/test/u6-recording/stacks.test.ts"
+    },
+    {
+      "id": "NFR4.64",
+      "status": "OK",
+      "target": "infrastructure/test/u6-recording/stacks.test.ts"
+    },
+    {
+      "id": "NFR5.10",
+      "status": "OK",
+      "target": "infrastructure/test/u6-recording/stacks.test.ts",
+      "note": "U6 で新しい秘密の情報は足さない。CALENDAR_TABLE・CHORE_TYPES_TABLE はテーブル名で秘密ではないことを確かめた"
+    },
+    {
+      "id": "NFR7.30",
+      "status": "Deferred",
+      "target": "ステージングで作り手が 20 回測る（README の『返事の速さを測る』）。実際の速さは Build and Test で記録する"
+    },
+    {
+      "id": "NFR8.9",
+      "status": "OK",
+      "target": "packages/backend/test/u6-recording/record-list.feature"
+    },
+    {
+      "id": "NFR9.7",
+      "status": "OK",
+      "target": "packages/frontend/test/u6-recording/theme.test.ts"
+    },
+    {
+      "id": "NFR10.6",
+      "status": "OK",
+      "target": "scripts/setup-rich-menu.ts"
+    },
+    {
+      "id": "NFR10.7",
+      "status": "OK",
+      "target": "scripts/setup-rich-menu.ts"
+    },
+    {
+      "id": "NFR11.5",
+      "status": "OK",
+      "target": "packages/shared/test/u6-recording/jstTimeOf.test.ts"
+    },
+    {
+      "id": "NFR11.6",
+      "status": "OK",
+      "target": "packages/shared/test/u6-recording/jstTimeOf.test.ts"
+    }
+  ],
+  "reverse": [
+    {
+      "id": "scripts/setup-rich-menu.ts",
+      "status": "N/A",
+      "target": "リッチメニューの設定スクリプト（BR7.15、NFR10.6、NFR10.7）。アプリの実行時には呼ばれない運用スクリプト"
+    },
+    {
+      "id": "packages/backend/src/lib/promise.ts",
+      "status": "N/A",
+      "target": "settle ユーティリティ（名前の Query を書き込み前に安全に待つ。NFR2.36、reliability-design.md の『名前の Query の置き方』）"
+    }
+  ]
+}

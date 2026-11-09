@@ -102,6 +102,9 @@ export class AppStack extends Stack {
       FAMILIES_TABLE: props.families.tableName,
       PROCESSED_LINE_EVENTS_TABLE: props.processedLineEvents.tableName,
       NOTIFICATION_GROUPS_TABLE: props.notificationGroups.tableName,
+      // U6: line から Calendar・ChoreTypes を読み書きするための環境変数（テーブル名。秘密ではない）
+      CALENDAR_TABLE: props.calendar.tableName,
+      CHORE_TYPES_TABLE: props.choreTypes.tableName,
       ENV: envName,
       ENTRY: 'line',
     }).fn;
@@ -227,7 +230,7 @@ export class AppStack extends Stack {
       }),
     );
 
-    // U5: 割り当てと日ごとの担当（api だけ。Scan・BatchGetItem・BatchWriteItem は足さない。索引なし。line には足さない）
+    // U5: 割り当てと日ごとの担当（api だけ。Scan・BatchGetItem・BatchWriteItem は足さない。索引なし。line には U6 で足す）
     this.apiFunction.addToRolePolicy(
       new iam.PolicyStatement({
         actions: [
@@ -239,6 +242,31 @@ export class AppStack extends Stack {
           'dynamodb:ConditionCheckItem',
         ],
         resources: [props.calendar.tableArn],
+      }),
+    );
+
+    // U6: line から記録するための Calendar への権限（新しい文 1 つ。索引の ARN は含めない）。
+    // 取引は UpdateItem（担当）＋ ConditionCheck（月の状態）で確かめる。
+    // PutItem・DeleteItem・Scan・BatchGetItem・BatchWriteItem は足さない（担当を作る・消すのは api（U5）だけ。NFR4.64）
+    this.lineFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: [
+          'dynamodb:GetItem',
+          'dynamodb:Query',
+          'dynamodb:UpdateItem',
+          'dynamodb:ConditionCheckItem',
+        ],
+        resources: [props.calendar.tableArn],
+      }),
+    );
+
+    // U6: line が ChoreTypes を読むための権限（新しい文 1 つ。読むだけ）。
+    // 種類の名前の取得（GetItem・Query）と、取引での単価の確かめ（ConditionCheck）に使う。
+    // Scan・PutItem・DeleteItem・UpdateItem は足さない（NFR4.64）
+    this.lineFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ['dynamodb:GetItem', 'dynamodb:Query', 'dynamodb:ConditionCheckItem'],
+        resources: [props.choreTypes.tableArn],
       }),
     );
 

@@ -138,6 +138,11 @@ export async function getGroupSummary(
   return ok({ groupName: data.groupName });
 }
 
+/** ただのテキストメッセージ（U6。案内・返事の 1 行に使う）。 */
+export function buildTextMessage(text: string): LineMessage {
+  return { type: 'text', text };
+}
+
 /** 返事に付ける、ボタン 1 つ（postback）つきのメッセージ。 */
 export function buildPostbackButtonMessage(input: {
   altText: string;
@@ -152,6 +157,55 @@ export function buildPostbackButtonMessage(input: {
       type: 'buttons',
       text: input.text,
       actions: [{ type: 'postback', label: input.label, data: input.data }],
+    },
+  };
+}
+
+/** record.do のボタンの値を作る（BR7.3）。action=record.do&dutyId=<ID>&v=<version>。 */
+export function recordDoData(dutyId: string, version: number): string {
+  return `action=record.do&dutyId=${dutyId}&v=${version}`;
+}
+
+/** 記録の選択肢の 1 つ（1 バブル 1 担当）。 */
+export interface RecordChoice {
+  dutyId: string;
+  choreName: string;
+  version: number;
+}
+
+/**
+ * 記録の選択肢の Flex Message carousel（U6。BR7.2。1 バブル 1 担当。ボタンは record.do）。
+ * altText は必須（LINE の SDK は使わない）。choices は呼び出し側が 12 件までに絞って渡す。
+ */
+export function buildRecordCarousel(choices: readonly RecordChoice[]): LineMessage {
+  return {
+    type: 'flex',
+    altText: '記録する担当を選んでください',
+    contents: {
+      type: 'carousel',
+      contents: choices.map((choice) => ({
+        type: 'bubble',
+        body: {
+          type: 'box',
+          layout: 'vertical',
+          contents: [{ type: 'text', text: choice.choreName, weight: 'bold', wrap: true }],
+        },
+        footer: {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'button',
+              style: 'primary',
+              action: {
+                type: 'postback',
+                label: '記録する',
+                data: recordDoData(choice.dutyId, choice.version),
+              },
+            },
+          ],
+        },
+      })),
     },
   };
 }
