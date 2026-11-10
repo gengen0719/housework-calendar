@@ -180,6 +180,51 @@ export interface RecordDutyRequest {
 export type RecordDutyResponse = Duty;
 
 /**
+ * 状態を変える操作（U7。C8 changeDutyStatus の action）。FR6.1 の表の 4 つだけ。
+ * cancel=取り消す（済→未）、markDone=済にする（未→済・×→済）、
+ * markSkipped=やらなかったにする（未→×・済→×）、unmarkSkipped=やらなかったを外す（×→未）。
+ */
+export type StatusChangeAction = 'cancel' | 'markDone' | 'markSkipped' | 'unmarkSkipped';
+
+/** POST /v1/duties/:dutyId/status の本文（U7）。見せた時点の version を一緒に送る */
+export interface StatusChangeRequest {
+  action: StatusChangeAction;
+  version: number;
+}
+
+/** POST /v1/duties/:dutyId/status の 200 の本文（U7）。更新後の担当（U5 の Duty をそのまま使う） */
+export type StatusChangeResponse = Duty;
+
+/**
+ * 状態を変える前の確認の中身（U7。entities.md の StatusChangePreview。保存しない）。
+ * 画面が操作の前に出す 1 行の変化と、必要な注意。
+ */
+export interface StatusChangePreview {
+  /** 担当の日付（YYYY-MM-DD） */
+  date: string;
+  /** お手伝いの名前 */
+  choreName: string;
+  /** 担当の子供の表示名 */
+  childName: string;
+  fromStatus: DutyStatus;
+  toStatus: DutyStatus;
+  /**
+   * 添える注意。cancel・済→× では「お小遣いの回数から外れます」、
+   * markDone では「{単価} 円で数えます」、それ以外は null。
+   */
+  countNote: string | null;
+}
+
+/** 月の確定・取り消しの前の確認の中身（U7。entities.md の MonthConfirmPreview。保存しない）。 */
+export interface MonthConfirmPreview {
+  /** 対象の月（YYYY-MM） */
+  month: string;
+  action: 'confirm' | 'unconfirm';
+  /** confirm のときだけ、残っている「未」の担当の件数（1 件以上で注意を添える） */
+  todoCount?: number;
+}
+
+/**
  * 409 OVERWRITE_CONFIRMATION_REQUIRED の details.changes の 1 件（U5）。
  * 作り直したあとにその日のその種類の担当がなければ toChildUserId は null（画面は「なし」と出す）。
  */

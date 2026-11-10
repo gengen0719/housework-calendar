@@ -200,11 +200,11 @@ describe('groupCommandGate.runGroupOperation（家族の確かめ）', () => {
     seedUser(world.users, 'mother', { familyId: FAMILY_ID, role: 'admin' });
     const outcome = await groupCommandGate.runGroupOperation(GROUP, 'U_mother', operation);
     expect(outcome).toEqual({ status: 'done', value: 'ok' });
-    expect(operation).toHaveBeenCalledWith({
-      familyId: FAMILY_ID,
-      userId: PEOPLE.mother.userId,
-      role: 'admin',
-    });
+    // U8 で、読んだ利用者の記録の表示名を第 2 引数に足した（ctx は変わらない）
+    expect(operation).toHaveBeenCalledWith(
+      { familyId: FAMILY_ID, userId: PEOPLE.mother.userId, role: 'admin' },
+      PEOPLE.mother.displayName,
+    );
   });
 
   it('別の家族の人は NOT_FAMILY_MEMBER', async () => {

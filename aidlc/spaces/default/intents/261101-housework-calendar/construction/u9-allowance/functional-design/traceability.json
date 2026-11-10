@@ -1,0 +1,84 @@
+{
+  "stage": "functional-design",
+  "unit": "u9-allowance",
+  "upstream_ids": ["AC8.1.1", "AC8.1.2", "AC8.1.3", "AC8.1.4", "AC5.1.13"],
+  "coverage": [
+    {
+      "id": "AC8.1.1",
+      "status": "OK",
+      "target": "BR10.2, BR10.3, BR10.4, BR10.5, BR10.7, BR10.11"
+    },
+    {
+      "id": "AC8.1.2",
+      "status": "OK",
+      "target": "BR10.6, BR10.10"
+    },
+    {
+      "id": "AC8.1.3",
+      "status": "OK",
+      "target": "BR10.5, BR10.11"
+    },
+    {
+      "id": "AC8.1.4",
+      "status": "OK",
+      "target": "BR10.2, BR10.4"
+    },
+    {
+      "id": "AC5.1.13",
+      "status": "OK",
+      "target": "BR10.2, BR10.12"
+    }
+  ],
+  "reverse": [
+    {
+      "id": "BR10.1",
+      "status": "N/A",
+      "target": "FR4.3, FR1.7 and NFR4 viewing rule (everyone in the family sees every child's amount; non-members refused; no talk reply per functional-design Q5); verified with AC4.1.3 and AC1.1.11 of other units"
+    },
+    {
+      "id": "BR10.8",
+      "status": "N/A",
+      "target": "functional-design Q4 decision and NFR11 (Japan-time month, navigation range from the family's creation month to next month, 422 for a malformed month)"
+    },
+    {
+      "id": "BR10.9",
+      "status": "N/A",
+      "target": "functional-design Q4 decision and FR6.5 display (heading says not confirmed or confirmed; the calculation does not change; confirm buttons stay with u7-review-confirm)"
+    },
+    {
+      "id": "BR10.13",
+      "status": "N/A",
+      "target": "FR4.5 and NFR2 reliability rule (a failed read is never returned half-way; retry from the current state; abnormal duties are skipped and logged)"
+    },
+    {
+      "id": "BR10.14",
+      "status": "N/A",
+      "target": "ADR-005 and NFR1 rule (read-only unit, no new table, index, permission or environment variable)"
+    },
+    {
+      "id": "BR10.15",
+      "status": "N/A",
+      "target": "NFR2, NFR4 and NFR5 logging rule (no names, amounts or secrets in logs)"
+    },
+    {
+      "id": "BR10.16",
+      "status": "N/A",
+      "target": "NFR7 performance rule (95 percent of screen reads within 3 seconds; parallel reads, one query per month)"
+    },
+    {
+      "id": "BR10.17",
+      "status": "N/A",
+      "target": "handover to u10-notifications (month-end summary calls getAllowances; FR9.2 and AC9.1.5 are verified in u10)"
+    },
+    {
+      "id": "BR10.18",
+      "status": "N/A",
+      "target": "handover to u11-adjustments (adjustment lines plug into the empty seam; AC8.2.5 to AC8.2.7 are verified in u11)"
+    },
+    {
+      "id": "BR10.19",
+      "status": "N/A",
+      "target": "functional-design Q2 decision (name of a child who left the family is read from the user record, display name only)"
+    }
+  ]
+}

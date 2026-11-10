@@ -4,6 +4,7 @@ import { NO_DUTY_LABEL, getMessage, type CalendarChild, type Duty } from '@house
 import { ApiFailure, changeDutyChild } from '../api/client';
 import { STATUS_LABEL, childName, formatTimeJst, longDayLabel } from '../calendar/format';
 import { DutyRecordAction } from '../components/DutyRecordAction';
+import { DutyStatusActions } from '../components/DutyStatusActions';
 import type { Authorized } from '../hooks/useSession';
 import { colors } from '../theme';
 
@@ -157,6 +158,14 @@ function DutyDetail({
         confirmed={confirmed}
         today={today}
         currentUserId={currentUserId}
+        isAdmin={isAdmin}
+        authorized={authorized}
+        onChanged={onChanged}
+        onRefresh={onRefresh}
+      />
+      <DutyStatusActions
+        duty={duty}
+        kids={kids}
         isAdmin={isAdmin}
         authorized={authorized}
         onChanged={onChanged}

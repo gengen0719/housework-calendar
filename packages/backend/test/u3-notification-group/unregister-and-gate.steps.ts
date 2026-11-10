@@ -212,6 +212,10 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
             (l) => l.includes('GROUP_COMMAND_REJECTED') && l.includes('GROUP_NOT_REGISTERED'),
           ),
         ).toBe(true);
+        // U8 で、LINE のグループ ID を書かない形に直した（NFR2.65）
+        const row = logs.find((l) => l.includes('GROUP_COMMAND_REJECTED')) ?? '';
+        expect(row).not.toContain('groupId');
+        expect(row).not.toContain(GROUP_ID);
       });
     },
   );

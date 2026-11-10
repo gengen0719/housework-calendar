@@ -394,7 +394,7 @@ events:
   - type: join                 # グループへの参加（U3。FR1.5）
     uses: source.groupId
     reply: お知らせ先の登録の案内
-  - type: message              # グループでの「登録」（U3）、「代わって」（U8。FR7.1）
+  - type: message              # グループでの「登録」（U3）、「家事交代」（U8。FR7.1）
     uses: [source.type, source.groupId, source.userId, message.text]
     calls: [家族とメンバー.registerNotificationGroup, カレンダー.listSwappableDuties]
   - type: postback             # リッチメニューとボタン（U6 の「やった」と担当の選択、U8 の申し出・引き受け・取り下げ）

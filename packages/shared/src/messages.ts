@@ -58,6 +58,8 @@ export const MESSAGES: Record<Reason, string> = {
   NOT_TODAY_DUTY: 'この担当は先に変更されました',
   ADMIN_RECORD_GUIDE: 'お手伝いの記録は子供のメニューです。記録の修正は画面からできます',
   JOIN_FAMILY_FIRST: '先に家族に参加してください',
+  // U8 で足した印
+  OFFER_OWNER_ONLY: 'この操作は申し出た人だけができます',
 };
 
 /** カレンダーと割り当ての画面で使う文言（理由の印ではない。U5）。 */
@@ -200,4 +202,111 @@ export function skippedDutyLabel(choreName: string): string {
 /** 理由の印から文言を引く。未知の印には INTERNAL の文言を返す。 */
 export function getMessage(reason: string): string {
   return isReason(reason) ? MESSAGES[reason] : MESSAGES.INTERNAL;
+}
+
+/** 確認・修正と確定（U7）で使う文言。理由の印ではない。画面が引く（C10）。 */
+import type { DutyStatus, MonthConfirmPreview, StatusChangePreview } from './api-types';
+
+export const STATUS_CONFIRM_BUTTON = 'はい';
+export const STATUS_CANCEL_BUTTON = 'やめる';
+/** cancel・済→× のときに添える注意（BR8.3） */
+export const STATUS_DROP_FROM_COUNT_NOTE = 'お小遣いの回数から外れます';
+export const MONTH_RECONFIRM_RETRY = '読み込み直す';
+
+/** 状態の表示名（確認の 1 行で使う）。 */
+const STATUS_LABEL: Record<DutyStatus, string> = {
+  todo: '未',
+  done: '済',
+  skipped: '×',
+};
+
+/** markDone で添える注意「{単価} 円で数えます」（BR8.3）。単価は確認時点の getCurrentUnitPrice の値。 */
+export function unitPriceCountNote(unitPrice: number): string {
+  return `${unitPrice} 円で数えます`;
+}
+
+/**
+ * 状態の変更の確認の 1 行（BR8.3）。
+ * markDone（済にする）は「{月}/{日} {お手伝い} {子供} を『済』にします」、
+ * それ以外は「{月}/{日} {お手伝い} {子供}: {前} → {後} に戻します／にします」。
+ */
+export function statusChangePreviewLine(preview: StatusChangePreview): string {
+  const head = `${monthSlashDay(preview.date)} ${preview.choreName} ${preview.childName}`;
+  if (preview.toStatus === 'done') return `${head} を『済』にします`;
+  // 未・× に戻すとき（済→未、×→未）は「戻します」、それ以外（未→×、済→×）は「にします」
+  const tail = preview.toStatus === 'todo' ? 'に戻します' : 'にします';
+  return `${head}: ${STATUS_LABEL[preview.fromStatus]} → ${STATUS_LABEL[preview.toStatus]} ${tail}`;
+}
+
+/** 月を確定する確認の本文（BR8.10）。未の件数（todoCount ≥ 1）があれば注意を添える。 */
+export function monthConfirmPreviewText(preview: MonthConfirmPreview): string {
+  if (preview.action === 'unconfirm') {
+    return `${preview.month}の確定を取り消しますか？ 取り消すと、また変更できるようになります`;
+  }
+  const base = `${preview.month}を確定しますか？ 確定すると変更できなくなります`;
+  if (preview.todoCount !== undefined && preview.todoCount >= 1) {
+    return `${base}。未の担当が ${preview.todoCount} 件あります。確定すると、これらは記録もやらなかったにもできなくなります`;
+  }
+  return base;
+}
+
+/** 担当の代わりの申し出（U8）で使う LINE の文言。理由の印ではない（C10、BR9.14）。 */
+export const SWAP_LIST_HEADING = '代わってほしい担当を選んでください';
+/** 候補が 10 件を超えたときに添える案内（BR9.6） */
+export const SWAP_OVERFLOW_NOTE =
+  '近い日の担当だけ出しています。ほかの担当は、その日が近づいたらまた『家事交代』と送ってください';
+/** 管理者への返事（BR9.3）。始める言葉は入れない */
+export const SWAP_ADMIN_GUIDE = '代わってもらう申し出は子供だけができます';
+/** 1 対 1 への返事（BR9.4） */
+export const SWAP_ONE_TO_ONE_GUIDE =
+  '代わってほしいときは、家族のグループで『家事交代』と送ってください';
+export const SWAP_OFFER_FAILED_MESSAGE = 'うまく申し出られませんでした。もう一度お試しください';
+export const SWAP_ACCEPT_FAILED_MESSAGE = 'うまく引き受けられませんでした。もう一度お試しください';
+export const SWAP_ACCEPT_BUTTON = '引き受ける';
+export const SWAP_WITHDRAW_BUTTON = '申し出をやめる';
+
+/** 名前が引けなかったときの言い換え（BR9.14） */
+const SWAP_UNKNOWN_CHILD = 'だれか';
+const SWAP_UNKNOWN_CHORE = 'お手伝い';
+
+function swapParts(
+  childName: string | undefined,
+  date: string,
+  choreName: string | undefined,
+): { who: string; when: string; what: string } {
+  return {
+    who: childName ? childName : SWAP_UNKNOWN_CHILD,
+    when: monthAndDay(date),
+    what: choreName ? choreName : SWAP_UNKNOWN_CHORE,
+  };
+}
+
+/** 申し出の知らせ: 「花子が 1月8日 の皿洗いを代わってくれる人を探しています」（BR9.14） */
+export function swapOfferedMessage(
+  childName: string | undefined,
+  date: string,
+  choreName: string | undefined,
+): string {
+  const { who, when, what } = swapParts(childName, date, choreName);
+  return `${who}が ${when} の${what}を代わってくれる人を探しています`;
+}
+
+/** 引き受けの知らせ: 「太郎が 1月8日 の皿洗いを引き受けました」 */
+export function swapAcceptedMessage(
+  childName: string | undefined,
+  date: string,
+  choreName: string | undefined,
+): string {
+  const { who, when, what } = swapParts(childName, date, choreName);
+  return `${who}が ${when} の${what}を引き受けました`;
+}
+
+/** 取り下げの知らせ: 「花子が 1月8日 の皿洗いの申し出をやめました」 */
+export function swapWithdrawnMessage(
+  childName: string | undefined,
+  date: string,
+  choreName: string | undefined,
+): string {
+  const { who, when, what } = swapParts(childName, date, choreName);
+  return `${who}が ${when} の${what}の申し出をやめました`;
 }

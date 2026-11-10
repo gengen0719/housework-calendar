@@ -1,8 +1,13 @@
-import { TransactionCanceledException } from '@aws-sdk/client-dynamodb';
+import {
+  ConditionalCheckFailedException,
+  TransactionCanceledException,
+} from '@aws-sdk/client-dynamodb';
 import {
   GetCommand,
+  PutCommand,
   QueryCommand,
   TransactWriteCommand,
+  UpdateCommand,
   type TransactWriteCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import { docClient, tables } from '../lib/dynamoClient';
@@ -278,13 +283,17 @@ export function buildCreateDutyItems(duty: DutyRecord) {
 }
 
 /** 「未」で、読んだときから変わっていない（version）、同じ担当（dutyId）であること */
-const CHECK_DUTY_UNCHANGED = '#status = :todo AND #version = :v AND #dutyId = :id';
+export const CHECK_DUTY_UNCHANGED = '#status = :todo AND #version = :v AND #dutyId = :id';
 
-function dutyUnchangedValues(duty: DutyRecord): Record<string, unknown> {
+export function dutyUnchangedValues(duty: DutyRecord): Record<string, unknown> {
   return { ':todo': 'todo', ':v': duty.version, ':id': duty.dutyId };
 }
 
-const DUTY_UNCHANGED_NAMES = { '#status': 'status', '#version': 'version', '#dutyId': 'dutyId' };
+export const DUTY_UNCHANGED_NAMES = {
+  '#status': 'status',
+  '#version': 'version',
+  '#dutyId': 'dutyId',
+};
 
 /** 担当を消す（担当の Delete と引き当ての Delete。項目数 2） */
 export function buildDeleteDutyItems(duty: DutyRecord) {
@@ -413,6 +422,213 @@ export function buildRecordItems(
     buildMonthGuard(duty.familyId, duty.month),
     buildUnitPriceGuard(duty.familyId, duty.choreTypeId, unitPrice),
   ];
+}
+
+// --- U7: 状態の変更の取引（reliability-design.md の「取引の形」。BR8.4〜BR8.6、NFR4.69） ---
+
+/** 「いまの状態」で、読んだときから変わっていない（version）、同じ担当（dutyId）であること（U7。markDone・reset 共通） */
+const CHECK_DUTY_STATUS_UNCHANGED = '#status = :from AND #version = :v AND #dutyId = :id';
+
+/**
+ * markDone（未→済、×→済）の取引の 3 項目（U7。BR8.6、reliability-design.md）。
+ * - 項目 0: 担当の Update（status=done、recordedAt/recordedBy/unitPrice/updatedAt を書き、version+1）。
+ *   条件は status=fromStatus（todo または skipped）・version・dutyId。U6 の buildRecordItems と違い #childUserId を付けない
+ *   （U7 の記録者は管理者で担当の子供ではない。BR8.6）。
+ * - 項目 1: 月の状態の ConditionCheck（確定していない。buildMonthGuard。担当の month。NFR2.48）
+ * - 項目 2: 種類の ConditionCheck（単価が読んだ値のまま。buildUnitPriceGuard。BR8.7）
+ * 条件式・更新式に出る属性名は、すべて # の別名で置き換える（NFR4.69）。
+ * 項目がなければ status=fromStatus の条件が成り立たず断られる（担当を作らない）。
+ */
+export function buildMarkDoneItems(
+  duty: DutyRecord,
+  unitPrice: number,
+  ctx: { userId: string },
+  now: Date,
+  expectedVersion: number = duty.version,
+): TransactItems {
+  const at = now.toISOString();
+  return [
+    {
+      Update: {
+        TableName: tables.calendar(),
+        Key: {
+          familyId: duty.familyId,
+          sk: dutySortKey(duty.month, duty.date, duty.choreTypeId),
+        },
+        UpdateExpression:
+          'SET #status = :done, #recordedAt = :now, #recordedBy = :by, ' +
+          '#unitPrice = :price, #updatedAt = :now, #version = #version + :one',
+        ConditionExpression: CHECK_DUTY_STATUS_UNCHANGED,
+        ExpressionAttributeNames: {
+          '#status': 'status',
+          '#recordedAt': 'recordedAt',
+          '#recordedBy': 'recordedBy',
+          '#unitPrice': 'unitPrice',
+          '#updatedAt': 'updatedAt',
+          '#version': 'version',
+          '#dutyId': 'dutyId',
+        },
+        ExpressionAttributeValues: {
+          ':done': 'done',
+          ':from': duty.status,
+          ':now': at,
+          ':by': ctx.userId,
+          ':price': unitPrice,
+          ':one': 1,
+          ':v': expectedVersion,
+          ':id': duty.dutyId,
+        },
+      },
+    },
+    buildMonthGuard(duty.familyId, duty.month),
+    buildUnitPriceGuard(duty.familyId, duty.choreTypeId, unitPrice),
+  ];
+}
+
+/**
+ * 「未」「×」に戻す取引の 2 項目（U7。cancel 済→未、markSkipped 済→×・未→×、unmarkSkipped ×→未。BR8.5）。
+ * - 項目 0: 担当の Update（status=toStatus にし、recordedAt/recordedBy/unitPrice を 3 つ同時に REMOVE、updatedAt=now、version+1）。
+ *   条件は status=fromStatus・version・dutyId。
+ * - 項目 1: 月の状態の ConditionCheck（確定していない。buildMonthGuard。担当の month）
+ * 単価は読まないので単価の ConditionCheck は付けない（2 項目）。属性名はすべて # の別名（NFR4.69）。
+ * 3 項目を同時に REMOVE し、どれか 1 つだけが残る担当を作らない（BR8.5）。
+ */
+export function buildResetStatusItems(
+  duty: DutyRecord,
+  toStatus: 'todo' | 'skipped',
+  now: Date,
+  expectedVersion: number = duty.version,
+): TransactItems {
+  return [
+    {
+      Update: {
+        TableName: tables.calendar(),
+        Key: {
+          familyId: duty.familyId,
+          sk: dutySortKey(duty.month, duty.date, duty.choreTypeId),
+        },
+        UpdateExpression:
+          'SET #status = :to, #updatedAt = :now, #version = #version + :one ' +
+          'REMOVE #recordedAt, #recordedBy, #unitPrice',
+        ConditionExpression: CHECK_DUTY_STATUS_UNCHANGED,
+        ExpressionAttributeNames: {
+          '#status': 'status',
+          '#updatedAt': 'updatedAt',
+          '#version': 'version',
+          '#dutyId': 'dutyId',
+          '#recordedAt': 'recordedAt',
+          '#recordedBy': 'recordedBy',
+          '#unitPrice': 'unitPrice',
+        },
+        ExpressionAttributeValues: {
+          ':to': toStatus,
+          ':from': duty.status,
+          ':now': now.toISOString(),
+          ':one': 1,
+          ':v': expectedVersion,
+          ':id': duty.dutyId,
+        },
+      },
+    },
+    buildMonthGuard(duty.familyId, duty.month),
+  ];
+}
+
+// --- U7: 月の状態の確定・取り消し（version を条件にしない冪等の書き込み。BR8.11、BR8.12、BR8.14、NFR2.46） ---
+
+/**
+ * 行がまだ無い月への初回の確定（U7。BR8.11）。attribute_not_exists(#sk) を条件に PutItem で version=1 の確定行を作る。
+ * 書けたら 'written'、行が既にある（競合）なら 'exists'（呼び出し側が updateMonthConfirmation でそろえる）。
+ */
+export async function putConfirmedMonthIfAbsent(
+  ctx: { familyId: string; userId: string },
+  month: string,
+  now: Date,
+): Promise<'written' | 'exists'> {
+  const record: MonthStateRecord & { sk: string } = {
+    sk: monthStateSortKey(month),
+    familyId: ctx.familyId,
+    month,
+    confirmed: true,
+    confirmedAt: now.toISOString(),
+    confirmedByUserId: ctx.userId,
+    version: 1,
+  };
+  try {
+    await docClient.send(
+      new PutCommand({
+        TableName: tables.calendar(),
+        Item: record,
+        ConditionExpression: 'attribute_not_exists(#sk)',
+        ExpressionAttributeNames: { '#sk': 'sk' },
+      }),
+    );
+    return 'written';
+  } catch (error) {
+    if (error instanceof ConditionalCheckFailedException) return 'exists';
+    throw error;
+  }
+}
+
+/**
+ * 行がある月の確定・取り消し（U7。BR8.11、BR8.12）。version を条件にせず、目的の値にそろえる。
+ * confirmed=true なら confirmedAt・confirmedByUserId を SET、false なら REMOVE。どちらも version+1。
+ * 取り消しで行が無い月には当てない（attribute_exists(#sk) を条件にし、断られたら何もしない）。
+ * 行があって書けたら 'written'、取り消しで行が無ければ 'absent'。属性名はすべて # の別名（NFR4.69）。
+ */
+export async function updateMonthConfirmation(
+  ctx: { familyId: string; userId: string },
+  month: string,
+  confirmed: boolean,
+  now: Date,
+): Promise<'written' | 'absent'> {
+  const common = {
+    TableName: tables.calendar(),
+    Key: { familyId: ctx.familyId, sk: monthStateSortKey(month) },
+    ConditionExpression: 'attribute_exists(#sk)',
+  };
+  // 行があるときだけ当てる（attribute_exists）。行の version は 0 以上で必ずあるので、素直に +1 する（BR8.14）
+  const input = confirmed
+    ? {
+        ...common,
+        UpdateExpression:
+          'SET #confirmed = :true, #confirmedAt = :now, #confirmedByUserId = :by, ' +
+          '#version = #version + :one',
+        ExpressionAttributeNames: {
+          '#sk': 'sk',
+          '#confirmed': 'confirmed',
+          '#confirmedAt': 'confirmedAt',
+          '#confirmedByUserId': 'confirmedByUserId',
+          '#version': 'version',
+        },
+        ExpressionAttributeValues: {
+          ':true': true,
+          ':now': now.toISOString(),
+          ':by': ctx.userId,
+          ':one': 1,
+        },
+      }
+    : {
+        ...common,
+        UpdateExpression:
+          'SET #confirmed = :false, #version = #version + :one ' +
+          'REMOVE #confirmedAt, #confirmedByUserId',
+        ExpressionAttributeNames: {
+          '#sk': 'sk',
+          '#confirmed': 'confirmed',
+          '#confirmedAt': 'confirmedAt',
+          '#confirmedByUserId': 'confirmedByUserId',
+          '#version': 'version',
+        },
+        ExpressionAttributeValues: { ':false': false, ':one': 1 },
+      };
+  try {
+    await docClient.send(new UpdateCommand(input));
+    return 'written';
+  } catch (error) {
+    if (error instanceof ConditionalCheckFailedException) return 'absent';
+    throw error;
+  }
 }
 
 /** 割り当ての Put。行が 0 行のときは choreTypeIds を置かない（空の集合は書けない） */

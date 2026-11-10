@@ -66,12 +66,37 @@ export interface DutyRecord {
   unitPrice?: number;
 }
 
-/** 月の状態（確定したか。U7 が書く）。Calendar の項目は sk（`M#<month>#S`）を足した形。 */
+/**
+ * 月の状態（確定したか。U7 が書く）。Calendar の項目は sk（`M#<month>#S`）を足した形。
+ * confirmedByUserId・version は U7 で足す（契約への追加。U5・U6 は confirmed だけを読む）。
+ * version は確定・取り消しの回数の手がかり（書き込みの条件にはしない。BR8.14）。記録のない月は version 0 扱い。
+ */
 export interface MonthStateRecord {
   familyId: string;
   month: string;
   confirmed: boolean;
   confirmedAt?: string;
+  confirmedByUserId?: string;
+  version?: number;
+}
+
+export type SwapStatus = 'open' | 'accepted' | 'withdrawn' | 'cancelled';
+
+/**
+ * 代わりにやるの申し出（U8）。Calendar の項目は sk（`SWAP#<dutyId>`）を足した形。
+ * 1 つの担当に項目は 1 つ。引き受け・取り下げ・自動でなくなったあとも残す。
+ */
+export interface SwapOfferRecord {
+  familyId: string;
+  dutyId: string;
+  offerId: string;
+  offererUserId: string;
+  dutyVersion: number;
+  status: SwapStatus;
+  acceptedByUserId?: string;
+  acceptedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 /** 担当の ID から担当の場所を引く印。Calendar の項目は sk（`DID#<dutyId>`）を足した形。 */

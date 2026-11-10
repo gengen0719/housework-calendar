@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 反映後の確かめ（全 20 件: 1・2・3・4 が各 1 件、3b が U2 の 5 件、3c が U3 の 1 件、3d〜3h が U4 の 5 件、3i〜3l が U5 の 4 件、3m が U6 の 1 件）。
+# 反映後の確かめ（全 23 件: 1・2・3・4 が各 1 件、3b が U2 の 5 件、3c が U3 の 1 件、3d〜3h が U4 の 5 件、3i〜3l が U5 の 4 件、3m が U6 の 1 件、3n〜3p が U7 の 3 件）。
 # 使い方: scripts/smoke-check.sh <CloudFront の URL> <api の関数 URL>
 #   例: scripts/smoke-check.sh https://dxxxx.cloudfront.net https://xxxx.lambda-url.ap-northeast-1.on.aws/
 set -euo pipefail
@@ -74,6 +74,13 @@ check "PATCH /v1/duties/:dutyId (セッションなし)" 401 -X PATCH -H "$json"
 
 # 3m. U6 の記録の操作がセッションなしで 401（書き込みはしない）。duty_id は U5 の作り物の ID を使い回す
 check "POST /v1/duties/:dutyId/record (セッションなし)" 401 -X POST -H "$json" --data '{"version":0}' "${base}/v1/duties/${duty_id}/record"
+
+# 3n〜3p. U7 の状態の変更と月の確定・取り消しがセッションなしで 401（書き込みはしない）。
+# duty_id は U5 の作り物の ID、month は 2000-01（どちらも本物ではない）。
+# PUT・DELETE が CloudFront を通って api に届く（403・405 にならない）ことも分かる
+check "POST /v1/duties/:dutyId/status (セッションなし)" 401 -X POST -H "$json" --data '{"action":"cancel","version":0}' "${base}/v1/duties/${duty_id}/status"
+check "PUT /v1/months/:month/confirmation (セッションなし)" 401 -X PUT -H "$json" --data '{}' "${base}/v1/months/2000-01/confirmation"
+check "DELETE /v1/months/:month/confirmation (セッションなし)" 401 -X DELETE "${base}/v1/months/2000-01/confirmation"
 
 # 4. CloudFront を通さない要求を断っている: 関数 URL を直接呼ぶと 403
 check "api の関数 URL を直接呼ぶ" 403 "${api_direct}/v1/me"

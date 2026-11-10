@@ -6,11 +6,13 @@ import {
   type CalendarChild,
   type ChoreType,
   type Duty,
+  type DutyStatus,
   type Member,
   type MonthCalendar,
   type Ok,
   type OverlapItem,
   type OverwriteChange,
+  type StatusChangeAction,
 } from '@housework/shared';
 import { describeError, logger, setRequestMetrics } from '../lib/logger';
 import type { FamilyContext } from '../middleware/requireMembership';
@@ -603,10 +605,30 @@ export async function changeDutyChild(
   return logChangeRejected(ctx, dutyId, 'INTERNAL');
 }
 
-/** 担当 1 件の画面用の形（種類の名前を C7 から読む。「未」の担当は記録がないので記録した人の名前は要らない） */
+/**
+ * 担当 1 件の画面用の形（種類の名前を C7 から読む）。
+ * recordedBy があれば、家族のメンバー全員（管理者を含む）から表示名を引く（U7 の markDone は管理者。F2.5、BR6.13）。
+ */
 async function dutyView(ctx: FamilyContext, duty: DutyRecord): Promise<Duty> {
-  const type = await choreTypeService.get(ctx, duty.choreTypeId);
-  return toDutyView(duty, new Map(type ? [[type.choreTypeId, type]] : []), new Map());
+  const types = new Map<string, { name: string }>();
+  const names = new Map<string, string>();
+  // 呼び出し側は書き込みのあとに呼ぶ。読み取りが失敗しても 500 にせず、名前を空にして返す（警告は ID だけ）
+  try {
+    const type = await choreTypeService.get(ctx, duty.choreTypeId);
+    if (type) types.set(type.choreTypeId, type);
+    if (duty.recordedBy) {
+      const members = await familyMemberService.listMembers(ctx);
+      const member = members.find((m) => m.userId === duty.recordedBy);
+      if (member) names.set(member.userId, member.displayName);
+    }
+  } catch {
+    logger.warn({
+      event: 'DUTY_VIEW_READ_FAILED',
+      familyId: ctx.familyId,
+      dutyId: duty.dutyId,
+    });
+  }
+  return toDutyView(duty, types, names);
 }
 
 /**
@@ -619,4 +641,246 @@ export async function isChoreTypeAssigned(
   choreTypeId: string,
 ): Promise<boolean> {
   return calendarRepository.isChoreTypeUsed(ctx.familyId, choreTypeId);
+}
+
+// --- U7: 状態の変更（changeDutyStatus）と月の確定・取り消し（confirmMonth・unconfirmMonth） ---
+
+/** 状態の変更の取引が競合で断られたとき、読み直してやり直す回数（最初の 1 回を含めて 2 回。NFR2.45） */
+const MAX_STATUS_ATTEMPTS = 2;
+
+/** 状態の変更が断られる理由（ADMIN_ONLY は入口の requireAdmin で先に断るので、ここでは返さない） */
+export type ChangeStatusFailure = {
+  ok: false;
+  reason: 'NOT_FOUND' | 'MONTH_CONFIRMED' | 'INVALID_TRANSITION' | 'INTERNAL';
+};
+
+export type ChangeStatusOutcome = Ok<Duty> | ChangeStatusFailure;
+
+export interface ChangeDutyStatusOptions {
+  /** 要求の入口で 1 回だけ取った時刻（recordedAt・updatedAt の元） */
+  now: Date;
+  /** 見せた時点の version。数でも、数を返す関数でも渡せる（本文を担当の 404 のあとで読むため） */
+  version: number | (() => number);
+}
+
+/**
+ * FR6.1 の表の判定（BR8.2）。いまの状態と action の組から、操作後の状態を返す。表になければ undefined。
+ */
+export function judgeTransition(
+  status: DutyStatus,
+  action: StatusChangeAction,
+): DutyStatus | undefined {
+  switch (action) {
+    case 'cancel':
+      return status === 'done' ? 'todo' : undefined; // 済 → 未
+    case 'markDone':
+      return status === 'todo' || status === 'skipped' ? 'done' : undefined; // 未・× → 済
+    case 'markSkipped':
+      return status === 'todo' || status === 'done' ? 'skipped' : undefined; // 未・済 → ×
+    case 'unmarkSkipped':
+      return status === 'skipped' ? 'todo' : undefined; // × → 未
+  }
+}
+
+function logStatusRejected(
+  ctx: FamilyContext,
+  dutyId: string,
+  action: StatusChangeAction,
+  reason: ChangeStatusFailure['reason'],
+): ChangeStatusFailure {
+  logger.info({
+    event: 'DUTY_STATUS_REJECTED',
+    familyId: ctx.familyId,
+    dutyId,
+    action,
+    reason,
+  });
+  return { ok: false, reason };
+}
+
+/**
+ * 状態を変える（C8 changeDutyStatus、F2、BR8.2・BR8.4〜BR8.7、BR8.15・BR8.18、reliability-design.md）。
+ * 管理者かどうかは呼び出し側（requireAdmin）が確かめる。version は数でも関数でも渡せる
+ * （本文の 422 は担当の 404 のあと。U5・U6 と同じ）。
+ * 流れ（for attempt in 1..2）: 探す（404）→ 月の確定（409）→ 見せた version との食い違い（409 INVALID_TRANSITION）→ 表（409）→ markDone は単価を読む →
+ * 取引を 1 回書く → 断られたら読み直して 1 回だけやり直す → 2 回失敗で INTERNAL。
+ * 書けたら DUTY_STATUS_CHANGED、担当が「未」でなくなったら notifyDutyReassigned を 1 回、更新後の Duty を返す。
+ */
+export async function changeDutyStatus(
+  ctx: FamilyContext,
+  dutyId: string,
+  action: StatusChangeAction,
+  options: ChangeDutyStatusOptions,
+): Promise<ChangeStatusOutcome> {
+  const { now } = options;
+  const startedAt = Date.now();
+  // version は担当の 404 のあとに解決する。関数なら 1 回だけ呼んで覚える（やり直しでも同じ値）
+  let wantedVersion: number | undefined;
+  const resolveVersion = (): number => {
+    if (wantedVersion === undefined) {
+      wantedVersion = typeof options.version === 'function' ? options.version() : options.version;
+    }
+    return wantedVersion;
+  };
+
+  for (let attempt = 0; attempt < MAX_STATUS_ATTEMPTS; attempt++) {
+    const found = await calendarRepository.findDuty(ctx.familyId, dutyId);
+    // 1 探す（家族の中だけ）
+    if (!found) return logStatusRejected(ctx, dutyId, action, 'NOT_FOUND');
+    const { duty, confirmed } = found;
+    // 本文を読む（422 を投げる可能性があるので、担当の 404 のあとで呼ぶ）。見せた時点の version
+    const shownVersion = resolveVersion();
+    // 2 月の確定（担当の month で引く。今日の月ではない。NFR2.48）
+    if (confirmed) return logStatusRejected(ctx, dutyId, action, 'MONTH_CONFIRMED');
+    // 2.5 見せた version と違えば「先に変更された」（古い画面からの操作で上書きしない。BR8.4、NFR4.70）
+    if (duty.version !== shownVersion) {
+      return logStatusRejected(ctx, dutyId, action, 'INVALID_TRANSITION');
+    }
+    // 3 FR6.1 の表
+    const toStatus = judgeTransition(duty.status, action);
+    if (toStatus === undefined) {
+      return logStatusRejected(ctx, dutyId, action, 'INVALID_TRANSITION');
+    }
+
+    // 4 markDone は書く直前に単価を読む
+    let items;
+    if (action === 'markDone') {
+      const price = await choreTypeService.getCurrentUnitPrice(ctx, duty.choreTypeId);
+      if (!price.ok) return logStatusRejected(ctx, dutyId, action, 'INTERNAL'); // 種類なし（起きない前提）
+      items = calendarRepository.buildMarkDoneItems(duty, price.value, ctx, now, shownVersion);
+    } else {
+      items = calendarRepository.buildResetStatusItems(
+        duty,
+        toStatus as 'todo' | 'skipped',
+        now,
+        shownVersion,
+      );
+    }
+
+    const outcome = await calendarRepository.writeTransaction(items);
+    if (outcome === 'written') {
+      const changed = applyStatusChange(duty, action, toStatus, ctx, now, items);
+      logger.info({
+        event: 'DUTY_STATUS_CHANGED',
+        familyId: ctx.familyId,
+        dutyId,
+        action,
+        fromStatus: duty.status,
+        toStatus,
+        durationMs: Date.now() - startedAt,
+      });
+      // 担当が「未」でなくなった（markDone・markSkipped）ときだけ、申し出の取り下げを呼ぶ（BR8.15）
+      if (toStatus !== 'todo') {
+        await notifyDutyReassigned([
+          {
+            familyId: ctx.familyId,
+            dutyId,
+            date: duty.date,
+            choreTypeId: duty.choreTypeId,
+            kind: 'status-changed',
+            fromChildUserId: duty.childUserId,
+          },
+        ]);
+      }
+      return ok(await dutyView(ctx, changed));
+    }
+    // 競合で断られた。読み直して BR8.4 の判定を最初から（やり直しは 1 回まで）。
+    // 読み直しは 1 回だけなので、次の試行があるときだけ DUTY_STATUS_RETRY を残す（observability-design.md）
+    if (attempt + 1 < MAX_STATUS_ATTEMPTS) {
+      logger.info({ event: 'DUTY_STATUS_RETRY', familyId: ctx.familyId, dutyId });
+    }
+  }
+  // 2 回続けて断られた
+  return logStatusRejected(ctx, dutyId, action, 'INTERNAL');
+}
+
+/** 取引が書けたあとの担当の形（画面に返す前の記録。markDone は 3 項目をそろえ、ほかは消す）。 */
+function applyStatusChange(
+  duty: DutyRecord,
+  action: StatusChangeAction,
+  toStatus: DutyStatus,
+  ctx: FamilyContext,
+  now: Date,
+  items: TransactItems,
+): DutyRecord {
+  const at = now.toISOString();
+  if (action === 'markDone') {
+    // 単価は取引の担当の Update に入れた :price を使う（読んだ値）
+    const update = (items[0] as { Update: { ExpressionAttributeValues: Record<string, unknown> } })
+      .Update;
+    return {
+      ...duty,
+      status: 'done',
+      recordedAt: at,
+      recordedBy: ctx.userId,
+      unitPrice: update.ExpressionAttributeValues[':price'] as number,
+      updatedAt: at,
+      version: duty.version + 1,
+    };
+  }
+  const { recordedAt: _a, recordedBy: _b, unitPrice: _c, ...rest } = duty;
+  void _a;
+  void _b;
+  void _c;
+  return { ...rest, status: toStatus, updatedAt: at, version: duty.version + 1 };
+}
+
+/**
+ * 月を確定する（C8 confirmMonth、F3、BR8.11、BR8.14〜BR8.16、NFR2.46）。管理者かどうかは呼び出し側が確かめる。
+ * 行の有無は条件つきの 1 回の書き込みで分ける（まず attribute_not_exists の Put、競合なら Update）。
+ * 書けたら MONTH_CONFIRMED_SET を残し、その月で「未」でなくなった担当を一覧にして notifyDutyReassigned を 1 回。
+ */
+export async function confirmMonth(
+  ctx: FamilyContext,
+  month: string,
+  options: { now: Date },
+): Promise<void> {
+  const putResult = await calendarRepository.putConfirmedMonthIfAbsent(ctx, month, options.now);
+  if (putResult === 'exists') {
+    await calendarRepository.updateMonthConfirmation(ctx, month, true, options.now);
+  }
+  logger.info({
+    event: 'MONTH_CONFIRMED_SET',
+    familyId: ctx.familyId,
+    month,
+    confirmed: true,
+  });
+  // その月で「未」でなくなる担当（確定の時点で「未」だった担当）を、担当ごとに status-changed の 1 件で渡す（R-01）。
+  // 書き込みは済んでいるので、読み取りが失敗しても成功のまま返す（警告は familyId・month だけ。名前・単価は書かない）
+  let items: MonthItems;
+  try {
+    items = await calendarRepository.loadMonth(ctx.familyId, month);
+  } catch {
+    logger.warn({
+      event: 'CONFIRM_POST_READ_FAILED',
+      familyId: ctx.familyId,
+      month,
+    });
+    return;
+  }
+  const events: DutyReassignedEvent[] = items.duties
+    .filter((duty) => duty.status === 'todo')
+    .map((duty) => ({
+      familyId: ctx.familyId,
+      dutyId: duty.dutyId,
+      date: duty.date,
+      choreTypeId: duty.choreTypeId,
+      kind: 'status-changed',
+      fromChildUserId: duty.childUserId,
+    }));
+  if (events.length > 0) await notifyDutyReassigned(events);
+}
+
+/**
+ * 月の確定を取り消す（C8 unconfirmMonth、F4、BR8.12、BR8.14）。管理者かどうかは呼び出し側が確かめる。
+ * 行があれば confirmed=false にし、無ければ何もしない。notifyDutyReassigned は呼ばない（取り下げるのは確定のときだけ）。
+ */
+export async function unconfirmMonth(ctx: FamilyContext, month: string): Promise<void> {
+  await calendarRepository.updateMonthConfirmation(ctx, month, false, new Date());
+  logger.info({
+    event: 'MONTH_CONFIRMED_SET',
+    familyId: ctx.familyId,
+    month,
+    confirmed: false,
+  });
 }

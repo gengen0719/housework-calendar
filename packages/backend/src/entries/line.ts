@@ -10,6 +10,7 @@ import { handleLeave } from '../handlers/line/leaveHandler';
 import { handleMessage } from '../handlers/line/messageHandler';
 import { handlePostback } from '../handlers/line/postbackHandler';
 import { parseRecordCommand } from '../handlers/line/recordCommand';
+import { parseSwapMessage, parseSwapPostback } from '../handlers/line/swapCommand';
 import { handleUnfollow } from '../handlers/line/unfollowHandler';
 import { WebhookBodySchema, type LineEvent } from '../handlers/line/types';
 import { getConfig } from '../lib/config';
@@ -21,6 +22,10 @@ import {
 } from '../middleware/verifyLineSignature';
 import { verifyOriginHeader } from '../middleware/verifyOriginHeader';
 import * as lineEventRepository from '../repositories/lineEventRepository';
+import { registerSwapHooks } from '../services/swapService';
+
+// 起動の枠で 1 回だけ登録する（U8。BR9.11）。line は担当の子供を変える書き込みを持たないので、記録の通知だけ
+registerSwapHooks({ reassigned: false, recorded: true });
 
 const json = (statusCode: number, body: unknown): APIGatewayProxyStructuredResultV2 => ({
   statusCode,
@@ -43,10 +48,17 @@ const handlers: Record<string, EventRoute> = {
   join: { accepts: always, handle: handleJoin },
   leave: { accepts: always, handle: handleLeave },
   unfollow: { accepts: always, handle: handleUnfollow },
-  message: { accepts: isGroupOperation, handle: handleMessage },
+  // message は、グループの操作（U3 の「登録」）か、「家事交代」（U8）を受け付ける
+  message: {
+    accepts: (event) => isGroupOperation(event) || parseSwapMessage(event) !== null,
+    handle: handleMessage,
+  },
   // postback は、グループの操作か、1 対 1 の記録の操作（U6。record.list / record.do）を受け付ける（security-design.md）
   postback: {
-    accepts: (event) => isGroupOperation(event) || parseRecordCommand(event) !== null,
+    accepts: (event) =>
+      isGroupOperation(event) ||
+      parseRecordCommand(event) !== null ||
+      parseSwapPostback(event) !== null,
     handle: handlePostback,
   },
 };

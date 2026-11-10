@@ -1,0 +1,214 @@
+{
+  "stage": "code-generation",
+  "unit": "u8-swap",
+  "version": 1,
+  "writes": [
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "docs/contract-changes-u8.md"
+    },
+    {
+      "path": "docs/manual-check-u8.md"
+    },
+    {
+      "path": "packages/shared/src/reasons.ts"
+    },
+    {
+      "path": "packages/shared/src/messages.ts"
+    },
+    {
+      "path": "packages/backend/src/entries/api.ts"
+    },
+    {
+      "path": "packages/backend/src/entries/line.ts"
+    },
+    {
+      "path": "packages/backend/src/handlers/line/swapCommand.ts"
+    },
+    {
+      "path": "packages/backend/src/handlers/line/swapHandler.ts"
+    },
+    {
+      "path": "packages/backend/src/handlers/line/messageHandler.ts"
+    },
+    {
+      "path": "packages/backend/src/handlers/line/postbackHandler.ts"
+    },
+    {
+      "path": "packages/backend/src/models.ts"
+    },
+    {
+      "path": "packages/backend/src/repositories/swapRepository.ts"
+    },
+    {
+      "path": "packages/backend/src/repositories/calendarRepository.ts"
+    },
+    {
+      "path": "packages/backend/src/services/swapService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/dutyReassignedHook.ts"
+    },
+    {
+      "path": "packages/backend/src/services/groupCommandGate.ts"
+    },
+    {
+      "path": "packages/backend/src/services/lineApiService.ts"
+    },
+    {
+      "path": "packages/backend/test/fixtures/fakeSecrets.ts"
+    },
+    {
+      "path": "packages/backend/test/u1-skeleton-family/helpers/fakeDynamo.ts"
+    },
+    {
+      "path": "packages/backend/test/u3-notification-group/unregister-and-gate.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u3-notification-group/unregisterNotificationGroup.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u5-assignment-calendar/dutyReassignedHook.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u8-swap/stacks.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/buildSwapMessages.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/dutyReassignedHook.concurrency.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/entries.registerHooks.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/groupCommandGate.displayName.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/helpers/lineEvents.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/helpers/lineFetch.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/helpers/lineWorld.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/helpers/seed.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/helpers/swapWorld.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/isOfferValid.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/lineLimits.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/mapWithConcurrency.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/registerSwapHooks.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-accept.feature"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-accept.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-cleanup.feature"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-cleanup.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-gate.feature"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-gate.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-hooks.feature"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-hooks.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-line-resilience.feature"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-line-resilience.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-line-roles.feature"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-line-roles.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-line.feature"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-line.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-list.feature"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-list.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-offer-withdraw.feature"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-offer-withdraw.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-transaction.feature"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swap-transaction.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swapColors.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swapCommand.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swapHandler.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swapLogs.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/listSwappableDuties.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/offerSwap.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/acceptSwap.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/withdrawSwap.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swapJstBoundary.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swapRepository.items.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u8-swap/swapRepository.keys.test.ts"
+    },
+    {
+      "path": "packages/shared/test/u8-swap/messages.test.ts"
+    }
+  ]
+}
