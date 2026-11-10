@@ -18,6 +18,8 @@ import type {
   NotificationGroupView,
   Reason,
   SaveAssignmentRequest,
+  StatusChangeRequest,
+  StatusChangeResponse,
 } from '@housework/shared';
 import { IDEMPOTENCY_KEY_HEADER, isReason } from '@housework/shared';
 
@@ -248,6 +250,36 @@ export function recordDuty(
   return request('POST', `/v1/duties/${encodeURIComponent(dutyId)}/record`, {
     token,
     body,
+    ...(signal ? { signal } : {}),
+  });
+}
+
+/** 担当の状態を変える（管理者だけ。U7）。見せた時点の version を送る。応答は変更後の担当 */
+export function changeDutyStatus(
+  token: string,
+  dutyId: string,
+  body: StatusChangeRequest,
+  signal?: AbortSignal,
+): Promise<StatusChangeResponse> {
+  return request('POST', `/v1/duties/${encodeURIComponent(dutyId)}/status`, {
+    token,
+    body,
+    ...(signal ? { signal } : {}),
+  });
+}
+
+/** 月を確定する（管理者だけ。何度押しても同じ結果。本文なし。U7） */
+export function confirmMonth(token: string, month: string, signal?: AbortSignal): Promise<void> {
+  return request('PUT', `${monthPath(month)}/confirmation`, {
+    token,
+    ...(signal ? { signal } : {}),
+  });
+}
+
+/** 月の確定を取り消す（管理者だけ。確定していなくても同じ結果。本文なし。U7） */
+export function unconfirmMonth(token: string, month: string, signal?: AbortSignal): Promise<void> {
+  return request('DELETE', `${monthPath(month)}/confirmation`, {
+    token,
     ...(signal ? { signal } : {}),
   });
 }

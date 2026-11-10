@@ -3,6 +3,8 @@ import {
   TransactionCanceledException,
 } from '@aws-sdk/client-dynamodb';
 import {
+  BatchGetCommand,
+  BatchWriteCommand,
   DeleteCommand,
   DynamoDBDocumentClient,
   GetCommand,
@@ -29,10 +31,20 @@ export interface FakeDynamoHooks {
   /** 競合の再現: 次の UpdateItem を評価する直前に 1 回だけ呼ぶ */
   beforeNextUpdate?: () => void;
   queryPageSize?: number;
+  /** 遅い読み取りの再現（U8）: Calendar・ChoreTypes の Get・Query をこのミリ秒だけ遅らせる */
+  readDelayMs?: number;
   beforeTransaction(n: number, fn: () => void): void;
   failTransaction(n: number, code: string): void;
   transactionSizes: number[];
   readLog: ReadLogEntry[];
+  /** 読み取りの対象の記録（U8）。`Get <表> <sk>`、`Query <表> <sk の前置き>`。申し出の項目 `SWAP#` を読んだ回数の確認用 */
+  readTargets: string[];
+  /**
+   * 見張り（U8）: 使ってはいけない呼び出しの記録。
+   * 申し出の項目（sk が `SWAP#` で始まる）への PutItem・DeleteItem、BatchGet、BatchWrite が呼ばれたら
+   * 書き込まず、ここに残して失敗させる。空のままなら呼ばれていない。
+   */
+  forbiddenCalls: string[];
 }
 
 export const USERS_TABLE = 'Users-test';
@@ -217,8 +229,17 @@ export function installFakeDynamo() {
     transactionSizes: [],
     /** 読み取り（Get、Query、Scan）の記録。強い整合性で読んだかを残す（U5。NFR1.20〜NFR1.22） */
     readLog: [],
+    readTargets: [],
+    forbiddenCalls: [],
   };
 
+  /** 遅い読み取りの再現（U8）。readDelayMs が無ければ、そのまま同期で返す（既存の動きを変えない） */
+  const delayed = <T>(tableName: string | undefined, result: T): T | Promise<T> => {
+    const ms = hooks.readDelayMs;
+    const slow =
+      ms !== undefined && (tableName === CALENDAR_TABLE || tableName === CHORE_TYPES_TABLE);
+    return slow ? new Promise<T>((resolve) => setTimeout(() => resolve(result), ms)) : result;
+  };
   const table = (name: string | undefined): Table => {
     const found = name ? tables[name] : undefined;
     if (!found) throw new Error(`知らないテーブル: ${name}`);
@@ -269,6 +290,10 @@ export function installFakeDynamo() {
   }
 
   mock.on(PutCommand).callsFake((input) => {
+    if (String(input.Item?.sk ?? '').startsWith('SWAP#')) {
+      hooks.forbiddenCalls.push(`PutItem ${String(input.TableName)} ${String(input.Item?.sk)}`);
+      throw new Error('申し出の項目への PutItem は使えません');
+    }
     const t = table(input.TableName);
     const key = keyOf(input.TableName, input.Item);
     const existing = t.get(key);
@@ -303,11 +328,16 @@ export function installFakeDynamo() {
       table: String(input.TableName),
       consistent: input.ConsistentRead === true,
     });
+    hooks.readTargets.push(`Get ${String(input.TableName)} ${String(input.Key?.sk)}`);
     const item = t.get(keyOf(input.TableName, input.Key));
-    return { Item: item ? { ...item } : undefined };
+    return delayed(input.TableName, { Item: item ? { ...item } : undefined });
   });
 
   mock.on(DeleteCommand).callsFake((input) => {
+    if (String(input.Key?.sk ?? '').startsWith('SWAP#')) {
+      hooks.forbiddenCalls.push(`DeleteItem ${String(input.TableName)} ${String(input.Key?.sk)}`);
+      throw new Error('申し出の項目への DeleteItem は使えません');
+    }
     if (isEvaluated(input.TableName)) {
       // ChoreTypes（U4）と Calendar（U5）は条件式を本当に評価する
       const existing = table(input.TableName).get(keyOf(input.TableName, input.Key));
@@ -471,6 +501,7 @@ export function installFakeDynamo() {
       table: String(input.TableName),
       consistent: input.ConsistentRead === true,
     });
+    hooks.readTargets.push(`Query ${String(input.TableName)} ${String(values[':p'])}`);
     if (isEvaluated(input.TableName)) {
       // `familyId = :f AND begins_with(sk, :p)`。sk の昇順。hooks.queryPageSize（または Limit）があれば、その件数ごとに LastEvaluatedKey を返す。
       // FilterExpression は 1 ページを読んだあとに当てる（本物と同じ）。ProjectionExpression があれば、その属性だけ返す
@@ -504,10 +535,10 @@ export function installFakeDynamo() {
               )
             : { ...item },
         );
-      return {
+      return delayed(input.TableName, {
         Items: items,
         ...(more ? { LastEvaluatedKey: { familyId: last.familyId, sk: last.sk } } : {}),
-      };
+      });
     }
     if (input.IndexName === 'familyId-index') {
       const familyId = values[':familyId'];
@@ -529,6 +560,16 @@ export function installFakeDynamo() {
       .filter((item) => item.lineUserId === lineUserId)
       .map((item) => ({ ...item }));
     return { Items: items };
+  });
+
+  /** BatchGet・BatchWrite は使わない（U8 の見張り）。呼ばれたら記録して失敗させる */
+  mock.on(BatchGetCommand).callsFake(() => {
+    hooks.forbiddenCalls.push('BatchGetItem');
+    throw new Error('BatchGetItem は使えません');
+  });
+  mock.on(BatchWriteCommand).callsFake(() => {
+    hooks.forbiddenCalls.push('BatchWriteItem');
+    throw new Error('BatchWriteItem は使えません');
   });
 
   /** Scan は使わない（NFR1.20、NFR1.22）。呼ばれたら記録して失敗させる */

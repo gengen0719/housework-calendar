@@ -1,0 +1,201 @@
+{
+  "stage": "nfr-requirements",
+  "unit": "u9-allowance",
+  "upstream_ids": [
+    "NFR1",
+    "NFR2",
+    "NFR3",
+    "NFR4",
+    "NFR5",
+    "NFR6",
+    "NFR7",
+    "NFR8",
+    "NFR9",
+    "NFR10",
+    "NFR11"
+  ],
+  "coverage": [
+    {
+      "id": "NFR1",
+      "status": "OK",
+      "target": "NFR1.36, NFR1.37, NFR1.38; u9 is read-only, adds no billable resource (NFR1.36), keeps DynamoDB reads small and constant per request (NFR1.37), no prefetch or polling (NFR1.38), sends no LINE message"
+    },
+    {
+      "id": "NFR2",
+      "status": "OK",
+      "target": "NFR2.67, NFR2.68, NFR2.69, NFR2.70, NFR2.71, NFR2.72, NFR2.73, NFR2.74, NFR2.75, NFR2.76, NFR2.77; whole-or-nothing failure (NFR2.68), ALLOWANCE_* anomaly logs (NFR2.75); the 15-minute notice to the maker is handed to u10 (NFR2.77, handoff section), u9 only leaves searchable logs"
+    },
+    {
+      "id": "NFR3",
+      "status": "OK",
+      "target": "NFR3.17, NFR3.18, NFR3.19; no stored data, no new table or index, constant reads per request"
+    },
+    {
+      "id": "NFR4",
+      "status": "OK",
+      "target": "NFR4.86, NFR4.87, NFR4.88, NFR4.89, NFR4.90, NFR4.91, NFR4.92, NFR4.93; every family member sees all children of the family (BR10.1), nothing across families, no write path, allow-listed response fields"
+    },
+    {
+      "id": "NFR5",
+      "status": "OK",
+      "target": "NFR5.16, NFR5.17"
+    },
+    {
+      "id": "NFR6",
+      "status": "OK",
+      "target": "NFR6.10; u9 has no repair path, anomalies are fixed through app operations or reviewed code"
+    },
+    {
+      "id": "NFR7",
+      "status": "OK",
+      "target": "NFR7.50, NFR7.51, NFR7.52, NFR7.53, NFR7.54, NFR7.55, NFR7.56, NFR7.57, NFR7.58; 3-second target for GET /months/{month}/allowances incl. month=current, normal and large month (300 duties), DynamoDB call-count breakdown (5 normal, 6 with index lag, +2 per departed child, 0 writes)"
+    },
+    {
+      "id": "NFR8",
+      "status": "OK",
+      "target": "NFR8.17, NFR8.18, NFR8.19"
+    },
+    {
+      "id": "NFR9",
+      "status": "OK",
+      "target": "NFR9.10, NFR9.11, NFR9.12; screen S5 accessibility (contrast, 44px targets, text for state, disabled end buttons, headings, live regions)"
+    },
+    {
+      "id": "NFR10",
+      "status": "OK",
+      "target": "NFR10.11, NFR10.12"
+    },
+    {
+      "id": "NFR11",
+      "status": "OK",
+      "target": "NFR11.10, NFR11.11; JST month boundaries for month=current, today, firstMonth, lastMonth and the duty date month"
+    }
+  ],
+  "reverse": [
+    {
+      "id": "AC8.1.1",
+      "status": "OK",
+      "target": "NFR2.69 (amount = unitPrice x count, total = sum of lines), NFR8.17, NFR8.18"
+    },
+    {
+      "id": "AC8.1.2",
+      "status": "OK",
+      "target": "NFR2.71 (child with no records shows a 0-yen row; empty family gives an empty list), NFR9.10"
+    },
+    {
+      "id": "AC8.1.3",
+      "status": "OK",
+      "target": "NFR2.69 (all amounts are integers), NFR8.18 (integer yen, one shared formatter)"
+    },
+    {
+      "id": "AC8.1.4",
+      "status": "OK",
+      "target": "NFR2.69, NFR7.50 (data includes a mid-month price change), NFR8.17"
+    },
+    {
+      "id": "AC5.1.13",
+      "status": "OK",
+      "target": "NFR2.69 (strongly consistent read, recomputed on every read), NFR2.67, NFR10.11"
+    },
+    {
+      "id": "AC4.1.3",
+      "status": "OK",
+      "target": "NFR4.87 (all family members see all children's amounts)"
+    },
+    {
+      "id": "AC1.1.11",
+      "status": "OK",
+      "target": "NFR4.86, NFR4.87"
+    },
+    {
+      "id": "AC4.1.5",
+      "status": "OK",
+      "target": "NFR2.68, NFR2.72 (failure text and re-read button), NFR4.93"
+    },
+    {
+      "id": "AC4.1.7",
+      "status": "OK",
+      "target": "NFR9.10, NFR9.11, NFR9.12"
+    },
+    {
+      "id": "AC9.1.5",
+      "status": "OK",
+      "target": "NFR2.73 (getAllowances works with a role: system ctx and throws on failure), NFR2.77 (handoff to u10), NFR8.18 (shared yen formatter)"
+    },
+    {
+      "id": "BR10.1",
+      "status": "OK",
+      "target": "NFR4.86, NFR4.87, NFR4.90"
+    },
+    {
+      "id": "BR10.2",
+      "status": "OK",
+      "target": "NFR2.67, NFR2.69, NFR3.19, NFR11.10 (month decided by the duty date, not the recorded time)"
+    },
+    {
+      "id": "BR10.6",
+      "status": "OK",
+      "target": "NFR2.69 (index lag), NFR2.71, NFR4.91, NFR7.55 (departed-child lookups bounded)"
+    },
+    {
+      "id": "BR10.7",
+      "status": "OK",
+      "target": "NFR2.68, NFR2.73, NFR4.90, NFR8.19 (adjustment plug-in is an argument with an empty default)"
+    },
+    {
+      "id": "BR10.8",
+      "status": "OK",
+      "target": "NFR4.88, NFR7.53, NFR11.10, NFR11.11"
+    },
+    {
+      "id": "BR10.9",
+      "status": "OK",
+      "target": "NFR9.10 (confirmation shown in text only)"
+    },
+    {
+      "id": "BR10.10",
+      "status": "OK",
+      "target": "NFR2.71, NFR9.10, NFR11.11 (today-month wording decided by the answer's today)"
+    },
+    {
+      "id": "BR10.11",
+      "status": "OK",
+      "target": "NFR9.10, NFR9.11, NFR8.18"
+    },
+    {
+      "id": "BR10.12",
+      "status": "OK",
+      "target": "NFR2.69, NFR2.72 (buttons stay pressable, 250 ms debounce, latest target month only, sequence numbers drop stale answers, no duplicate request for the same in-flight month), NFR1.38 (no prefetch or polling), NFR7.53"
+    },
+    {
+      "id": "BR10.13",
+      "status": "OK",
+      "target": "NFR2.68, NFR2.70, NFR2.75, NFR2.77, NFR4.93"
+    },
+    {
+      "id": "BR10.14",
+      "status": "OK",
+      "target": "NFR2.67, NFR4.89, NFR1.36, NFR3.19"
+    },
+    {
+      "id": "BR10.15",
+      "status": "OK",
+      "target": "NFR2.74, NFR2.75, NFR2.76 (no names, amounts or LINE ids in logs)"
+    },
+    {
+      "id": "BR10.16",
+      "status": "OK",
+      "target": "NFR7.50, NFR7.51, NFR7.52, NFR7.53, NFR7.55, NFR7.56 (parallel reads, one shared Families read via loadFamilyAndMembers, no per-duty reads, departed-child chain max 4 stages)"
+    },
+    {
+      "id": "BR10.17",
+      "status": "OK",
+      "target": "NFR2.73, NFR2.77 (u10 handoff)"
+    },
+    {
+      "id": "BR10.19",
+      "status": "OK",
+      "target": "NFR2.68 (NOT_FOUND becomes the substitute text, any other error fails the whole request), NFR4.90 (findDisplayName returns the display name only, one caller)"
+    }
+  ]
+}

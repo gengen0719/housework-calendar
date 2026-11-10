@@ -34,21 +34,21 @@ export type GateOutcome<T> =
   { status: 'done'; value: T } | { status: 'rejected'; reason: GateRejection; message: string };
 
 /**
- * 登録以外のグループの操作の入口（security-design.md の「グループの操作の入口」3、4、BR4.10）。U8 の「代わって」はここに操作を差し込む。
+ * 登録以外のグループの操作の入口（security-design.md の「グループの操作の入口」3、4、BR4.10）。U8 の「家事交代」はここに操作を差し込む。
  * 1. findFamilyByGroup で家族を決める。登録されていなければ GROUP_NOT_REGISTERED（操作は呼ばない）
- * 2. source.userId の利用者が友だちで、その家族のメンバーのときだけ、ctx = { familyId, userId, role } で操作を呼ぶ。違えば NOT_FAMILY_MEMBER
+ * 2. source.userId の利用者が友だちで、その家族のメンバーのときだけ、ctx = { familyId, userId, role } と、読んだ利用者の記録の表示名で操作を呼ぶ（追加の読み取りはしない）。違えば NOT_FAMILY_MEMBER
  * 断るときの message は決まった文だけで、家族の名前・メンバー・担当を入れない。呼び出し側は message をそのまま reply する。
  * source.type が group かどうかの確かめは呼び出し側（1 対 1 は案内、room は何もしない）。
  */
 export async function runGroupOperation<T>(
   groupId: string,
   lineUserId: string | undefined,
-  operation: (ctx: FamilyContext) => Promise<T>,
+  operation: (ctx: FamilyContext, displayName: string) => Promise<T>,
 ): Promise<GateOutcome<T>> {
   const reject = (reason: GateRejection, userId?: string): GateOutcome<T> => {
+    // LINE のグループ ID は書かない（NFR2.65）。残すのは理由と、分かるときのアプリの利用者 ID だけ
     logger.info({
       event: 'GROUP_COMMAND_REJECTED',
-      groupId,
       reason,
       ...(userId ? { userId } : {}),
     });
@@ -69,7 +69,7 @@ export async function runGroupOperation<T>(
     userId: user.userId,
     role: user.role,
   };
-  return { status: 'done', value: await operation(ctx) };
+  return { status: 'done', value: await operation(ctx, user.displayName) };
 }
 
 export type RegisterOutcome =

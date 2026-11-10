@@ -33,6 +33,14 @@ export const colors = {
   /** 確認ダイアログ（記録。U6）。見出しと本文の文字と、ダイアログの背景 */
   dialogText: '#1f2933',
   dialogBackground: '#ffffff',
+  /** 状態を変える操作ボタン（U7。済にする・やらなかったを外す・確定する）。背景とその上の文字 */
+  reviewActionButton: '#1f4e8c',
+  reviewActionButtonText: '#ffffff',
+  /** 元に戻す側の操作ボタン（U7。取り消す・やらなかったにする・確定を取り消す）。背景とその上の文字 */
+  reviewRevertButton: '#b3261e',
+  reviewRevertButtonText: '#ffffff',
+  /** 確認ダイアログの注意の文字の色（U7。「お小遣いの回数から外れます」「未の担当が N 件あります」） */
+  reviewNoteText: '#8a4b00',
 } as const;
 
 /** 文字の色と背景の色の組（色の差を単体テストで確かめる） */
@@ -62,6 +70,10 @@ export const textBackgroundPairs: ReadonlyArray<readonly [string, string, string
   // U6（記録）で足す色
   ['「やった」ボタンの文字 / ボタン', colors.recordButtonText, colors.recordButton],
   ['確認ダイアログの文字 / ダイアログ', colors.dialogText, colors.dialogBackground],
+  // U7（確認・修正と確定）で足す色
+  ['操作ボタン（進める）の文字 / ボタン', colors.reviewActionButtonText, colors.reviewActionButton],
+  ['操作ボタン（戻す）の文字 / ボタン', colors.reviewRevertButtonText, colors.reviewRevertButton],
+  ['確認ダイアログの注意の文字 / ダイアログ', colors.reviewNoteText, colors.dialogBackground],
 ];
 
 const touchTarget = { minWidth: MIN_TOUCH_TARGET_PX, minHeight: MIN_TOUCH_TARGET_PX };

@@ -1,0 +1,111 @@
+{
+  "stage": "nfr-requirements",
+  "unit": "u8-swap",
+  "upstream_ids": [
+    "NFR1",
+    "NFR2",
+    "NFR3",
+    "NFR4",
+    "NFR5",
+    "NFR6",
+    "NFR7",
+    "NFR8",
+    "NFR9",
+    "NFR10",
+    "NFR11"
+  ],
+  "coverage": [
+    {
+      "id": "NFR1",
+      "status": "OK",
+      "target": "NFR1.32, NFR1.33, NFR1.34, NFR1.35; u8 sends reply only and never push (NFR1.32), adds no billable resource (NFR1.33), keeps hook writes small (NFR1.34)"
+    },
+    {
+      "id": "NFR2",
+      "status": "OK",
+      "target": "NFR2.54, NFR2.55, NFR2.56, NFR2.57, NFR2.58, NFR2.59, NFR2.60, NFR2.61, NFR2.62, NFR2.63, NFR2.64, NFR2.65, NFR2.66; the 15-minute notice to the maker is handed to u10 (NFR2.66), u8 only leaves searchable INTERNAL/500/hook-failure logs"
+    },
+    {
+      "id": "NFR3",
+      "status": "OK",
+      "target": "NFR3.14, NFR3.15, NFR3.16"
+    },
+    {
+      "id": "NFR4",
+      "status": "OK",
+      "target": "NFR4.74, NFR4.75, NFR4.76, NFR4.77, NFR4.78, NFR4.79, NFR4.80, NFR4.81, NFR4.82, NFR4.83, NFR4.84, NFR4.85"
+    },
+    {
+      "id": "NFR5",
+      "status": "OK",
+      "target": "NFR5.14, NFR5.15"
+    },
+    {
+      "id": "NFR6",
+      "status": "OK",
+      "target": "NFR6.9"
+    },
+    {
+      "id": "NFR7",
+      "status": "OK",
+      "target": "NFR7.39, NFR7.40, NFR7.41, NFR7.42, NFR7.43, NFR7.44, NFR7.45, NFR7.46, NFR7.47, NFR7.48, NFR7.49; the month-confirm hook count and time (BR9.11) is decided in NFR7.46 (policy (b), bounded concurrency 4), with a staged escalation whose last step (c) needs the person"
+    },
+    {
+      "id": "NFR8",
+      "status": "OK",
+      "target": "NFR8.14, NFR8.15, NFR8.16"
+    },
+    {
+      "id": "NFR9",
+      "status": "OK",
+      "target": "NFR9.9; u8 adds no screen, only LINE reply messages"
+    },
+    {
+      "id": "NFR10",
+      "status": "OK",
+      "target": "NFR10.9, NFR10.10"
+    },
+    {
+      "id": "NFR11",
+      "status": "OK",
+      "target": "NFR11.8, NFR11.9"
+    }
+  ],
+  "reverse": [
+    {
+      "id": "AC7.1.11",
+      "status": "OK",
+      "target": "NFR7.39, NFR7.40, NFR7.41, NFR7.42 (each operation measured 20 times, 19 or more within 3 seconds; start point read as in u6 NFR7.25), NFR7.43, NFR7.44, NFR7.48"
+    },
+    {
+      "id": "BR9.11",
+      "status": "OK",
+      "target": "NFR7.46 (decision among (a) measure, (b) bounded concurrency, (c) contract change), NFR3.15, NFR2.58, NFR2.59, NFR2.64, NFR8.16"
+    },
+    {
+      "id": "BR9.8",
+      "status": "OK",
+      "target": "NFR2.57 (validity decided at read time, independent of the hook), NFR4.80"
+    },
+    {
+      "id": "BR9.9",
+      "status": "OK",
+      "target": "NFR4.79, NFR2.54, NFR2.55 (first of two simultaneous accepts only)"
+    },
+    {
+      "id": "BR9.18",
+      "status": "OK",
+      "target": "NFR2.63, NFR2.65 (no names or LINE ids in logs; GROUP_COMMAND_REJECTED stops writing the LINE group id), NFR4.84"
+    },
+    {
+      "id": "BR9.19",
+      "status": "OK",
+      "target": "NFR4.81, NFR4.82 (no PutItem or DeleteItem on line; no permission or environment variable change), NFR1.33, NFR3.14"
+    },
+    {
+      "id": "BR9.6",
+      "status": "OK",
+      "target": "NFR3.16, NFR8.15 (LINE limits are assumptions; official check is the first step of code generation)"
+    }
+  ]
+}

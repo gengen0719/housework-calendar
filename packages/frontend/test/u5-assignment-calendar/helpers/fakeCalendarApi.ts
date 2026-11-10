@@ -66,6 +66,10 @@ interface FakeState {
   patchAnswers: FakeResponse[];
   /** 記録（POST /record）の答え。順に使い、尽きたら最後の答えを使う。空なら受けた担当を「済」にして 200（U6） */
   recordAnswers: FakeResponse[];
+  /** 状態の変更（POST /status）の答え。順に使い、尽きたら最後の答えを使う。空なら操作どおりに担当を書き換えて 200（U7） */
+  statusAnswers: FakeResponse[];
+  /** 月の確定・取り消し（PUT・DELETE /confirmation）の答え。空なら月の確定の印を書き換えて 200（U7） */
+  confirmationAnswers: FakeResponse[];
 }
 
 export const fake: FakeState = {
@@ -80,6 +84,8 @@ export const fake: FakeState = {
   saveAnswers: [],
   patchAnswers: [],
   recordAnswers: [],
+  statusAnswers: [],
+  confirmationAnswers: [],
 };
 
 export function resetFake(): void {
@@ -97,7 +103,16 @@ export function resetFake(): void {
   fake.saveAnswers = [];
   fake.patchAnswers = [];
   fake.recordAnswers = [];
+  fake.statusAnswers = [];
+  fake.confirmationAnswers = [];
 }
+
+const STATUS_AFTER = {
+  cancel: 'todo',
+  markDone: 'done',
+  markSkipped: 'skipped',
+  unmarkSkipped: 'todo',
+} as const;
 
 let dutySequence = 0;
 const DUTY_ID_PREFIX = '44444444-4444-4444-8444-';
@@ -230,6 +245,53 @@ export function installFakeApi(): void {
           unitPrice: 100,
           version: found.version + 1,
         });
+      }
+      const statusMatch = /^\/v1\/duties\/(.+)\/status$/.exec(input);
+      if (method === 'POST' && statusMatch) {
+        const answer = nextAnswer(fake.statusAnswers);
+        if (answer) return respond(answer.status, answer.body);
+        const month = Object.keys(fake.calendars).find((m) =>
+          fake.calendars[m]?.duties.some((d) => d.dutyId === statusMatch[1]),
+        );
+        const calendar = month ? fake.calendars[month] : undefined;
+        const found = calendar?.duties.find((d) => d.dutyId === statusMatch[1]);
+        if (!calendar || !found) return respond(404, { error: { reason: 'NOT_FOUND' } });
+        const action = (body as { action: keyof typeof STATUS_AFTER }).action;
+        const status = STATUS_AFTER[action];
+        const self = fake.role === 'admin' ? HANAKO : TARO;
+        const changed: Duty =
+          status === 'done'
+            ? {
+                ...found,
+                status,
+                recordedAt: '2026-11-15T07:42:00.000Z',
+                recordedBy: self.userId,
+                recordedByName: self.displayName,
+                unitPrice:
+                  fake.choreTypes.find((c) => c.choreTypeId === found.choreTypeId)?.unitPrice ??
+                  null,
+                version: found.version + 1,
+              }
+            : {
+                ...found,
+                status,
+                recordedAt: null,
+                recordedBy: null,
+                recordedByName: null,
+                unitPrice: null,
+                version: found.version + 1,
+              };
+        calendar.duties = calendar.duties.map((d) => (d.dutyId === changed.dutyId ? changed : d));
+        return respond(200, changed);
+      }
+      const confirmationMatch = /^\/v1\/months\/(\d{4}-\d{2})\/confirmation$/.exec(input);
+      if ((method === 'PUT' || method === 'DELETE') && confirmationMatch) {
+        const answer = nextAnswer(fake.confirmationAnswers);
+        if (answer) return respond(answer.status, answer.body);
+        const month = confirmationMatch[1] as string;
+        const calendar = fake.calendars[month];
+        if (calendar) calendar.confirmed = method === 'PUT';
+        return respond(200, {});
       }
       const dutyMatch = /^\/v1\/duties\/(.+)$/.exec(input);
       if (method === 'PATCH' && dutyMatch) {

@@ -11,6 +11,7 @@ import {
 import {
   MESSAGES,
   MONTH_CONFIRMED_LABEL,
+  getMessage,
   NOTIFICATION_GROUP_HOWTO,
   NO_ASSIGNMENT_MESSAGE,
   NO_DUTY_LABEL,
@@ -20,8 +21,10 @@ import {
   type MonthCalendar,
   type Role,
 } from '@housework/shared';
+import { ApiFailure, confirmMonth, unconfirmMonth } from '../api/client';
 import { STATUS_LABEL, childName, dayLabel, monthHeading } from '../calendar/format';
 import { DutyRecordAction } from '../components/DutyRecordAction';
+import { MonthConfirmDialog } from '../components/MonthConfirmDialog';
 import { useMonthCalendar } from '../hooks/useMonthCalendar';
 import type { NotificationGroupState } from '../hooks/useNotificationGroup';
 import type { Authorized } from '../hooks/useSession';
@@ -65,9 +68,37 @@ export function CalendarPage({
   const [selectedDate, setSelectedDate] = useState<string | undefined>(undefined);
   const [editing, setEditing] = useState(false);
   const isAdmin = role === 'admin';
+  const [confirming, setConfirming] = useState<'confirm' | 'unconfirm' | undefined>(undefined);
+  const [confirmBusy, setConfirmBusy] = useState(false);
+  const [confirmError, setConfirmError] = useState<string | undefined>(undefined);
+
+  /** 月の確定・取り消し（U7。F3、F4）。成功したら確定の表示を先に更新してから読み直す */
+  async function submitMonthConfirmation(action: 'confirm' | 'unconfirm') {
+    if (state.kind !== 'ready') return;
+    const shown = state.value;
+    setConfirmBusy(true);
+    setConfirmError(undefined);
+    try {
+      await authorized((token) =>
+        action === 'confirm'
+          ? confirmMonth(token, shown.month)
+          : unconfirmMonth(token, shown.month),
+      );
+      setConfirming(undefined);
+      replace({ ...shown, confirmed: action === 'confirm' });
+      refresh();
+    } catch (e) {
+      setConfirming(undefined);
+      setConfirmError(getMessage(e instanceof ApiFailure ? e.reason : 'INTERNAL'));
+    } finally {
+      setConfirmBusy(false);
+    }
+  }
 
   function move(go: () => void) {
     setSelectedDate(undefined);
+    setConfirming(undefined);
+    setConfirmError(undefined);
     go();
   }
 
@@ -184,6 +215,55 @@ export function CalendarPage({
         >
           {MONTH_CONFIRMED_LABEL}
         </Typography>
+      )}
+      {isAdmin && state.kind === 'ready' && (
+        <Stack spacing={1} sx={{ alignItems: 'flex-start' }} data-testid="month-confirm-area">
+          {state.value.confirmed ? (
+            <Button
+              variant="contained"
+              onClick={() => setConfirming('unconfirm')}
+              data-testid="month-unconfirm-button"
+              sx={{
+                bgcolor: colors.reviewRevertButton,
+                color: colors.reviewRevertButtonText,
+              }}
+            >
+              確定を取り消す
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              onClick={() => setConfirming('confirm')}
+              data-testid="month-confirm-button"
+              sx={{
+                bgcolor: colors.reviewActionButton,
+                color: colors.reviewActionButtonText,
+              }}
+            >
+              この月を確定する
+            </Button>
+          )}
+          {confirmError && (
+            <Typography color="error" role="alert" data-testid="month-confirm-error">
+              {confirmError}
+            </Typography>
+          )}
+        </Stack>
+      )}
+      {isAdmin && state.kind === 'ready' && confirming && (
+        <MonthConfirmDialog
+          preview={{
+            month: monthHeading(state.value.month),
+            action: confirming,
+            // 未の件数は、読み込み済みのカレンダーの担当から数える（新しい API は足さない。BR8.10）
+            ...(confirming === 'confirm'
+              ? { todoCount: state.value.duties.filter((d) => d.status === 'todo').length }
+              : {}),
+          }}
+          busy={confirmBusy}
+          onConfirm={() => void submitMonthConfirmation(confirming)}
+          onCancel={() => setConfirming(undefined)}
+        />
       )}
       {renderBody()}
     </Stack>

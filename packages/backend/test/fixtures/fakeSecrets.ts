@@ -115,3 +115,53 @@ export const fakeU6ChoreTypeId = (index: number): string =>
 
 // U6（記録）: 家族の中に存在しない担当 ID（NOT_FOUND / 404 の確認用）。UUID の形だが本物ではない。
 export const FAKE_U6_NONEXISTENT_DUTY_ID = '00000000-0000-4000-8000-0000000000ee'; // gitleaks:allow テスト用の作り物の値
+
+// U7（確認・修正と確定）で足す作り物の値。
+// 担当 ID・子供 ID・管理者 ID・ほかの家族の ID・月は U5・U6 のものを再利用する（上の定義）。
+// U7 で新しく要るのは、確定・取り消しの筋書きで使う作り物の月と、記録のない担当 ID だけ。
+// 確定した月（記録のない月の確定の確認用。YYYY-MM）
+export const FAKE_U7_CONFIRMED_MONTH = '2027-02'; // gitleaks:allow テスト用の作り物の値
+// 記録のない月（行のない月。確定・取り消しの冪等の確認用。YYYY-MM）
+export const FAKE_U7_EMPTY_MONTH = '2000-01'; // gitleaks:allow テスト用の作り物の値
+// 過去の確定していない月（月をまたいでも直せることの確認用。YYYY-MM）
+export const FAKE_U7_PAST_MONTH = '2026-12'; // gitleaks:allow テスト用の作り物の値
+// U7 の筋書き・単体テストで使う作り物の担当 ID（UUID の形。状態の変更の 5 とおり用）
+export const FAKE_U7_DUTY_ID_A = '00000000-0000-4000-8000-0000000007a1'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U7_DUTY_ID_B = '00000000-0000-4000-8000-0000000007b2'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U7_DUTY_ID_C = '00000000-0000-4000-8000-0000000007c3'; // gitleaks:allow テスト用の作り物の値
+// U7: 家族の中に存在しない担当 ID（NOT_FOUND / 404 の確認用）。UUID の形だが本物ではない。
+export const FAKE_U7_NONEXISTENT_DUTY_ID = '00000000-0000-4000-8000-0000000007ee'; // gitleaks:allow テスト用の作り物の値
+
+// U8（代わりにやる）で足す作り物の値。
+// 担当 ID・子供 ID・管理者 ID・ほかの家族の ID・月は U5・U6・U7 のものを再利用する（上の定義）。
+// 申し出の ID（UUID の形。古いボタンの確認用に 2 種類以上）
+export const FAKE_U8_OFFER_ID_1 = '00000000-0000-4000-8000-0000000008a1'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U8_OFFER_ID_2 = '00000000-0000-4000-8000-0000000008b2'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U8_OFFER_ID_3 = '00000000-0000-4000-8000-0000000008c3'; // gitleaks:allow テスト用の作り物の値
+// U8 の筋書き・単体テストで使う作り物の担当 ID（UUID の形）
+export const FAKE_U8_DUTY_ID_A = '00000000-0000-4000-8000-0000000008d1'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U8_DUTY_ID_B = '00000000-0000-4000-8000-0000000008d2'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U8_DUTY_ID_C = '00000000-0000-4000-8000-0000000008d3'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U8_DUTY_ID_D = '00000000-0000-4000-8000-0000000008d4'; // gitleaks:allow テスト用の作り物の値
+// U8: 家族の中に存在しない担当 ID（NOT_FOUND の確認用）。UUID の形だが本物ではない。
+export const FAKE_U8_NONEXISTENT_DUTY_ID = '00000000-0000-4000-8000-0000000008ee'; // gitleaks:allow テスト用の作り物の値
+
+/** index（0〜999）から作り物の担当 ID を作る（11 件以上の一覧・300 件のフックの確認用）。UUID の形だが本物ではない。 */
+export const fakeU8DutyId = (index: number): string =>
+  `00000000-0000-4000-8000-00000008${String(index).padStart(4, '0')}`; // gitleaks:allow テスト用の作り物の値
+
+/** index（0〜999）から作り物の種類 ID を作る（11 件以上の一覧用）。UUID の形だが本物ではない。 */
+export const fakeU8ChoreTypeId = (index: number): string =>
+  `bbbbbbbb-bbbb-4bbb-8bbb-0000000c${String(index).padStart(4, '0')}`; // gitleaks:allow テスト用の作り物の値
+
+// U8: LINE のグループ ID・ユーザー ID・reply トークンの作り物（ログに出ないことの確認用の目印を兼ねる）
+export const FAKE_U8_GROUP_ID = 'C_u8_group_registered'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U8_UNREGISTERED_GROUP_ID = 'C_u8_group_unregistered'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U8_OUTSIDER_LINE_ID = 'U_u8_outsider'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U8_REPLY_TOKEN_PREFIX = 'reply-u8-'; // gitleaks:allow テスト用の作り物の値
+// U8: 月（YYYY-MM）
+export const FAKE_U8_NEXT_MONTH = '2027-02'; // gitleaks:allow テスト用の作り物の値
+// U8: 名前を伏せ字で確かめるための作り物の目印（タグ・改行・21 文字以上を含む表示名・種類の名前）
+export const FAKE_U8_MARKER_DISPLAY_NAME = '<b>目印の表示名</b>\n二行目'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U8_MARKER_LONG_CHORE_NAME =
+  '目印の長い名前あいうえおかきくけこさしすせそたちつてと'; // gitleaks:allow テスト用の作り物の値

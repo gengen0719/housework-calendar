@@ -1,4 +1,13 @@
-import { err, ok, type Result } from '@housework/shared';
+import {
+  err,
+  ok,
+  SWAP_ACCEPT_BUTTON,
+  SWAP_WITHDRAW_BUTTON,
+  swapAcceptedMessage,
+  swapOfferedMessage,
+  swapWithdrawnMessage,
+  type Result,
+} from '@housework/shared';
 import { getConfig } from '../lib/config';
 
 const LINE_API = 'https://api.line.me';
@@ -217,4 +226,168 @@ export async function reply(replyToken: string, messages: LineMessage[]): Promis
     body: JSON.stringify({ replyToken, messages }),
   });
   if (!response.ok) throw new LineApiError('LINE の返事の送信に失敗しました', response.status);
+}
+
+/**
+ * LINE の文字数・個数の上限（docs/contract-changes-u8.md の確認結果。2026-11-10 確認）。
+ * 上限の数字はここだけに置く。ALT_TEXT_MAX は、公式の上限（1500）より厳しい 400 を使い続ける。
+ */
+export const LINE_LIMITS = {
+  /** Flex の button のアクションの label */
+  FLEX_BUTTON_LABEL_MAX: 40,
+  /** buttons テンプレートのボタンの label */
+  TEMPLATE_BUTTON_LABEL_MAX: 20,
+  /** buttons テンプレートの本文（タイトル・画像なし） */
+  TEMPLATE_BODY_MAX: 160,
+  ALT_TEXT_MAX: 400,
+  ALT_TEXT_OFFICIAL_MAX: 1500,
+  CAROUSEL_BUBBLES_MAX: 12,
+  REPLY_MESSAGES_MAX: 5,
+  POSTBACK_DATA_MAX: 300,
+} as const;
+
+/** ボタンの日付の部分「M/D」の最大の長さ（12/31） */
+export const DATE_LABEL_MAX_LENGTH = 5;
+/** 申し出の名前の長さの上限（BR9.6。公式の上限が大きくても 20 文字に収める） */
+const NAME_LENGTH_CAP = 20;
+
+/** 担当のボタンの名前の長さ。上限から計算する（日付と空白 1 文字を引く）。 */
+export const SWAP_CHORE_NAME_MAX = Math.min(
+  LINE_LIMITS.FLEX_BUTTON_LABEL_MAX - DATE_LABEL_MAX_LENGTH - 1,
+  NAME_LENGTH_CAP,
+);
+
+/** 文字を割らずに max 文字に収める。超えるときは末尾を「…」にする。 */
+export function truncateForLine(text: string, max: number): string {
+  const chars = Array.from(text);
+  if (chars.length <= max) return text;
+  return `${chars.slice(0, Math.max(0, max - 1)).join('')}…`;
+}
+
+/** 担当のボタンの文字: 「1/8 皿洗い」（名前は SWAP_CHORE_NAME_MAX に収める） */
+export function swapButtonLabel(dateLabel: string, choreName: string): string {
+  return `${dateLabel} ${truncateForLine(choreName, SWAP_CHORE_NAME_MAX)}`;
+}
+
+const NOTICE_LONGEST_DATE = '2027-12-31';
+
+function noticeMessages(who: string, what: string): string[] {
+  return [swapOfferedMessage, swapAcceptedMessage, swapWithdrawnMessage].map((fn) =>
+    fn(who, NOTICE_LONGEST_DATE, what),
+  );
+}
+
+/** 名前を除いた固定の文と日付の最大の長さ */
+const NOTICE_FIXED_LENGTH =
+  Math.max(...noticeMessages('a', 'a').map((m) => Array.from(m).length)) - 2;
+
+/** 知らせの本文の表示名・お手伝いの名前の長さ。本文の上限から計算し、20 を上限とする。 */
+export const SWAP_NOTICE_NAME_MAX = Math.min(
+  Math.floor((LINE_LIMITS.TEMPLATE_BODY_MAX - NOTICE_FIXED_LENGTH) / 2),
+  NAME_LENGTH_CAP,
+);
+
+/** 名前を切ったときの、知らせの本文の最大の長さ（3 種類のうち最長）。上限の確認に使う。 */
+export function swapNoticeLength(displayName: string, choreName: string): number {
+  const who = truncateForLine(displayName, SWAP_NOTICE_NAME_MAX);
+  const what = truncateForLine(choreName, SWAP_NOTICE_NAME_MAX);
+  return Math.max(...noticeMessages(who, what).map((m) => Array.from(m).length));
+}
+
+/** 担当を選ぶボタンの値（BR9.16）。action=swap.offer&dutyId=<UUID> */
+export function swapOfferData(dutyId: string): string {
+  return `action=swap.offer&dutyId=${dutyId}`;
+}
+/** 「引き受ける」のボタンの値。action=swap.accept&dutyId=<UUID>&offerId=<UUID> */
+export function swapAcceptData(dutyId: string, offerId: string): string {
+  return `action=swap.accept&dutyId=${dutyId}&offerId=${offerId}`;
+}
+/** 「申し出をやめる」のボタンの値。action=swap.withdraw&dutyId=<UUID>&offerId=<UUID> */
+export function swapWithdrawData(dutyId: string, offerId: string): string {
+  return `action=swap.withdraw&dutyId=${dutyId}&offerId=${offerId}`;
+}
+
+/**
+ * 代わりにやるのボタンの色（NFR9.9）。LINE の標準の配色の色の差は資料で確かめられなかったので（docs/contract-changes-u8.md）、
+ * 白い文字に対して 4.5:1 以上になる濃い緑を自分で指定する。色の差は swapColors.test.ts が計算で確かめる。
+ */
+export const SWAP_BUTTON_COLOR = '#1b5e20';
+export const SWAP_BUTTON_TEXT_COLOR = '#ffffff';
+
+/** 担当の選択肢 1 つ（1 バブル 1 担当）。 */
+export interface SwapChoice {
+  dutyId: string;
+  /** 「M/D」（例: 1/8） */
+  dateLabel: string;
+  choreName: string;
+}
+
+/**
+ * 担当を選ぶ Flex Message carousel（U8。BR9.6）。1 バブル 1 担当。ボタンの文字は「1/8 皿洗い」で、名前は
+ * SWAP_CHORE_NAME_MAX に収める。ボタンの値は swap.offer。altText は必須（LINE の SDK は使わない）。
+ * choices は呼び出し側が 10 件までに絞って渡す。
+ */
+export function buildSwapCarousel(choices: readonly SwapChoice[]): LineMessage {
+  return {
+    type: 'flex',
+    altText: '代わってほしい担当を選んでください',
+    contents: {
+      type: 'carousel',
+      contents: choices.map((choice) => {
+        const label = swapButtonLabel(choice.dateLabel, choice.choreName);
+        return {
+          type: 'bubble',
+          body: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [{ type: 'text', text: label, weight: 'bold', wrap: true }],
+          },
+          footer: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [
+              {
+                type: 'button',
+                style: 'primary',
+                height: 'md',
+                color: SWAP_BUTTON_COLOR,
+                action: { type: 'postback', label, data: swapOfferData(choice.dutyId) },
+              },
+            ],
+          },
+        };
+      }),
+    },
+  };
+}
+
+/**
+ * 申し出の知らせ（U8。AC7.1.4）。buttons テンプレート（タイトル・画像なし）に「引き受ける」「申し出をやめる」の 2 ボタン。
+ * 本文は 160 文字以内（呼び出し側が名前を SWAP_NOTICE_NAME_MAX に収める）。altText も同じ文。
+ */
+export function buildSwapOfferMessage(input: {
+  text: string;
+  dutyId: string;
+  offerId: string;
+}): LineMessage {
+  return {
+    type: 'template',
+    altText: truncateForLine(input.text, LINE_LIMITS.ALT_TEXT_MAX),
+    template: {
+      type: 'buttons',
+      text: truncateForLine(input.text, LINE_LIMITS.TEMPLATE_BODY_MAX),
+      actions: [
+        {
+          type: 'postback',
+          label: SWAP_ACCEPT_BUTTON,
+          data: swapAcceptData(input.dutyId, input.offerId),
+        },
+        {
+          type: 'postback',
+          label: SWAP_WITHDRAW_BUTTON,
+          data: swapWithdrawData(input.dutyId, input.offerId),
+        },
+      ],
+    },
+  };
 }

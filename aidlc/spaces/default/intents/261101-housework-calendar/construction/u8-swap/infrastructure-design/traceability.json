@@ -1,0 +1,332 @@
+{
+  "stage": "infrastructure-design",
+  "unit": "u8-swap",
+  "upstream_ids": [
+    "NFR1.32",
+    "NFR1.33",
+    "NFR1.34",
+    "NFR1.35",
+    "NFR2.54",
+    "NFR2.55",
+    "NFR2.56",
+    "NFR2.57",
+    "NFR2.58",
+    "NFR2.59",
+    "NFR2.60",
+    "NFR2.61",
+    "NFR2.62",
+    "NFR2.63",
+    "NFR2.64",
+    "NFR2.65",
+    "NFR2.66",
+    "NFR3.14",
+    "NFR3.15",
+    "NFR3.16",
+    "NFR4.74",
+    "NFR4.75",
+    "NFR4.76",
+    "NFR4.77",
+    "NFR4.78",
+    "NFR4.79",
+    "NFR4.80",
+    "NFR4.81",
+    "NFR4.82",
+    "NFR4.83",
+    "NFR4.84",
+    "NFR4.85",
+    "NFR5.14",
+    "NFR5.15",
+    "NFR6.9",
+    "NFR7.39",
+    "NFR7.40",
+    "NFR7.41",
+    "NFR7.42",
+    "NFR7.43",
+    "NFR7.44",
+    "NFR7.45",
+    "NFR7.46",
+    "NFR7.47",
+    "NFR7.48",
+    "NFR7.49",
+    "NFR8.14",
+    "NFR8.15",
+    "NFR8.16",
+    "NFR9.9",
+    "NFR10.9",
+    "NFR10.10",
+    "NFR11.8",
+    "NFR11.9"
+  ],
+  "coverage": [
+    {
+      "id": "NFR1.32",
+      "status": "OK",
+      "target": "infrastructure-specification.md Infrastructure Services（LINE は reply だけ）・費用の見込み（無料のメッセージ数に数えない）; cicd-pipeline.md 費用の確かめ"
+    },
+    {
+      "id": "NFR1.33",
+      "status": "OK",
+      "target": "infrastructure-specification.md 冒頭・Deployment・足さないもの（新しいテーブル・索引・Lambda・指標・アラームなし）; monitoring-design.md Alerts; cicd-pipeline.md CDK のスタックテスト（構成の数が U7 の後と同じ）"
+    },
+    {
+      "id": "NFR1.34",
+      "status": "OK",
+      "target": "infrastructure-specification.md 費用の見込み（フックの書き込み、月に 1 円に満たない）・Shared Infrastructure（同じパーティションの並行数 4）"
+    },
+    {
+      "id": "NFR1.35",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）（fetch でメッセージを作る関数。SDK なし）; infrastructure-specification.md Infrastructure Services（外部 API は reply だけ）"
+    },
+    {
+      "id": "NFR2.54",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.55",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.56",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.57",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.58",
+      "status": "OK",
+      "target": "infrastructure-specification.md Shared Infrastructure（フックの登録は api と line で別々に 1 回）; アプリの起動の枠で満たす"
+    },
+    {
+      "id": "NFR2.59",
+      "status": "OK",
+      "target": "monitoring-design.md Metrics & KPIs（CONFIRM_POST_READ_FAILED・DUTY_HOOKS_TRUNCATED）; infrastructure-specification.md Shared Infrastructure"
+    },
+    {
+      "id": "NFR2.60",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.61",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.62",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.63",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing（SWAP_* のイベント、結果は 1 件）・Metrics & KPIs"
+    },
+    {
+      "id": "NFR2.64",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing・Metrics & KPIs（SWAP_OFFER_CLOSED・DUTY_HOOKS_DONE・DUTY_HOOKS_TRUNCATED・DUTY_HOOK_FAILED）・問い合わせ 5・6"
+    },
+    {
+      "id": "NFR2.65",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing（書かないもの、GROUP_COMMAND_REJECTED から groupId を外す）"
+    },
+    {
+      "id": "NFR2.66",
+      "status": "OK",
+      "target": "monitoring-design.md Alerts（U10 への引き継ぎ一覧の表）・問い合わせ 3・4・7; functional-design/functional-spec.md 次の単位への引き継ぎ（U10 の行。同じ一覧。指標・アラームは U10 へ引き継ぎ）"
+    },
+    {
+      "id": "NFR3.14",
+      "status": "OK",
+      "target": "infrastructure-specification.md Deployment・Infrastructure Services（SWAP# は同じ表の別の sk、索引なし、GetItem だけ）"
+    },
+    {
+      "id": "NFR3.15",
+      "status": "OK",
+      "target": "infrastructure-specification.md Shared Infrastructure（並行数 4）; monitoring-design.md SLIs / SLOs（NFR7.46）・Metrics & KPIs（DUTY_HOOKS_DONE.concurrency）"
+    },
+    {
+      "id": "NFR3.16",
+      "status": "OK",
+      "target": "cicd-pipeline.md CDK のスタックテスト（line の同時実行が U1 のまま、予約はコンテキストで与えたときだけ）; infrastructure-specification.md Deployment"
+    },
+    {
+      "id": "NFR4.74",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR4.75",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR4.76",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR4.77",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR4.78",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR4.79",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR4.80",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR4.81",
+      "status": "OK",
+      "target": "infrastructure-specification.md 実コードで確かめた結果（line に PutItem を足さず UpdateItem で作る）・残る危険"
+    },
+    {
+      "id": "NFR4.82",
+      "status": "OK",
+      "target": "infrastructure-specification.md 実コードで確かめた結果・Infrastructure Services・足さないもの（追加なし。app-stack.ts を読んで確認）; cicd-pipeline.md CDK のスタックテスト（line と api の許可・環境変数が前後で同じ）"
+    },
+    {
+      "id": "NFR4.83",
+      "status": "OK",
+      "target": "infrastructure-specification.md Infrastructure Services（reply だけ、push 系を使わない）"
+    },
+    {
+      "id": "NFR4.84",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing（書かないもの）"
+    },
+    {
+      "id": "NFR4.85",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR5.14",
+      "status": "OK",
+      "target": "infrastructure-specification.md Deployment（秘密の情報: 新しい秘密なし、line/* を起動時に読む）; cicd-pipeline.md 秘密の情報（gitleaks）"
+    },
+    {
+      "id": "NFR5.15",
+      "status": "OK",
+      "target": "cicd-pipeline.md 秘密の情報（<作り物の値>、作り物の秘密で計算した HMAC）"
+    },
+    {
+      "id": "NFR6.9",
+      "status": "OK",
+      "target": "infrastructure-specification.md 本番のデータの決まりとの関係・元に戻す手順; cicd-pipeline.md CDK のスタックテスト（本番 Calendar が Retain）・ステージングでの手での確かめ（データは画面と LINE の操作で作る）"
+    },
+    {
+      "id": "NFR7.39",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs（一覧 20 回中 19 回以上が 3 秒以内）; cicd-pipeline.md ステージングでの手での確かめ 12"
+    },
+    {
+      "id": "NFR7.40",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs; cicd-pipeline.md ステージングでの手での確かめ 12"
+    },
+    {
+      "id": "NFR7.41",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs; cicd-pipeline.md ステージングでの手での確かめ 12"
+    },
+    {
+      "id": "NFR7.42",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs; cicd-pipeline.md ステージングでの手での確かめ 12"
+    },
+    {
+      "id": "NFR7.43",
+      "status": "OK",
+      "target": "monitoring-design.md Metrics & KPIs・SLIs / SLOs（サーバー側 2,000 ms は補助）"
+    },
+    {
+      "id": "NFR7.44",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）（呼び出しの回数は単体テスト）; infrastructure-specification.md 費用の見込み"
+    },
+    {
+      "id": "NFR7.45",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs（U8 反映後の測り直し）; cicd-pipeline.md ステージングでの手での確かめ 14"
+    },
+    {
+      "id": "NFR7.46",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs（確定の応答 3 秒・確定とフックの時間・スロットル 0・申し出の掃除）・Metrics & KPIs（WriteThrottleEvents／ThrottledRequests）・問い合わせ 5・6; cicd-pipeline.md ステージングでの手での確かめ 13・README に足すこと"
+    },
+    {
+      "id": "NFR7.47",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR7.48",
+      "status": "OK",
+      "target": "cicd-pipeline.md ステージングでの手での確かめ 12〜14・README に足すこと（測り方、冷たい起動 10 回以上）; infrastructure-specification.md Deployment（大きさは 3 秒を超えたときだけ見直す）"
+    },
+    {
+      "id": "NFR7.49",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing・Metrics & KPIs（durationMs、REPORT の Init Duration）"
+    },
+    {
+      "id": "NFR8.14",
+      "status": "OK",
+      "target": "cicd-pipeline.md ワークフロー（ci.yml 変更なし。行カバレッジ 80%）・CDK のスタックテスト"
+    },
+    {
+      "id": "NFR8.15",
+      "status": "OK",
+      "target": "cicd-pipeline.md ステージングでの手での確かめ（LINE の上限の確認結果を contract-changes-u8.md に残す）"
+    },
+    {
+      "id": "NFR8.16",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）（上流文書の更新と contract-changes-u8.md はコード生成）"
+    },
+    {
+      "id": "NFR9.9",
+      "status": "OK",
+      "target": "cicd-pipeline.md ステージングでの手での確かめ（目で見て確認）・Assumptions; 満たし方はアプリのコード（lineApiService.ts）"
+    },
+    {
+      "id": "NFR10.9",
+      "status": "OK",
+      "target": "infrastructure-specification.md Deployment（新しい環境ごとの設定なし、ステージング用の公式アカウントと作り手だけのグループ）; cicd-pipeline.md ステージングでの手での確かめ"
+    },
+    {
+      "id": "NFR10.10",
+      "status": "OK",
+      "target": "infrastructure-specification.md 元に戻す手順; cicd-pipeline.md 前の版に戻す"
+    },
+    {
+      "id": "NFR11.8",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR11.9",
+      "status": "OK",
+      "target": "インフラの追加なし（アプリのコードで満たす）"
+    }
+  ]
+}

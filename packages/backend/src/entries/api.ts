@@ -17,6 +17,8 @@ import { acceptInvitation } from '../handlers/invitation/accept';
 import { getCurrentInvitation } from '../handlers/invitation/getCurrent';
 import { previewInvitation } from '../handlers/invitation/preview';
 import { changeDutyChild } from '../handlers/calendar/changeDutyChild';
+import { changeDutyStatus } from '../handlers/calendar/changeDutyStatus';
+import { confirmMonth, unconfirmMonth } from '../handlers/calendar/confirmMonth';
 import { recordDuty } from '../handlers/calendar/recordDuty';
 import { getAssignment } from '../handlers/calendar/getAssignment';
 import { getCalendar } from '../handlers/calendar/getCalendar';
@@ -32,6 +34,7 @@ import { requireAuth } from '../middleware/requireAuth';
 import { verifyOriginHeader } from '../middleware/verifyOriginHeader';
 import { setCalendarPort } from '../services/calendarPort';
 import * as calendarService from '../services/calendarService';
+import { registerSwapHooks } from '../services/swapService';
 
 /**
  * composition root: C7（種類）の「消す」が使う C8 の窓口に、U5 の本物を取り付ける（BR6.10）。
@@ -40,6 +43,11 @@ import * as calendarService from '../services/calendarService';
  * 読み込んだ時点で取り付く。LINE の入口（entries/line）は種類を消さないので取り付けない。
  */
 setCalendarPort({ isChoreTypeAssigned: calendarService.isChoreTypeAssigned });
+/**
+ * 代わりにやる（U8）の申し出の掃除を、担当の子供の変更・消えた・状態の変更と、記録の通知に登録する（BR9.11）。
+ * 読み込んだ時点で 1 回だけ登録する（api は担当を変える書き込みを持つので、両方）。
+ */
+registerSwapHooks({ reassigned: true, recorded: true });
 
 interface RouteInput {
   event: APIGatewayProxyEventV2;
@@ -162,6 +170,22 @@ export const routes: Record<string, Route> = {
       status: 200,
       body: await recordDuty(auth, params.dutyId ?? '', () => readJsonBody(event), { now }),
     };
+  },
+  // U7: 管理者が担当の状態を直す（本文の形は担当の探索より先に確かめる）と、月の確定・取り消し（本文は読まない）
+  'POST /v1/duties/:dutyId/status': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return {
+      status: 200,
+      body: await changeDutyStatus(auth, params.dutyId ?? '', () => readJsonBody(event), { now }),
+    };
+  },
+  'PUT /v1/months/:month/confirmation': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return { status: 200, body: await confirmMonth(auth, params.month ?? '', { now }) };
+  },
+  'DELETE /v1/months/:month/confirmation': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return { status: 200, body: await unconfirmMonth(auth, params.month ?? '') };
   },
   // U2: 家族のメンバーの一覧（メンバー全員）と招待（管理者だけ。権限の確かめは各ハンドラーで requireMembership → requireAdmin）
   'GET /v1/family/members': async ({ event, config, now }) => {

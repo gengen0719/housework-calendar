@@ -1,0 +1,199 @@
+{
+  "stage": "infrastructure-design",
+  "unit": "u7-review-confirm",
+  "upstream_ids": [
+    "NFR1.30", "NFR1.31",
+    "NFR2.44", "NFR2.45", "NFR2.46", "NFR2.47", "NFR2.48", "NFR2.49", "NFR2.50", "NFR2.51", "NFR2.52", "NFR2.53",
+    "NFR3.11", "NFR3.12", "NFR3.13",
+    "NFR4.65", "NFR4.66", "NFR4.67", "NFR4.68", "NFR4.69", "NFR4.70", "NFR4.71", "NFR4.72", "NFR4.73",
+    "NFR5.13",
+    "NFR6.8",
+    "NFR7.33", "NFR7.34", "NFR7.35", "NFR7.36", "NFR7.37", "NFR7.38",
+    "NFR8.13",
+    "NFR9.8",
+    "NFR10.8",
+    "NFR11.7"
+  ],
+  "coverage": [
+    {
+      "id": "NFR1.30",
+      "status": "OK",
+      "target": "infrastructure-specification.md 費用の見込み（U7 は LINE を呼ばない。reply・push・multicast・broadcast なし。無料のメッセージ数を 1 通も使わない）; cicd-pipeline.md 費用の確かめ"
+    },
+    {
+      "id": "NFR1.31",
+      "status": "OK",
+      "target": "infrastructure-specification.md Deployment（新しいテーブル・Lambda・索引・指標・アラームを足さない）; monitoring-design.md（メトリクスフィルターもアラームもダッシュボードも足さない）; cicd-pipeline.md CDK のスタックテスト（テーブル・Lambda・ロググループ・MetricFilter の数が U7 の前後で同じ）"
+    },
+    {
+      "id": "NFR2.44",
+      "status": "OK",
+      "target": "インフラの追加なし（状態の変更の 1 回の取引はアプリのコードで満たす。既存の writeTransaction を使う）; infrastructure-specification.md Infrastructure Services（Calendar の UpdateItem・ConditionCheckItem は api の既存権限の範囲内）"
+    },
+    {
+      "id": "NFR2.45",
+      "status": "OK",
+      "target": "インフラの追加なし（読み直しと classifyCancellation はアプリのコードで満たす）; infrastructure-specification.md（取引・読み直しは api の既存の DynamoDB 権限で動く）"
+    },
+    {
+      "id": "NFR2.46",
+      "status": "OK",
+      "target": "infrastructure-specification.md Infrastructure Services（確定行の作成は Calendar の PutItem（attribute_not_exists）で、U5 で足した PutItem の範囲内。version を条件にしない冪等はアプリのコード）; インフラの追加なし"
+    },
+    {
+      "id": "NFR2.47",
+      "status": "OK",
+      "target": "インフラの追加なし（確定した月が変えられないのは各単位の buildMonthGuard の ConditionCheck で、既存の api 権限で動く）; infrastructure-specification.md Shared Infrastructure（Calendar の共有）"
+    },
+    {
+      "id": "NFR2.48",
+      "status": "OK",
+      "target": "インフラの追加なし（確かめは担当の日付の月。buildMonthGuard は担当の month で引く。アプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.49",
+      "status": "OK",
+      "target": "インフラの追加なし（INTERNAL と例外の 500 は U1 の入口 entries/api.ts で満たす）; monitoring-design.md 失敗の見つけ方（DUTY_STATUS_REJECTED reason=INTERNAL・REQUEST_ERROR）"
+    },
+    {
+      "id": "NFR2.50",
+      "status": "OK",
+      "target": "インフラの追加なし（onDutyReassigned フックはアプリのコードで満たす。U8 まで登録なし）; monitoring-design.md（DUTY_REASSIGN_HOOK_FAILED は dutyId・kind だけ、名前を書かない）"
+    },
+    {
+      "id": "NFR2.51",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing（DUTY_STATUS_CHANGED・DUTY_STATUS_REJECTED・MONTH_CONFIRMED_SET・DUTY_STATUS_RETRY・DUTY_REASSIGN_HOOK_FAILED。api の既存ロググループを使う。新しいロググループなし）"
+    },
+    {
+      "id": "NFR2.52",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing（書かないもの: 表示名・お手伝いの名前・LINE のユーザー ID・単価・金額・秘密。userId で残す）; インフラの追加なし（伏せ字と型はアプリのコードで満たす）"
+    },
+    {
+      "id": "NFR2.53",
+      "status": "OK",
+      "target": "monitoring-design.md 失敗の見つけ方（event と reason で検索。問い合わせ 3・4・6）; monitoring-design.md Alerts（指標・アラームは U10 で足す。U7 は足さない）"
+    },
+    {
+      "id": "NFR3.11",
+      "status": "OK",
+      "target": "インフラの追加なし（取引の項目数・呼び出しの回数・Scan 系なしはアプリのコードで満たす）; infrastructure-specification.md Infrastructure Services（Calendar の GetItem・Query・UpdateItem、ChoreTypes の GetItem は既存権限の範囲内）"
+    },
+    {
+      "id": "NFR3.12",
+      "status": "OK",
+      "target": "infrastructure-specification.md Deployment・Infrastructure Services（DataStack は変えない。新しい保存先・索引なし。月の状態に足す 3 属性はテーブル定義に影響しない）"
+    },
+    {
+      "id": "NFR3.13",
+      "status": "OK",
+      "target": "infrastructure-specification.md Deployment（api の Lambda: 256 MB・30 秒・ARM64 のまま。同時実行の上限は U1 の変数。常温めなし）; cicd-pipeline.md CDK のスタックテスト（MemorySize 256・Timeout 30 が変わらない）"
+    },
+    {
+      "id": "NFR4.65",
+      "status": "OK",
+      "target": "インフラの追加なし（requireAuth → requireMembership → requireAdmin の順番はアプリのコードで満たす）; cicd-pipeline.md スモークチェック 3n（子供が直接呼んで 403 ADMIN_ONLY は手の確かめ 5）"
+    },
+    {
+      "id": "NFR4.66",
+      "status": "OK",
+      "target": "インフラの追加なし（家族の範囲で探す findDuty と月の状態のキーが ctx.familyId はアプリのコードで満たす）; infrastructure-specification.md（URL・本文で家族を指定できない familyScope）"
+    },
+    {
+      "id": "NFR4.67",
+      "status": "OK",
+      "target": "インフラの追加なし（本文の形の zod・strip、結果の値は裏側が決めるはアプリのコードで満たす）; cicd-pipeline.md スモークチェック 3n（本文が空でも 401 で止まる）"
+    },
+    {
+      "id": "NFR4.68",
+      "status": "OK",
+      "target": "インフラの追加なし（month の形の確かめ・本文を読まないはアプリのコードで満たす）; cicd-pipeline.md スモークチェック 3o・3p（PUT・DELETE /v1/months/:month/confirmation がセッションなしで 401）"
+    },
+    {
+      "id": "NFR4.69",
+      "status": "OK",
+      "target": "インフラの追加なし（取引の条件・ExpressionAttributeNames はアプリのコードで満たす）; infrastructure-specification.md（担当の UpdateItem・月と単価の ConditionCheck は既存の api 権限で動く）"
+    },
+    {
+      "id": "NFR4.70",
+      "status": "OK",
+      "target": "インフラの追加なし（競合の 1 回読み直し・classifyCancellation・確定取り消しは version を条件にしないはアプリのコードで満たす）"
+    },
+    {
+      "id": "NFR4.71",
+      "status": "OK",
+      "target": "infrastructure-specification.md api の Lambda の権限（足さないことの確認。Calendar 6 操作・ChoreTypes 6 操作・CALENDAR_TABLE・CHORE_TYPES_TABLE は U4・U5 で足し済み。担当に PutItem・DeleteItem を新たに発行しない。確定行の PutItem は月の状態の項目で U5 の範囲内）; cicd-pipeline.md CDK のスタックテスト（api の権限・環境変数が U7 の前後で同じ）"
+    },
+    {
+      "id": "NFR4.72",
+      "status": "OK",
+      "target": "infrastructure-specification.md（line の Lambda は U7 で変えない。LINE の経路なし。既存権限を増やさない）; cicd-pipeline.md CDK のスタックテスト（line の許可と環境変数が U7 の前後で同じ）"
+    },
+    {
+      "id": "NFR4.73",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing（操作の事実だけ。表示名・単価を残さない。userId で残す）; インフラの追加なし（伏せ字はアプリのコードで満たす）"
+    },
+    {
+      "id": "NFR5.13",
+      "status": "OK",
+      "target": "infrastructure-specification.md Deployment（新しい秘密・SSM パラメータ・GitHub Variables なし。LINE を呼ばないのでチャネルトークンも使わない。jwt/* は U1 のまま）; cicd-pipeline.md 秘密の情報（例は <作り物の値>、gitleaks が通ること）"
+    },
+    {
+      "id": "NFR6.8",
+      "status": "OK",
+      "target": "infrastructure-specification.md 本番のデータの決まりとの関係・元に戻す手順（直接書き換えるスクリプトを作らない。Calendar は本番で RETAIN。戻しても権限・環境変数は消えない）; cicd-pipeline.md CDK のスタックテスト（本番 Calendar の DeletionPolicy = Retain）; ステージングでの手での確かめ（データは画面の操作で作る）"
+    },
+    {
+      "id": "NFR7.33",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs（状態の変更の返事の時間、markDone を代表、95% が 3 秒以内）; cicd-pipeline.md ステージングでの手での確かめ 14; infrastructure-specification.md Deployment（大きさは 3 秒を超えたときだけ見直す）"
+    },
+    {
+      "id": "NFR7.34",
+      "status": "OK",
+      "target": "monitoring-design.md SLIs / SLOs（確定・取り消しの返事の時間、行の無い月への初回確定を含める）; cicd-pipeline.md ステージングでの手での確かめ 9・14"
+    },
+    {
+      "id": "NFR7.35",
+      "status": "OK",
+      "target": "インフラの追加なし（呼び出しの回数の上限はアプリの単体テストで満たす。外への通信 0 回）; infrastructure-specification.md 費用の見込み（状態の変更 1 回で約 4.5 読み取りユニット）"
+    },
+    {
+      "id": "NFR7.36",
+      "status": "OK",
+      "target": "cicd-pipeline.md README に足すこと・ステージングでの手での確かめ 14（測り方、コールドスタート 10 回以上、環境変数を手で書き換えない、markDone の 20 件の用意）"
+    },
+    {
+      "id": "NFR7.37",
+      "status": "OK",
+      "target": "monitoring-design.md Metrics & KPIs・SLIs / SLOs（REQUEST_END.durationMs の 95% が 2,000 ms、path の型で分ける、合格は画面録画で判断）"
+    },
+    {
+      "id": "NFR7.38",
+      "status": "OK",
+      "target": "monitoring-design.md Logs & Tracing・Metrics & KPIs（REQUEST_END の durationMs と path の型、DUTY_STATUS_CHANGED の処理の durationMs、REPORT の Init Duration でコールドスタート。追加の実装なし）"
+    },
+    {
+      "id": "NFR8.13",
+      "status": "OK",
+      "target": "cicd-pipeline.md ワークフロー（ci.yml 変更なし。行カバレッジ 80% が U7 のコードにも掛かる）; インフラの追加なし（競合・連打・時計の筋書きはアプリのテストへ引き継ぎ。自動テストに 3 秒の目標を入れない）"
+    },
+    {
+      "id": "NFR9.8",
+      "status": "OK",
+      "target": "インフラの追加なし（応答で先に新しい状態・aria-busy・確認のフォーカスと Esc・色と大きさはアプリのコードで満たす）; cicd-pipeline.md ワークフロー（ci.yml の Vitest が theme の単体テストを実行する）; ステージングでの手での確かめ 12"
+    },
+    {
+      "id": "NFR10.8",
+      "status": "OK",
+      "target": "infrastructure-specification.md Deployment（新しい環境ごとの設定なし。AppStack のコード反映だけ。ステージングで確かめてから本番。コード反映はコールドスタートを作る機会）; cicd-pipeline.md 反映の順番・ステージングでの手での確かめ（環境変数を手で書き換えない）"
+    },
+    {
+      "id": "NFR11.7",
+      "status": "OK",
+      "target": "インフラの追加なし（now を入口で 1 回、recordedAt・updatedAt・confirmedAt は UTC、表示だけ日本時間、月の確かめは担当の month、境のテストはアプリのコードで満たす）"
+    }
+  ]
+}

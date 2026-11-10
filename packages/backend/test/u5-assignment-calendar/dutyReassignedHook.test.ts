@@ -52,7 +52,7 @@ describe('onDutyReassigned（担当が変わったことを伝える仕組み）
     expect(lines).toEqual([]);
   });
 
-  it('登録した関数を、担当ごとに順に await して呼ぶ', async () => {
+  it('登録した関数を、担当ごとに await して呼ぶ（U8 から、別の担当どうしは並行してよい）', async () => {
     const order: string[] = [];
     onDutyReassigned(async (event) => {
       order.push(`start ${event.kind}`);
@@ -60,12 +60,12 @@ describe('onDutyReassigned（担当が変わったことを伝える仕組み）
       order.push(`end ${event.kind}`);
     });
     await notifyDutyReassigned([changed, deleted]);
-    expect(order).toEqual([
-      'start child-changed',
-      'end child-changed',
-      'start deleted',
-      'end deleted',
-    ]);
+    // 1 つの担当の中は start → end の順。別の担当どうしの前後は決めない（BR9.11）
+    expect(order).toHaveLength(4);
+    for (const kind of ['child-changed', 'deleted']) {
+      expect(order.indexOf(`start ${kind}`)).toBeGreaterThanOrEqual(0);
+      expect(order.indexOf(`start ${kind}`)).toBeLessThan(order.indexOf(`end ${kind}`));
+    }
   });
 
   it('複数の関数を登録した順に呼ぶ', async () => {

@@ -1,0 +1,86 @@
+{
+  "stage": "nfr-requirements",
+  "unit": "u7-review-confirm",
+  "upstream_ids": [
+    "NFR1",
+    "NFR2",
+    "NFR3",
+    "NFR4",
+    "NFR5",
+    "NFR6",
+    "NFR7",
+    "NFR8",
+    "NFR9",
+    "NFR10",
+    "NFR11"
+  ],
+  "coverage": [
+    {
+      "id": "NFR1",
+      "status": "OK",
+      "target": "NFR1.30, NFR1.31"
+    },
+    {
+      "id": "NFR2",
+      "status": "OK",
+      "target": "NFR2.44, NFR2.45, NFR2.46, NFR2.47, NFR2.48, NFR2.49, NFR2.50, NFR2.51, NFR2.52, NFR2.53; the 15-minute notice to the maker is handed to u10 (NFR2.53), u7 only leaves INTERNAL/500 in the logs"
+    },
+    {
+      "id": "NFR3",
+      "status": "OK",
+      "target": "NFR3.11, NFR3.12, NFR3.13"
+    },
+    {
+      "id": "NFR4",
+      "status": "OK",
+      "target": "NFR4.65, NFR4.66, NFR4.67, NFR4.68, NFR4.69, NFR4.70, NFR4.71, NFR4.72, NFR4.73"
+    },
+    {
+      "id": "NFR5",
+      "status": "OK",
+      "target": "NFR5.13"
+    },
+    {
+      "id": "NFR6",
+      "status": "OK",
+      "target": "NFR6.8"
+    },
+    {
+      "id": "NFR7",
+      "status": "OK",
+      "target": "NFR7.33, NFR7.34, NFR7.35, NFR7.36, NFR7.37, NFR7.38"
+    },
+    {
+      "id": "NFR8",
+      "status": "OK",
+      "target": "NFR8.13"
+    },
+    {
+      "id": "NFR9",
+      "status": "OK",
+      "target": "NFR9.8"
+    },
+    {
+      "id": "NFR10",
+      "status": "OK",
+      "target": "NFR10.8"
+    },
+    {
+      "id": "NFR11",
+      "status": "OK",
+      "target": "NFR11.7"
+    }
+  ],
+  "reverse": [
+    {
+      "id": "BR8.15",
+      "status": "OK",
+      "target": "NFR2.50 (onDutyReassigned hook for u8: status-changed / month-confirmed; u7 only provides the call site, no registration until u8)"
+    },
+    {
+      "id": "AC6.1.6",
+      "status": "OK",
+      "target": "NFR2.47 (record / status-change / assignment-change rejected with MONTH_CONFIRMED in u7; the adjustment part is deferred to u11 AC8.2.5)"
+    }
+  ]
+}
