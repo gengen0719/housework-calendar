@@ -165,3 +165,30 @@ export const FAKE_U8_NEXT_MONTH = '2027-02'; // gitleaks:allow テスト用の�
 export const FAKE_U8_MARKER_DISPLAY_NAME = '<b>目印の表示名</b>\n二行目'; // gitleaks:allow テスト用の作り物の値
 export const FAKE_U8_MARKER_LONG_CHORE_NAME =
   '目印の長い名前あいうえおかきくけこさしすせそたちつてと'; // gitleaks:allow テスト用の作り物の値
+// U9（お小遣いの額）で足す作り物の値。
+// 家族・子供・管理者・種類・担当の ID は U5〜U8 のものを再利用する（上の定義）。
+// 抜けた子供・メンバーでない人の利用者 ID（UUID の形）
+export const FAKE_U9_DEPARTED_USER_ID = '00000000-0000-4000-8000-0000000009a1'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U9_DEPARTED_USER_ID_2 = '00000000-0000-4000-8000-0000000009a2'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U9_OUTSIDER_USER_ID = '00000000-0000-4000-8000-0000000009a3'; // gitleaks:allow テスト用の作り物の値
+// U9 の担当 ID（UUID の形）
+export const FAKE_U9_DUTY_ID_A = '00000000-0000-4000-8000-0000000009d1'; // gitleaks:allow テスト用の作り物の値
+/** index（0〜999）から作り物の担当 ID を作る（異常 300 件・読み取り回数の確認用）。UUID の形だが本物ではない。 */
+export const fakeU9DutyId = (index: number): string =>
+  `00000000-0000-4000-8000-00000009${String(index).padStart(4, '0')}`; // gitleaks:allow テスト用の作り物の値
+/** index（0〜999）から作り物の子供 ID を作る（抜けた子供が多い場合の確認用）。 */
+export const fakeU9ChildId = (index: number): string =>
+  `00000000-0000-4000-8000-0000009c${String(index).padStart(4, '0')}`; // gitleaks:allow テスト用の作り物の値
+/** index（0〜999）から作り物の種類 ID を作る（種類が一覧にない異常・種類が 10 個の確認用）。UUID の形だが本物ではない。 */
+export const fakeU9ChoreTypeId = (index: number): string =>
+  `cccccccc-cccc-4ccc-8ccc-0000000c${String(index).padStart(4, '0')}`; // gitleaks:allow テスト用の作り物の値
+// U9: 月（YYYY-MM）
+export const FAKE_U9_MONTH = '2027-01'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U9_PREVIOUS_MONTH = '2026-12'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U9_NEXT_MONTH = '2027-02'; // gitleaks:allow テスト用の作り物の値
+// U9: ログに出ないことを確かめるための作り物の目印（表示名・種類の名前・金額の数字）
+export const FAKE_U9_MARKER_DISPLAY_NAME = '目印の子供名ユーキューマーカー'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U9_MARKER_CHORE_NAME = '目印のお手伝いユーキューマーカー'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U9_MARKER_UNIT_PRICE = 7777; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U9_MARKER_ADJUSTMENT_AMOUNT = -4321; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U9_MARKER_ADJUSTMENT_REASON = '目印の理由ユーキューマーカー'; // gitleaks:allow テスト用の作り物の値

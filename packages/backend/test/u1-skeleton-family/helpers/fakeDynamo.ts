@@ -33,6 +33,10 @@ export interface FakeDynamoHooks {
   queryPageSize?: number;
   /** 遅い読み取りの再現（U8）: Calendar・ChoreTypes の Get・Query をこのミリ秒だけ遅らせる */
   readDelayMs?: number;
+  /** 遅い読み取りの再現（U9）: readDelayMs を、Calendar・ChoreTypes に加えてここに並べた表にも当てる */
+  readDelayExtraTables?: string[];
+  /** 読み取りの失敗の差し込み（U9）: 表と操作（Get／Query）を指定すると、その読み取りが投げる */
+  failRead(table: string, operation: 'Get' | 'Query'): void;
   beforeTransaction(n: number, fn: () => void): void;
   failTransaction(n: number, code: string): void;
   transactionSizes: number[];
@@ -215,8 +219,12 @@ export function installFakeDynamo() {
   /** 競合の再現: 次の TransactWriteItems を評価する直前に 1 回だけ呼ぶ（「読んだあとに別の書き込みが先に入った」状態を作る） */
   const beforeTransactionByCount = new Map<number, () => void>();
   const failTransactionByCount = new Map<number, string>();
+  const failingReads = new Set<string>();
   const hooks: FakeDynamoHooks = {
     queryPageSize: undefined,
+    failRead(tableName: string, operation: 'Get' | 'Query'): void {
+      failingReads.add(`${operation} ${tableName}`);
+    },
     /** n 回目（1 から数える）のトランザクションを評価する直前に、別の書き込みを入れる（U5） */
     beforeTransaction(n: number, fn: () => void): void {
       beforeTransactionByCount.set(n, fn);
@@ -237,7 +245,10 @@ export function installFakeDynamo() {
   const delayed = <T>(tableName: string | undefined, result: T): T | Promise<T> => {
     const ms = hooks.readDelayMs;
     const slow =
-      ms !== undefined && (tableName === CALENDAR_TABLE || tableName === CHORE_TYPES_TABLE);
+      ms !== undefined &&
+      (tableName === CALENDAR_TABLE ||
+        tableName === CHORE_TYPES_TABLE ||
+        (tableName !== undefined && hooks.readDelayExtraTables?.includes(tableName) === true));
     return slow ? new Promise<T>((resolve) => setTimeout(() => resolve(result), ms)) : result;
   };
   const table = (name: string | undefined): Table => {
@@ -323,6 +334,9 @@ export function installFakeDynamo() {
 
   mock.on(GetCommand).callsFake((input) => {
     const t = table(input.TableName);
+    if (failingReads.has(`Get ${String(input.TableName)}`)) {
+      throw new Error(`読み取りの失敗（差し込み）: Get ${String(input.TableName)}`);
+    }
     hooks.readLog.push({
       operation: 'Get',
       table: String(input.TableName),
@@ -496,6 +510,9 @@ export function installFakeDynamo() {
   mock.on(QueryCommand).callsFake((input) => {
     const t = table(input.TableName);
     const values: Record<string, unknown> = input.ExpressionAttributeValues ?? {};
+    if (failingReads.has(`Query ${String(input.TableName)}`)) {
+      throw new Error(`読み取りの失敗（差し込み）: Query ${String(input.TableName)}`);
+    }
     hooks.readLog.push({
       operation: 'Query',
       table: String(input.TableName),
@@ -553,7 +570,7 @@ export function installFakeDynamo() {
             ]),
           ),
         );
-      return { Items: items };
+      return delayed(input.TableName, { Items: items });
     }
     const lineUserId = values[':lineUserId'];
     const items = [...t.values()]

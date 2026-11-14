@@ -12,7 +12,7 @@ import {
 } from '@housework/shared';
 import { logger } from '../lib/logger';
 import type { ChoreTypeRecord, RequestRecord } from '../models';
-import type { FamilyContext } from '../middleware/requireMembership';
+import type { FamilyContext, FamilyScope } from '../middleware/requireMembership';
 import * as choreTypeRepository from '../repositories/choreTypeRepository';
 import * as calendarPort from './calendarPort';
 import * as requestRecordRepository from '../repositories/requestRecordRepository';
@@ -97,7 +97,7 @@ function logRejected(ctx: FamilyContext, reason: string, choreTypeId?: string): 
  * 種類の一覧（C7 list、F1、BR5.11）。家族のメンバー全員が見られる（呼び出し側が requireMembership を通す）。
  * 「使わない」の種類も active つきで返す。
  */
-export async function list(ctx: FamilyContext): Promise<ChoreType[]> {
+export async function list(ctx: FamilyScope): Promise<ChoreType[]> {
   const records = await choreTypeRepository.listByFamily(ctx.familyId);
   return sortForDisplay(records).map(toView);
 }

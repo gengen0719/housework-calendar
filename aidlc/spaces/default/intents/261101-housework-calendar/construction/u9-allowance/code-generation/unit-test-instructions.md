@@ -14,7 +14,13 @@ U1〜U8 と同じです（`construction/u1-skeleton-family/code-generation/unit-
 
 ## 実行環境の確認の記録（Step 3）
 
-Step 3 で「この単位だけ」のコマンドが動くことを確かめたあと、確かめた日と、偽の DynamoDB に足した補助（読み取りの記録、書き込みの命令の見張り、読み取りの失敗・遅延の差し込み）の一覧をここに書く。**コード生成の前なので、まだ確かめていない。**
+Step 3 で確かめました（Step 4 で U1〜U8 の全 165 ファイル・3248 件が無修正で通ることも確認）。
+- 「この単位だけ」のコマンド `npx vitest run u9-allowance --coverage ...` が動くことを、空の筋書き 1 つで確かめた（その筋書きは Step 4 で消した）
+- 偽の DynamoDB（`fakeDynamo.ts`）に足した補助（既存の期待は変えていない）:
+  - `hooks.failRead(table, 'Get' | 'Query')`: 読み取りを 1 つずつ失敗させる差し込み
+  - `hooks.readDelayExtraTables`: `readDelayMs` を、Calendar・ChoreTypes に加えて Users・Families にも当てる遅延の差し込み（`familyId-index` の Query にも効く）
+  - 既存の `hooks.readLog`・`hooks.readTargets`（読み取りの記録）、月の `Query`（`begins_with`・強い整合性・続きのページ）、`Users`／`Families` の `GetItem`、`familyId-index` の `Query` はそのまま使える
+- 書き込みの命令の見張り: `helpers/writeGuard.ts` の `writeCalls`／`totalWrites`（`aws-sdk-client-mock` の呼び出し記録から、`PutItem`・`UpdateItem`・`DeleteItem`・`TransactWriteItems`・`BatchWriteItem` の回数を数える。偽の DynamoDB の既存の見張り `forbiddenCalls`〈`BatchGetItem`・`BatchWriteItem`・`Scan`〉と併用）
 
 - U9 の補助: `packages/backend/test/u9-allowance/helpers/`（`seed.ts`、`clock.ts`、`logs.ts`、`session.ts`）
 

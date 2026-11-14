@@ -126,7 +126,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
 
 *契約の置き換えの記録、テストの置き場所、偽の DynamoDB の確認、権限の確認。BR10.14、NFR1.36、NFR4.89、NFR5.17、NFR8.17、NFR8.19 の準備*
 
-- [ ] **Step 1: 契約の確認と `docs/contract-changes-u9.md` の作成**（BR10.7、NFR8.19）
+- [x] **Step 1: 契約の確認と `docs/contract-changes-u9.md` の作成**（BR10.7、NFR8.19）
   - 読んで確かめる: `inception/contract-design/contract-summary.md` の C1（`Allowance`、`GET /months/{month}/allowances`）、C6（`listMembers`・`findFamilyChild`）、C7（`list`）、C8（`listDoneDuties`・`isMonthConfirmed`）、C9（`getAllowances`）、C10（文言）。`packages` にまだ `Allowance`・`allowances` の入口・`listDoneDuties`・`isMonthConfirmed`・`findDisplayName`・`getFamilyCreatedAt`・`FamilyScope` がなく、誰も使っていないことを `grep` で確かめる（計画の作成時点では 0 件だった）
   - `docs/contract-changes-u9.md` を新設する（U8 の `contract-changes-u8.md` の形に揃える）。先に書く節:
     - 「置き換え」: `Allowance` を Q6 の形（`childUserId`・`displayName`・`current`・`month`・`lines`〈`choreTypeId`・`choreName`・`unitPrice`・`count`・`amount`〉・`adjustments`〈`adjustmentId`・`amount`・`reason`〉・`total`）に置き換えた
@@ -134,7 +134,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
     - 残りの節（`current`、`findDisplayName`、`getFamilyCreatedAt`、`loadFamilyAndMembers`、`listMembers` の `role: system` 対応、`Cache-Control: no-store` と `RouteResult.headers`、`mapWithConcurrency` の移動、文言、`formatYen`）は Step 42 で完成させる
   - 承認の確認点 1〜3 の結果をこの文書に記録する枠を置く
 
-- [ ] **Step 2: 骨組みと設定の置き場所**（NFR5.17、NFR8.17）
+- [x] **Step 2: 骨組みと設定の置き場所**（NFR5.17、NFR8.17）
   - U9 のテストのフォルダを作る:
     - `packages/shared/test/u9-allowance/`
     - `packages/backend/test/u9-allowance/`（と `helpers/`）
@@ -150,7 +150,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
     - `logs.ts`: `console` への出力を集め、目印の文字・数字が全行に含まれないことを確かめる関数（U8 の同種の補助を再利用して足す）
     - `session.ts`: 署名つきのセッションで `entries/api.ts` の `handler` を呼ぶ補助（U5〜U8 のものを再利用）
 
-- [ ] **Step 3: テストの実行環境の準備とコマンドの記録**（NFR8.17）
+- [x] **Step 3: テストの実行環境の準備とコマンドの記録**（NFR8.17）
   - U1〜U8 の Vitest・`@amiceli/vitest-cucumber`・カバレッジの設定をそのまま使う（`vitest.config.ts` は変えない。`thresholds.lines: 80` は下げない。新しい道具は入れない）。画面のテストは U7 と同じ（`jsdom`、Testing Library、`*.steps.tsx`）
   - 偽の DynamoDB（`packages/backend/test/u1-skeleton-family/helpers/fakeDynamo.ts`）が U9 の読み方に対応していることを確かめ、足りなければ補助を足す（U1〜U8 のテストの期待は変えない）:
     - 月の `Query`（`begins_with`、強い整合性、続きのページ）、`Users` の `GetItem`（強い整合性）と `familyId-index` の `Query`、`Families` の `GetItem`、`ChoreTypes` の `Query`
@@ -159,7 +159,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
     - 読み取りを 1 つずつ失敗させる差し込み（`hooks.failRead(table, operation)`）と、読み取りの完了を遅らせる差し込み（並行・段の確認用）
   - 最初の空の筋書き 1 つ（`packages/backend/test/u9-allowance/runner-ready.feature` と steps）で、「この単位だけ」のコマンドが動くことを確かめ、コマンドを `unit-test-instructions.md` に記録する（NFR8.17）
 
-- [ ] **Step 4: 既存のテストが通ったままかを確かめる**
+- [x] **Step 4: 既存のテストが通ったままかを確かめる**
   - Step 2〜3 の変更のあと、U1〜U8 のバックエンド・共有・画面・インフラのテストがすべて通ることを確かめる:
     ```bash
     npx vitest run u1-skeleton-family u2-invitation u3-notification-group u4-chore-types u5-assignment-calendar u6-recording u7-review-confirm u8-swap
@@ -167,7 +167,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
   - 落ちたら補助の変更を直す（U1〜U8 のテストの期待は変えない）
   - `runner-ready.feature` と steps を消す
 
-- [ ] **Step 5: 権限と環境変数が足りていることを `app-stack.ts` で確かめる**（BR10.14、NFR4.89、NFR1.36）
+- [x] **Step 5: 権限と環境変数が足りていることを `app-stack.ts` で確かめる**（BR10.14、NFR4.89、NFR1.36）
   - `infrastructure/lib/app-stack.ts` を**読むだけ**で、設計の結論（インフラの変更なし）を再確認する:
     - `api` の Lambda: `Users`（表の `GetItem`・`PutItem`・`UpdateItem`、`lineUserId-index`・`familyId-index` の `Query`）、`Families`（`GetItem` ほか）、`ChoreTypes`（`Query` を含む 6 操作）、`Calendar`（`GetItem`・`Query` を含む 6 操作）。環境変数 `USERS_TABLE`・`FAMILIES_TABLE`・`CHORE_TYPES_TABLE`・`CALENDAR_TABLE`
     - `api` に `Scan`・`BatchGetItem`・`BatchWriteItem`・`dynamodb:*`、`Resource: "*"` の DynamoDB の文がない。IAM の文の数が `api` 11・`line` 9（U8 の後のまま）
@@ -180,21 +180,21 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
 
 *BR10.5、BR10.7、BR10.10、BR10.11、NFR4.91、NFR8.18、NFR8.19、NFR9.10 の準備*
 
-- [ ] **Step 6: 単体テストと型のテストを書く（共有パッケージ）**（BR10.5、BR10.10、BR10.11、NFR4.91、NFR8.18）— `packages/shared/test/u9-allowance/`:
+- [x] **Step 6: 単体テストと型のテストを書く（共有パッケージ）**（BR10.5、BR10.10、BR10.11、NFR4.91、NFR8.18）— `packages/shared/test/u9-allowance/`:
   - `yen.test.ts`（5〜8 件）: `formatYen(1400)`＝「1,400円」、`0`＝「0円」、`-200`＝「-200円」（**半角のハイフン**。U+2212 でない。`Intl` が別の記号を返す環境を想定して、絶対値を整形して `-` を前に付ける自前の組み立てを確かめる）、大きい数（`Number.MAX_SAFE_INTEGER` の桁区切り）、小数・`NaN`・`Infinity` を渡したときの扱い（整数だけを受ける。型と実行時の両方）、0 円を下回っても 0 円にそろえない
   - `messages.test.ts`（5〜8 件）: 見出し「{年}年{月}月のお小遣い」（0 埋めなし。`2027-01` → 「2027年1月のお小遣い」）、「確定していません」、「今月の記録はまだありません（0 円）」、「この月の記録はまだありません（0 円）」、「お小遣いを表示する子供がまだいません」、「（あなた）」、「名前が分からない子供」、「不明なお手伝い」が機能設計の表のとおりで、既存の文言（`MONTH_CONFIRMED_LABEL`＝「確定済み」、`NOT_FAMILY_MEMBER`、`INVALID_MONTH`、失敗の文言）が消えていないこと
   - `api-types.test.ts`（5 件。型のテスト）: `AllowanceMonthView`・`Allowance`・`AllowanceChoreLine`・`AllowanceAdjustmentLine` の項目名が許可した一覧と**完全に一致**すること（`expectTypeOf`）。`Allowance` に LINE の ID・役割・家族 ID・管理者の情報がないこと。`Role` に `system` が混ざっていないこと（`@ts-expect-error`）
 
-- [ ] **Step 7: 作る（共有パッケージ）**（BR10.5、BR10.7、BR10.10、BR10.11、NFR8.18、NFR8.19）— `packages/shared/src/`:
+- [x] **Step 7: 作る（共有パッケージ）**（BR10.5、BR10.7、BR10.10、BR10.11、NFR8.18、NFR8.19）— `packages/shared/src/`:
   - `api-types.ts`: `AllowanceChoreLine`（`choreTypeId`・`choreName`・`unitPrice`・`count`・`amount`）、`AllowanceAdjustmentLine`（`adjustmentId`・`amount`・`reason`）、`Allowance`（`childUserId`・`displayName`・`current`・`month`・`lines`・`adjustments`・`total`）、`AllowanceMonthView`（`month`・`confirmed`・`today`・`firstMonth`・`lastMonth`・`allowances`）を足す。`Role` は変えない
   - `yen.ts`（名前は既存の並びに合わせる）: `formatYen(amount: number): string`。`Intl.NumberFormat('ja-JP')` で絶対値を桁区切りにし、負のときだけ半角の `-` を前に付けて「円」を後ろに付ける
   - `messages.ts`: 上の文言を、値を入れる形の関数（見出し）と定数（ほか）として足す。`index.ts` の再公開を確認する
 
-- [ ] **Step 8: 通す、整える（共有パッケージ）**
+- [x] **Step 8: 通す、整える（共有パッケージ）**
   - Step 6 のテストが通るまで直す
   - U1〜U8 の共有のテストが通ることを確かめる（既存の `messages.test.ts` は、文言を足す以外の期待を変えない）
 
-- [ ] **Step 9: 共有の batch の確認**
+- [x] **Step 9: 共有の batch の確認**
   - この batch の確認コマンドを実行する（`packages/frontend` の型検査が、`api-types.ts` の追加で壊れないことも含む）
 
 ---
@@ -203,26 +203,26 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
 
 *BR10.7、BR10.16、NFR2.73、NFR3.18、NFR4.90、NFR4.92、NFR7.56、ADR-U9-01、ADR-U9-04、ADR-U9-05 の実装*
 
-- [ ] **Step 10: 筋書きと単体テストを書く（土台）**（NFR3.18、NFR4.90、NFR4.92）— `packages/backend/test/u9-allowance/`:
+- [x] **Step 10: 筋書きと単体テストを書く（土台）**（NFR3.18、NFR4.90、NFR4.92）— `packages/backend/test/u9-allowance/`:
   - `promise.mapWithConcurrency.test.ts`（5〜8 件）: 上限が 1・2・4・10・件数より大きいとき、空の一覧、結果の順序（結果を返す場合）、**失敗のあとに新しい項目を始めない旗**（旗を立てたとき、1 件が投げたら、まだ始めていない項目の `worker` が呼ばれず、投げたエラーが呼び出し側に伝わる。旗を立てないときは従来どおり投げない `worker` で全件が呼ばれる）、同時に動く数が上限を超えない（時間のかかる関数の中のカウンターで数える）
   - `dutyReassignedHook.reexport.test.ts`（5 件）: `dutyReassignedHook.ts` が `mapWithConcurrency`・`clampConcurrency`・`DUTY_HOOK_CONCURRENCY` を同じ名前で再び公開していること、U8 の並行数の筋書き（`swap-hooks.feature`）と `mapWithConcurrency.test.ts` が**無修正**で通ること
   - `http.json.test.ts`（5〜8 件）: `json(status, body)` の戻りが前後で同じ（`content-type` だけ）、`json(status, body, { 'cache-control': 'no-store' })` で追加のヘッダーが付く、追加のヘッダーに `content-type` を渡しても `content-type: application/json` が勝つ（追加を先に、`content-type` を後に書く）、`errorResponse` の戻りが変わらない
   - `contextTypes.test.ts`（5 件。型のテスト）: `requireMembership` の戻りが `FamilyContext`（`role` は `admin`／`child` のみ）、`ReadContext` が `FamilyContext | SystemContext`、書き込みの窓口に `{ familyId, role: 'system' }` を渡すコードが型で落ちる（`// @ts-expect-error`）、`choreTypeService.list` に `FamilyScope` を渡せる、`handlers/**` と `entries/api.ts` が `SystemContext` を import していない（`grep` の代わりに、ソースを読んで確かめるテスト）
 
-- [ ] **Step 11: 作る（`mapWithConcurrency` の移動）**（NFR3.18、NFR7.56、ADR-U9-04）— `packages/backend/src/lib/promise.ts`（変更）、`services/dutyReassignedHook.ts`（変更）:
+- [x] **Step 11: 作る（`mapWithConcurrency` の移動）**（NFR3.18、NFR7.56、ADR-U9-04）— `packages/backend/src/lib/promise.ts`（変更）、`services/dutyReassignedHook.ts`（変更）:
   - `mapWithConcurrency<T>(items, limit, worker, options?)` を `lib/promise.ts` に移す。`options.stopAfterFailure`（既定は偽）を足し、真のときは、`worker` が投げたあと、まだ始めていない項目を取り出さない（投げたエラーは `Promise.all` で呼び出し側へ）
   - `dutyReassignedHook.ts` は `mapWithConcurrency` を `lib/promise.ts` から import し、**同じ名前で再び公開する**（`export { mapWithConcurrency } from '../lib/promise'`）。`clampConcurrency`・定数・`notifyDutyReassigned` の動きと型は変えない（`worker` が投げない U8 のフックの動きは同じ）
 
-- [ ] **Step 12: 作る（`json()` の追加ヘッダーと `RouteResult.headers`）**（NFR4.92、ADR-U9-05）— `lib/http.ts`、`entries/api.ts`（変更）:
+- [x] **Step 12: 作る（`json()` の追加ヘッダーと `RouteResult.headers`）**（NFR4.92、ADR-U9-05）— `lib/http.ts`、`entries/api.ts`（変更）:
   - `json(statusCode, body, extraHeaders?)`: `headers: { ...extraHeaders, 'content-type': 'application/json' }`（追加を先に、`content-type` を後に書く）。`errorResponse` は変えない
   - `entries/api.ts`: `RouteResult` に任意の `headers?: Record<string, string>` を足し、`return json(result.status, result.body, result.headers)` にする。`headers` を持たない既存の入口の戻りは前後で同じ。`routes` の既存の行は 1 行も変えない（allowances の行は Step 29）
   - `NO_STORE_HEADERS = { 'cache-control': 'no-store' }` を `handlers/allowances/` の側に置く（Step 29。`lib/http.ts` に置くかは既存の並びに合わせる）
 
-- [ ] **Step 13: 作る（文脈の型）**（NFR2.73、NFR4.90、ADR-U9-01）— `middleware/requireMembership.ts`、`services/choreTypeService.ts`（型だけ）:
+- [x] **Step 13: 作る（文脈の型）**（NFR2.73、NFR4.90、ADR-U9-01）— `middleware/requireMembership.ts`、`services/choreTypeService.ts`（型だけ）:
   - `FamilyScope { familyId: string }`、`SystemContext extends FamilyScope { role: 'system' }`、`ReadContext = FamilyContext | SystemContext` を足す。`FamilyContext` と `requireMembership` は**変えない**
   - `choreTypeService.list` の引数の型を `FamilyScope` に広げる（本体は変えない）。`SystemContext` を作る関数は足さない（U10 が持つ）
 
-- [ ] **Step 14: 通す、整える（土台）**
+- [x] **Step 14: 通す、整える（土台）**
   - Step 10 のテストが通るまで直す
   - U1〜U8 の全テストが**無修正で**通る（特に U8 のフックの並行数、U1〜U7 の入口の応答、U4 の種類の一覧）
   - この batch の確認コマンドを実行する
@@ -233,7 +233,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
 
 *BR10.6、BR10.8、BR10.16、BR10.19、NFR2.73、NFR4.90、NFR7.55、ADR-U9-02 の実装*
 
-- [ ] **Step 15: 筋書きを書く（家族の読み取りと C8 の窓口）**（BR10.6、BR10.8、BR10.19、NFR2.73、NFR7.55）— `packages/backend/test/u9-allowance/`:
+- [x] **Step 15: 筋書きを書く（家族の読み取りと C8 の窓口）**（BR10.6、BR10.8、BR10.19、NFR2.73、NFR7.55）— `packages/backend/test/u9-allowance/`:
   - `family-reads.feature` と `family-reads.steps.ts`（約 14 場面）:
     - `loadFamilyAndMembers(ctx)` が、Families を **1 回だけ**読み（`GetItem` の回数 1）、家族の項目（作成時刻）とメンバー（管理者が最初、続けて子供を家族に入った順、同じ時刻は表示名、userId の順）を返す
     - `listMembers(ctx)` の戻り（並び・本人の補い・LINE のユーザー ID を返さない）が**前後で同じ**（U1・U2 の既存のテストが無修正で通る）
@@ -244,27 +244,27 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
     - 抜けた子供の確かめ: `findFamilyChild` は利用者がいない・ほかの家族・管理者のどれも同じ `NOT_FOUND`（既存の動き）
     - 書き込みの命令が 0 回（見張り）
 
-- [ ] **Step 16: 作る（`familyMemberService` の分け出し）**（BR10.16、NFR2.73、NFR7.55、ADR-U9-02）— `services/familyMemberService.ts`（変更）:
+- [x] **Step 16: 作る（`familyMemberService` の分け出し）**（BR10.16、NFR2.73、NFR7.55、ADR-U9-02）— `services/familyMemberService.ts`（変更）:
   - `loadFamilyAndMembers(ctx: ReadContext)`: Families を 1 回読み、`familyRepository.findById` の結果から家族の項目とメンバー（既存の並び替えを使う）を返す。本人の補いは `ctx.role !== 'system'` のときだけ
   - `listMembers(ctx: ReadContext)`: `loadFamilyAndMembers` の `members` だけを返す薄い関数にする（**戻りは今のまま**）。家族の記録がないときの投げ方も今のまま
   - `findDisplayName(ctx: FamilyScope, userId)`: `userRepository.findById(userId, { consistent: true })` の表示名だけを `Result<string, 'NOT_FOUND'>` で返す。呼び出しは `allowanceService` の 1 か所だけ（コメントに理由を書く）
   - `getFamilyCreatedAt(ctx: FamilyScope)`: `familyRepository.findById(ctx.familyId)` の作成時刻（UTC）だけを返す。`allowanceService` の本線では `loadFamilyAndMembers` の結果を使い、この関数を別に呼ばない（Families を 2 回にしない）
   - `findFamilyChild` の型を `FamilyScope` に広げる（本体は変えない）
 
-- [ ] **Step 17: 作る（C8 の窓口）**（BR10.2、BR10.14、NFR7.55）— `services/calendarService.ts`（窓口の追加）、`repositories/calendarRepository.ts`（足りなければ純粋な補助だけ）:
+- [x] **Step 17: 作る（C8 の窓口）**（BR10.2、BR10.14、NFR7.55）— `services/calendarService.ts`（窓口の追加）、`repositories/calendarRepository.ts`（足りなければ純粋な補助だけ）:
   - `listDoneDuties(ctx: FamilyScope, month)`: `loadMonth` を使う薄い窓口。「済」で `unitPrice` を持つ担当を返す。`isMonthConfirmed(ctx: FamilyScope, month)`: 月の状態の `confirmed`（行なしは偽）。U10・U11 向けの窓口で、`allowanceService` は自分の `loadMonth` の結果を使い、これらを**別に呼ばない**（Query を 2 回にしない）
   - リポジトリは既存の `loadMonth`・`getMonthState`（強い整合性）で足りるか確かめる。足りなければ、純粋な絞り込みの関数だけを `calendarRepository` に足す（書き込みの関数は足さない）。`userRepository`・`familyRepository` は既存の関数で足りる（新しい読み取りの関数を足す場合も `GetItem`／`Query` だけ）
 
-- [ ] **Step 18: 通す（家族の読み取りと C8 の窓口）**
+- [x] **Step 18: 通す（家族の読み取りと C8 の窓口）**
   - Step 15 の筋書きが通るまで直す
   - U1〜U8 の `listMembers`・`calendarService` のテストが無修正で通ったまま
 
-- [ ] **Step 19: 単体テスト（家族の読み取り・C8 の窓口）**（BR10.6、BR10.19、NFR7.55）— `packages/backend/test/u9-allowance/`:
+- [x] **Step 19: 単体テスト（家族の読み取り・C8 の窓口）**（BR10.6、BR10.19、NFR7.55）— `packages/backend/test/u9-allowance/`:
   - `loadFamilyAndMembers.test.ts`（5〜8 件）: Families の `GetItem` が 1 回、`Users` の `Query` が 1 回、本人の補いの有無で `GetItem` の回数が変わる（通常 +0〜1、`role: system` は 0）、並び順の最終決め、家族の記録がないときの投げ方
   - `findDisplayName.test.ts`（5 件）: 表示名だけを返す、`NOT_FOUND`、戻りに余分な項目がない（`Object.keys`）
   - `listDoneDuties.test.ts`（5〜8 件）: 「済」だけ、単価なしの「済」は返さない、0 円は返す、月は担当の `date` の月（12 月 31 日の担当を 1 月に記録しても 12 月）、続きのページを最後まで読む、月の状態の行がない月は `isMonthConfirmed` が偽
 
-- [ ] **Step 20: 家族の読み取りの batch の確認**
+- [x] **Step 20: 家族の読み取りの batch の確認**
   - この batch の確認コマンドを実行する（U1〜U8 が通ったままであること）
 
 ---

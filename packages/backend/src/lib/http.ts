@@ -1,10 +1,15 @@
 import type { APIGatewayProxyStructuredResultV2 } from 'aws-lambda';
 import type { ApiError } from './errors';
 
-export function json(statusCode: number, body: unknown): APIGatewayProxyStructuredResultV2 {
+/** 追加のヘッダーは先に、content-type を後に書く（content-type は常に application/json が勝つ）。 */
+export function json(
+  statusCode: number,
+  body: unknown,
+  extraHeaders?: Record<string, string>,
+): APIGatewayProxyStructuredResultV2 {
   return {
     statusCode,
-    headers: { 'content-type': 'application/json' },
+    headers: { ...extraHeaders, 'content-type': 'application/json' },
     body: JSON.stringify(body),
   };
 }

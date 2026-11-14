@@ -310,3 +310,19 @@ export function swapWithdrawnMessage(
   const { who, when, what } = swapParts(childName, date, choreName);
   return `${who}が ${when} の${what}の申し出をやめました`;
 }
+
+/** お小遣いの画面 S5 の文言（U9。理由の印ではない。C10、BR10.9〜BR10.11） */
+export const ALLOWANCE_UNCONFIRMED_LABEL = '確定していません';
+export const ALLOWANCE_EMPTY_THIS_MONTH = '今月の記録はまだありません（0 円）';
+export const ALLOWANCE_EMPTY_OTHER_MONTH = 'この月の記録はまだありません（0 円）';
+export const ALLOWANCE_NO_CHILDREN = 'お小遣いを表示する子供がまだいません';
+export const ALLOWANCE_YOU_SUFFIX = '（あなた）';
+export const ALLOWANCE_UNKNOWN_CHILD = '名前が分からない子供';
+export const ALLOWANCE_UNKNOWN_CHORE = '不明なお手伝い';
+export const ALLOWANCE_LOAD_FAILED_MESSAGE = '表示できませんでした。もう一度お試しください';
+
+/** 見出し: 「2027年1月のお小遣い」（月は 0 埋めしない。`month` は `YYYY-MM`） */
+export function allowanceHeading(month: string): string {
+  const [year = '', mm = ''] = month.split('-');
+  return `${Number(year)}年${Number(mm)}月のお小遣い`;
+}

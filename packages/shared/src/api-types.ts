@@ -265,3 +265,48 @@ export const FAMILY_NAME_MAX_LENGTH = 20;
 export const CHORE_TYPE_NAME_MIN_LENGTH = 1;
 export const CHORE_TYPE_NAME_MAX_LENGTH = 20;
 export const CHORE_TYPE_DESCRIPTION_MAX_LENGTH = 100;
+
+/**
+ * お小遣いの内訳の 1 行（U9。種類ごと・単価ごと）。額は「済」の担当に書き写された単価 × 回数で、
+ * 種類の今の単価は使わない（BR10.2、BR10.4）。
+ */
+export interface AllowanceChoreLine {
+  choreTypeId: string;
+  choreName: string;
+  unitPrice: number;
+  count: number;
+  amount: number;
+}
+
+/** 加算・減額の 1 行（U9 は常に空。U11 が中身を足す。BR10.7） */
+export interface AllowanceAdjustmentLine {
+  adjustmentId: string;
+  amount: number;
+  reason: string;
+}
+
+/** 子供 1 人・1 か月分のお小遣いの答え（C9 getAllowances の戻りの 1 件。保存しない。BR10.5） */
+export interface Allowance {
+  childUserId: string;
+  displayName: string;
+  /** 今も家族にいる子供か（抜けた子供の「済」がある月は false で出る。BR10.6） */
+  current: boolean;
+  month: string;
+  lines: AllowanceChoreLine[];
+  adjustments: AllowanceAdjustmentLine[];
+  /** 内訳の和 + 加算・減額の和。0 円を下回ってもそのまま出す */
+  total: number;
+}
+
+/**
+ * GET /months/{month}/allowances の応答（画面 S5 用）。
+ * 契約の `Allowance[]` を包んだ形で、作り手が承認した例外（docs/contract-changes-u9.md）。
+ */
+export interface AllowanceMonthView {
+  month: string;
+  confirmed: boolean;
+  today: string;
+  firstMonth: string;
+  lastMonth: string;
+  allowances: Allowance[];
+}

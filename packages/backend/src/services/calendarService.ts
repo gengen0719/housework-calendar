@@ -15,7 +15,7 @@ import {
   type StatusChangeAction,
 } from '@housework/shared';
 import { describeError, logger, setRequestMetrics } from '../lib/logger';
-import type { FamilyContext } from '../middleware/requireMembership';
+import type { FamilyContext, FamilyScope } from '../middleware/requireMembership';
 import type { AssignmentRecord, AssignmentRuleRecord, DutyRecord } from '../models';
 import * as calendarRepository from '../repositories/calendarRepository';
 import type { MonthItems, TransactItems } from '../repositories/calendarRepository';
@@ -407,6 +407,24 @@ export async function getAssignment(ctx: FamilyContext, month: string): Promise<
     rules: record ? normalizeRules(record.rules) : [],
     exists: record !== undefined,
   };
+}
+
+/**
+ * 月の「済」の担当で、書き写された単価を持つものを返す（C8 listDoneDuties。U10・U11 向けの読み取り窓口）。
+ * 月は担当の日付の月（記録した日ではない）。単価のない「済」（異常なデータ）は返さない。0 円は返す。
+ * allowanceService は自分の loadMonth の結果を使い、この窓口を呼ばない（Query を 2 回にしない）。
+ */
+export async function listDoneDuties(ctx: FamilyScope, month: string): Promise<DutyRecord[]> {
+  const items = await calendarRepository.loadMonth(ctx.familyId, month);
+  return items.duties.filter(
+    (duty) => duty.status === 'done' && duty.unitPrice !== undefined && duty.unitPrice !== null,
+  );
+}
+
+/** 月が確定しているか（C8 isMonthConfirmed）。月の状態の行がなければ確定していない。 */
+export async function isMonthConfirmed(ctx: FamilyScope, month: string): Promise<boolean> {
+  const state = await calendarRepository.getMonthState(ctx.familyId, month);
+  return state?.confirmed === true;
 }
 
 /** MonthCalendar を作るときの追加の材料 */
