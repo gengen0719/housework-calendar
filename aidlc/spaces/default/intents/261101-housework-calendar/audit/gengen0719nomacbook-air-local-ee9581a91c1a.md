@@ -40011,3 +40011,52 @@
 **Message**: Sub-agent execution failed: Usage limit reached
 
 ---
+
+## Human Turn
+**Timestamp**: 2026-11-14T10:40:31Z
+**Event**: HUMAN_TURN
+**Session**: sess_d3a53686-4bfe-47da-b067-45f28eeb3beb
+**Origin**: person
+**Source**: typed
+**Message Id**: 64adc1b3
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-14T10:40:46Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: grant
+**Grant**: turn-marker
+**Actor**: main
+**Stage**: code-generation
+**Tool**: Edit
+**Details**: <project-dir>/packages/backend/test/u9-allowance/tallyDuties.test.ts
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-14T10:41:03Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: grant
+**Grant**: turn-marker
+**Actor**: main
+**Stage**: code-generation
+**Tool**: Edit
+**Details**: <project-dir>/packages/backend/test/u9-allowance/tallyDuties.test.ts
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-14T10:41:08Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: plan-approval
+**Authority**: grant
+**Grant**: turn-marker
+**Actor**: main
+**Stage**: code-generation
+**Tool**: Bash
+**Details**: npx tsc --noEmit -p packages/backend 2>&1 | head -5; echo "exit:$?"
+
+---

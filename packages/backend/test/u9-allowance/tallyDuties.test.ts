@@ -65,7 +65,7 @@ describe('tallyDuties（BR10.2〜BR10.4、BR10.13）', () => {
 
   it('単価が undefined／null の「済」は数えず、担当の ID を並び順のまま記録する', () => {
     const a = duty({ unitPrice: undefined });
-    const b = duty({ unitPrice: null });
+    const b = duty({ unitPrice: null as unknown as number });
     const ok = duty();
     const result = tally([a, ok, b]);
     expect(result.anomalies.withoutPrice).toEqual([a.dutyId, b.dutyId]);
