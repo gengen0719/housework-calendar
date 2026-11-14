@@ -16,7 +16,7 @@ import {
 } from '@housework/shared';
 import { logger } from '../lib/logger';
 import type { Family, Invitation, RequestRecord, User } from '../models';
-import type { FamilyContext } from '../middleware/requireMembership';
+import type { FamilyContext, FamilyScope, ReadContext } from '../middleware/requireMembership';
 import * as familyRepository from '../repositories/familyRepository';
 import * as invitationRepository from '../repositories/invitationRepository';
 import * as notificationGroupRepository from '../repositories/notificationGroupRepository';
@@ -84,7 +84,7 @@ export async function findUserByLineId(lineUserId: string): Promise<Result<User,
  * 利用者がいない、ほかの家族の人、管理者は、どれも同じ NOT_FOUND。結果整合の索引は使わない。
  */
 export async function findFamilyChild(
-  ctx: FamilyContext,
+  ctx: FamilyScope,
   userId: string,
 ): Promise<Result<{ userId: string; displayName: string }, 'NOT_FOUND'>> {
   const user = await userRepository.findById(userId, { consistent: true });
@@ -206,13 +206,24 @@ function compareText(a: string, b: string): number {
  * （同じ時刻は表示名、それも同じなら userId の順）。LINE のユーザー ID は返さない。
  * 索引は結果整合なので、結果に本人が含まれなければ、Users を強い整合性で読んで足してから並べる。
  */
-export async function listMembers(ctx: FamilyContext): Promise<Member[]> {
+export async function listMembers(ctx: ReadContext): Promise<Member[]> {
+  return (await loadFamilyAndMembers(ctx)).members;
+}
+
+/**
+ * 家族の記録とメンバーを、家族の記録（Families）を 1 回だけ読んで返す（U9。ADR-U9-02）。
+ * お小遣いの計算が家族の作成時刻とメンバーの両方を要るため、listMembers から分け出した。並びと本人の補いは listMembers と同じ。
+ * お知らせ用の裏側の文脈（role: system）には本人がいないので、本人の補いの読み取りはしない。
+ */
+export async function loadFamilyAndMembers(
+  ctx: ReadContext,
+): Promise<{ family: Family; members: Member[] }> {
   const family = await familyRepository.findById(ctx.familyId);
   if (!family) {
     throw new Error(`利用者の家族の記録が見つかりません: ${ctx.familyId}`);
   }
   const rows = await userRepository.listByFamily(ctx.familyId);
-  if (!rows.some((row) => row.userId === ctx.userId)) {
+  if (ctx.role !== 'system' && !rows.some((row) => row.userId === ctx.userId)) {
     const self = await userRepository.findById(ctx.userId, { consistent: true });
     if (self?.familyId === ctx.familyId && self.role) {
       rows.push({
@@ -223,7 +234,7 @@ export async function listMembers(ctx: FamilyContext): Promise<Member[]> {
       });
     }
   }
-  return rows
+  const members = rows
     .filter((row): row is typeof row & { role: Role } => row.role !== undefined)
     .sort(
       (a, b) =>
@@ -233,6 +244,26 @@ export async function listMembers(ctx: FamilyContext): Promise<Member[]> {
         compareText(a.userId, b.userId),
     )
     .map(({ userId, displayName, role }) => ({ userId, displayName, role }));
+  return { family, members };
+}
+
+/**
+ * 利用者の表示名だけを、強い整合性で読む（U9。ADR-U9-02）。家族を抜けた子供の名前を、お小遣いの行に出すために使う。
+ * 呼び出しは allowanceService の 1 か所だけ。戻りは表示名の文字列のみで、LINE のユーザー ID・役割・家族 ID は返さない。
+ */
+export async function findDisplayName(
+  _ctx: FamilyScope,
+  userId: string,
+): Promise<Result<string, 'NOT_FOUND'>> {
+  const user = await userRepository.findById(userId, { consistent: true });
+  return user ? ok(user.displayName) : err('NOT_FOUND');
+}
+
+/** 家族の作成時刻（UTC）だけを返す（U9）。家族の記録がなければ投げる。月を移れる範囲の始まりに使う。 */
+export async function getFamilyCreatedAt(ctx: FamilyScope): Promise<string> {
+  const family = await familyRepository.findById(ctx.familyId);
+  if (!family) throw new Error(`利用者の家族の記録が見つかりません: ${ctx.familyId}`);
+  return family.createdAt;
 }
 
 export type CreateInvitationFailure = 'IDEMPOTENCY_KEY_REUSED' | 'INTERNAL';

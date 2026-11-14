@@ -62,6 +62,8 @@ interface RouteInput {
 interface RouteResult {
   status: number;
   body: unknown;
+  /** 応答に足すヘッダー（U9: 額の応答の cache-control）。ない入口は従来どおり */
+  headers?: Record<string, string>;
 }
 
 export type Route = (input: RouteInput) => Promise<RouteResult>;
@@ -249,7 +251,7 @@ export async function handler(
       params: match.params,
       ...(remaining ? { remainingTimeMs: () => remaining.call(context) } : {}),
     });
-    return json(result.status, result.body);
+    return json(result.status, result.body, result.headers);
   } catch (err) {
     if (err instanceof ApiError) {
       logger.info({ event: 'REQUEST_REJECTED', status: err.status, reason: err.reason, path });

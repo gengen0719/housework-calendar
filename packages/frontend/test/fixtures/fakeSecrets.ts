@@ -42,3 +42,8 @@ export const FAKE_DUTY_ID_4 = '44444444-4444-4444-8444-444444444444'; // gitleak
 // 上書きの確かめの印の 2 つ目（確かめのあとに担当が変わった場合の新しい印）
 export const FAKE_CHANGES_HASH_2 =
   '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'; // gitleaks:allow テスト用の作り物の値
+// U9（お小遣いの額）の画面のテストで使う作り物の値（名前・種類の名前・金額の目印）
+export const FAKE_U9_DEPARTED_USER_ID = '00000000-0000-4000-8000-0000000009a1'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U9_MARKER_CHORE_NAME = '目印のお手伝いユーキューマーカー'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U9_CHORE_TYPE_ID_1 = '11111111-1111-4111-8111-111111111111'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_U9_CHORE_TYPE_ID_2 = '22222222-2222-4222-8222-222222222222'; // gitleaks:allow テスト用の作り物の値

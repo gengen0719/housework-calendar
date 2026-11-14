@@ -20,3 +20,38 @@ export function settle<T>(p: Promise<T>): Promise<Settled<T>> {
     (error: unknown): Settled<T> => ({ ok: false, error }),
   );
 }
+
+export interface MapWithConcurrencyOptions {
+  /**
+   * 真のとき、worker が 1 件でも投げたら、まだ始めていない項目を取り出さない（投げたエラーは呼び出し側へ）。
+   * 既定は偽（従来どおり。worker が投げない U8 のフックの動きは変わらない）。
+   */
+  stopAfterFailure?: boolean;
+}
+
+/**
+ * items を最大 limit 件ずつ並行して処理する（U8 の dutyReassignedHook から移した。ADR-U9-04）。
+ * 既定では 1 件の失敗は worker の中で扱い、ほかを止めない。依存は入れない（自前の小さな関数。NFR8.16）。
+ */
+export async function mapWithConcurrency<T>(
+  items: readonly T[],
+  limit: number,
+  worker: (item: T) => Promise<void>,
+  options: MapWithConcurrencyOptions = {},
+): Promise<void> {
+  let next = 0;
+  let failed = false;
+  const lane = async (): Promise<void> => {
+    while (next < items.length && !(options.stopAfterFailure && failed)) {
+      const item = items[next++] as T; // 単一スレッドなので取り合いは起きない
+      try {
+        await worker(item);
+      } catch (error) {
+        failed = true;
+        throw error;
+      }
+    }
+  };
+  const lanes = Math.max(1, Math.min(Math.trunc(limit) || 1, items.length));
+  await Promise.all(Array.from({ length: lanes }, lane));
+}

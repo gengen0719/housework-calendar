@@ -1,5 +1,6 @@
 import type { DutyOrigin } from '../models';
 import { describeError, logger } from '../lib/logger';
+import { mapWithConcurrency } from '../lib/promise';
 
 /**
  * 担当の子供が変わった・担当が消えたことを伝える仕組み（C8 の中。BR6.6、reliability-design.md）。
@@ -56,25 +57,8 @@ export function clampConcurrency(value: number): number {
   );
 }
 
-/**
- * items を最大 limit 件ずつ並行して処理する。1 件の失敗は worker の中で扱い、ほかを止めない。
- * 依存は入れない（自前の小さな関数。NFR8.16）。
- */
-export async function mapWithConcurrency<T>(
-  items: readonly T[],
-  limit: number,
-  worker: (item: T) => Promise<void>,
-): Promise<void> {
-  let next = 0;
-  const lane = async (): Promise<void> => {
-    while (next < items.length) {
-      const item = items[next++] as T; // 単一スレッドなので取り合いは起きない
-      await worker(item);
-    }
-  };
-  const lanes = Math.max(1, Math.min(Math.trunc(limit) || 1, items.length));
-  await Promise.all(Array.from({ length: lanes }, lane));
-}
+/** 並行数の制限つきの処理は lib/promise に移した（U9）。U8 のテストのため、同じ名前で再び公開する。 */
+export { mapWithConcurrency };
 
 /** DUTY_HOOKS_DONE の kind: 1 種類なら文字列、混ざるときは種類ごとの件数（合計は count と一致）。 */
 function summarizeKind(
