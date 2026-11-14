@@ -138,7 +138,11 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     });
     When('管理者が 1 月のお小遣いを読む', read);
     Then('内訳は皿洗い、お風呂洗い、不明なお手伝いの順である', () => {
-      expect(taro().lines.map((l) => l.choreName)).toEqual(['皿洗い', 'お風呂洗い', '不明なお手伝い']);
+      expect(taro().lines.map((l) => l.choreName)).toEqual([
+        '皿洗い',
+        'お風呂洗い',
+        '不明なお手伝い',
+      ]);
     });
   });
 
@@ -150,14 +154,17 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
         badId = w.done({ date: dateOf(0), childUserId: PEOPLE.mother.userId });
       });
       When('管理者が 1 月のお小遣いを読む', read);
-      Then('管理者の行はなく、OWNER_NOT_CHILD が familyId と dutyId だけで 1 行残り、答えは返る', () => {
-        const rows = results[0] ?? [];
-        expect(rows.map((a) => a.displayName)).toEqual(['太郎', '花子', '次郎']);
-        const logged = w.logs.rows(OWNER_NOT_CHILD);
-        expect(logged).toHaveLength(1);
-        expect(logged[0]?.dutyId).toBe(badId);
-        expect(keysOf(logged[0] ?? {})).toEqual(['dutyId', 'event', 'familyId']);
-      });
+      Then(
+        '管理者の行はなく、OWNER_NOT_CHILD が familyId と dutyId だけで 1 行残り、答えは返る',
+        () => {
+          const rows = results[0] ?? [];
+          expect(rows.map((a) => a.displayName)).toEqual(['太郎', '花子', '次郎']);
+          const logged = w.logs.rows(OWNER_NOT_CHILD);
+          expect(logged).toHaveLength(1);
+          expect(logged[0]?.dutyId).toBe(badId);
+          expect(keysOf(logged[0] ?? {})).toEqual(['dutyId', 'event', 'familyId']);
+        },
+      );
     },
   );
 
@@ -207,33 +214,39 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     ({ Given, When, Then }) => {
       Given('単価の項目がない「済」が 300 件ある', () => withoutPrice(300, 40));
       When('管理者が 1 月のお小遣いを読む', read);
-      Then('WITHOUT_PRICE は 20 行で anomalyCount は 300 で、行は sk の順の先頭 20 件である', () => {
-        const rows = w.logs.rows(WITHOUT_PRICE);
-        expect(rows).toHaveLength(20);
-        expect(rows.map((r) => r.dutyId)).toEqual(dutyIdsInSkOrder(() => true).slice(0, 20));
-        expect(w.logs.rows('ALLOWANCE_COMPUTED')[0]?.anomalyCount).toBe(300);
-      });
+      Then(
+        'WITHOUT_PRICE は 20 行で anomalyCount は 300 で、行は sk の順の先頭 20 件である',
+        () => {
+          const rows = w.logs.rows(WITHOUT_PRICE);
+          expect(rows).toHaveLength(20);
+          expect(rows.map((r) => r.dutyId)).toEqual(dutyIdsInSkOrder(() => true).slice(0, 20));
+          expect(w.logs.rows('ALLOWANCE_COMPUTED')[0]?.anomalyCount).toBe(300);
+        },
+      );
     },
   );
 
   Scenario(
     '3 種類の異常がそれぞれ多くても各種類 20 行まで、合計 60 行以下である',
     ({ Given, When, Then }) => {
-      Given('単価なし 100 件、一覧にない種類 25 種類 100 件、管理者の担当 100 件の「済」がある', () => {
-        withoutPrice(100, 40);
-        for (let t = 0; t < 25; t++) {
-          for (let d = 0; d < 4; d++) {
-            w.done({ date: dateOf(d), choreTypeId: fakeU9ChoreTypeId(t) });
+      Given(
+        '単価なし 100 件、一覧にない種類 25 種類 100 件、管理者の担当 100 件の「済」がある',
+        () => {
+          withoutPrice(100, 40);
+          for (let t = 0; t < 25; t++) {
+            for (let d = 0; d < 4; d++) {
+              w.done({ date: dateOf(d), choreTypeId: fakeU9ChoreTypeId(t) });
+            }
           }
-        }
-        for (let i = 0; i < 100; i++) {
-          w.done({
-            date: dateOf(i),
-            choreTypeId: fakeU9ChoreTypeId(60 + Math.floor(i / 28)),
-            childUserId: PEOPLE.mother.userId,
-          });
-        }
-      });
+          for (let i = 0; i < 100; i++) {
+            w.done({
+              date: dateOf(i),
+              choreTypeId: fakeU9ChoreTypeId(60 + Math.floor(i / 28)),
+              childUserId: PEOPLE.mother.userId,
+            });
+          }
+        },
+      );
       When('管理者が 1 月のお小遣いを読む', read);
       Then('異常のログは種類ごとに 20 行で合計 60 行以下で、anomalyCount は 300 である', () => {
         expect(w.logs.rows(WITHOUT_PRICE)).toHaveLength(20);
@@ -245,21 +258,25 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     },
   );
 
-  Scenario('一覧にない種類のログは種類の ID の昇順で先頭 20 種類になる', ({ Given, When, Then }) => {
-    Given('一覧にない種類 25 種類の「済」が 1 件ずつある', () => {
-      // 登録の逆順に置いても、ログは種類の ID の昇順で決まる
-      for (let t = 24; t >= 0; t--) w.done({ date: dateOf(t), choreTypeId: fakeU9ChoreTypeId(t) });
-    });
-    When('管理者が 1 月のお小遣いを読む', read);
-    Then('CHORE_TYPE_MISSING は種類の ID の昇順の先頭 20 行で、anomalyCount は 25 である', () => {
-      const ids = w.logs.rows(TYPE_MISSING).map((r) => r.choreTypeId);
-      const expected = Array.from({ length: 25 }, (_, t) => fakeU9ChoreTypeId(t))
-        .sort()
-        .slice(0, 20);
-      expect(ids).toEqual(expected);
-      expect(w.logs.rows('ALLOWANCE_COMPUTED')[0]?.anomalyCount).toBe(25);
-    });
-  });
+  Scenario(
+    '一覧にない種類のログは種類の ID の昇順で先頭 20 種類になる',
+    ({ Given, When, Then }) => {
+      Given('一覧にない種類 25 種類の「済」が 1 件ずつある', () => {
+        // 登録の逆順に置いても、ログは種類の ID の昇順で決まる
+        for (let t = 24; t >= 0; t--)
+          w.done({ date: dateOf(t), choreTypeId: fakeU9ChoreTypeId(t) });
+      });
+      When('管理者が 1 月のお小遣いを読む', read);
+      Then('CHORE_TYPE_MISSING は種類の ID の昇順の先頭 20 行で、anomalyCount は 25 である', () => {
+        const ids = w.logs.rows(TYPE_MISSING).map((r) => r.choreTypeId);
+        const expected = Array.from({ length: 25 }, (_, t) => fakeU9ChoreTypeId(t))
+          .sort()
+          .slice(0, 20);
+        expect(ids).toEqual(expected);
+        expect(w.logs.rows('ALLOWANCE_COMPUTED')[0]?.anomalyCount).toBe(25);
+      });
+    },
+  );
 
   Scenario('同じデータを 2 回読むと異常のログの行は毎回同じである', ({ Given, When, Then }) => {
     Given('単価の項目がない「済」が 30 件ある', () => withoutPrice(30, 40));
@@ -276,26 +293,32 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     });
   });
 
-  Scenario('異常のログは計算のログより先に出て、計算のログは 1 件だけである', ({ Given, When, Then }) => {
-    Given('太郎の皿洗いの「済」が単価の項目なしで 1 件、正常に 2 件ある', () => {
-      w.done({ date: dateOf(0), price: null });
-      w.done({ date: dateOf(1) });
-      w.done({ date: dateOf(2) });
-    });
-    When('管理者が 1 月のお小遣いを読む', read);
-    Then('異常の行のあとに ALLOWANCE_COMPUTED が 1 件だけあり、anomalyCount は 1 である', () => {
-      const events = w.logs.lines.map((l) => l.event);
-      expect(events.filter((e) => e === 'ALLOWANCE_COMPUTED')).toHaveLength(1);
-      expect(events.indexOf(WITHOUT_PRICE)).toBeLessThan(events.indexOf('ALLOWANCE_COMPUTED'));
-      expect(w.logs.rows('ALLOWANCE_COMPUTED')[0]?.anomalyCount).toBe(1);
-    });
-  });
+  Scenario(
+    '異常のログは計算のログより先に出て、計算のログは 1 件だけである',
+    ({ Given, When, Then }) => {
+      Given('太郎の皿洗いの「済」が単価の項目なしで 1 件、正常に 2 件ある', () => {
+        w.done({ date: dateOf(0), price: null });
+        w.done({ date: dateOf(1) });
+        w.done({ date: dateOf(2) });
+      });
+      When('管理者が 1 月のお小遣いを読む', read);
+      Then('異常の行のあとに ALLOWANCE_COMPUTED が 1 件だけあり、anomalyCount は 1 である', () => {
+        const events = w.logs.lines.map((l) => l.event);
+        expect(events.filter((e) => e === 'ALLOWANCE_COMPUTED')).toHaveLength(1);
+        expect(events.indexOf(WITHOUT_PRICE)).toBeLessThan(events.indexOf('ALLOWANCE_COMPUTED'));
+        expect(w.logs.rows('ALLOWANCE_COMPUTED')[0]?.anomalyCount).toBe(1);
+      });
+    },
+  );
 
   Scenario('異常のログの項目に名前・金額・利用者の ID が入らない', ({ Given, When, Then }) => {
     Given('3 種類の異常が 1 件ずつあり、名前と単価に目印がついている', () => {
       const item = w.world.users.get(CHILDREN.taro.userId);
       if (item) {
-        w.world.users.set(CHILDREN.taro.userId, { ...item, displayName: FAKE_U9_MARKER_DISPLAY_NAME });
+        w.world.users.set(CHILDREN.taro.userId, {
+          ...item,
+          displayName: FAKE_U9_MARKER_DISPLAY_NAME,
+        });
       }
       const key = `${FAMILY_ID}#TYPE#${CHORES.dishes.choreTypeId}`;
       const type = w.world.choreTypes.get(key);

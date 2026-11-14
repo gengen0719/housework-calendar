@@ -106,7 +106,9 @@ describe('assembleAllowances（BR10.4〜BR10.7）', () => {
   });
 
   it('単価 0 円の行は 0 円の行として出る', () => {
-    const rows = assembleAllowances(base({ lines: new Map([['u-taro', [line('t-dishes', 0, 2)]]]) }));
+    const rows = assembleAllowances(
+      base({ lines: new Map([['u-taro', [line('t-dishes', 0, 2)]]]) }),
+    );
     expect(rows[0]?.lines).toEqual([
       { choreTypeId: 't-dishes', choreName: '皿洗い', unitPrice: 0, count: 2, amount: 0 },
     ]);
@@ -120,7 +122,13 @@ describe('assembleAllowances（BR10.4〜BR10.7）', () => {
         adjustments: new Map([
           [
             'u-taro',
-            [{ ...adj('a1', 10), lineUserId: 'U_secret', role: 'admin' } as AllowanceAdjustmentLine],
+            [
+              {
+                ...adj('a1', 10),
+                lineUserId: 'U_secret',
+                role: 'admin',
+              } as AllowanceAdjustmentLine,
+            ],
           ],
         ]),
       }),

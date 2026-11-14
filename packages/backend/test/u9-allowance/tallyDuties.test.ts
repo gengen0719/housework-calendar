@@ -74,7 +74,11 @@ describe('tallyDuties（BR10.2〜BR10.4、BR10.13）', () => {
   });
 
   it('同じ種類で単価が 2 つあれば 2 行になる', () => {
-    const result = tally([duty({ unitPrice: 100 }), duty({ unitPrice: 120 }), duty({ unitPrice: 100 })]);
+    const result = tally([
+      duty({ unitPrice: 100 }),
+      duty({ unitPrice: 120 }),
+      duty({ unitPrice: 100 }),
+    ]);
     expect(result.byChild.get(TAKU)).toEqual([
       { choreTypeId: DISHES, unitPrice: 100, count: 2 },
       { choreTypeId: DISHES, unitPrice: 120, count: 1 },

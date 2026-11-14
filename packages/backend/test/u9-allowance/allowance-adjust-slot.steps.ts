@@ -143,11 +143,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
         const [scope, month, ids] = slotCalls[0] ?? [];
         expect(scope).toEqual({ familyId: FAMILY_ID });
         expect(month).toBe(MONTH);
-        expect(ids).toEqual([
-          CHILDREN.taro.userId,
-          CHILDREN.hanako.userId,
-          CHILDREN.jiro.userId,
-        ]);
+        expect(ids).toEqual([CHILDREN.taro.userId, CHILDREN.hanako.userId, CHILDREN.jiro.userId]);
       });
     },
   );

@@ -37,9 +37,11 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     vi.restoreAllMocks();
   });
 
-  const read = (month = MONTH, ctx = asRead(ctxAdmin())) => async (): Promise<void> => {
-    result = await getAllowances(ctx, month);
-  };
+  const read =
+    (month = MONTH, ctx = asRead(ctxAdmin())) =>
+    async (): Promise<void> => {
+      result = await getAllowances(ctx, month);
+    };
   const names = (): string[] => result.map((a) => a.displayName);
   const THREE = ['太郎', '花子', '次郎'];
 
@@ -83,21 +85,24 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     });
   });
 
-  Scenario('抜けた子供の「済」がある月は名前つきで今いる子供の後ろに出る', ({ Given, When, Then }) => {
-    Given('家族を抜けた「ゆうき」の 1 月の皿洗いの「済」が 2 回ある', () => {
-      w.departed(FAKE_U9_DEPARTED_USER_ID, 'ゆうき');
-      w.done({ date: dateOf(0), childUserId: FAKE_U9_DEPARTED_USER_ID });
-      w.done({ date: dateOf(1), childUserId: FAKE_U9_DEPARTED_USER_ID });
-    });
-    When('管理者が 1 月のお小遣いを読む', read());
-    Then('太郎、花子、次郎の後ろに「ゆうき」の行があり、current は偽で合計は 200 である', () => {
-      expect(names()).toEqual([...THREE, 'ゆうき']);
-      const row = rowOf(result, 'ゆうき');
-      expect(row.current).toBe(false);
-      expect(row.total).toBe(200);
-      expect(row.childUserId).toBe(FAKE_U9_DEPARTED_USER_ID);
-    });
-  });
+  Scenario(
+    '抜けた子供の「済」がある月は名前つきで今いる子供の後ろに出る',
+    ({ Given, When, Then }) => {
+      Given('家族を抜けた「ゆうき」の 1 月の皿洗いの「済」が 2 回ある', () => {
+        w.departed(FAKE_U9_DEPARTED_USER_ID, 'ゆうき');
+        w.done({ date: dateOf(0), childUserId: FAKE_U9_DEPARTED_USER_ID });
+        w.done({ date: dateOf(1), childUserId: FAKE_U9_DEPARTED_USER_ID });
+      });
+      When('管理者が 1 月のお小遣いを読む', read());
+      Then('太郎、花子、次郎の後ろに「ゆうき」の行があり、current は偽で合計は 200 である', () => {
+        expect(names()).toEqual([...THREE, 'ゆうき']);
+        const row = rowOf(result, 'ゆうき');
+        expect(row.current).toBe(false);
+        expect(row.total).toBe(200);
+        expect(row.childUserId).toBe(FAKE_U9_DEPARTED_USER_ID);
+      });
+    },
+  );
 
   Scenario('抜けた子供の「済」がない月は行が出ない', ({ Given, When, Then }) => {
     Given('家族を抜けた「ゆうき」の 1 月の皿洗いの「済」が 2 回あり、2 月には担当がない', () => {
@@ -136,21 +141,29 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
   });
 
   Scenario('抜けた子供は表示名の順、同じ名前は userId の順に並ぶ', ({ Given, When, Then }) => {
-    Given('家族を抜けた「みどり」「あおい」「あおい」の 1 月の皿洗いの「済」がそれぞれ 1 回ある', () => {
-      const ids = [fakeU9ChildId(1), FAKE_U9_DEPARTED_USER_ID_2, FAKE_U9_DEPARTED_USER_ID];
-      const labels = ['みどり', 'あおい', 'あおい'];
-      ids.forEach((id, i) => {
-        w.departed(id, labels[i]);
-        w.done({ date: dateOf(i), childUserId: id });
-      });
-    });
+    Given(
+      '家族を抜けた「みどり」「あおい」「あおい」の 1 月の皿洗いの「済」がそれぞれ 1 回ある',
+      () => {
+        const ids = [fakeU9ChildId(1), FAKE_U9_DEPARTED_USER_ID_2, FAKE_U9_DEPARTED_USER_ID];
+        const labels = ['みどり', 'あおい', 'あおい'];
+        ids.forEach((id, i) => {
+          w.departed(id, labels[i]);
+          w.done({ date: dateOf(i), childUserId: id });
+        });
+      },
+    );
     When('管理者が 1 月のお小遣いを読む', read());
-    Then('抜けた子供の行は「あおい」「あおい」「みどり」の順で、同じ名前は userId の順である', () => {
-      const departed = result.filter((a) => !a.current);
-      expect(departed.map((a) => a.displayName)).toEqual(['あおい', 'あおい', 'みどり']);
-      const sameName = departed.filter((a) => a.displayName === 'あおい').map((a) => a.childUserId);
-      expect(sameName).toEqual([...sameName].sort());
-    });
+    Then(
+      '抜けた子供の行は「あおい」「あおい」「みどり」の順で、同じ名前は userId の順である',
+      () => {
+        const departed = result.filter((a) => !a.current);
+        expect(departed.map((a) => a.displayName)).toEqual(['あおい', 'あおい', 'みどり']);
+        const sameName = departed
+          .filter((a) => a.displayName === 'あおい')
+          .map((a) => a.childUserId);
+        expect(sameName).toEqual([...sameName].sort());
+      },
+    );
   });
 
   Scenario('子供がひとりもいない家族では行が空になる', ({ Given, When, Then }) => {

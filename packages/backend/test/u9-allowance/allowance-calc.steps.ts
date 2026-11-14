@@ -72,20 +72,26 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     w.world.calendar.set(key, { ...rest, status: 'todo' });
   };
 
-  Scenario('太郎の皿洗い 8 回と洗濯物たたみ 4 回が内訳つきで合計される', ({ Given, When, Then }) => {
-    Given('太郎の 1 月に皿洗いの「済」が 8 回、洗濯物たたみの「済」が 4 回ある', () => {
-      dishesTimes(8);
-      for (let i = 0; i < 4; i++) w.done({ date: dateOf(i), chore: 'laundry' });
-    });
-    When('管理者が 1 月のお小遣いを読む', readOnce);
-    Then('太郎の内訳は「皿洗い 100 x 8 = 800」「洗濯物たたみ 150 x 4 = 600」で合計は 1400 である', () => {
-      expect(taro().lines.map(lineText)).toEqual([
-        '皿洗い 100 x 8 = 800',
-        '洗濯物たたみ 150 x 4 = 600',
-      ]);
-      expect(taro().total).toBe(1400);
-    });
-  });
+  Scenario(
+    '太郎の皿洗い 8 回と洗濯物たたみ 4 回が内訳つきで合計される',
+    ({ Given, When, Then }) => {
+      Given('太郎の 1 月に皿洗いの「済」が 8 回、洗濯物たたみの「済」が 4 回ある', () => {
+        dishesTimes(8);
+        for (let i = 0; i < 4; i++) w.done({ date: dateOf(i), chore: 'laundry' });
+      });
+      When('管理者が 1 月のお小遣いを読む', readOnce);
+      Then(
+        '太郎の内訳は「皿洗い 100 x 8 = 800」「洗濯物たたみ 150 x 4 = 600」で合計は 1400 である',
+        () => {
+          expect(taro().lines.map(lineText)).toEqual([
+            '皿洗い 100 x 8 = 800',
+            '洗濯物たたみ 150 x 4 = 600',
+          ]);
+          expect(taro().total).toBe(1400);
+        },
+      );
+    },
+  );
 
   Scenario('単価・回数・小計・合計はすべて整数である', ({ Given, When, Then }) => {
     Given('太郎の 1 月に皿洗いの「済」が 3 回ある', () => dishesTimes(3));
@@ -100,24 +106,36 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     });
   });
 
-  Scenario('単価を変える前の分と後の分が別の行になり合計は 420 円になる', ({ Given, When, Then }) => {
-    Given('太郎が皿洗いを 100 円で 3 回記録したあと、単価 120 円で 1 回記録している', () => {
-      dishesTimes(3);
-      w.done({ date: dateOf(10), chore: 'dishes', price: 120 });
-    });
-    When('管理者が 1 月のお小遣いを読む', readOnce);
-    Then('内訳は「皿洗い 100 x 3 = 300」「皿洗い 120 x 1 = 120」の 2 行で合計は 420 である', () => {
-      expect(taro().lines.map(lineText)).toEqual(['皿洗い 100 x 3 = 300', '皿洗い 120 x 1 = 120']);
-      expect(taro().total).toBe(420);
-    });
-  });
+  Scenario(
+    '単価を変える前の分と後の分が別の行になり合計は 420 円になる',
+    ({ Given, When, Then }) => {
+      Given('太郎が皿洗いを 100 円で 3 回記録したあと、単価 120 円で 1 回記録している', () => {
+        dishesTimes(3);
+        w.done({ date: dateOf(10), chore: 'dishes', price: 120 });
+      });
+      When('管理者が 1 月のお小遣いを読む', readOnce);
+      Then(
+        '内訳は「皿洗い 100 x 3 = 300」「皿洗い 120 x 1 = 120」の 2 行で合計は 420 である',
+        () => {
+          expect(taro().lines.map(lineText)).toEqual([
+            '皿洗い 100 x 3 = 300',
+            '皿洗い 120 x 1 = 120',
+          ]);
+          expect(taro().total).toBe(420);
+        },
+      );
+    },
+  );
 
   Scenario('種類の単価をさらに変えても過去の行と合計は変わらない', ({ Given, When, Then }) => {
-    Given('太郎が皿洗いを 100 円で 3 回、120 円で 1 回記録していて、種類の単価が 200 円に変わった', () => {
-      dishesTimes(3);
-      w.done({ date: dateOf(10), chore: 'dishes', price: 120 });
-      setUnitPrice(w.world.choreTypes, CHORES.dishes.choreTypeId, 200);
-    });
+    Given(
+      '太郎が皿洗いを 100 円で 3 回、120 円で 1 回記録していて、種類の単価が 200 円に変わった',
+      () => {
+        dishesTimes(3);
+        w.done({ date: dateOf(10), chore: 'dishes', price: 120 });
+        setUnitPrice(w.world.choreTypes, CHORES.dishes.choreTypeId, 200);
+      },
+    );
     When('管理者が 1 月のお小遣いを読む', readOnce);
     Then('内訳は 2 行のままで合計は 420 である', () => {
       expect(taro().lines).toHaveLength(2);
@@ -191,9 +209,12 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
   });
 
   Scenario('花子の担当を次郎が引き受けて記録すると次郎の額になる', ({ Given, When, Then }) => {
-    Given('花子の担当を次郎が引き受けて担当の子供が次郎に変わり、次郎が記録した「済」がある', () => {
-      w.done({ date: dateOf(0), child: 'jiro', recordedBy: CHILDREN.jiro.userId });
-    });
+    Given(
+      '花子の担当を次郎が引き受けて担当の子供が次郎に変わり、次郎が記録した「済」がある',
+      () => {
+        w.done({ date: dateOf(0), child: 'jiro', recordedBy: CHILDREN.jiro.userId });
+      },
+    );
     When('管理者が 1 月のお小遣いを読む', readOnce);
     Then('次郎の合計が 100 で、花子の合計は 0 である', () => {
       expect(rowOf(last(), '次郎').total).toBe(100);
@@ -280,8 +301,12 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     Given('太郎の皿洗いが単価 0 円で 2 回ある', () => dishesTimes(2, 0));
     When('管理者が 1 月のお小遣いを読む', readOnce);
     Then('異常のログは 1 行もなく、計算のログは 1 件だけである', () => {
-      expect(w.logs.lines.filter((l) => String(l.event).startsWith('ALLOWANCE_DUTY'))).toHaveLength(0);
-      expect(w.logs.lines.filter((l) => l.event === 'ALLOWANCE_CHORE_TYPE_MISSING')).toHaveLength(0);
+      expect(w.logs.lines.filter((l) => String(l.event).startsWith('ALLOWANCE_DUTY'))).toHaveLength(
+        0,
+      );
+      expect(w.logs.lines.filter((l) => l.event === 'ALLOWANCE_CHORE_TYPE_MISSING')).toHaveLength(
+        0,
+      );
       expect(w.logs.rows('ALLOWANCE_COMPUTED')).toHaveLength(1);
       expect(w.logs.rows('ALLOWANCE_COMPUTED')[0]?.anomalyCount).toBe(0);
     });
@@ -301,20 +326,26 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     });
   });
 
-  Scenario('1 月 31 日と 2 月 1 日の担当はそれぞれ 1 月と 2 月の額に入る', ({ Given, When, Then }) => {
-    Given('日本時間の 1 月 31 日 23 時 59 分と 2 月 1 日 0 時 0 分に、その日の担当を記録した「済」がある', () => {
-      w.done({ date: '2027-01-31', recordedAt: '2027-01-31T14:59:00.000Z' });
-      w.done({ date: '2027-02-01', recordedAt: '2027-01-31T15:00:00.000Z' });
-    });
-    When('管理者が 1 月のお小遣いと 2 月のお小遣いを読む', async () => {
-      await read('2027-01');
-      await read('2027-02');
-    });
-    Then('1 月の太郎は 100 円で、2 月の太郎も 100 円である', () => {
-      expect(rowOf(results[0] ?? [], '太郎').total).toBe(100);
-      expect(rowOf(results[1] ?? [], '太郎').total).toBe(100);
-    });
-  });
+  Scenario(
+    '1 月 31 日と 2 月 1 日の担当はそれぞれ 1 月と 2 月の額に入る',
+    ({ Given, When, Then }) => {
+      Given(
+        '日本時間の 1 月 31 日 23 時 59 分と 2 月 1 日 0 時 0 分に、その日の担当を記録した「済」がある',
+        () => {
+          w.done({ date: '2027-01-31', recordedAt: '2027-01-31T14:59:00.000Z' });
+          w.done({ date: '2027-02-01', recordedAt: '2027-01-31T15:00:00.000Z' });
+        },
+      );
+      When('管理者が 1 月のお小遣いと 2 月のお小遣いを読む', async () => {
+        await read('2027-01');
+        await read('2027-02');
+      });
+      Then('1 月の太郎は 100 円で、2 月の太郎も 100 円である', () => {
+        expect(rowOf(results[0] ?? [], '太郎').total).toBe(100);
+        expect(rowOf(results[1] ?? [], '太郎').total).toBe(100);
+      });
+    },
+  );
 
   Scenario('別の月の「済」は数えない', ({ Given, When, Then }) => {
     Given('太郎の 12 月と 1 月と 2 月に皿洗いの「済」が 1 回ずつある', () => {
@@ -345,16 +376,19 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     });
   });
 
-  Scenario('同じ読み取りを 2 回繰り返しても間に記録がなければ同じ答えになる', ({ Given, When, Then }) => {
-    Given('太郎の 1 月に皿洗いの「済」が 3 回ある', () => dishesTimes(3));
-    When('管理者が 1 月のお小遣いを 2 回続けて読む', async () => {
-      await read();
-      await read();
-    });
-    Then('2 回の答えは完全に同じである', () => {
-      expect(results[1]).toEqual(results[0]);
-    });
-  });
+  Scenario(
+    '同じ読み取りを 2 回繰り返しても間に記録がなければ同じ答えになる',
+    ({ Given, When, Then }) => {
+      Given('太郎の 1 月に皿洗いの「済」が 3 回ある', () => dishesTimes(3));
+      When('管理者が 1 月のお小遣いを 2 回続けて読む', async () => {
+        await read();
+        await read();
+      });
+      Then('2 回の答えは完全に同じである', () => {
+        expect(results[1]).toEqual(results[0]);
+      });
+    },
+  );
 
   Scenario('確定している月でも額は確定前と同じである', ({ Given, When, Then }) => {
     Given('太郎の 1 月に皿洗いの「済」が 3 回あり、1 月はまだ確定していない', () => {
@@ -387,10 +421,13 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
   Scenario('書き込みの命令は 1 回も呼ばれない', ({ Given, When, Then }) => {
     Given('太郎の 1 月に皿洗いの「済」が 3 回ある', () => dishesTimes(3));
     When('管理者が 1 月のお小遣いを読む', readOnce);
-    Then('PutItem・UpdateItem・DeleteItem・TransactWriteItems・BatchWriteItem は 0 回である', () => {
-      expect(totalWrites(w.world)).toBe(0);
-      expect(readCount(w.world)).toBeGreaterThan(0);
-    });
+    Then(
+      'PutItem・UpdateItem・DeleteItem・TransactWriteItems・BatchWriteItem は 0 回である',
+      () => {
+        expect(totalWrites(w.world)).toBe(0);
+        expect(readCount(w.world)).toBeGreaterThan(0);
+      },
+    );
   });
 
   Scenario('fetch は 1 回も呼ばれない', ({ Given, When, Then }) => {

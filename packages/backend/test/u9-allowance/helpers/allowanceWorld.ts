@@ -146,7 +146,8 @@ export function setupAllowanceWorld(): AllowanceWorld {
       return r.dutyId;
     },
     departed: (userId, displayName) => {
-      if (displayName === undefined) return seedDepartedChild(world.users, { userId, missing: true });
+      if (displayName === undefined)
+        return seedDepartedChild(world.users, { userId, missing: true });
       return seedDepartedChild(world.users, { userId, displayName });
     },
     addChild: (userId, displayName, joinedAt) => {
@@ -184,6 +185,8 @@ export function rowOf(allowances: readonly Allowance[], displayName: string): Al
 /** ある表の読み取りの回数（操作は Get／Query）。 */
 export function readCount(world: World, table?: string, operation?: 'Get' | 'Query'): number {
   return world.hooks.readLog.filter(
-    (e) => (table === undefined || e.table === table) && (operation === undefined || e.operation === operation),
+    (e) =>
+      (table === undefined || e.table === table) &&
+      (operation === undefined || e.operation === operation),
   ).length;
 }
