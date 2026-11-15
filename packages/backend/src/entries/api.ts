@@ -32,9 +32,13 @@ import { readJsonBody } from '../lib/requestBody';
 import { matchRoute } from '../lib/router';
 import { requireAuth } from '../middleware/requireAuth';
 import { verifyOriginHeader } from '../middleware/verifyOriginHeader';
+import { getAllowances } from '../handlers/allowances/getAllowances';
 import { setCalendarPort } from '../services/calendarPort';
 import * as calendarService from '../services/calendarService';
 import { registerSwapHooks } from '../services/swapService';
+
+/** 成功（200）のお小遣いの応答に付けるキャッシュなしのヘッダー（NFR4.92、ADR-U9-05） */
+const NO_STORE_HEADERS: Record<string, string> = { 'cache-control': 'no-store' };
 
 /**
  * composition root: C7（種類）の「消す」が使う C8 の窓口に、U5 の本物を取り付ける（BR6.10）。
@@ -220,6 +224,15 @@ export const routes: Record<string, Route> = {
     return {
       status: 201,
       body: await createInvitation(auth, event.headers, config.liffUrl, now),
+    };
+  },
+  // U9: 子供ごとのお小遣いの額（読み取り専用。管理者・子供どちらでも見られる。BR10.1、NFR4.92）
+  'GET /v1/months/:month/allowances': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return {
+      status: 200,
+      body: await getAllowances(auth, params.month ?? '', now),
+      headers: NO_STORE_HEADERS,
     };
   },
 };

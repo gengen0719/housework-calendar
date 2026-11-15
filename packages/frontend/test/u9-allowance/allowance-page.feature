@@ -1,0 +1,21 @@
+Feature: 家族のお小遣いを見る
+  Scenario: 家族の内訳と合計を見る
+    Given 子供二人の内訳がある
+    When 子供がお小遣いを開く
+    Then 全員の合計と自分の目印が見える
+  Scenario: 確定の状態を見る
+    Given 月が確定している
+    When お小遣いを開く
+    Then 確定済みと表示され操作ボタンはない
+  Scenario: 子供がまだいない
+    Given 子供がいない
+    When お小遣いを開く
+    Then 子供がいない案内が見える
+  Scenario: マイナスと名前をそのまま見る
+    Given 名前にタグがあり合計がマイナス
+    When お小遣いを開く
+    Then タグは文字でマイナスは残る
+  Scenario: 読み取りをやり直す
+    Given 読み取りに失敗する
+    When 読み込み直すを押す
+    Then 同じ月を読み直して表示する

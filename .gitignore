@@ -13,8 +13,6 @@ aidlc/.aidlc-unit-releases/
 aidlc/.aidlc-unit-merges/
 aidlc/.aidlc-active-space-*.tmp
 aidlc/active-memory/
-aidlc/.aidlc-turn-counter
-aidlc/.aidlc-readonly-latch
 aidlc/.aidlc-sessions/
 aidlc/.aidlc-request-text/
 aidlc/spaces/*/intents/.aidlc-*
@@ -25,6 +23,8 @@ aidlc/spaces/*/knowledge/.sources.local.json
 aidlc/spaces/*/intents/*/runtime-graph.json
 aidlc/spaces/*/intents/*/.aidlc-*
 aidlc/diagnostics/
+aidlc/.aidlc-turn-counter
+aidlc/.aidlc-readonly-latch
 .kiro/steering/aidlc-active-memory.md
 .kiro/agents/aidlc-scoped-review-*.md
 # END AI-DLC:gitignore

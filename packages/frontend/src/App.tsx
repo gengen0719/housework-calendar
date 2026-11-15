@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { CircularProgress, Container, Typography } from '@mui/material';
 import { MESSAGES } from '@housework/shared';
 import { useNotificationGroup } from './hooks/useNotificationGroup';
@@ -10,11 +10,15 @@ import { FamilySettingsPage } from './pages/FamilySettingsPage';
 import { InvitationPage } from './pages/InvitationPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { SetupPage } from './pages/SetupPage';
+const AllowancePage = lazy(() =>
+  import('./pages/AllowancePage').then((module) => ({ default: module.AllowancePage })),
+);
 export function App() {
   const { state, reload, createFamily, authorized, invitation, closeInvitation, joined } =
     useSession();
   const [showSettings, setShowSettings] = useState(false);
   const [showChoreTypes, setShowChoreTypes] = useState(false);
+  const [allowanceMonth, setAllowanceMonth] = useState<string>();
   // お知らせ先は、管理者のカレンダーの枠と、家族の設定（管理者も子供も）のためだけに読む。子供のカレンダーの枠では呼ばない（BR4.11）
   const role = state.kind === 'ready' && !invitation ? state.me.family?.role : undefined;
   const notificationGroup = useNotificationGroup(
@@ -61,6 +65,18 @@ export function App() {
         }
         const { family } = state.me;
         if (!family) return <SetupPage onCreateFamily={createFamily} />;
+        if (allowanceMonth !== undefined)
+          return (
+            <Suspense fallback={<Typography role="status">読み込み中…</Typography>}>
+              <AllowancePage
+                authorized={authorized}
+                initialMonth={allowanceMonth}
+                currentUserId={state.me.userId}
+                role={family.role}
+                onBack={() => setAllowanceMonth(undefined)}
+              />
+            </Suspense>
+          );
         if (showSettings && showChoreTypes) {
           return (
             <ChoreTypesPage
@@ -90,6 +106,7 @@ export function App() {
             role={family.role}
             notificationGroup={notificationGroup}
             onOpenSettings={() => setShowSettings(true)}
+            onOpenAllowance={setAllowanceMonth}
           />
         );
       }

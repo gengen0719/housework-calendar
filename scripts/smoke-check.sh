@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 反映後の確かめ（全 23 件: 1・2・3・4 が各 1 件、3b が U2 の 5 件、3c が U3 の 1 件、3d〜3h が U4 の 5 件、3i〜3l が U5 の 4 件、3m が U6 の 1 件、3n〜3p が U7 の 3 件）。
+# 反映後の確かめ（全 24 件: 1・2・3・4 が各 1 件、3b が U2 の 5 件、3c が U3 の 1 件、3d〜3h が U4 の 5 件、3i〜3l が U5 の 4 件、3m が U6 の 1 件、3n〜3p が U7 の 3 件、3q が U9 の 1 件）。
 # 使い方: scripts/smoke-check.sh <CloudFront の URL> <api の関数 URL>
 #   例: scripts/smoke-check.sh https://dxxxx.cloudfront.net https://xxxx.lambda-url.ap-northeast-1.on.aws/
 set -euo pipefail
@@ -81,6 +81,9 @@ check "POST /v1/duties/:dutyId/record (セッションなし)" 401 -X POST -H "$
 check "POST /v1/duties/:dutyId/status (セッションなし)" 401 -X POST -H "$json" --data '{"action":"cancel","version":0}' "${base}/v1/duties/${duty_id}/status"
 check "PUT /v1/months/:month/confirmation (セッションなし)" 401 -X PUT -H "$json" --data '{}' "${base}/v1/months/2000-01/confirmation"
 check "DELETE /v1/months/:month/confirmation (セッションなし)" 401 -X DELETE "${base}/v1/months/2000-01/confirmation"
+
+# 3q. U9 のお小遣いの読み取りがセッションなしで 401（書き込みはしない）。
+check "GET /v1/months/:month/allowances (セッションなし)" 401 "${base}/v1/months/current/allowances"
 
 # 4. CloudFront を通さない要求を断っている: 関数 URL を直接呼ぶと 403
 check "api の関数 URL を直接呼ぶ" 403 "${api_direct}/v1/me"
