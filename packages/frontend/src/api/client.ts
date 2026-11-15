@@ -1,4 +1,5 @@
 import type {
+  AllowanceMonthView,
   CreateFamilyRequest,
   CreateFamilyResponse,
   CreateSessionRequest,
@@ -198,6 +199,15 @@ export function deleteChoreType(token: string, choreTypeId: string): Promise<voi
 }
 
 const monthPath = (month: string) => `/v1/months/${encodeURIComponent(month)}`;
+
+/** お小遣いは読むたびに計算される。家族の指定や本文は送らない（U9）。 */
+export function getAllowances(
+  token: string,
+  month: string,
+  signal?: AbortSignal,
+): Promise<AllowanceMonthView> {
+  return request('GET', `${monthPath(month)}/allowances`, { token, signal });
+}
 
 /** 月のカレンダー（家族のメンバー全員が見られる。signal で古い月の要求を取り消す。NFR7.20） */
 export function getMonthCalendar(

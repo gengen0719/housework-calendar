@@ -93,6 +93,9 @@ const priceOf = (chore: ChoreKey): number => {
 /** 山田家を置き、単価と入った順をそろえ、ログを集め始める。 */
 export function setupAllowanceWorld(): AllowanceWorld {
   const world = setupWorld();
+  // allowance-api.steps は画面用 API の入口（api Lambda）を呼ぶ。
+  // setupWorld() は ENTRY を 'line' に設定するので、api として上書きする（jwt/* が読める）。
+  process.env.ENTRY = 'api';
   seedAllowanceHousehold(world);
   setUnitPrice(world.choreTypes, CHORES.dishes.choreTypeId, PRICE.dishes);
   setUnitPrice(world.choreTypes, CHORES.laundry.choreTypeId, PRICE.laundry);

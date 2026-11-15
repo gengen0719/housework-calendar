@@ -11,7 +11,7 @@
 | `packages/frontend`           | Vite + React + MUI の画面（LIFF）                                                         |
 | `infrastructure`              | AWS CDK（TypeScript）。`Housework-Account`、`Housework-<env>-Data`、`Housework-<env>-App` |
 | `.github/workflows`           | `ci.yml`、`deploy-staging.yml`、`deploy-production.yml`                                   |
-| `scripts/smoke-check.sh`      | 反映後の確かめ（4 つ）                                                                    |
+| `scripts/smoke-check.sh`      | 反映後の確かめ（全 24 件）                                                                |
 | `docs/contract-changes-u1.md` | U1 で足した契約の一覧                                                                     |
 
 リージョンは東京（`ap-northeast-1`）です。環境はステージング（`staging`）と本番（`production`）の 2 つで、同じ AWS アカウントの中に別のスタックで置きます。
@@ -570,6 +570,76 @@ U8 の動作は、スモークチェックでは確かめません（LINE の署
 ### U8 を反映したあとの戻し方
 
 U8 はインフラを変えないので、戻しても消える権限や環境変数はありません。不具合は `git revert` のコミットを `main` に取り込んで直します。戻すと「家事交代」とボタンは反応しなくなり、引き受けた担当は画面からの担当の変更と同じ状態で残ります。`SWAP#` の項目は前の版から読まれず、無害で残ります。**本番の `Calendar` のデータは、手で書き換えません。**
+
+## U9 お小遣いを見る
+
+母親も子供も、カレンダーの「お小遣い」から家族全員の内訳を開けます。最初は裏側の日本時間の今日の月、前後のボタンで家族が作られた月から翌月まで移れます。済になった担当の単価と回数で毎回計算し、保存した合計は持ちません。自分の行には「（あなた）」が付きます。月の確定はカレンダーで行います。
+
+`GET /v1/months/{month}/allowances` は `YYYY-MM` と完全一致の `current` を受け、成功200だけ `Cache-Control: no-store` を返します。APIにもLINEにも書込の操作は追加しません。U9のあとは反映後のスモークが**全24件**です。
+
+テストは `npx vitest run u9-allowance`。画面のビルドは `npm run build --workspace @housework/frontend` です。ステージングでの [手での確認16件](docs/manual-check-u9.md) は**まだ実行していません**。
+
+### 3秒の確認と見守り
+
+ステージング用公式アカウントと作り手だけの家族を二つ使い、通常の月と、子供5人・種類10件・担当300件の月を通常操作で用意します。入口ごとに20回、冷たい起動10回以上を含め、1秒30コマ以上の画面録画から押してから描画までを読みます。250msの静まりも含め、遅い試行を除外しません。冷たい起動はLambdaの `REPORT` の `Init Duration` と `REQUEST_END.coldStart` で見分けます。設定や環境変数の手変更で冷たい起動を作りません。U9反映後はS1の3秒目標（NFR7.20）も測り直します。
+
+CloudWatch Logs Insights は `api` のロググループを測定期間だけに絞ります。問い合わせは検索した量の従量課金です。次の1〜7を使います（`filter` は `stats` より前）。
+
+```text
+# 1 入口の時間
+fields @timestamp, path, durationMs, dutyCount, coldStart
+| filter event = "REQUEST_END" and path = "/v1/months/:month/allowances"
+| stats pct(durationMs, 95) as p95, max(durationMs) as worst, count() as n by coldStart
+```
+
+```text
+# 2 集計の時間
+fields @timestamp, month, dutyCount, childCount, durationMs
+| filter event = "ALLOWANCE_COMPUTED"
+| stats pct(durationMs, 95) as p95, max(durationMs) as worst, max(dutyCount) as maxDuty, count() as n
+```
+
+```text
+# 3 異常があった要求
+fields @timestamp, familyId, month, anomalyCount, durationMs
+| filter event = "ALLOWANCE_COMPUTED" and anomalyCount > 0
+| sort @timestamp desc
+| limit 50
+```
+
+```text
+# 4 異常の種類
+fields @timestamp, event
+| filter event in ["ALLOWANCE_DUTY_WITHOUT_PRICE", "ALLOWANCE_CHORE_TYPE_MISSING", "ALLOWANCE_DUTY_OWNER_NOT_CHILD"]
+| stats count() as n by event
+```
+
+```text
+# 5 失敗
+fields @timestamp, event, path, error
+| filter event = "REQUEST_ERROR" and path = "/v1/months/:month/allowances"
+| sort @timestamp desc
+| limit 20
+```
+
+```text
+# 6 認証や入力の断り
+fields @timestamp, event, status, reason
+| filter event = "REQUEST_REJECTED" and path = "/v1/months/:month/allowances"
+| stats count() as n by status, reason
+```
+
+```text
+# 7 生の行に名前や金額がないこと
+fields @message
+| filter event = "ALLOWANCE_COMPUTED"
+| sort @timestamp desc
+| limit 5
+```
+
+DynamoDBの呼出し回数は `AWS/DynamoDB` の `SuccessfulRequestLatency` の `SampleCount` を期間60秒、表×操作ごとの前後差で取ります。Usersの索引は `GlobalSecondaryIndexName=familyId-index` を別に数え、他の操作を止めて一回ずつ1〜2分あけます。通常5回、本人の補いで6回、抜けた子供k人でさらに最大2k回。書込は0回です。請求RRUは回数と同じではなくデータ量にも依存します。
+
+戻すときはU9のコミットをrevertして通常の反映手順を通します。データの移行は不要です。U10が `getAllowances` を使い始めたあとは**U10を先に戻します**。
 
 ## 既知の課題
 

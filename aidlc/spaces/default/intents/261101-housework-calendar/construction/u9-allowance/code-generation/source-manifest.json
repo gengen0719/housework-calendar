@@ -1,0 +1,1153 @@
+{
+  "stage": "code-generation",
+  "unit": "u9-allowance",
+  "version": 1,
+  "writes": [
+    {
+      "path": ".agents/skills/aidlc-approval-handoff/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-bugfix/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-build-and-test/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-ci-pipeline/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-code-generation/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-compose/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-contract-design/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-delivery-planning/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-deployment-execution/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-deployment-pipeline/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-domain-design/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-environment-provisioning/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-express/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-feasibility/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-feature/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-feedback-optimization/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-functional-design/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-incident-response/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-infrastructure-design/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-init/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-intent-capture/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-knowledge/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-market-research/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-mvp/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-nfr-design/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-nfr-requirements/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-observability-setup/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-outcomes-pack/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-performance-validation/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-practices-discovery/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-refined-mockups/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-replay/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-requirements-analysis/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-reverse-engineering/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-rough-mockups/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-scope-definition/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-security-patch/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-session-cost/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-team-formation/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-units-generation/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/aidlc-user-stories/SKILL.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-architect-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-architecture-reviewer-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-aws-platform-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-compliance-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-composer-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-delivery-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-design-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-developer-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-devsecops-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-operations-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-pipeline-deploy-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-product-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-product-lead-agent.md"
+    },
+    {
+      "path": ".codex/agents/aidlc-quality-agent.md"
+    },
+    {
+      "path": ".codex/aidlc-common/conductor.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-definition.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-collaborators.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-ensemble.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-governance.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-learnings.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-loopback.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-recovery.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-reviewer-repair.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-reviewer-unit.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-reviewer.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-sensors.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-summary.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol-swarm.md"
+    },
+    {
+      "path": ".codex/aidlc-common/protocols/stage-protocol.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/construction/build-and-test.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/construction/ci-pipeline.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/construction/code-generation.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/construction/functional-design.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/construction/infrastructure-design.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/construction/nfr-design.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/construction/nfr-requirements.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/ideation/approval-handoff.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/ideation/feasibility.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/ideation/intent-capture.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/ideation/market-research.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/ideation/rough-mockups.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/ideation/scope-definition.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/ideation/team-formation.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/inception/contract-design.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/inception/delivery-planning.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/inception/domain-design.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/inception/practices-discovery.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/inception/refined-mockups.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/inception/requirements-analysis.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/inception/reverse-engineering.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/inception/units-generation.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/inception/user-stories.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/initialization/state-init.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/initialization/workspace-detection.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/operation/deployment-execution.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/operation/deployment-pipeline.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/operation/environment-provisioning.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/operation/feedback-optimization.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/operation/incident-response.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/operation/observability-setup.md"
+    },
+    {
+      "path": ".codex/aidlc-common/stages/operation/performance-validation.md"
+    },
+    {
+      "path": ".codex/hooks/aidlc-codex-adapter.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-continue-workflow.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-deliver-stage-rules.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-fold-usage.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-log-subagent.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-plan-approval-guard.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-rebuild-stage-graph.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-record-human-turn.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-review-freeze.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-reviewer-scope.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-run-sensors.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-session-end.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-session-start.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-state-transition-guard.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-statusline.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-sync-workflow-state.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-validate-state.ts"
+    },
+    {
+      "path": ".codex/hooks/aidlc-write-audit-log.ts"
+    },
+    {
+      "path": ".codex/hooks/review-freeze-command.ts"
+    },
+    {
+      "path": ".codex/hooks/runtime-integrity.ts"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-architect-agent/adr-template.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-architect-agent/architecture-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-architect-agent/architecture-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-architect-agent/ddd-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-architect-agent/nfr-design-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-architect-agent/nfr-design-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-architecture-reviewer-agent/reviewing.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-aws-platform-agent/cdk-best-practices.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-aws-platform-agent/cost-optimization-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-aws-platform-agent/infrastructure-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-aws-platform-agent/well-architected-framework.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-compliance-agent/regulatory-frameworks.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-composer-agent/composing.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-delivery-agent/mob-programming-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-delivery-agent/team-topologies.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-delivery-agent/workflow-planning-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-design-agent/accessibility-wcag.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-design-agent/component-spec-template.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-design-agent/interaction-design-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-design-agent/ux-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-design-agent/wireframing-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-developer-agent/api-design-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-developer-agent/code-analysis-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-developer-agent/code-generation-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-developer-agent/code-generation-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-developer-agent/data-modelling-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-developer-agent/re-artifacts.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-devsecops-agent/devsecops-pipeline-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-devsecops-agent/nfr-requirements-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-devsecops-agent/security-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-devsecops-agent/threat-modelling-stride.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-operations-agent/incident-response-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-operations-agent/nfr-performance-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-operations-agent/observability-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-operations-agent/slo-sli-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-pipeline-deploy-agent/branching-strategies.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-pipeline-deploy-agent/cicd-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-pipeline-deploy-agent/deployment-strategies.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-product-agent/corner-checklist.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-product-agent/functional-design-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-product-agent/market-research-methods.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-product-agent/prioritization-frameworks.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-product-agent/product-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-product-agent/requirements-elicitation.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-product-agent/requirements-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-product-agent/user-story-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-product-lead-agent/reviewing.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-quality-agent/nfr-reliability-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-quality-agent/nfr-validation-methods.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-quality-agent/test-strategy-patterns.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-quality-agent/testing-guide.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-shared/ai-dlc-principles.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-shared/audit-format.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-shared/brownfield.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-shared/knowledge-readme-template.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-shared/memory-template.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-shared/rules-reading.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-shared/state-template.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-shared/verification.md"
+    },
+    {
+      "path": ".codex/knowledge/aidlc-shared/worktree-info-schema.md"
+    },
+    {
+      "path": ".codex/onboarding.md"
+    },
+    {
+      "path": ".codex/scopes/aidlc-classic.md"
+    },
+    {
+      "path": ".codex/scopes/aidlc-express.md"
+    },
+    {
+      "path": ".codex/sensors/aidlc-claim-sources.md"
+    },
+    {
+      "path": ".codex/sensors/aidlc-linter.md"
+    },
+    {
+      "path": ".codex/sensors/aidlc-required-sections.md"
+    },
+    {
+      "path": ".codex/sensors/aidlc-traceability.md"
+    },
+    {
+      "path": ".codex/sensors/aidlc-type-check.md"
+    },
+    {
+      "path": ".codex/sensors/aidlc-upstream-coverage.md"
+    },
+    {
+      "path": ".codex/tools/aidlc-archive.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-artifact-resolution.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-artifact-vocabulary.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-attest.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-audit.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-before-pick.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-bolt.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-brought-files.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-channel.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-color.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-command.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-completions.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-config-diagnostics.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-construction-checkpoints.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-directive.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-distribution.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-doctor-bundle.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-doctor.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-documentkb-schema.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-executable-path.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-folder-depth.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-gitignore.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-graph.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-guard-fences.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-guard-operation.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-guard-switch.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-hook-front-gate.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-hook-trace.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-includes.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-init.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-inline-context.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-install-paths.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-jump.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-kiro-hooks-off.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-kiro-ide-terminal.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-kiro-ide-workflows.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-kiro-review-copy.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-kiro-session.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-knowledge.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-learned-date.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-learnings.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-lib.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-lifecycle.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-lock-line.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-locks.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-log.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-machine-config.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-markdown.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-message-store.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-metrics.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-model-policy.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-orchestrate.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-plan-approval-ask.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-plugin-build.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-plugin-create.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-plugin-emit.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-plugin-test.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-plugin-validate.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-plugin.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-question-store.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-recorded-switches.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-release.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-reply-reader.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-review-brief.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-review-manifest.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-review-records.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-rule-schema.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-rules-held.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-runner-gen.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-runtime-paths.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-runtime.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-sensor-claim-sources.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-sensor-linter.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-sensor-required-sections.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-sensor-schema.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-sensor-traceability.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-sensor-type-check.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-sensor-upstream-coverage.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-sensor.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-settings.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-stage-schema.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-state.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-statusline-choice.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-steering.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-swarm-checkpoints.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-swarm.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-testing-posture.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-tiers.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-transaction.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-uninstall-plan.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-unit-walk-view.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-unit.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-update.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-usage.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-utility.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-validate.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-validity.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-version.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-windows-uninstall.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-workspace-doctor.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-workspace-manifest.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-workspace-sync.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc-worktree.ts"
+    },
+    {
+      "path": ".codex/tools/aidlc.ts"
+    },
+    {
+      "path": ".codex/tools/data/aidlc-projection.json"
+    },
+    {
+      "path": ".codex/tools/data/aidlc-settings.schema.json"
+    },
+    {
+      "path": ".codex/tools/data/ars-priors.json"
+    },
+    {
+      "path": ".codex/tools/data/harness.json"
+    },
+    {
+      "path": ".codex/tools/data/memory-seed/org.md"
+    },
+    {
+      "path": ".codex/tools/data/model-rates.json"
+    },
+    {
+      "path": ".codex/tools/data/plugin-hooks-template/aidlc-plugin-compose.ts"
+    },
+    {
+      "path": ".codex/tools/data/plugin-hooks-template/compose.ts"
+    },
+    {
+      "path": ".codex/tools/data/plugin-targets.json"
+    },
+    {
+      "path": ".codex/tools/data/stage-graph.json"
+    },
+    {
+      "path": "docs/contract-changes-u9.md"
+    },
+    {
+      "path": "docs/manual-check-u9.md"
+    },
+    {
+      "path": "eslint.config.js"
+    },
+    {
+      "path": "infrastructure/test/u9-allowance/fixtures/index.html"
+    },
+    {
+      "path": "infrastructure/test/u9-allowance/stacks.test.ts"
+    },
+    {
+      "path": "packages/backend/src/entries/api.ts"
+    },
+    {
+      "path": "packages/backend/src/handlers/allowances/getAllowances.ts"
+    },
+    {
+      "path": "packages/backend/src/handlers/allowances/params.ts"
+    },
+    {
+      "path": "packages/backend/src/lib/http.ts"
+    },
+    {
+      "path": "packages/backend/src/lib/promise.ts"
+    },
+    {
+      "path": "packages/backend/src/middleware/requireMembership.ts"
+    },
+    {
+      "path": "packages/backend/src/services/allowanceService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/calendarService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/choreTypeService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/dutyReassignedHook.ts"
+    },
+    {
+      "path": "packages/backend/src/services/familyMemberService.ts"
+    },
+    {
+      "path": "packages/backend/test/fixtures/fakeSecrets.ts"
+    },
+    {
+      "path": "packages/backend/test/u1-skeleton-family/helpers/fakeDynamo.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-adjust-slot.feature"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-adjust-slot.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-anomaly.feature"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-anomaly.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-api.feature"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-api.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-calc.feature"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-calc.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-children.feature"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-children.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-reads.feature"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-reads.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowanceLogs.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowanceService.imports.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/assembleAllowances.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/contextTypes.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/deriveRange.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/dutyReassignedHook.reexport.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/family-reads.feature"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/family-reads.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/findDisplayName.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/getAllowances.handler.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/helpers/allowanceWorld.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/helpers/clock.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/helpers/logs.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/helpers/seed.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/helpers/session.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/helpers/writeGuard.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/http.json.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/listDoneDuties.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/loadFamilyAndMembers.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/promise.mapWithConcurrency.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/resolveMonthParam.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/routes.allowances.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/tallyDuties.test.ts"
+    },
+    {
+      "path": "packages/frontend/src/api/client.ts"
+    },
+    {
+      "path": "packages/frontend/src/App.tsx"
+    },
+    {
+      "path": "packages/frontend/src/hooks/useAllowanceMonth.ts"
+    },
+    {
+      "path": "packages/frontend/src/pages/AllowancePage.tsx"
+    },
+    {
+      "path": "packages/frontend/src/pages/CalendarPage.tsx"
+    },
+    {
+      "path": "packages/frontend/test/fixtures/fakeSecrets.ts"
+    },
+    {
+      "path": "packages/frontend/test/u9-allowance/allowance-month-move.feature"
+    },
+    {
+      "path": "packages/frontend/test/u9-allowance/allowance-month-move.steps.tsx"
+    },
+    {
+      "path": "packages/frontend/test/u9-allowance/allowance-page.feature"
+    },
+    {
+      "path": "packages/frontend/test/u9-allowance/allowance-page.steps.tsx"
+    },
+    {
+      "path": "packages/frontend/test/u9-allowance/AllowancePage.test.tsx"
+    },
+    {
+      "path": "packages/frontend/test/u9-allowance/client.allowances.test.ts"
+    },
+    {
+      "path": "packages/frontend/test/u9-allowance/helpers/view.ts"
+    },
+    {
+      "path": "packages/frontend/test/u9-allowance/theme.allowance.test.ts"
+    },
+    {
+      "path": "packages/frontend/test/u9-allowance/useAllowanceMonth.test.tsx"
+    },
+    {
+      "path": "packages/shared/src/api-types.ts"
+    },
+    {
+      "path": "packages/shared/src/index.ts"
+    },
+    {
+      "path": "packages/shared/src/messages.ts"
+    },
+    {
+      "path": "packages/shared/src/yen.ts"
+    },
+    {
+      "path": "packages/shared/test/u9-allowance/api-types.test.ts"
+    },
+    {
+      "path": "packages/shared/test/u9-allowance/messages.test.ts"
+    },
+    {
+      "path": "packages/shared/test/u9-allowance/yen.test.ts"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "scripts/smoke-check.sh"
+    }
+  ]
+}

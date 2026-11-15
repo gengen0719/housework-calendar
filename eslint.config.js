@@ -49,6 +49,7 @@ export default tseslint.config(
       '**/coverage/**',
       'aidlc/**',
       '.kiro/**',
+      '.codex/**',
     ],
   },
   js.configs.recommended,

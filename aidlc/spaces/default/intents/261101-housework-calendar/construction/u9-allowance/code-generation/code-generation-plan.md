@@ -273,7 +273,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
 
 *AC8.1.1〜AC8.1.4、AC5.1.13、BR10.2〜BR10.7、BR10.12、BR10.13、BR10.15、BR10.16、BR10.19、NFR2.67〜NFR2.71、NFR2.74〜NFR2.76、NFR7.55、NFR7.56、NFR11.10 の実装*
 
-- [ ] **Step 21: 筋書きを書く（計算）**（AC8.1.1、AC8.1.3、AC8.1.4、AC5.1.13、BR10.2〜BR10.5）— `packages/backend/test/u9-allowance/`:
+- [x] **Step 21: 筋書きを書く（計算）**（AC8.1.1、AC8.1.3、AC8.1.4、AC5.1.13、BR10.2〜BR10.5）— `packages/backend/test/u9-allowance/`:
   - `allowance-calc.feature` と `allowance-calc.steps.ts`（約 30 場面。機能設計の S1、S3〜S16、S24 の計算の部分、S34）:
     - S1: 皿洗い 100 円 8 回と風呂掃除 150 円 4 回 → 800 円・600 円、合計 1,400 円（AC8.1.1）。整数だけ（S3。AC8.1.3）
     - S4・S5: 100 円 3 回のあと単価を 120 円に変えて 1 回 → 2 行と合計 420 円。さらに 200 円に変えても 2 行と合計は同じ（今の単価を使わない。AC8.1.4、AC2.1.4）
@@ -296,7 +296,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
     - S28: 次郎は 100 円 x 1 回と -300 円 → 合計 -200 円（0 円にそろえない）
     - S29: 差し込み口が空 → `adjustments` は空、合計は内訳の和。差し込み口が投げたら全体が失敗（一部だけ返さない）
 
-- [ ] **Step 22: 筋書きを書く（異常・読み取りの回数・失敗・ログ）**（BR10.13、BR10.15、BR10.16、NFR2.68、NFR2.70、NFR2.74〜NFR2.76、NFR7.55、NFR7.56）— `packages/backend/test/u9-allowance/`:
+- [x] **Step 22: 筋書きを書く（異常・読み取りの回数・失敗・ログ）**（BR10.13、BR10.15、BR10.16、NFR2.68、NFR2.70、NFR2.74〜NFR2.76、NFR7.55、NFR7.56）— `packages/backend/test/u9-allowance/`:
   - `allowance-anomaly.feature` と steps（約 12 場面。S14、S30、S30b）:
     - S30: 「済」なのに `unitPrice` が空（`undefined` または `null`）→ 数えない。`ALLOWANCE_DUTY_WITHOUT_PRICE`（`familyId`・`dutyId`）が残る。画面（答え）は返る
     - 種類が一覧にない「済」→ 名前「不明なお手伝い」で一覧の最後に並べ、`ALLOWANCE_CHORE_TYPE_MISSING`（`familyId`・`choreTypeId`）が種類ごとに 1 行
@@ -310,7 +310,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
     - 担当が 300 件、家族の子供 10 人、種類 10 個でも、読み取りの回数が担当の数で増えない
     - ログ: `ALLOWANCE_COMPUTED`（`familyId`・`month`・`childCount`・`lineCount`・`dutyCount`・`doneCount`・`departedChildCount`・`anomalyCount`・`durationMs` ほか、`observability-design.md` の 10 項目）が 1 要求 1 件。表示名・種類の名前・LINE の ID・単価・小計・合計・加算・減額の値が全行に含まれない（目印の文字・数字）。`setRequestMetrics` の `dutyCount` が入る
 
-- [ ] **Step 23: 作る（`services/allowanceService.ts`）**（BR10.2〜BR10.7、BR10.12、BR10.13、BR10.15、BR10.16、BR10.19、NFR2.67〜NFR2.71、NFR7.56、NFR8.19、ADR-U9-03、ADR-U9-04、ADR-U9-07）— `packages/backend/src/services/allowanceService.ts`（新設）:
+- [x] **Step 23: 作る（`services/allowanceService.ts`）**（BR10.2〜BR10.7、BR10.12、BR10.13、BR10.15、BR10.16、BR10.19、NFR2.67〜NFR2.71、NFR7.56、NFR8.19、ADR-U9-03、ADR-U9-04、ADR-U9-07）— `packages/backend/src/services/allowanceService.ts`（新設）:
   - 純粋な関数（時計・DynamoDB・`logger` を呼ばない）:
     - `tallyDuties(duties, ...)`: 「済」だけを取り出し（単価が `undefined`／`null` は数えず異常に記録、0 円は有効）、`childUserId` ごとに `(choreTypeId, unitPrice)` でまとめて `count`・`amount = unitPrice × count` を作り、異常の一覧（単価なし・持ち主が管理者・種類なし）を返す
     - `assembleAllowances(...)`: 対象の子供（今いる子供の全員 + 「済」のある抜けた子供）を並べ（今いる子供は家族に入った順、抜けた子供は表示名、userId の順）、行を種類の並び → 単価の低い順に並べ、`adjustments` を付け、`total = lines の和 + adjustments の和` を計算する。0 円を下回ってもそのまま。許可した項目だけを 1 つずつ書いて組み立てる（NFR4.91）
@@ -320,18 +320,18 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
   - 窓口: `getAllowances(ctx: ReadContext, month, options?)`＝`Allowance[]`。`getAllowanceMonthView(ctx, month, { today, ... })`＝`confirmed`（月の状態、行なしは偽）・`today`・`firstMonth`・`lastMonth` を添えた `AllowanceMonthView`。失敗は投げる。成功したあとに、異常の行（`warn`）→ `ALLOWANCE_COMPUTED`（`info`）を 1 件出す。`logger` の `LogData` に名前・金額を渡さない
   - `allowanceService` は `lineApiService`・`swapService`・書き込みの窓口・`calendarService` を import しない（読み取り専用の境界。NFR4.89）
 
-- [ ] **Step 24: 通す（計算の筋書き）**
+- [x] **Step 24: 通す（計算の筋書き）**
   - Step 21・22 の筋書きが通るまで直す
   - U1〜U8 の `calendarService`・`recordingService`・`familyMemberService` のテストが通ったまま
 
-- [ ] **Step 25: 単体テスト（`allowanceService` の部品）**（NFR8.19、NFR4.89、NFR4.91、NFR2.76）— `packages/backend/test/u9-allowance/`:
+- [x] **Step 25: 単体テスト（`allowanceService` の部品）**（NFR8.19、NFR4.89、NFR4.91、NFR2.76）— `packages/backend/test/u9-allowance/`:
   - `tallyDuties.test.ts`（5〜8 件）: 空、単価 0 円、単価なし（`undefined`・`null`）、同じ種類で単価が 2 つ、持ち主が管理者、種類が一覧にない、`count` が整数
   - `assembleAllowances.test.ts`（5〜8 件）: 並び順（今いる子供・抜けた子供・種類・単価）、`total` の式（`adjustments` が負でも）、0 円を下回っても 0 円にそろえない、許可した項目名だけ（`Object.keys` が一覧と完全一致。管理者の情報・LINE の ID が入らない）、空の `allowances`
   - `deriveRange.test.ts`（5〜8 件）: 作成が UTC 15:00 の前後（日本時間では翌日・翌月になる）、月末、年またぎ、うるう年、今日が 12 月のとき `lastMonth` が翌年 1 月
   - `allowanceService.imports.test.ts`（5 件）: `allowanceService.ts` の import に `lineApiService`・`swapService`・`calendarService`・書き込みのリポジトリの関数がない（ソースを読んで確かめる）。書き込みの命令が 0 回（見張り）。`fetch` が 0 回
   - `allowanceLogs.test.ts`（5〜8 件）: 成功・異常 3 種・失敗（ログが出ない）・上限 20 行、項目名が許可した一覧と完全一致、目印の文字・数字が全行にない
 
-- [ ] **Step 26: 計算の batch の確認**
+- [x] **Step 26: 計算の batch の確認**
   - この batch の確認コマンドを実行する
 
 ---
@@ -340,7 +340,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
 
 *AC8.1.1〜AC8.1.3、BR10.1、BR10.8、BR10.9、BR10.13、NFR4.86〜NFR4.88、NFR4.91〜NFR4.93、NFR8.19、NFR11.10、ADR-U9-05 の実装*
 
-- [ ] **Step 27: 筋書きを書く（入口）**（BR10.1、BR10.8、BR10.9、BR10.13、NFR4.86〜NFR4.88、NFR4.91〜NFR4.93、NFR11.10）— `packages/backend/test/u9-allowance/`:
+- [x] **Step 27: 筋書きを書く（入口）**（BR10.1、BR10.8、BR10.9、BR10.13、NFR4.86〜NFR4.88、NFR4.91〜NFR4.93、NFR11.10）— `packages/backend/test/u9-allowance/`:
   - `allowance-api.feature` と `allowance-api.steps.ts`（約 24 場面。署名つきのセッションで `entries/api.ts` の `handler` を呼ぶ。S20〜S26、S31、S35）:
     - 確かめの順番: セッションなし → 401、ブロック中 → 403 `NOT_FRIEND`、家族のメンバーでない → 403 `NOT_FAMILY_MEMBER`（額も内訳も返らず、DynamoDB の月の読み取りも 0 回）、月の形が違う（`2027-13`、`abc`、`2027-1`、`Current`、`current ` の空白つき）→ 422 `INVALID_MONTH`（DynamoDB を読まない）。確かめの順番を入れ替えると落ちる（月が不正でもセッションなしは 401）
     - 母親も子供も 200 で、家族の全員分が返る（S20・S21。自分の行だけに絞らない。AC4.1.3）。ほかの家族の子供・種類・担当が応答に出ない（家族はセッションから決まる。クエリ・本文を読まない）
@@ -353,18 +353,18 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
     - 振り分け表に `'GET /v1/months/:month/allowances'` の 1 行だけが足され、`PUT`・`PATCH`・`POST`・`DELETE` の allowances は 404（書き込みの入口がない）
     - 同じ要求を 2 回送っても、間に記録がなければ同じ答え（`Idempotency-Key` は要らない）
 
-- [ ] **Step 28: 作る（月の読み方とハンドラー）**（BR10.1、BR10.8、NFR4.86〜NFR4.88、NFR8.19）— `packages/backend/src/handlers/allowances/params.ts`・`getAllowances.ts`（新設）:
+- [x] **Step 28: 作る（月の読み方とハンドラー）**（BR10.1、BR10.8、NFR4.86〜NFR4.88、NFR8.19）— `packages/backend/src/handlers/allowances/params.ts`・`getAllowances.ts`（新設）:
   - `params.ts`: `resolveMonthParam(raw, now)`: `'current'`（完全一致）なら `monthOfDate(jstDateOf(now))`、それ以外は既存の `requireMonthParam(raw)`（形が違えば 422 `INVALID_MONTH`）。検証後の値だけからキーを作る
   - `getAllowances.ts`: 薄い入口。`requireMembership(auth)`（`requireAdmin` は通さない）→ `resolveMonthParam` → `allowanceService.getAllowanceMonthView(ctx, month, { today: jstDateOf(now), ... })` → **本文（`AllowanceMonthView`）だけを返す**。`now` は入口で 1 回取ったものを受け取る（端末の時計・`new Date()` の直接呼びを使わない）。`handlers/**` から `SystemContext` を import しない
 
-- [ ] **Step 29: 作る（振り分け表）**（NFR4.92、NFR8.19、ADR-U9-05）— `entries/api.ts`（変更）:
+- [x] **Step 29: 作る（振り分け表）**（NFR4.92、NFR8.19、ADR-U9-05）— `entries/api.ts`（変更）:
   - `'GET /v1/months/:month/allowances'` を **1 行**足す（先頭で `requireAuth`、`{ status: 200, body: await getAllowances(auth, params.month ?? '', now), headers: NO_STORE_HEADERS }`）。コメントは既存の並びに合わせる。ほかの行は変えない
 
-- [ ] **Step 30: 通す（入口の筋書き）**
+- [x] **Step 30: 通す（入口の筋書き）**
   - Step 27 の筋書きが通るまで直す
   - U1〜U8 の入口の筋書き（`getCalendar`・`confirmMonth`・LINE の入口を含む）が無修正で通ったまま。`registerSwapHooks` の登録（`entries/api.ts`）が壊れていない
 
-- [ ] **Step 31: 単体テスト（入口）、整える**（NFR4.86、NFR4.88、NFR4.92）— `packages/backend/test/u9-allowance/`:
+- [x] **Step 31: 単体テスト（入口）、整える**（NFR4.86、NFR4.88、NFR4.92）— `packages/backend/test/u9-allowance/`:
   - `resolveMonthParam.test.ts`（5〜8 件）: `current` の完全一致、`Current`・`current `・`CURRENT`・空文字・`2000-00`・`2101-01` は 422、日本時間の境（UTC 14:59:59／15:00:00 の前後、12/31 → 1/1、2/29）
   - `getAllowances.handler.test.ts`（5〜8 件）: `requireMembership` の失敗がそのまま伝わる、`now` を 1 回だけ使う、`requireAdmin` を通らない
   - `routes.allowances.test.ts`（5 件）: 振り分け表のキーに allowances の `GET` だけがある、`RouteResult.headers` を持たない既存の入口の戻りが前後で同じ
@@ -376,7 +376,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
 
 *AC8.1.1〜AC8.1.3、AC4.1.3、AC4.1.5、AC4.1.7、BR10.8〜BR10.13、NFR1.38、NFR2.72、NFR4.92、NFR7.52、NFR7.53、NFR8.18、NFR9.10〜NFR9.12、NFR11.11、ADR-U9-06 の実装*
 
-- [ ] **Step 32: 筋書きと単体テストを書く（画面の月の移動）**（BR10.8、BR10.12、NFR1.38、NFR2.72、NFR7.53、ADR-U9-06）— `packages/frontend/test/u9-allowance/`:
+- [x] **Step 32: 筋書きと単体テストを書く（画面の月の移動）**（BR10.8、BR10.12、NFR1.38、NFR2.72、NFR7.53、ADR-U9-06）— `packages/frontend/test/u9-allowance/`:
   - `allowance-month-move.feature` と `allowance-month-move.steps.tsx`（約 12 場面。S32、S35。差し替えた時計 `vi.useFakeTimers` と差し替えた `fetch`）:
     - 直接開く → `month=current` の 1 回だけ（`calendar` を呼ばない）。S1 から開く → `MonthCalendar.today` の月で 1 回
     - [<] [>] を続けて押す → 最後の押しから **250 ms** 待ってから、最新の目標の月だけを要求する（途中の月は要求しない）。押すたびに目標の月だけを更新する
@@ -387,7 +387,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
     - 先読みも自動の読み直し（ポーリング・月の変わり目の自動の切り替え）もしない。「読み込み直す」を押したときだけ同じ月でもう一度読む。端末の時計を別の月にしても、答えの `today` の月で文言が決まる（NFR11.11）
   - `useAllowanceMonth.test.tsx`（5〜8 件）: 連番、静まり、`AbortController`、`reload`、範囲の保持、アンマウント時の後始末
 
-- [ ] **Step 33: 筋書きと単体テストを書く（画面の表示）**（AC8.1.1〜AC8.1.3、AC4.1.3、AC4.1.5、AC4.1.7、BR10.9〜BR10.11、BR10.13、NFR9.10〜NFR9.12）— `packages/frontend/test/u9-allowance/`:
+- [x] **Step 33: 筋書きと単体テストを書く（画面の表示）**（AC8.1.1〜AC8.1.3、AC4.1.3、AC4.1.5、AC4.1.7、BR10.9〜BR10.11、BR10.13、NFR9.10〜NFR9.12）— `packages/frontend/test/u9-allowance/`:
   - `allowance-page.feature` と `allowance-page.steps.tsx`（約 20 場面。Testing Library の役割での検索）:
     - S1: 見出し（h1）「2027年1月のお小遣い」、子供ごとの見出し（h2）「太郎 1,400円」、内訳（`ul`／`li`）「皿洗い 100円 x 8回 = 800円」「風呂掃除 150円 x 4回 = 600円」。見える文字を `aria-label` で別の文に置き換えない
     - 単価が変わった月は「皿洗い 100円 x 3回」「皿洗い 120円 x 1回」の 2 行（AC8.1.4）
@@ -402,24 +402,24 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
   - `theme.allowance.test.ts`（5〜8 件）: S5 の色の組み合わせ（自分の行の緑の枠を含む）の文字と背景の差が 4.5:1 以上、緑の枠と背景が 3:1 以上、ボタンの押す場所が 44×44 ピクセル以上（U1・U7 のテーマのテストを S5 の色に広げる）
   - `formatYen` が画面の全部の金額に使われている（画面のテストで桁区切り・マイナスを確かめる。表示が U10・U11 と食い違わない）
 
-- [ ] **Step 34: 作る（API クライアントと月の移動の部品）**（NFR4.92、NFR7.53、ADR-U9-06）— `packages/frontend/src/`:
+- [x] **Step 34: 作る（API クライアントと月の移動の部品）**（NFR4.92、NFR7.53、ADR-U9-06）— `packages/frontend/src/`:
   - `api/client.ts`: `getAllowances(token, month, signal?)`（`AllowanceMonthView`）。URL は `/v1/months/<month>/allowances` で月だけ。既存の `monthPath` を使う
   - `hooks/useAllowanceMonth.ts`（新設）: 最初の月（S1 から → `MonthCalendar.today` の月、直接 → `current`）、目標の月、250 ms の静まり、連番（最新の連番の答えだけを描く）、最新の連番の要求の月が目標の月と同じときだけ重ねて出さない、`AbortController` による古い要求の取り消し、`reload`、答えの `firstMonth`・`lastMonth` の保持、状態（`loading`／`ready`／`error`）。先読みも自動の読み直しもしない。端末の時計は使わない
 
-- [ ] **Step 35: 作る（S5 の画面）**（BR10.9〜BR10.11、NFR7.52、NFR9.10、NFR9.11）— `pages/AllowancePage.tsx`（新設）:
+- [x] **Step 35: 作る（S5 の画面）**（BR10.9〜BR10.11、NFR7.52、NFR9.10、NFR9.11）— `pages/AllowancePage.tsx`（新設）:
   - `React.lazy` の別の塊として読み込まれる形にする（S1 の初期表示を重くしない）。h1（見出し）、[<]・[>]（`aria-label`、端で `disabled`）、確定の文字、子供ごとの h2（名前・合計・「（あなた）」）、内訳の `ul`／`li`、`role="status"`／`role="alert"`、「読み込み直す」、「戻る」
   - 金額は `formatYen`、文言は `MESSAGES`／共有の関数から。`dangerouslySetInnerHTML` を使わない。色・大きさは `theme.ts` から（足りなければ S5 の色だけを足し、コントラストのテストを通す）。加算・減額・確定のボタンは置かない
 
-- [ ] **Step 36: 作る（S1 の入口と画面の切り替え）**（NFR7.53、NFR11.11）— `pages/CalendarPage.tsx`、`App.tsx`（変更）:
+- [x] **Step 36: 作る（S1 の入口と画面の切り替え）**（NFR7.53、NFR11.11）— `pages/CalendarPage.tsx`、`App.tsx`（変更）:
   - `CalendarPage`: 「お小遣い」の入口（`onOpenAllowance`）をメンバー全員に出す。押したときの月は `MonthCalendar.today` の月を渡す。ほかの動き・`data-testid` は変えない
   - `App.tsx`: 既存のページの切り替え（`showSettings` などの状態）の形に合わせて S5 を開く道を足す。S5 を直接開くとき（`today` を持たない）は `current`。URL のパスを新しく作るか画面の状態で切り替えるかは、既存の形を読んで選び、`code-summary.md` に書く。S5 の読み込みは `React.lazy` + `Suspense`
   - 画面のテストの前提（U1〜U7 の `CalendarPage`・`App` のテスト）が、入口を足しても無修正で通る
 
-- [ ] **Step 37: 通す（画面の筋書き）**
+- [x] **Step 37: 通す（画面の筋書き）**
   - Step 32・33 の筋書きが通るまで直す
   - U1〜U8 の画面のテストが無修正で通ったまま。`npm run build`（画面のビルド）が通り、S5 が別の塊になっていることを確かめる
 
-- [ ] **Step 38: 整える（アクセシビリティ・先読みなし）**（NFR9.10〜NFR9.12、NFR1.38）
+- [x] **Step 38: 整える（アクセシビリティ・先読みなし）**（NFR9.10〜NFR9.12、NFR1.38）
   - 色の差・押す場所・読み上げの名前を、テストと目で確かめる。ステージングでの目と読み上げの確認は `docs/manual-check-u9.md` の確かめ 16
   - 先読み・ポーリング・月の自動の切り替えがないことを、通信の回数のテストで確かめ済みであることを確認する
   - この batch の確認コマンドを実行する
@@ -430,7 +430,7 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
 
 *NFR1.36、NFR4.89、NFR6.10、NFR7.50〜NFR7.58、NFR10.11、NFR10.12 の実装（前後で同じことを固定）*
 
-- [ ] **Step 39: スモークチェックに 3q を足す**（NFR4.86、NFR10.11）— `scripts/smoke-check.sh`（変更）:
+- [x] **Step 39: スモークチェックに 3q を足す**（NFR4.86、NFR10.11）— `scripts/smoke-check.sh`（変更）:
   - 3p のあとに足す（`cicd-pipeline.md` のとおり）:
     ```bash
     # 3q. U9 のお小遣いの読み取りがセッションなしで 401（書き込みはしない）。
@@ -440,12 +440,12 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
   - 見出し（2 行目）を「全 24 件: …、3n〜3p が U7 の 3 件、3q が U9 の 1 件」に直す。署名もシークレットも要らない（スクリプトに秘密を持たせない）。確認点 1 で `current` を外す場合は、月を `2000-01` にする
   - 期待が 401 になるのは、認証が月の形より先に走る順番（Step 27 の筋書きで確かめ済み）による
 
-- [ ] **Step 40: README の件数と U9 の節**（NFR7.57、NFR10.12）— `README.md`（変更）:
+- [x] **Step 40: README の件数と U9 の節**（NFR7.57、NFR10.12）— `README.md`（変更）:
   - **件数の直し方は 1 つ**: 各単位の節（U4・U5・U6・U7・U8 の「全 23 件」〈385・428・499・542・564 行目付近〉）は「その単位の時点の件数」として**そのまま残す**。直すのは、ファイル一覧の `scripts/smoke-check.sh` の行（14 行目付近。「反映後の確かめ（4 つ）」→「（全 24 件）」）と、新しく書く U9 の節（「U9 のあとは全 24 件」）だけ
   - U9 の節を足す: お小遣いの画面（S5）の使い方（カレンダーの「お小遣い」から。月の移動）、`GET /v1/months/{month}/allowances`（`current` も可。`Cache-Control: no-store`）、手での確かめ `docs/manual-check-u9.md` への案内（**まだ実行していない**と書く）、3 秒の測り方（NFR7.57。入口ごとに 20 回、冷たい起動 10 回以上、`Init Duration` の読み方、画面録画〈1 秒 30 コマ以上〉から読み取る、除外しない、家族 2 つの用意の仕方、環境変数や設定を手で書き換えてコールドスタートを作らない）、U9 の反映後の S1 の測り直し（NFR7.20）、Logs Insights の検索の例（`monitoring-design.md` の問い合わせ 1〜6。`filter` を `stats` より前に置く）と問い合わせ 7（生の行）、DynamoDB の呼び出しの回数の取り方（`AWS/DynamoDB` の `SuccessfulRequestLatency` の `SampleCount`）、元に戻し方（U10 が `getAllowances` を使い始めたあとは U10 を先に戻す）
   - 「テストの動かし方」に `npx vitest run u9-allowance` を足す
 
-- [ ] **Step 41: スタックのテストを書いて通す（前後で同じことを固定）**（NFR1.36、NFR4.89、NFR6.10）— `infrastructure/test/u9-allowance/stacks.test.ts`（新設、U8 の同ファイルと同じ作り、約 14 件）:
+- [x] **Step 41: スタックのテストを書いて通す（前後で同じことを固定）**（NFR1.36、NFR4.89、NFR6.10）— `infrastructure/test/u9-allowance/stacks.test.ts`（新設、U8 の同ファイルと同じ作り、約 14 件）:
   - `infrastructure/lib/app-stack.ts`・`data-stack.ts`・`app.ts` は**変えない**。既存のままテストが通ることを確かめる（通らなければテストの期待を直す。インフラ定義は変えない）
   - `api` の `Users`（表: `GetItem`・`PutItem`・`UpdateItem`、索引 `lineUserId-index`・`familyId-index`: `Query`）、`Families`（`GetItem`・`PutItem`・`UpdateItem`・`ConditionCheckItem`）、`ChoreTypes`・`Calendar`（それぞれ 6 操作）が U8 のまま。`api` に `Scan`・`BatchGetItem`・`BatchWriteItem`・`dynamodb:*`、`Resource: "*"` の DynamoDB の文がない
   - `api` の環境変数が U8 のまま（`USERS_TABLE`・`FAMILIES_TABLE`・`CHORE_TYPES_TABLE`・`CALENDAR_TABLE` を含む）で、新しい環境変数がない。`line` の権限と環境変数が U8 のまま
@@ -456,12 +456,12 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
   - ロググループの保管 30 日、テーブル 8・Lambda・ロググループ・`AWS::Logs::MetricFilter` 1 つ・アラーム 0 件が U8 の後と同じ。本番の `Calendar` が `DeletionPolicy = Retain` のまま
   - `npx vitest run infrastructure/test/u9-allowance/stacks.test.ts` が通ること。既存の CDK のテスト（`u4-chore-types`・`u5-assignment-calendar` の `it.skip` を含む）は触らない
 
-- [ ] **Step 42: 書類（契約の変更・手での確かめ）**（NFR7.50〜NFR7.58、NFR10.11、NFR10.12）:
+- [x] **Step 42: 書類（契約の変更・手での確かめ）**（NFR7.50〜NFR7.58、NFR10.11、NFR10.12）:
   - `docs/contract-changes-u9.md`（Step 1 で新設した冒頭の節に足して完成させる。U8 の形式に揃える）: 「置き換え」「応答の形の例外」（Step 1）、`functional-spec.md` の「契約への追加」の表（C1 の入口と `current`、C6 の `findDisplayName`・`getFamilyCreatedAt`・`loadFamilyAndMembers`、`listMembers` の `role: system` 対応、C8 の `listDoneDuties`・`isMonthConfirmed`、C9 `getAllowances`、C10 の文言、`formatYen`）、`FamilyScope`／`SystemContext`／`ReadContext`（書き込みの窓口は変えない）、`RouteResult` の任意の `headers` と `Cache-Control: no-store`（既存の応答は変えない）、`mapWithConcurrency` の `lib/promise.ts` への移動（再公開。U8 の動きは同じ）、`AdjustmentSource` の形（U11 が取り付ける）、承認の確認点 1〜3 の結果。壊す変更がないこと
   - `docs/manual-check-u9.md`（新設）: `cicd-pipeline.md` の「ステージングでの手での確かめ」の **16 件**を、手順書の形にする（準備: ステージング用の公式アカウントと作り手だけの家族、管理者と子供の役割のテスト用の利用者 2 人以上、測定用に家族をもう 1 つ〈家族 2 つ。NFR7.57〉。データはアプリの画面と LINE の操作で作り、直接書き換えない〈NFR6.10〉／確かめ 1〜16 の「操作」「期待」「見るログ」〈`monitoring-design.md` の問い合わせの番号〉「結果を書く欄」／3 秒の測り方〈確かめ 14。端末は LIFF と外部ブラウザの両方、入口 (a) S1 から (b) 直接 (c) 月の移動 20 回〈[<] 10・[>] 10、うち 5 回は「読み込み直す」も〉 (d) 大きい月、各 20 回中 10 回以上は 30 分以上あけた冷たい起動、`Init Duration` で数える、画面録画 1 秒 30 コマ以上、失敗した回も除外しない、合格は画面録画だけ〉／S1 の測り直し〈確かめ 15〉／届かないときの順番〈(1) 読み取りの並行の確認、(2) 配信物の大きさ、(3) 起動時の読み込みの整理、(4) Lambda のメモリ 256→512 MB〉）。本物の ID・トークンを書かない（例は `<作り物の値>`）。結果の置き場所は `build-and-test` の成果物
   - 手での確かめが **16 件**であること（`cicd-pipeline.md` の表の 1〜16）を、文書の冒頭に書く
 
-- [ ] **Step 43: 費用と秘密の確かめ**（NFR1.36、NFR5.16、NFR5.17）
+- [x] **Step 43: 費用と秘密の確かめ**（NFR1.36、NFR5.16、NFR5.17）
   - U9 のコードに LINE の API（reply・push・multicast・broadcast・プロフィール取得）への通信が 0 回であること、書き込みの命令が 0 回であることを、テスト（Step 3 の見張りと `fetch` の見張り）で確かめ済みであることを `code-summary.md` に書く
   - 秘密の確かめ: U9 で足したファイル・文書・テストに本物の鍵・トークン・ID・表示名・額がなく、作り物の値は `fakeSecrets.ts` だけにあり、文書は `<作り物の値>` と書いていること。gitleaks（`.gitleaks.toml`）の設定を変えない
   - DynamoDB の追加費用の見積もり（月に 1 円に満たない）の根拠は `scalability-design.md` のまま。料金の単価を公式の料金表で確かめて数を `docs/contract-changes-u9.md` に残す（確かめられなければ「未確認」と書く）
@@ -471,16 +471,16 @@ Testing Contract の 8 つの骨組みとの対応: 1 構成と本番設定の�
 
 ### Batch 9: 追跡・まとめ・全体の確認（Step 44〜47）
 
-- [ ] **Step 44: traceability.json**（AC8.1.1〜AC8.1.4、AC5.1.13、BR10.1〜BR10.19、NFR）
+- [x] **Step 44: traceability.json**（AC8.1.1〜AC8.1.4、AC5.1.13、BR10.1〜BR10.19、NFR）
   - `traceability.json`（`code-generation-plan.md` の隣に新設）: 受け入れ条件（AC8.1.1〜AC8.1.4、AC5.1.13。あわせて確かめる AC4.1.3・AC4.1.5・AC4.1.7・AC1.1.11・AC2.1.4・AC2.1.5）、BR10.1〜BR10.19、割り当てられた NFR（NFR1.36〜NFR1.38、NFR2.67〜NFR2.77、NFR3.17〜NFR3.19、NFR4.86〜NFR4.93、NFR5.16〜NFR5.17、NFR6.10、NFR7.50〜NFR7.58、NFR8.17〜NFR8.19、NFR9.10〜NFR9.12、NFR10.11〜NFR10.12、NFR11.10〜NFR11.11）と ADR-U9-01〜07 を、実装・テストのファイルと対応させる。各 `OK` の target は実在するファイル 1 つ。3 秒の目標（S33、NFR7.50〜NFR7.52）は「設計まで。計測はステージング」として `docs/manual-check-u9.md` を target にし、その旨を注記する
 
-- [ ] **Step 45: source-manifest.json**
+- [x] **Step 45: source-manifest.json**
   - `source-manifest.json`（`code-generation-plan.md` の隣に新設）: U9 が作る・変えるすべてのアプリケーションソースのパスを列挙する（`packages/shared/src/api-types.ts`・`messages.ts`・`yen.ts`・`index.ts`、`packages/backend/src/**` の上の一覧、`packages/frontend/src/**` の上の一覧、`packages/*/test/u9-allowance/`・`infrastructure/test/u9-allowance/`・`packages/backend/test/fixtures/fakeSecrets.ts`・`fakeDynamo.ts`〈変えたとき〉・`scripts/smoke-check.sh`・`docs/contract-changes-u9.md`・`docs/manual-check-u9.md`・`README.md`）。**`aidlc/` 以下のパスは入れない**。`infrastructure/lib/`、`.github/workflows/`、`line` の入口は含めない（変えないため）
 
-- [ ] **Step 46: code-summary.md**
+- [x] **Step 46: code-summary.md**
   - `code-summary.md`（`code-generation-plan.md` の隣に新設）: 作った・変えたファイル、主な実装の決め（確認点 1〜3 の承認の結果、`AdjustmentSource` の形、`FamilyScope` の置き場所、S5 を開く道の形〈URL か画面の状態か〉、`calendarService` の C8 の窓口を `allowanceService` が使わない理由）、テストの件数とカバレッジ、**書いたが実行しなかったテストとその理由**（ステージングの手での確かめ 16 件と 3 秒の測定は `docs/manual-check-u9.md` に引き継ぎ。実行していない）、計画からのずれ。Step 5 の権限の確認結果を書く
 
-- [ ] **Step 47: 全体の確認コマンドを実行する**（U1〜U9 のすべてのテストが通ること、型チェックが通ること、カバレッジ 80% 以上）:
+- [x] **Step 47: 全体の確認コマンドを実行する**（U1〜U9 のすべてのテストが通ること、型チェックが通ること、カバレッジ 80% 以上）:
   ```bash
   npm run format:check && npm run lint && npx tsc --noEmit -p packages/shared && npx tsc --noEmit -p packages/backend && npx tsc --noEmit -p packages/frontend && npx tsc --noEmit -p infrastructure && npm test
   ```

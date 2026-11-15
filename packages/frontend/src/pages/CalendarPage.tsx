@@ -16,6 +16,7 @@ import {
   NO_ASSIGNMENT_MESSAGE,
   NO_DUTY_LABEL,
   datesOfMonth,
+  monthOfDate,
   isEditableMonth,
   type Duty,
   type MonthCalendar,
@@ -50,6 +51,7 @@ interface Props {
   currentUserId?: string;
   /** 「家族の設定」へ進む（U2）。渡さなければボタンは出さない */
   onOpenSettings?: () => void;
+  onOpenAllowance?: (month: string) => void;
   /** 自分の役割とお知らせ先の読み込み結果（U3）。管理者で、お知らせ先がないと分かったときだけ登録の案内を出す */
   role?: Role;
   notificationGroup?: NotificationGroupState;
@@ -61,6 +63,7 @@ export function CalendarPage({
   authorized,
   currentUserId,
   onOpenSettings,
+  onOpenAllowance,
   role,
   notificationGroup,
 }: Props) {
@@ -180,6 +183,16 @@ export function CalendarPage({
           data-testid="open-settings-button"
         >
           家族の設定
+        </Button>
+      )}
+      {onOpenAllowance && (
+        <Button
+          onClick={() =>
+            onOpenAllowance(state.kind === 'ready' ? monthOfDate(state.value.today) : 'current')
+          }
+          data-testid="open-allowance-button"
+        >
+          お小遣い
         </Button>
       )}
       {/* 子供には出さない（BR4.11）。子供の画面は API も呼ばない（App が管理者のときだけ読む） */}
