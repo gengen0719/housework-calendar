@@ -131,7 +131,7 @@ describe('U5 CDK: Data スタック', () => {
   });
 
   it('テーブルの合計は 8 つ', () => {
-    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 10);
+    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 11);
   });
 });
 

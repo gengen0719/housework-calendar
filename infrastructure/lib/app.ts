@@ -69,6 +69,11 @@ export function buildApp(app: App = new App()): App {
       calendar: data.calendar,
       notificationDispatches: data.notificationDispatches,
       notificationPayloads: data.notificationPayloads,
+      adjustments: data.adjustments,
+      backupsEnabled:
+        optionalContextString(app, `${envName}BackupsEnabled`) === undefined
+          ? undefined
+          : optionalContextString(app, `${envName}BackupsEnabled`) === 'true',
       notificationsEnabled:
         app.node.tryGetContext(`${envName}NotificationsEnabled`) === true ||
         app.node.tryGetContext(`${envName}NotificationsEnabled`) === 'true',

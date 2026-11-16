@@ -25,9 +25,10 @@ export class NotificationConstruct extends Construct {
     super(scope, id);
     const stack = Stack.of(this),
       env = props.envName,
-      enabled = props.notificationsEnabled ?? false;
+      enabled = props.notificationsEnabled ?? false,
+      backupsEnabled = props.backupsEnabled ?? enabled;
     if (
-      enabled &&
+      (enabled || backupsEnabled) &&
       (!props.notificationEmail ||
         !/^\S+@\S+\.\S+$/.test(props.notificationEmail) ||
         !props.notificationChecksPassed ||
@@ -36,7 +37,9 @@ export class NotificationConstruct extends Construct {
         props.notificationEstimatedJpy! > 100 ||
         props.notificationEstimatedJpy! < 0)
     )
-      throw new Error('通知の有効化には購読と実機試験、月100円以内の合算見積もり確認が必要です');
+      throw new Error(
+        '通知またはバックアップの有効化には購読と実機試験、月100円以内の合算見積もり確認が必要です',
+      );
     if (props.reservedConcurrency !== undefined && props.reservedConcurrency < 3 && enabled)
       throw new Error('通知の予約並行数は3以上が必要です');
     const dlq = new sqs.Queue(this, 'DeadLetterQueue', {
@@ -75,6 +78,9 @@ export class NotificationConstruct extends Construct {
         ENV: env,
         SSM_PREFIX: ssmPrefix(env),
         NOTIFICATIONS_ENABLED: String(enabled),
+        BACKUPS_ENABLED: String(backupsEnabled),
+        ADJUSTMENTS_TABLE: props.adjustments.tableName,
+        ADJUSTMENTS_ARN: props.adjustments.tableArn,
         NOTIFICATION_DISPATCHES_TABLE: props.notificationDispatches.tableName,
         NOTIFICATION_DISPATCHES_ARN: props.notificationDispatches.tableArn,
         NOTIFICATION_PAYLOADS_TABLE: props.notificationPayloads.tableName,
@@ -130,13 +136,19 @@ export class NotificationConstruct extends Construct {
     policy(['dynamodb:Query'], [`${props.users.tableArn}/index/familyId-index`]);
     policy(
       ['dynamodb:GetItem', 'dynamodb:Query'],
-      [props.calendar.tableArn, props.choreTypes.tableArn],
+      [props.calendar.tableArn, props.choreTypes.tableArn, props.adjustments.tableArn],
     );
     policy(['dynamodb:Scan'], [props.families.tableArn]);
-    policy(['dynamodb:CreateBackup'], [props.notificationDispatches.tableArn]);
+    policy(
+      ['dynamodb:CreateBackup'],
+      [props.notificationDispatches.tableArn, props.adjustments.tableArn],
+    );
     policy(
       ['dynamodb:DescribeBackup', 'dynamodb:DeleteBackup'],
-      [`${props.notificationDispatches.tableArn}/backup/*`],
+      [
+        `${props.notificationDispatches.tableArn}/backup/*`,
+        `${props.adjustments.tableArn}/backup/*`,
+      ],
     );
     // ListBackupsとGetMetricStatisticsは資源指定をサポートしない。自リージョンに制限し、コードは表名・ARNとキュー名を固定する。
     policy(['dynamodb:ListBackups', 'cloudwatch:GetMetricStatistics'], ['*'], {
@@ -208,7 +220,7 @@ export class NotificationConstruct extends Construct {
         scheduleExpression: expression,
         scheduleExpressionTimezone: 'Asia/Tokyo',
         flexibleTimeWindow: { mode: 'OFF' },
-        state: enabled ? 'ENABLED' : 'DISABLED',
+        state: (name === 'Backup' ? backupsEnabled : enabled) ? 'ENABLED' : 'DISABLED',
         target: {
           arn: this.notify.functionArn,
           roleArn: role.roleArn,
@@ -231,7 +243,8 @@ export class NotificationConstruct extends Construct {
         datapointsToAlarm: 1,
         treatMissingData: missing,
         comparisonOperator: comparison,
-        actionsEnabled: enabled,
+        // backup-onlyでは外向き通知の欠測を警報にしない。実行障害/DLQのメールは有効。
+        actionsEnabled: name === 'NotifyHealth' ? enabled : enabled || backupsEnabled,
       });
       a.addAlarmAction(new actions.SnsAction(topic));
     };

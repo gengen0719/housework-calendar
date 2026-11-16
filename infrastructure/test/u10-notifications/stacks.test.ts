@@ -27,7 +27,7 @@ const resources = (kind: string) =>
 describe('通知の配備構成', () => {
   it('各環境10テーブル', () => {
     for (const env of ['staging', 'production'])
-      templates[`Housework-${env}-Data`]!.resourceCountIs('AWS::DynamoDB::Table', 10);
+      templates[`Housework-${env}-Data`]!.resourceCountIs('AWS::DynamoDB::Table', 11);
   });
   it('新しいLambdaは1つだけ', () => app().resourceCountIs('AWS::Lambda::Function', 5));
   it('公開URLは元の2つだけ', () => app().resourceCountIs('AWS::Lambda::Url', 2));

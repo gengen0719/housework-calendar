@@ -39,6 +39,11 @@ import * as familyMemberService from './familyMemberService';
 /** 保存の書き込みが競合で断られたとき、読み直してやり直す回数（最初の 1 回を含めて 2 回。NFR2.29） */
 const MAX_ATTEMPTS = 2;
 
+/** C8限定窓口: 月状態の書込と直列化する未確定条件。 */
+export function buildUnconfirmedMonthGuard(scope: FamilyScope, month: string) {
+  return calendarRepository.buildMonthGuard(scope.familyId, month);
+}
+
 /** チャンクを書く前に、これより残り時間が短ければ書かずに 500 にする（Lambda の 30 秒の時間切れの前。NFR2.28） */
 const MIN_REMAINING_MS = 5000;
 

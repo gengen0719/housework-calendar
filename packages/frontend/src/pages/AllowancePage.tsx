@@ -1,4 +1,7 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
+import { useState } from 'react';
+import { AdjustmentPage } from './AdjustmentPage';
+import { AdjustmentListPage } from './AdjustmentListPage';
 import {
   ALLOWANCE_UNCONFIRMED_LABEL,
   ALLOWANCE_EMPTY_THIS_MONTH,
@@ -25,12 +28,58 @@ interface Props {
   onBack: () => void;
 }
 export function AllowancePage({ authorized, initialMonth, currentUserId, role, onBack }: Props) {
+  const [editing, setEditing] = useState(false);
+  const [notice, setNotice] = useState('');
+  const [listing, setListing] = useState(false);
   const { month, state, range, previous, next, reload } = useAllowanceMonth(
     authorized,
     initialMonth,
   );
+  if (listing)
+    return (
+      <AdjustmentListPage
+        key={month}
+        authorized={authorized}
+        month={month}
+        onBack={() => {
+          setListing(false);
+          reload();
+        }}
+      />
+    );
+  if (editing && state.kind === 'ready')
+    return (
+      <AdjustmentPage
+        key={month}
+        authorized={authorized}
+        month={month}
+        children={state.value.allowances
+          .filter((c) => c.current)
+          .map((c) => ({ userId: c.childUserId, displayName: c.displayName }))}
+        onBack={() => {
+          setEditing(false);
+          reload();
+        }}
+        onSaved={() => {
+          setEditing(false);
+          setNotice('保存しました。表示を読み込み直します');
+          reload();
+        }}
+      />
+    );
   return (
     <Stack spacing={2} data-testid="allowance-page">
+      {notice && <Typography role="status">{notice}</Typography>}
+      {role === 'admin' && (
+        <Button onClick={() => setListing(true)} data-testid="allowance-adjustment-list">
+          加算・減額の一覧
+        </Button>
+      )}
+      {role === 'admin' && state.kind === 'ready' && !state.value.confirmed && (
+        <Button onClick={() => setEditing(true)} data-testid="allowance-adjustments">
+          加算・減額
+        </Button>
+      )}
       <Button onClick={onBack} data-testid="allowance-back">
         戻る
       </Button>

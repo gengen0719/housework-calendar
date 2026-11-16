@@ -119,7 +119,7 @@ describe('U7 CDK: api のロールは U7 で変わらない（NFR4.71）', () =>
 
   it('api の許可の文の数は U6 のまま（U7 で IAM の文を足していない）', () => {
     // 表ごと・索引ごと・パラメータごとの文。数が増えたら、U7 でインフラが変わったということ
-    expect(apiStatements()).toHaveLength(12);
+    expect(apiStatements()).toHaveLength(13);
     expect(lineStatements()).toHaveLength(10);
     expect(statementsOnTable(apiStatements(), 'Calendar')).toHaveLength(1);
     expect(statementsOnTable(apiStatements(), 'ChoreTypes')).toHaveLength(1);
@@ -177,7 +177,7 @@ describe('U7 CDK: 本番とステージングの資源の切り分け', () => {
 
 describe('U7 CDK: 数と設定が U7 の前後で変わらない（NFR1.31）', () => {
   it('テーブル・Lambda・ロググループ・MetricFilter の数が U6 のまま', () => {
-    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 10);
+    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 11);
     t('Housework-staging-App').resourceCountIs('AWS::Lambda::Function', 5);
     t('Housework-staging-App').resourceCountIs('AWS::Logs::LogGroup', 3);
     t('Housework-staging-App').resourceCountIs('AWS::Logs::MetricFilter', 1);

@@ -16,6 +16,22 @@ import {
 } from '../services/notificationMaintenanceService';
 import { requireEnv } from '../lib/config';
 export async function handler(event: unknown): Promise<SQSBatchResponse | void> {
+  const backupOnly =
+    event !== null &&
+    typeof event === 'object' &&
+    Object.keys(event).join(',') === 'operation' &&
+    (event as { operation?: unknown }).operation === 'backup';
+  if (backupOnly) {
+    if ((process.env.BACKUPS_ENABLED ?? process.env.NOTIFICATIONS_ENABLED) !== 'true')
+      throw new Error('BACKUPS_DISABLED');
+    try {
+      await backup(Date.now());
+      return;
+    } catch {
+      await operationalAlert('notify', 'backup');
+      throw new Error('NOTIFY_ENTRY_FAILED');
+    }
+  }
   if (process.env.NOTIFICATIONS_ENABLED !== 'true') throw new Error('NOTIFICATIONS_DISABLED');
   try {
     if (event && typeof event === 'object' && 'Records' in event) {
@@ -54,10 +70,6 @@ export async function handler(event: unknown): Promise<SQSBatchResponse | void> 
     }
     if (input.operation === 'cleanup') {
       await cleanup(Date.now());
-      return;
-    }
-    if (input.operation === 'backup') {
-      await backup(Date.now());
       return;
     }
     let trigger;

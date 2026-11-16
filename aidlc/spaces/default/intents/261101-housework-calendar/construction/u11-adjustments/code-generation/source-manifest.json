@@ -1,0 +1,205 @@
+{
+  "stage": "code-generation",
+  "unit": "u11-adjustments",
+  "version": 1,
+  "writes": [
+    {
+      "path": ".github/workflows/deploy-production.yml"
+    },
+    {
+      "path": ".github/workflows/deploy-staging.yml"
+    },
+    {
+      "path": "docs/adjustment-runbook.md"
+    },
+    {
+      "path": "docs/contract-changes-u11.md"
+    },
+    {
+      "path": "docs/manual-check-u11.md"
+    },
+    {
+      "path": "docs/notification-runbook.md"
+    },
+    {
+      "path": "infrastructure/lib/app-stack.ts"
+    },
+    {
+      "path": "infrastructure/lib/app.ts"
+    },
+    {
+      "path": "infrastructure/lib/data-stack.ts"
+    },
+    {
+      "path": "infrastructure/lib/notification-construct.ts"
+    },
+    {
+      "path": "infrastructure/test/fixtures/fakeSecrets.ts"
+    },
+    {
+      "path": "infrastructure/test/u1-skeleton-family/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u10-notifications/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u11-adjustments/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u5-assignment-calendar/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u6-recording/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u7-review-confirm/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u8-swap/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u9-allowance/stacks.test.ts"
+    },
+    {
+      "path": "packages/backend/src/entries/api.ts"
+    },
+    {
+      "path": "packages/backend/src/entries/notify.ts"
+    },
+    {
+      "path": "packages/backend/src/handlers/allowances/createAdjustment.ts"
+    },
+    {
+      "path": "packages/backend/src/handlers/allowances/getAllowances.ts"
+    },
+    {
+      "path": "packages/backend/src/handlers/allowances/manageAdjustments.ts"
+    },
+    {
+      "path": "packages/backend/src/lib/dynamoClient.ts"
+    },
+    {
+      "path": "packages/backend/src/models.ts"
+    },
+    {
+      "path": "packages/backend/src/repositories/adjustmentRepository.ts"
+    },
+    {
+      "path": "packages/backend/src/services/adjustmentService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/allowanceService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/calendarService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/familyMemberService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/notificationMaintenanceService.ts"
+    },
+    {
+      "path": "packages/backend/test/u1-skeleton-family/helpers/fakeDynamo.ts"
+    },
+    {
+      "path": "packages/backend/test/u1-skeleton-family/helpers/world.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationMaintenanceService.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/adjustment-delete.feature"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/adjustment-delete.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/adjustment-operations.feature"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/adjustment-operations.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/adjustment-totals.feature"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/adjustment-totals.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/adjustmentCalculation.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/adjustments.feature"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/adjustments.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/backup.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/deletion.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/helpers/world.ts"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/integration.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u11-adjustments/registration.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/allowance-reads.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u9-allowance/getAllowances.handler.test.ts"
+    },
+    {
+      "path": "packages/frontend/src/api/client.ts"
+    },
+    {
+      "path": "packages/frontend/src/pages/AdjustmentListPage.tsx"
+    },
+    {
+      "path": "packages/frontend/src/pages/AdjustmentPage.tsx"
+    },
+    {
+      "path": "packages/frontend/src/pages/AllowancePage.tsx"
+    },
+    {
+      "path": "packages/frontend/test/u11-adjustments/AdjustmentListPage.test.tsx"
+    },
+    {
+      "path": "packages/frontend/test/u11-adjustments/AdjustmentPage.test.tsx"
+    },
+    {
+      "path": "packages/frontend/test/u11-adjustments/adjustment-form.feature"
+    },
+    {
+      "path": "packages/frontend/test/u11-adjustments/adjustment-form.steps.tsx"
+    },
+    {
+      "path": "packages/frontend/test/u11-adjustments/adjustment-recovery.feature"
+    },
+    {
+      "path": "packages/frontend/test/u11-adjustments/adjustment-recovery.steps.tsx"
+    },
+    {
+      "path": "packages/shared/src/adjustment.ts"
+    },
+    {
+      "path": "packages/shared/src/index.ts"
+    },
+    {
+      "path": "packages/shared/src/messages.ts"
+    },
+    {
+      "path": "packages/shared/src/reasons.ts"
+    },
+    {
+      "path": "packages/shared/test/u11-adjustments/adjustment.test.ts"
+    }
+  ]
+}

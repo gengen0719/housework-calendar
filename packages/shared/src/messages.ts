@@ -34,6 +34,8 @@ export const MESSAGES: Record<Reason, string> = {
   OFFER_GONE: 'この申し出はもうありません',
   CANNOT_ACCEPT_OWN_OFFER: 'この申し出には応えられません',
   REASON_REQUIRED: '理由を入力してください',
+  INVALID_REASON: '理由は100文字以内で入力してください',
+  ALLOWANCE_OUT_OF_RANGE: '合計を正確に表示できません。加算・減額の一覧から内容を訂正してください',
   INVALID_AMOUNT: '金額は 1 円以上の整数で入力してください',
   NOT_FRIEND: 'このアプリを使うには、公式アカウントを友だち追加してください',
   INVALID_FAMILY_NAME: '家族の名前を 1〜20 文字で入力してください',

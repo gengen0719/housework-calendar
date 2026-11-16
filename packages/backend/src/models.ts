@@ -144,7 +144,7 @@ export interface Invitation {
 
 /** 送り直しを見分ける操作の名前（BR3.5） */
 export type RequestOperation =
-  'createFamily' | 'createInvitation' | 'acceptInvitation' | 'createChoreType';
+  'createFamily' | 'createInvitation' | 'acceptInvitation' | 'createChoreType' | 'addAdjustment';
 
 /**
  * 操作の送り直しを見分ける記録（entities.md の RequestRecord）。expiresAt は TTL 用の UNIX 秒。
@@ -156,11 +156,16 @@ export interface RequestRecord {
   operation: RequestOperation;
   target?: string;
   /** 前に返した結果の本文（createFamily と acceptInvitation は MeFamily、createInvitation は InvitationView、createChoreType は ChoreType） */
-  result: MeFamily | InvitationView | ChoreType;
+  result: MeFamily | InvitationView | ChoreType | import('@housework/shared').AdjustmentView;
   expiresAt: number;
 }
 
 /** 利用者（entities.md の User）。日時は UTC の ISO 8601。 */
+export type AdjustmentRecord = import('@housework/shared').AdjustmentView & {
+  familyId: string;
+  createdBy: string;
+};
+
 export interface User {
   userId: string;
   lineUserId: string;

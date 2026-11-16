@@ -1,5 +1,8 @@
 import type {
   AllowanceMonthView,
+  AdjustmentInput,
+  AdjustmentView,
+  AdjustmentMonthView,
   CreateFamilyRequest,
   CreateFamilyResponse,
   CreateSessionRequest,
@@ -199,6 +202,29 @@ export function deleteChoreType(token: string, choreTypeId: string): Promise<voi
 }
 
 const monthPath = (month: string) => `/v1/months/${encodeURIComponent(month)}`;
+
+export function addAdjustment(
+  token: string,
+  month: string,
+  input: AdjustmentInput,
+  key: string,
+): Promise<AdjustmentView> {
+  return request('POST', `${monthPath(month)}/adjustments`, {
+    token,
+    body: input,
+    headers: idempotent(key),
+  });
+}
+export function getAdjustments(
+  token: string,
+  month: string,
+  signal?: AbortSignal,
+): Promise<AdjustmentMonthView> {
+  return request('GET', `${monthPath(month)}/adjustments`, { token, signal });
+}
+export function deleteAdjustment(token: string, id: string): Promise<void> {
+  return request('DELETE', `/v1/adjustments/${encodeURIComponent(id)}`, { token });
+}
 
 /** お小遣いは読むたびに計算される。家族の指定や本文は送らない（U9）。 */
 export function getAllowances(

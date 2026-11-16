@@ -182,7 +182,8 @@ describe('メタデータだけのバックアップ', () => {
     db.on(DescribeBackupCommand).resolves({
       BackupDescription: {
         SourceTableDetails: { TableArn: tableArn },
-        BackupDetails: { BackupName: own.BackupName },
+        // U11: 所有確認に加え、削除可能な状態も確認する。
+        BackupDetails: { BackupName: own.BackupName, BackupStatus: 'AVAILABLE' },
       },
     } as never);
     db.on(DeleteBackupCommand).resolves({});

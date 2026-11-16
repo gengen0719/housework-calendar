@@ -55,6 +55,8 @@ export interface AppStackProps extends StackProps {
   calendar: dynamodb.ITable;
   notificationDispatches: dynamodb.ITable;
   notificationPayloads: dynamodb.ITable;
+  adjustments: dynamodb.ITable;
+  backupsEnabled?: boolean;
   notificationsEnabled?: boolean;
   notificationEmail?: string;
   notificationChecksPassed?: boolean;
@@ -96,6 +98,7 @@ export class AppStack extends Stack {
       USERS_TABLE: props.users.tableName,
       FAMILIES_TABLE: props.families.tableName,
       REQUEST_RECORDS_TABLE: props.requestRecords.tableName,
+      ADJUSTMENTS_TABLE: props.adjustments.tableName,
       INVITATIONS_TABLE: props.invitations.tableName,
       NOTIFICATION_GROUPS_TABLE: props.notificationGroups.tableName,
       CHORE_TYPES_TABLE: props.choreTypes.tableName,
@@ -133,7 +136,12 @@ export class AppStack extends Stack {
     const usersIndexArn = `${props.users.tableArn}/index/lineUserId-index`;
     this.apiFunction.addToRolePolicy(
       new iam.PolicyStatement({
-        actions: ['dynamodb:GetItem', 'dynamodb:PutItem', 'dynamodb:UpdateItem'],
+        actions: [
+          'dynamodb:GetItem',
+          'dynamodb:PutItem',
+          'dynamodb:UpdateItem',
+          'dynamodb:ConditionCheckItem',
+        ],
         resources: [props.users.tableArn],
       }),
     );
@@ -296,6 +304,12 @@ export class AppStack extends Stack {
         }),
       );
     };
+    this.apiFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ['dynamodb:GetItem', 'dynamodb:Query', 'dynamodb:PutItem', 'dynamodb:DeleteItem'],
+        resources: [props.adjustments.tableArn],
+      }),
+    );
     grantParameters(this.apiFunction, ['jwt/*', 'line/*', 'cloudfront/*']);
     grantParameters(this.lineFunction, ['line/*', 'cloudfront/*']);
 

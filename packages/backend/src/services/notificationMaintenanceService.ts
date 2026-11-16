@@ -167,12 +167,25 @@ export async function cleanup(now: number): Promise<void> {
     throw new Error('CLEANUP_FAILED');
   }
 }
-const backupPrefix = () => `housework-${requireEnv('ENV')}-notifications-`;
-export function ownedBackup(backup: BackupSummary): boolean {
+interface BackupTarget {
+  table: string;
+  arn: string;
+  kind: 'notifications' | 'adjustments';
+}
+const notificationBackupTarget = (): BackupTarget => ({
+  table: dispatchTable(),
+  arn: requireEnv('NOTIFICATION_DISPATCHES_ARN'),
+  kind: 'notifications',
+});
+const backupPrefix = (target: BackupTarget) => `housework-${requireEnv('ENV')}-${target.kind}-`;
+export function ownedBackup(
+  backup: BackupSummary,
+  target: BackupTarget = notificationBackupTarget(),
+): boolean {
   return (
-    backup.TableArn === requireEnv('NOTIFICATION_DISPATCHES_ARN') &&
-    !!backup.BackupArn?.startsWith(`${requireEnv('NOTIFICATION_DISPATCHES_ARN')}/backup/`) &&
-    !!backup.BackupName?.startsWith(backupPrefix())
+    backup.TableArn === target.arn &&
+    !!backup.BackupArn?.startsWith(`${target.arn}/backup/`) &&
+    !!backup.BackupName?.startsWith(backupPrefix(target))
   );
 }
 async function saveBackup(arn: string, createdAt: number): Promise<void> {
@@ -185,34 +198,38 @@ async function saveBackup(arn: string, createdAt: number): Promise<void> {
   );
 }
 /** 応答不明・台帳保存失敗でも、名前と自テーブルARNを検証した一覧で照合する。 */
-export async function backup(now: number): Promise<void> {
+async function backupTarget(now: number, target: BackupTarget, deadline: number): Promise<void> {
+  const bounded = () => {
+    const remaining = deadline - Date.now();
+    if (remaining < 1) throw new Error('BACKUP_DEADLINE');
+    return { abortSignal: AbortSignal.timeout(Math.min(2000, remaining)) };
+  };
   let failure = false;
   try {
-    const name = `${backupPrefix()}${jstDateOf(new Date(now))}`;
+    const name = `${backupPrefix(target)}${jstDateOf(new Date(now))}`;
     let summaries: BackupSummary[] = [];
     let last: string | undefined;
     do {
       const r = await db.send(
         new ListBackupsCommand({
-          TableName: dispatchTable(),
+          TableName: target.table,
           BackupType: 'USER',
           ExclusiveStartBackupArn: last,
         }),
-        options(),
+        bounded(),
       );
       summaries.push(...(r.BackupSummaries ?? []));
       last = r.LastEvaluatedBackupArn;
     } while (last);
-    summaries = summaries.filter(ownedBackup);
+    summaries = summaries.filter((b) => ownedBackup(b, target));
     if (!summaries.some((b) => b.BackupName === name)) {
       try {
         const r = await db.send(
-          new CreateBackupCommand({ TableName: dispatchTable(), BackupName: name }),
-          options(),
+          new CreateBackupCommand({ TableName: target.table, BackupName: name }),
+          bounded(),
         );
         const arn = r.BackupDetails?.BackupArn;
-        if (!arn || !arn.startsWith(`${requireEnv('NOTIFICATION_DISPATCHES_ARN')}/backup/`))
-          throw new Error('INVALID_BACKUP');
+        if (!arn || !arn.startsWith(`${target.arn}/backup/`)) throw new Error('INVALID_BACKUP');
         await saveBackup(arn, now);
       } catch {
         failure = true;
@@ -222,13 +239,13 @@ export async function backup(now: number): Promise<void> {
       do {
         const r = await db.send(
           new ListBackupsCommand({
-            TableName: dispatchTable(),
+            TableName: target.table,
             BackupType: 'USER',
             ExclusiveStartBackupArn: cursor,
           }),
-          options(),
+          bounded(),
         );
-        summaries.push(...(r.BackupSummaries ?? []).filter(ownedBackup));
+        summaries.push(...(r.BackupSummaries ?? []).filter((b) => ownedBackup(b, target)));
         cursor = r.LastEvaluatedBackupArn;
       } while (cursor);
     }
@@ -238,20 +255,17 @@ export async function backup(now: number): Promise<void> {
     }
     // 台帳だけに残る作成もDescribeで検証。別テーブルのARNは絶対に要求しない。
     for (const row of await listMetadataPartition('BACKUPS')) {
-      if (
-        typeof row.sk !== 'string' ||
-        !row.sk.startsWith(`${requireEnv('NOTIFICATION_DISPATCHES_ARN')}/backup/`)
-      )
-        continue;
+      if (typeof row.sk !== 'string' || !row.sk.startsWith(`${target.arn}/backup/`)) continue;
       if (typeof row.createdAt !== 'number' || now - row.createdAt <= 7 * 86400000) continue;
-      const result = await db.send(new DescribeBackupCommand({ BackupArn: row.sk }), options());
+      const result = await db.send(new DescribeBackupCommand({ BackupArn: row.sk }), bounded());
       const desc = result.BackupDescription;
       if (
-        desc?.SourceTableDetails?.TableArn !== requireEnv('NOTIFICATION_DISPATCHES_ARN') ||
-        !desc.BackupDetails?.BackupName?.startsWith(backupPrefix())
+        desc?.SourceTableDetails?.TableArn !== target.arn ||
+        !desc.BackupDetails?.BackupName?.startsWith(backupPrefix(target)) ||
+        desc.BackupDetails.BackupStatus !== 'AVAILABLE'
       )
         continue;
-      await db.send(new DeleteBackupCommand({ BackupArn: row.sk }), options());
+      await db.send(new DeleteBackupCommand({ BackupArn: row.sk }), bounded());
       await docClient.send(
         new DeleteCommand({ TableName: dispatchTable(), Key: { pk: 'BACKUPS', sk: row.sk } }),
         options(),
@@ -265,4 +279,25 @@ export async function backup(now: number): Promise<void> {
     await operationalAlert('notify', 'backup');
     throw new Error('BACKUP_FAILED');
   }
+}
+
+/** 固定された二表のみ。片方の障害でも他方を試み、最後に失敗を返す。 */
+export async function backup(now: number): Promise<void> {
+  const targets = [notificationBackupTarget()];
+  if (process.env.ADJUSTMENTS_TABLE || process.env.ADJUSTMENTS_ARN)
+    targets.push({
+      table: requireEnv('ADJUSTMENTS_TABLE'),
+      arn: requireEnv('ADJUSTMENTS_ARN'),
+      kind: 'adjustments',
+    });
+  const deadline = Date.now() + 25000;
+  let failed = false;
+  for (const target of targets) {
+    try {
+      await backupTarget(now, target, deadline);
+    } catch {
+      failed = true;
+    }
+  }
+  if (failed) throw new Error('BACKUP_FAILED');
 }

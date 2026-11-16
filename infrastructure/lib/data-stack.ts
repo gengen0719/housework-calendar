@@ -19,6 +19,7 @@ export class DataStack extends Stack {
   readonly calendar: dynamodb.Table;
   readonly notificationDispatches: dynamodb.Table;
   readonly notificationPayloads: dynamodb.Table;
+  readonly adjustments: dynamodb.Table;
 
   constructor(scope: Construct, id: string, props: DataStackProps) {
     super(scope, id, props);
@@ -87,6 +88,11 @@ export class DataStack extends Stack {
 
     // U5: 割り当て・日ごとの担当・月の状態（索引なし、TTL なし、tableName 指定なし。本番は RETAIN）
     this.calendar = new dynamodb.Table(this, 'Calendar', {
+      ...common,
+      partitionKey: { name: 'familyId', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'sk', type: dynamodb.AttributeType.STRING },
+    });
+    this.adjustments = new dynamodb.Table(this, 'Adjustments', {
       ...common,
       partitionKey: { name: 'familyId', type: dynamodb.AttributeType.STRING },
       sortKey: { name: 'sk', type: dynamodb.AttributeType.STRING },

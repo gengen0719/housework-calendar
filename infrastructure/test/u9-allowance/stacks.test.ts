@@ -44,7 +44,7 @@ beforeAll(() => {
 
 describe('U9 はインフラを増やさない', () => {
   it('IAM の文は api 11、line 9 のまま', () => {
-    expect(statements('api')).toHaveLength(12);
+    expect(statements('api')).toHaveLength(13);
     expect(statements('line')).toHaveLength(10);
   });
   it.each(['api', 'line'])('%s に広い DynamoDB の許可がない', (entry) => {
@@ -104,7 +104,7 @@ describe('U9 はインフラを増やさない', () => {
         'SSM_PREFIX',
         'USERS_TABLE',
         ...(entry === 'api'
-          ? ['INVITATIONS_TABLE', 'REQUEST_RECORDS_TABLE']
+          ? ['ADJUSTMENTS_TABLE', 'INVITATIONS_TABLE', 'REQUEST_RECORDS_TABLE']
           : ['PROCESSED_LINE_EVENTS_TABLE']),
       ].sort(),
     );
@@ -113,7 +113,7 @@ describe('U9 はインフラを増やさない', () => {
     expect(JSON.stringify(t().toJSON())).not.toContain('ReservedConcurrentExecutions');
   });
   it('資源数を保つ', () => {
-    templates['Housework-staging-Data']!.resourceCountIs('AWS::DynamoDB::Table', 10);
+    templates['Housework-staging-Data']!.resourceCountIs('AWS::DynamoDB::Table', 11);
     t().resourceCountIs('AWS::Lambda::Function', 5);
     t().resourceCountIs('AWS::Logs::LogGroup', 3);
     t().resourceCountIs('AWS::Logs::MetricFilter', 1);

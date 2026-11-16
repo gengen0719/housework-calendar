@@ -141,7 +141,8 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
           expect(readCount(w.world, FAMILIES_TABLE, 'Get')).toBe(1);
           expect(readCount(w.world, USERS_TABLE, 'Query')).toBe(1);
           expect(readCount(w.world, CHORE_TYPES_TABLE, 'Query')).toBe(1);
-          expect(readCount(w.world)).toBe(4);
+          // U11: 本番の調整Queryが1回加わる。他の4回と書込0回は維持。
+          expect(readCount(w.world)).toBe(5);
           expect(totalWrites(w.world)).toBe(0);
         },
       );
@@ -154,7 +155,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     });
     When('管理者が 1 月のお小遣いを読む', readPlain);
     Then('読み取りは計 10 回で、Users の Get は 6 回である', () => {
-      expect(readCount(w.world)).toBe(10);
+      expect(readCount(w.world)).toBe(11);
       expect(readCount(w.world, USERS_TABLE, 'Get')).toBe(6);
       expect(totalWrites(w.world)).toBe(0);
     });
@@ -317,7 +318,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
       });
       When('管理者が 1 月のお小遣いを読む', readPlain);
       Then('読み取りは計 4 回で、10 人分の行と 300 回分の合計が返る', () => {
-        expect(readCount(w.world)).toBe(4);
+        expect(readCount(w.world)).toBe(5);
         expect(result).toHaveLength(10);
         expect(result?.reduce((sum, a) => sum + a.total, 0)).toBe(3000);
       });

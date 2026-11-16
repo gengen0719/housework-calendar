@@ -11,6 +11,7 @@
 // ここに置いてよいのは作り物だけ。本物の鍵やトークンは絶対に置かない。
 
 export const FAKE_ORIGIN_VERIFY_SECRET = 'dummy-origin-verify-secret-for-tests'; // gitleaks:allow テスト用の作り物の値
+export const FAKE_NOTIFICATION_EMAIL = 'owner@example.com'; // gitleaks:allow テスト用の作り物の値
 
 // GitHub Actions の OIDC で、IAM ロールの信頼ポリシーに現れる条件キー（秘密ではないが、名前に token を含む）
 export const GITHUB_OIDC_AUD_CONDITION_KEY = 'token.actions.githubusercontent.com:aud'; // gitleaks:allow テスト用の作り物の値

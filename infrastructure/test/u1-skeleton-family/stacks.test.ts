@@ -103,7 +103,7 @@ describe('U1 CDK stacks', () => {
 
   it('DynamoDB は 8 つ（U2 で Invitations、U3 で NotificationGroups、U4 で ChoreTypes、U5 で Calendar を追加）で、オンデマンド、GSI と TTL がある', () => {
     const data = t('Housework-staging-Data');
-    data.resourceCountIs('AWS::DynamoDB::Table', 10);
+    data.resourceCountIs('AWS::DynamoDB::Table', 11);
     data.allResourcesProperties('AWS::DynamoDB::Table', { BillingMode: 'PAY_PER_REQUEST' });
     data.hasResourceProperties('AWS::DynamoDB::Table', {
       KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }],
@@ -129,7 +129,7 @@ describe('U1 CDK stacks', () => {
       t('Housework-production-Data').findResources('AWS::DynamoDB::Table'),
     );
     const stg = Object.values(t('Housework-staging-Data').findResources('AWS::DynamoDB::Table'));
-    expect(prod).toHaveLength(10);
+    expect(prod).toHaveLength(11);
     for (const r of prod) expect(r.DeletionPolicy).toBe('Retain');
     for (const r of stg) expect(r.DeletionPolicy).toBe('Delete');
   });

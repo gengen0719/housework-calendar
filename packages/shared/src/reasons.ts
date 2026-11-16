@@ -68,6 +68,8 @@ export const ALL_REASONS = [
   'JOIN_FAMILY_FIRST',
   // U8 で足した印
   'OFFER_OWNER_ONLY',
+  'INVALID_REASON',
+  'ALLOWANCE_OUT_OF_RANGE',
 ] as const;
 
 export type Reason = (typeof ALL_REASONS)[number];

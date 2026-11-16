@@ -59,6 +59,7 @@ export const INVITATIONS_TABLE = 'Invitations-test';
 export const NOTIFICATION_GROUPS_TABLE = 'NotificationGroups-test';
 export const CHORE_TYPES_TABLE = 'ChoreTypes-test';
 export const CALENDAR_TABLE = 'Calendar-test';
+export const ADJUSTMENTS_TABLE = 'Adjustments-test';
 
 /** 表ごとの主キーの名前（並び順どおりに「#」でつないでメモリ上の鍵にする）。 */
 const KEY_NAMES: Record<string, string[]> = {
@@ -70,10 +71,11 @@ const KEY_NAMES: Record<string, string[]> = {
   [NOTIFICATION_GROUPS_TABLE]: ['groupId'],
   [CHORE_TYPES_TABLE]: ['familyId', 'sk'],
   [CALENDAR_TABLE]: ['familyId', 'sk'],
+  [ADJUSTMENTS_TABLE]: ['familyId', 'sk'],
 };
 
 /** 条件式・Query を本当に評価する表（U4 の ChoreTypes、U5 の Calendar） */
-const EVALUATED_TABLES: string[] = [CHORE_TYPES_TABLE, CALENDAR_TABLE];
+const EVALUATED_TABLES: string[] = [CHORE_TYPES_TABLE, CALENDAR_TABLE, ADJUSTMENTS_TABLE];
 const isEvaluated = (name: string | undefined): boolean =>
   name !== undefined && EVALUATED_TABLES.includes(name);
 
@@ -213,6 +215,7 @@ export function installFakeDynamo() {
     [NOTIFICATION_GROUPS_TABLE]: new Map(),
     [CHORE_TYPES_TABLE]: new Map(),
     [CALENDAR_TABLE]: new Map(),
+    [ADJUSTMENTS_TABLE]: new Map(),
   };
   /** 結果整合の再現: 索引（familyId-index）の Query の結果から隠す利用者 */
   const hiddenFromFamilyIndex = new Set<string>();
@@ -609,6 +612,7 @@ export function installFakeDynamo() {
     notificationGroups: tables[NOTIFICATION_GROUPS_TABLE] as Table,
     choreTypes: tables[CHORE_TYPES_TABLE] as Table,
     calendar: tables[CALENDAR_TABLE] as Table,
+    adjustments: tables[ADJUSTMENTS_TABLE] as Table,
     hiddenFromFamilyIndex,
     hooks,
   };

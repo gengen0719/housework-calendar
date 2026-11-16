@@ -1,0 +1,88 @@
+{
+  "stage": "infrastructure-design",
+  "unit": "u11-adjustments",
+  "upstream_ids": [
+    "NFR7.201",
+    "NFR7.202",
+    "NFR9.201",
+    "NFR6.201",
+    "NFR4.201",
+    "NFR4.202",
+    "NFR5.201",
+    "NFR10.201",
+    "NFR1.201",
+    "NFR3.201",
+    "NFR7.203",
+    "NFR6.204",
+    "NFR2.201",
+    "NFR8.201",
+    "NFR11.201", "NFR6.202", "NFR6.203", "NFR2.202", "NFR5.202", "NFR7.204"
+  ],
+  "coverage": [
+    {"id":"NFR6.202","status":"OK","target":"infrastructure-specification.md IAM and Configuration"},
+    {"id":"NFR6.203","status":"OK","target":"infrastructure-specification.md Infrastructure Services"},
+    {"id":"NFR2.202","status":"OK","target":"monitoring-design.md Alerts"},
+    {"id":"NFR5.202","status":"OK","target":"monitoring-design.md Logs & Tracing"},
+    {"id":"NFR7.204","status":"OK","target":"monitoring-design.md SLIs / SLOs"},
+    {
+      "id": "NFR7.201",
+      "status": "OK", "target": "monitoring-design.md SLIs / SLOs"
+    },
+    {
+      "id": "NFR7.202",
+      "status": "OK", "target": "infrastructure-specification.md Deployment"
+    },
+    {
+      "id": "NFR9.201",
+      "status": "N/A", "target": "画面の視認性・操作性はアプリ実装と手動確認。新しい基盤なし"
+    },
+    {
+      "id": "NFR6.201",
+      "status": "N/A", "target": "独立した編集一覧と正確な計算はアプリ実装。既存APIへ追加"
+    },
+    {
+      "id": "NFR4.201",
+      "status": "OK", "target": "infrastructure-specification.md IAM and Configuration"
+    },
+    {
+      "id": "NFR4.202",
+      "status": "N/A", "target": "境界の入力検証はアプリ実装"
+    },
+    {
+      "id": "NFR5.201",
+      "status": "OK", "target": "infrastructure-specification.md Infrastructure Services; monitoring-design.md Logs & Tracing"
+    },
+    {
+      "id": "NFR10.201",
+      "status": "OK", "target": "infrastructure-specification.md Deployment"
+    },
+    {
+      "id": "NFR1.201",
+      "status": "OK", "target": "infrastructure-specification.md Cost Estimate"
+    },
+    {
+      "id": "NFR3.201",
+      "status": "OK", "target": "infrastructure-specification.md Deployment"
+    },
+    {
+      "id": "NFR7.203",
+      "status": "OK", "target": "infrastructure-specification.md Infrastructure Services"
+    },
+    {
+      "id": "NFR6.204",
+      "status": "OK", "target": "infrastructure-specification.md Backup and Restore"
+    },
+    {
+      "id": "NFR2.201",
+      "status": "OK", "target": "monitoring-design.md Alerts"
+    },
+    {
+      "id": "NFR8.201",
+      "status": "OK", "target": "cicd-pipeline.md Pipeline"
+    },
+    {
+      "id": "NFR11.201",
+      "status": "N/A", "target": "明示月と日本時間の処理はアプリ実装。既存Scheduler時刻を維持"
+    }
+  ]
+}

@@ -151,7 +151,7 @@ describe('U8 CDK: api のロールは U8 で変わらない', () => {
   });
 
   it('IAM の文の数は U7 のまま（U8 で文を足していない）', () => {
-    expect(apiStatements()).toHaveLength(12);
+    expect(apiStatements()).toHaveLength(13);
     expect(lineStatements()).toHaveLength(10);
   });
 
@@ -168,7 +168,7 @@ describe('U8 CDK: api のロールは U8 で変わらない', () => {
 
 describe('U8 CDK: 数と設定が U8 の前後で変わらない（NFR1.33）', () => {
   it('テーブル・Lambda・ロググループ・MetricFilter・アラームの数が U7 のまま', () => {
-    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 10);
+    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 11);
     t('Housework-staging-App').resourceCountIs('AWS::Lambda::Function', 5);
     t('Housework-staging-App').resourceCountIs('AWS::Logs::LogGroup', 3);
     t('Housework-staging-App').resourceCountIs('AWS::Logs::MetricFilter', 1);

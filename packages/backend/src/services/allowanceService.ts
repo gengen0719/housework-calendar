@@ -21,6 +21,8 @@ import {
   type AllowanceMonthView,
 } from '@housework/shared';
 import { logger, setRequestMetrics } from '../lib/logger';
+import { ApiError } from '../lib/errors';
+import { listByMonth as listAdjustmentRecords } from '../repositories/adjustmentRepository';
 import { mapWithConcurrency } from '../lib/promise';
 import type { FamilyScope, ReadContext } from '../middleware/requireMembership';
 import type { DutyRecord } from '../models';
@@ -191,7 +193,7 @@ export function assembleAllowances(input: AssembleInput): Allowance[] {
         choreName: names.get(line.choreTypeId) ?? ALLOWANCE_UNKNOWN_CHORE,
         unitPrice: line.unitPrice,
         count: line.count,
-        amount: line.unitPrice * line.count,
+        amount: safeAmount(BigInt(line.unitPrice) * BigInt(line.count)),
       }));
     const adjustments: AllowanceAdjustmentLine[] = (input.adjustments.get(child.userId) ?? []).map(
       (adjustment) => ({
@@ -200,9 +202,10 @@ export function assembleAllowances(input: AssembleInput): Allowance[] {
         reason: adjustment.reason,
       }),
     );
-    const total =
-      lines.reduce((sum, line) => sum + line.amount, 0) +
-      adjustments.reduce((sum, adjustment) => sum + adjustment.amount, 0);
+    const total = safeAmount(
+      lines.reduce((sum, line) => sum + BigInt(line.amount), 0n) +
+        adjustments.reduce((sum, adjustment) => sum + BigInt(adjustment.amount), 0n),
+    );
     return {
       childUserId: child.userId,
       displayName: child.displayName,
@@ -213,6 +216,12 @@ export function assembleAllowances(input: AssembleInput): Allowance[] {
       total,
     };
   });
+}
+
+function safeAmount(value: bigint): number {
+  if (value > BigInt(Number.MAX_SAFE_INTEGER) || value < BigInt(Number.MIN_SAFE_INTEGER))
+    throw new ApiError(422, 'ALLOWANCE_OUT_OF_RANGE');
+  return Number(value);
 }
 
 /**
@@ -266,9 +275,17 @@ async function compute(
     new Set(choreTypes.map((type) => type.choreTypeId)),
   );
 
+  const adjustments = options.adjustments
+    ? await options.adjustments(scope, month, [
+        ...new Set([...currentChildren.map((c) => c.userId), ...tally.byChild.keys()]),
+      ])
+    : await persistedAdjustments(scope, month);
+
   // 段 2: 一覧にいない持ち主を、子供ごとの連なりで確かめる（10 並行まで。1 人が投げたら新しい確かめを始めない）
   const listedIds = new Set(currentChildren.map((c) => c.userId));
-  const unlisted = [...tally.byChild.keys()].filter((id) => !listedIds.has(id)).sort(compareText);
+  const unlisted = [...new Set([...tally.byChild.keys(), ...adjustments.keys()])]
+    .filter((id) => !listedIds.has(id) && !adminUserIds.has(id))
+    .sort(compareText);
   const lagging: ChildName[] = [];
   const departed: ChildName[] = [];
   await mapWithConcurrency(
@@ -286,16 +303,6 @@ async function compute(
     { stopAfterFailure: true },
   );
   const current = [...currentChildren, ...lagging.sort(compareChildren)];
-
-  // 段 3: 加算・減額（差し込み口。既定は空）
-  const ordered = orderChildren(current, departed);
-  const adjustments = options.adjustments
-    ? await options.adjustments(
-        scope,
-        month,
-        ordered.map((child) => child.userId),
-      )
-    : new Map<string, readonly AllowanceAdjustmentLine[]>();
 
   // 段 4: 組み立て
   const allowances = assembleAllowances({
@@ -371,7 +378,7 @@ export async function getAllowanceMonthView(
 ): Promise<AllowanceMonthView> {
   const computed = await compute(ctx, month, options);
   const range = deriveRange(computed.familyCreatedAt, options.today);
-  computed.emit();
+  if (options.emitLogs !== false) computed.emit();
   return {
     month,
     confirmed: computed.confirmed,
@@ -380,4 +387,19 @@ export async function getAllowanceMonthView(
     lastMonth: range.lastMonth,
     allowances: computed.allowances,
   };
+}
+
+/** お小遣いが所有する全調整を読む。本番のAPIと通知で同じ既定接続を使う。 */
+async function persistedAdjustments(scope: FamilyScope, month: string) {
+  const result = new Map<string, AllowanceAdjustmentLine[]>();
+  for (const row of await listAdjustmentRecords(scope.familyId, month)) {
+    const lines = result.get(row.childUserId) ?? [];
+    lines.push({
+      adjustmentId: row.adjustmentId,
+      amount: row.kind === 'subtract' ? -row.amount : row.amount,
+      reason: row.reason,
+    });
+    result.set(row.childUserId, lines);
+  }
+  return result;
 }
