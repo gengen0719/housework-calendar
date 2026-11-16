@@ -1,0 +1,232 @@
+{
+  "stage": "code-generation",
+  "unit": "u10-notifications",
+  "version": 1,
+  "writes": [
+    {
+      "path": "packages/backend/test/u10-notifications/apiFailureAlert.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationResultLog.test.ts"
+    },
+    {
+      "path": ".github/workflows/deploy-production.yml"
+    },
+    {
+      "path": ".github/workflows/deploy-staging.yml"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "docs/contract-changes-u10.md"
+    },
+    {
+      "path": "docs/manual-check-u10.md"
+    },
+    {
+      "path": "docs/notification-runbook.md"
+    },
+    {
+      "path": "infrastructure/lib/account-stack.ts"
+    },
+    {
+      "path": "infrastructure/lib/app-stack.ts"
+    },
+    {
+      "path": "infrastructure/lib/app.ts"
+    },
+    {
+      "path": "infrastructure/lib/data-stack.ts"
+    },
+    {
+      "path": "infrastructure/lib/notification-construct.ts"
+    },
+    {
+      "path": "infrastructure/test/u1-skeleton-family/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u10-notifications/fixtures/index.html"
+    },
+    {
+      "path": "infrastructure/test/u10-notifications/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u5-assignment-calendar/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u6-recording/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u7-review-confirm/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u8-swap/stacks.test.ts"
+    },
+    {
+      "path": "infrastructure/test/u9-allowance/stacks.test.ts"
+    },
+    {
+      "path": "package-lock.json"
+    },
+    {
+      "path": "packages/backend/package.json"
+    },
+    {
+      "path": "packages/backend/src/entries/api.ts"
+    },
+    {
+      "path": "packages/backend/src/entries/line.ts"
+    },
+    {
+      "path": "packages/backend/src/entries/notify.ts"
+    },
+    {
+      "path": "packages/backend/src/lib/config.ts"
+    },
+    {
+      "path": "packages/backend/src/models.ts"
+    },
+    {
+      "path": "packages/backend/src/repositories/familyRepository.ts"
+    },
+    {
+      "path": "packages/backend/src/repositories/notificationPayloadRepository.ts"
+    },
+    {
+      "path": "packages/backend/src/repositories/notificationRepository.ts"
+    },
+    {
+      "path": "packages/backend/src/services/allowanceService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/calendarService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/familyMemberService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/notificationIdentity.ts"
+    },
+    {
+      "path": "packages/backend/src/services/notificationMaintenanceService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/notificationMessages.ts"
+    },
+    {
+      "path": "packages/backend/src/services/notificationPushService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/notificationQueueService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/notificationService.ts"
+    },
+    {
+      "path": "packages/backend/src/services/notificationTime.ts"
+    },
+    {
+      "path": "packages/backend/src/services/operationalAlertService.ts"
+    },
+    {
+      "path": "packages/backend/test/fixtures/fakeSecrets.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/helpers/fixtures.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/helpers/workflow.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-content.feature"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-content.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-dispatch.feature"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-dispatch.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-family.feature"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-family.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-operations.feature"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-operations.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-push.feature"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-push.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-state.feature"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-state.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-time.feature"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notification-time.steps.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationFamily.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationIdentity.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationMaintenanceService.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationMessages.boundaries.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationMessages.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationPushService.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationQueueService.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationRepository.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationService.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationTime.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notificationTrigger.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/notify.entry.test.ts"
+    },
+    {
+      "path": "packages/backend/test/u10-notifications/operationalAlertService.test.ts"
+    },
+    {
+      "path": "packages/shared/src/index.ts"
+    },
+    {
+      "path": "packages/shared/src/notification-types.ts"
+    },
+    {
+      "path": "packages/shared/test/u10-notifications/notification-types.test.ts"
+    }
+  ]
+}

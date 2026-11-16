@@ -902,3 +902,7 @@ export async function unconfirmMonth(ctx: FamilyContext, month: string): Promise
     confirmed: false,
   });
 }
+/** C8 通知用の読み取り。その日の未・済・×をすべて返す。 */
+export async function listDutiesOn(ctx: FamilyScope, date: string): Promise<DutyRecord[]> {
+  return calendarRepository.listDutiesOn(ctx.familyId, date);
+}

@@ -67,6 +67,21 @@ export function buildApp(app: App = new App()): App {
       notificationGroups: data.notificationGroups,
       choreTypes: data.choreTypes,
       calendar: data.calendar,
+      notificationDispatches: data.notificationDispatches,
+      notificationPayloads: data.notificationPayloads,
+      notificationsEnabled:
+        app.node.tryGetContext(`${envName}NotificationsEnabled`) === true ||
+        app.node.tryGetContext(`${envName}NotificationsEnabled`) === 'true',
+      notificationEmail: optionalContextString(app, `${envName}NotificationEmail`),
+      notificationChecksPassed:
+        app.node.tryGetContext(`${envName}NotificationChecksPassed`) === true ||
+        app.node.tryGetContext(`${envName}NotificationChecksPassed`) === 'true',
+      notificationBudgetVerified:
+        app.node.tryGetContext(`${envName}NotificationBudgetVerified`) === true ||
+        app.node.tryGetContext(`${envName}NotificationBudgetVerified`) === 'true',
+      notificationEstimatedJpy: Number(
+        app.node.tryGetContext(`${envName}NotificationEstimatedJpy`),
+      ),
       originVerifySecret,
       frontendDistPath,
       reservedConcurrency,

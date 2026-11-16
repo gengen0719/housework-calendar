@@ -1,0 +1,62 @@
+{
+  "stage": "functional-design",
+  "unit": "u10-notifications",
+  "upstream_ids": [
+    "AC9.1.4",
+    "AC9.1.9",
+    "AC9.1.1",
+    "AC9.1.10",
+    "AC9.1.2",
+    "AC9.1.3",
+    "AC9.1.5",
+    "AC9.1.6",
+    "AC9.1.7",
+    "AC9.1.8"
+  ],
+  "coverage": [
+    {
+      "id": "AC9.1.4",
+      "status": "OK", "target": "BR11.3"
+    },
+    {
+      "id": "AC9.1.9",
+      "status": "OK", "target": "BR11.4"
+    },
+    {
+      "id": "AC9.1.1",
+      "status": "OK", "target": "BR11.1, BR11.3"
+    },
+    {
+      "id": "AC9.1.10",
+      "status": "OK", "target": "BR11.6"
+    },
+    {
+      "id": "AC9.1.2",
+      "status": "OK", "target": "BR11.3"
+    },
+    {
+      "id": "AC9.1.3",
+      "status": "OK", "target": "BR11.6"
+    },
+    {
+      "id": "AC9.1.5",
+      "status": "OK", "target": "BR11.4, BR11.5"
+    },
+    {
+      "id": "AC9.1.6",
+      "status": "OK", "target": "BR11.10"
+    },
+    {
+      "id": "AC9.1.7",
+      "status": "OK", "target": "BR11.11"
+    },
+    {
+      "id": "AC9.1.8",
+      "status": "OK", "target": "BR11.6, BR11.7, BR11.8, BR11.9"
+    }
+  ],
+  "reverse": [
+    {"id":"BR11.2","status":"N/A","target":"共有のAC1.2.4とFR1.5、NFR4の家族範囲と登録なしの省略"},
+    {"id":"BR11.12","status":"N/A","target":"FR1.5、FR9.5、NFR4の送信先変更と二重配信防止の境界"}
+  ]
+}

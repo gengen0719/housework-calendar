@@ -1,0 +1,63 @@
+{
+  "stage": "nfr-requirements",
+  "unit": "u10-notifications",
+  "upstream_ids": [
+    "NFR2",
+    "NFR1",
+    "NFR3",
+    "NFR4",
+    "NFR5",
+    "NFR6",
+    "NFR7",
+    "NFR8",
+    "NFR9",
+    "NFR10",
+    "NFR11"
+  ],
+  "coverage": [
+    {
+      "id": "NFR2",
+      "status": "OK", "target": "NFR2.101, NFR2.102, NFR2.103, NFR2.104, NFR2.105, NFR2.106, NFR2.107, NFR2.108, NFR2.109"
+    },
+    {
+      "id": "NFR1",
+      "status": "OK", "target": "NFR1.101, NFR1.102"
+    },
+    {
+      "id": "NFR3",
+      "status": "OK", "target": "NFR3.101, NFR3.102, NFR3.103"
+    },
+    {
+      "id": "NFR4",
+      "status": "OK", "target": "NFR4.101, NFR4.102, NFR4.103, NFR4.104, NFR4.105"
+    },
+    {
+      "id": "NFR5",
+      "status": "OK", "target": "NFR5.101, NFR5.102"
+    },
+    {
+      "id": "NFR6",
+      "status": "OK", "target": "NFR6.101, NFR6.102"
+    },
+    {
+      "id": "NFR7",
+      "status": "OK", "target": "NFR7.101, NFR7.102, NFR7.103"
+    },
+    {
+      "id": "NFR8",
+      "status": "OK", "target": "NFR8.101"
+    },
+    {
+      "id": "NFR9",
+      "status": "N/A", "target": "U10は新しい画面を作らない。既存UIのアクセシビリティを変更しない。"
+    },
+    {
+      "id": "NFR10",
+      "status": "OK", "target": "NFR10.101"
+    },
+    {
+      "id": "NFR11",
+      "status": "OK", "target": "NFR11.101"
+    }
+  ]
+}

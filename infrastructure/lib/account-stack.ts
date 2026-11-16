@@ -76,7 +76,7 @@ export class AccountStack extends Stack {
         budgetName: 'housework-calendar-monthly',
         budgetType: 'COST',
         timeUnit: 'MONTHLY',
-        budgetLimit: { amount: 1, unit: 'USD' },
+        budgetLimit: { amount: 0.5, unit: 'USD' },
       },
       notificationsWithSubscribers: [
         {

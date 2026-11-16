@@ -1,6 +1,7 @@
 import { TransactionCanceledException } from '@aws-sdk/client-dynamodb';
 import {
   GetCommand,
+  ScanCommand,
   TransactWriteCommand,
   type TransactWriteCommandInput,
 } from '@aws-sdk/lib-dynamodb';
@@ -11,6 +12,26 @@ import * as invitationRepository from './invitationRepository';
 import * as notificationGroupRepository from './notificationGroupRepository';
 import * as requestRecordRepository from './requestRecordRepository';
 import * as userRepository from './userRepository';
+
+/** 内部通知だけに公開する限定Scan。家族のID以外は投影しない。 */
+export async function listNotificationFamilies(
+  cursor?: Record<string, unknown>,
+): Promise<{ familyIds: string[]; cursor?: Record<string, unknown> }> {
+  const result = await docClient.send(
+    new ScanCommand({
+      TableName: tables.families(),
+      Limit: 100,
+      ProjectionExpression: 'familyId',
+      ExclusiveStartKey: cursor,
+    }),
+    { abortSignal: AbortSignal.timeout(2000) },
+  );
+  const familyIds = (result.Items ?? []).map((item) => {
+    if (typeof item.familyId !== 'string') throw new Error('INVALID_FAMILY');
+    return item.familyId;
+  });
+  return { familyIds, ...(result.LastEvaluatedKey ? { cursor: result.LastEvaluatedKey } : {}) };
+}
 
 /** 家族を読む。作り直しの前など、最新の値が要るときは consistent: true（強い整合性）。 */
 export async function findById(

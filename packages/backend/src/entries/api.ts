@@ -3,6 +3,7 @@ import type {
   APIGatewayProxyStructuredResultV2,
   Context,
 } from 'aws-lambda';
+import { reportEntryFailure } from '../services/operationalAlertService';
 import { createChoreType } from '../handlers/choreType/create';
 import { listChoreTypes } from '../handlers/choreType/list';
 import { removeChoreType } from '../handlers/choreType/remove';
@@ -268,9 +269,11 @@ export async function handler(
   } catch (err) {
     if (err instanceof ApiError) {
       logger.info({ event: 'REQUEST_REJECTED', status: err.status, reason: err.reason, path });
+      if (err.status >= 500) await reportEntryFailure('api');
       return errorResponse(err);
     }
     logger.error({ event: 'REQUEST_ERROR', path, ...describeError(err) });
+    await reportEntryFailure('api');
     return json(500, { error: { reason: 'INTERNAL' } });
   } finally {
     logger.info({

@@ -1,0 +1,323 @@
+{
+  "stage": "code-generation",
+  "unit": "u10-notifications",
+  "upstream_ids": [
+    "AC9.1.4",
+    "AC9.1.9",
+    "AC9.1.1",
+    "AC9.1.10",
+    "AC9.1.2",
+    "AC9.1.3",
+    "AC9.1.5",
+    "AC9.1.6",
+    "AC9.1.7",
+    "AC9.1.8",
+    "NFR7.101",
+    "NFR7.102",
+    "NFR7.103",
+    "NFR11.101",
+    "NFR4.101",
+    "NFR4.102",
+    "NFR4.103",
+    "NFR4.104",
+    "NFR5.101",
+    "NFR5.102",
+    "NFR6.101",
+    "NFR3.101",
+    "NFR3.102",
+    "NFR3.103",
+    "NFR1.101",
+    "NFR1.102",
+    "NFR2.101",
+    "NFR2.102",
+    "NFR2.103",
+    "NFR2.104",
+    "NFR2.105",
+    "NFR2.106",
+    "NFR8.101",
+    "NFR10.101",
+    "BR11.1",
+    "BR11.2",
+    "BR11.3",
+    "BR11.4",
+    "BR11.5",
+    "BR11.6",
+    "BR11.7",
+    "BR11.8",
+    "BR11.9",
+    "BR11.10",
+    "BR11.11",
+    "BR11.12",
+    "AC1.2.4",
+    "NFR2.107",
+    "NFR2.108",
+    "NFR2.109",
+    "NFR4.105",
+    "NFR6.102"
+  ],
+  "coverage": [
+    {
+      "id": "AC9.1.4",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notificationService.test.ts"
+    },
+    {
+      "id": "AC9.1.9",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notificationPushService.test.ts"
+    },
+    {
+      "id": "AC9.1.1",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationMessages.ts"
+    },
+    {
+      "id": "AC9.1.10",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notificationService.test.ts"
+    },
+    {
+      "id": "AC9.1.2",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notificationService.test.ts"
+    },
+    {
+      "id": "AC9.1.3",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notificationService.test.ts"
+    },
+    {
+      "id": "AC9.1.5",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationMessages.ts"
+    },
+    {
+      "id": "AC9.1.6",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationMessages.ts"
+    },
+    {
+      "id": "AC9.1.7",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notification-dispatch.steps.ts"
+    },
+    {
+      "id": "AC9.1.8",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notificationService.test.ts"
+    },
+    {
+      "id": "NFR7.101",
+      "status": "Deferred",
+      "target": "docs/manual-check-u10.md",
+      "note": "実機の初回60秒/実メール15分は未実行。検証手順と自動の期限/監視試験は用意。"
+    },
+    {
+      "id": "NFR7.102",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationService.ts"
+    },
+    {
+      "id": "NFR7.103",
+      "status": "OK",
+      "target": "packages/backend/src/lib/promise.ts"
+    },
+    {
+      "id": "NFR11.101",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationTime.ts"
+    },
+    {
+      "id": "NFR4.101",
+      "status": "OK",
+      "target": "infrastructure/lib/notification-construct.ts"
+    },
+    {
+      "id": "NFR4.102",
+      "status": "OK",
+      "target": "packages/backend/src/services/familyMemberService.ts"
+    },
+    {
+      "id": "NFR4.103",
+      "status": "OK",
+      "target": "packages/backend/src/repositories/notificationRepository.ts"
+    },
+    {
+      "id": "NFR4.104",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationMaintenanceService.ts"
+    },
+    {
+      "id": "NFR5.101",
+      "status": "OK",
+      "target": "infrastructure/lib/notification-construct.ts"
+    },
+    {
+      "id": "NFR5.102",
+      "status": "OK",
+      "target": "packages/backend/src/repositories/notificationPayloadRepository.ts"
+    },
+    {
+      "id": "NFR6.101",
+      "status": "OK",
+      "target": "docs/notification-runbook.md"
+    },
+    {
+      "id": "NFR3.101",
+      "status": "OK",
+      "target": "infrastructure/lib/notification-construct.ts"
+    },
+    {
+      "id": "NFR3.102",
+      "status": "OK",
+      "target": "packages/backend/src/repositories/familyRepository.ts"
+    },
+    {
+      "id": "NFR3.103",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationMessages.ts"
+    },
+    {
+      "id": "NFR1.101",
+      "status": "OK",
+      "target": "docs/notification-runbook.md"
+    },
+    {
+      "id": "NFR1.102",
+      "status": "OK",
+      "target": "infrastructure/lib/notification-construct.ts"
+    },
+    {
+      "id": "NFR2.101",
+      "status": "Deferred",
+      "target": "docs/manual-check-u10.md",
+      "note": "実機の初回60秒/実メール15分は未実行。検証手順と自動の期限/監視試験は用意。"
+    },
+    {
+      "id": "NFR2.102",
+      "status": "OK",
+      "target": "packages/backend/src/repositories/notificationRepository.ts"
+    },
+    {
+      "id": "NFR2.103",
+      "status": "OK",
+      "target": "packages/backend/src/repositories/notificationRepository.ts"
+    },
+    {
+      "id": "NFR2.104",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationService.ts"
+    },
+    {
+      "id": "NFR2.105",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationService.ts"
+    },
+    {
+      "id": "NFR2.106",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationMaintenanceService.ts"
+    },
+    {
+      "id": "NFR8.101",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notification-dispatch.steps.ts"
+    },
+    {
+      "id": "NFR10.101",
+      "status": "OK",
+      "target": "infrastructure/lib/notification-construct.ts"
+    },
+    {
+      "id": "BR11.1",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationTime.ts"
+    },
+    {
+      "id": "BR11.2",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notificationService.test.ts"
+    },
+    {
+      "id": "BR11.3",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationMessages.ts"
+    },
+    {
+      "id": "BR11.4",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationMessages.ts"
+    },
+    {
+      "id": "BR11.5",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationMessages.ts"
+    },
+    {
+      "id": "BR11.6",
+      "status": "OK",
+      "target": "packages/backend/src/repositories/notificationRepository.ts"
+    },
+    {
+      "id": "BR11.7",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notification-dispatch.steps.ts"
+    },
+    {
+      "id": "BR11.8",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationService.ts"
+    },
+    {
+      "id": "BR11.9",
+      "status": "OK",
+      "target": "packages/backend/src/services/operationalAlertService.ts"
+    },
+    {
+      "id": "BR11.10",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notificationService.test.ts"
+    },
+    {
+      "id": "BR11.11",
+      "status": "OK",
+      "target": "packages/backend/src/services/notificationMessages.ts"
+    },
+    {
+      "id": "BR11.12",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notificationService.test.ts"
+    },
+    {
+      "id": "AC1.2.4",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notificationService.test.ts"
+    },
+    {
+      "id": "NFR2.107",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/notificationResultLog.test.ts"
+    },
+    {
+      "id": "NFR2.108",
+      "status": "OK",
+      "target": "packages/backend/src/services/operationalAlertService.ts"
+    },
+    {
+      "id": "NFR2.109",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/apiFailureAlert.test.ts"
+    },
+    {
+      "id": "NFR4.105",
+      "status": "OK",
+      "target": "packages/backend/test/u10-notifications/operationalAlertService.test.ts"
+    },
+    {
+      "id": "NFR6.102",
+      "status": "OK",
+      "target": "docs/notification-runbook.md"
+    }
+  ],
+  "reverse": []
+}

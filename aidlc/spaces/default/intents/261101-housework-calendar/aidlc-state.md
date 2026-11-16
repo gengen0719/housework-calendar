@@ -187,6 +187,33 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- **Active Unit**: u11-adjustments
+
+- **Unit Stage**: nfr-design
+
+- **Unit State**: in-progress
+
 ## Phase Progress
 <!-- Status values: Pending, Active, Verified, Skipped -->
 
@@ -247,7 +274,7 @@
 - **Current Stage**: functional-design
 - **Next Stage**: nfr-requirements
 - **Status**: Running
-- **Last Updated**: 2026-11-15T06:48:02Z
+- **Last Updated**: 2026-11-16T00:02:19Z
 
 - **Construction Autonomy Mode**: autonomous
 

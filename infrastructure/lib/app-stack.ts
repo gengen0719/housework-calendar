@@ -11,6 +11,7 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
 import type { Construct } from 'constructs';
 import { ssmPrefix, type EnvName } from './env.js';
+import { NotificationConstruct } from './notification-construct.js';
 
 /**
  * 応答ヘッダーの CSP。MUI（emotion）が内側のスタイルを使うため style-src に
@@ -52,6 +53,13 @@ export interface AppStackProps extends StackProps {
   notificationGroups: dynamodb.ITable;
   choreTypes: dynamodb.ITable;
   calendar: dynamodb.ITable;
+  notificationDispatches: dynamodb.ITable;
+  notificationPayloads: dynamodb.ITable;
+  notificationsEnabled?: boolean;
+  notificationEmail?: string;
+  notificationChecksPassed?: boolean;
+  notificationBudgetVerified?: boolean;
+  notificationEstimatedJpy?: number;
   /** CloudFront が元に付ける秘密のヘッダー `X-Origin-Verify` の値（CDK のコンテキストから） */
   originVerifySecret: string;
   /** ビルド済みの画面（packages/frontend/dist）のあるフォルダ */
@@ -290,6 +298,12 @@ export class AppStack extends Stack {
     };
     grantParameters(this.apiFunction, ['jwt/*', 'line/*', 'cloudfront/*']);
     grantParameters(this.lineFunction, ['line/*', 'cloudfront/*']);
+
+    new NotificationConstruct(this, 'Notifications', {
+      ...props,
+      api: this.apiFunction,
+      line: this.lineFunction,
+    });
 
     // --- 関数 URL（認証 NONE。公開で呼べる許可は CDK が付ける。秘密のヘッダーで守る） ---
     const apiUrl = this.apiFunction.addFunctionUrl({ authType: lambda.FunctionUrlAuthType.NONE });

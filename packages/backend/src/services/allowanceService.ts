@@ -45,6 +45,8 @@ export type AdjustmentSource = (
 
 export interface GetAllowancesOptions {
   adjustments?: AdjustmentSource;
+  /** U10の運用ログはHMAC参照だけに限るため、計算だけを再利用する。既定は従来どおりログを出す。 */
+  emitLogs?: boolean;
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -357,7 +359,7 @@ export async function getAllowances(
   options: GetAllowancesOptions = {},
 ): Promise<Allowance[]> {
   const computed = await compute(ctx, month, options);
-  computed.emit();
+  if (options.emitLogs !== false) computed.emit();
   return computed.allowances;
 }
 

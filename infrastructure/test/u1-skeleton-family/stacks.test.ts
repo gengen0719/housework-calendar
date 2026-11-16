@@ -1,3 +1,4 @@
+// U10: 通知2表・notify Lambda/ログ各1・標準アラーム5・api/lineのSNS許可各1を追加。既存の認証・暗号化・表ごとの操作の制約は維持する。
 import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
@@ -102,7 +103,7 @@ describe('U1 CDK stacks', () => {
 
   it('DynamoDB は 8 つ（U2 で Invitations、U3 で NotificationGroups、U4 で ChoreTypes、U5 で Calendar を追加）で、オンデマンド、GSI と TTL がある', () => {
     const data = t('Housework-staging-Data');
-    data.resourceCountIs('AWS::DynamoDB::Table', 8);
+    data.resourceCountIs('AWS::DynamoDB::Table', 10);
     data.allResourcesProperties('AWS::DynamoDB::Table', { BillingMode: 'PAY_PER_REQUEST' });
     data.hasResourceProperties('AWS::DynamoDB::Table', {
       KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }],
@@ -128,7 +129,7 @@ describe('U1 CDK stacks', () => {
       t('Housework-production-Data').findResources('AWS::DynamoDB::Table'),
     );
     const stg = Object.values(t('Housework-staging-Data').findResources('AWS::DynamoDB::Table'));
-    expect(prod).toHaveLength(8);
+    expect(prod).toHaveLength(10);
     for (const r of prod) expect(r.DeletionPolicy).toBe('Retain');
     for (const r of stg) expect(r.DeletionPolicy).toBe('Delete');
   });
@@ -263,7 +264,7 @@ describe('U1 CDK stacks', () => {
       }),
     });
     account.hasResourceProperties('AWS::Budgets::Budget', {
-      Budget: Match.objectLike({ BudgetLimit: { Amount: 1, Unit: 'USD' }, TimeUnit: 'MONTHLY' }),
+      Budget: Match.objectLike({ BudgetLimit: { Amount: 0.5, Unit: 'USD' }, TimeUnit: 'MONTHLY' }),
     });
     // CDK は bootstrap のロールをタグ付きで引き受けるので、TagSession も許していること
     account.hasResourceProperties('AWS::IAM::Policy', {

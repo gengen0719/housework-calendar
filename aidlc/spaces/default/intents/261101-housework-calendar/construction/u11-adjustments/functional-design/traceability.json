@@ -1,0 +1,43 @@
+{
+  "stage": "functional-design",
+  "unit": "u11-adjustments",
+  "upstream_ids": [
+    "AC8.2.5",
+    "AC8.2.6",
+    "AC8.2.1",
+    "AC8.2.2",
+    "AC8.2.3",
+    "AC8.2.4",
+    "AC8.2.7"
+  ],
+  "coverage": [
+    {
+      "id": "AC8.2.5",
+      "status": "OK", "target": "BR12.4 BR12.6"
+    },
+    {
+      "id": "AC8.2.6",
+      "status": "OK", "target": "BR12.5"
+    },
+    {
+      "id": "AC8.2.1",
+      "status": "OK", "target": "BR12.1 BR12.2 BR12.3 BR12.7 BR12.8"
+    },
+    {
+      "id": "AC8.2.2",
+      "status": "OK", "target": "BR12.3 BR12.8"
+    },
+    {
+      "id": "AC8.2.3",
+      "status": "OK", "target": "BR12.2 BR12.8"
+    },
+    {
+      "id": "AC8.2.4",
+      "status": "OK", "target": "BR12.1"
+    },
+    {
+      "id": "AC8.2.7",
+      "status": "OK", "target": "BR12.5"
+    }
+  ]
+}

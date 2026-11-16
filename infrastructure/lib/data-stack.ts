@@ -17,6 +17,8 @@ export class DataStack extends Stack {
   readonly notificationGroups: dynamodb.Table;
   readonly choreTypes: dynamodb.Table;
   readonly calendar: dynamodb.Table;
+  readonly notificationDispatches: dynamodb.Table;
+  readonly notificationPayloads: dynamodb.Table;
 
   constructor(scope: Construct, id: string, props: DataStackProps) {
     super(scope, id, props);
@@ -88,6 +90,19 @@ export class DataStack extends Stack {
       ...common,
       partitionKey: { name: 'familyId', type: dynamodb.AttributeType.STRING },
       sortKey: { name: 'sk', type: dynamodb.AttributeType.STRING },
+    });
+    // U10: 本文と宛先はバックアップ対象のメタデータへ混ぜない。
+    this.notificationDispatches = new dynamodb.Table(this, 'NotificationDispatches', {
+      ...common,
+      partitionKey: { name: 'pk', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'sk', type: dynamodb.AttributeType.STRING },
+      timeToLiveAttribute: 'ttl',
+    });
+    this.notificationPayloads = new dynamodb.Table(this, 'NotificationPayloads', {
+      ...common,
+      partitionKey: { name: 'scheduledDate', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'dispatchKey', type: dynamodb.AttributeType.STRING },
+      timeToLiveAttribute: 'ttl',
     });
   }
 }

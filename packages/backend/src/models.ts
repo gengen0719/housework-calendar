@@ -173,3 +173,29 @@ export interface User {
   registeredAt: string;
   friendStatusChangedAt: string;
 }
+export interface NotificationDispatch {
+  familyId: string;
+  kind: import('@housework/shared').NotificationKind;
+  targetDate: string;
+  scheduledAt: number;
+  expiresAt: number;
+  state: import('@housework/shared').NotificationState;
+  version: number;
+  attempts: number;
+  retryKey: string;
+  leaseOwner?: string;
+  leaseUntil?: number;
+  nextAttemptAt?: number;
+  firstFailureAt?: number;
+  failureReason?: import('@housework/shared').NotificationReason;
+  acceptedAt?: number;
+  providerRequestId?: string;
+}
+export interface NotificationPayload {
+  scheduledDate: string;
+  dispatchKey: string;
+  scheduledAt: number;
+  destination: string;
+  text: string;
+  ttl: number;
+}

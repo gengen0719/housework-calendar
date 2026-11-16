@@ -1,0 +1,182 @@
+{
+  "stage": "nfr-design",
+  "unit": "u10-notifications",
+  "upstream_ids": [
+    "NFR7.101",
+    "NFR7.102",
+    "NFR7.103",
+    "NFR11.101",
+    "NFR4.101",
+    "NFR4.102",
+    "NFR4.103",
+    "NFR4.104",
+    "NFR5.101",
+    "NFR5.102",
+    "NFR6.101",
+    "NFR3.101",
+    "NFR3.102",
+    "NFR3.103",
+    "NFR1.101",
+    "NFR1.102",
+    "NFR2.101",
+    "NFR2.102",
+    "NFR2.103",
+    "NFR2.104",
+    "NFR2.105",
+    "NFR2.106",
+    "NFR8.101",
+    "NFR10.101",
+    "NFR2.107",
+    "NFR2.108",
+    "NFR2.109",
+    "NFR4.105",
+    "NFR6.102"
+  ],
+  "coverage": [
+    {
+      "id": "NFR7.101",
+      "status": "OK",
+      "target": "performance-design.md"
+    },
+    {
+      "id": "NFR7.102",
+      "status": "OK",
+      "target": "performance-design.md"
+    },
+    {
+      "id": "NFR7.103",
+      "status": "OK",
+      "target": "performance-design.md"
+    },
+    {
+      "id": "NFR11.101",
+      "status": "OK",
+      "target": "performance-design.md"
+    },
+    {
+      "id": "NFR4.101",
+      "status": "OK",
+      "target": "security-design.md"
+    },
+    {
+      "id": "NFR4.102",
+      "status": "OK",
+      "target": "security-design.md"
+    },
+    {
+      "id": "NFR4.103",
+      "status": "OK",
+      "target": "security-design.md"
+    },
+    {
+      "id": "NFR4.104",
+      "status": "OK",
+      "target": "security-design.md"
+    },
+    {
+      "id": "NFR5.101",
+      "status": "OK",
+      "target": "security-design.md"
+    },
+    {
+      "id": "NFR5.102",
+      "status": "OK",
+      "target": "security-design.md"
+    },
+    {
+      "id": "NFR6.101",
+      "status": "OK",
+      "target": "security-design.md"
+    },
+    {
+      "id": "NFR3.101",
+      "status": "OK",
+      "target": "scalability-design.md"
+    },
+    {
+      "id": "NFR3.102",
+      "status": "OK",
+      "target": "scalability-design.md"
+    },
+    {
+      "id": "NFR3.103",
+      "status": "OK",
+      "target": "scalability-design.md"
+    },
+    {
+      "id": "NFR1.101",
+      "status": "OK",
+      "target": "scalability-design.md"
+    },
+    {
+      "id": "NFR1.102",
+      "status": "OK",
+      "target": "scalability-design.md"
+    },
+    {
+      "id": "NFR2.101",
+      "status": "OK",
+      "target": "reliability-design.md"
+    },
+    {
+      "id": "NFR2.102",
+      "status": "OK",
+      "target": "reliability-design.md"
+    },
+    {
+      "id": "NFR2.103",
+      "status": "OK",
+      "target": "reliability-design.md"
+    },
+    {
+      "id": "NFR2.104",
+      "status": "OK",
+      "target": "reliability-design.md"
+    },
+    {
+      "id": "NFR2.105",
+      "status": "OK",
+      "target": "reliability-design.md"
+    },
+    {
+      "id": "NFR2.106",
+      "status": "OK",
+      "target": "reliability-design.md"
+    },
+    {
+      "id": "NFR8.101",
+      "status": "OK",
+      "target": "reliability-design.md"
+    },
+    {
+      "id": "NFR10.101",
+      "status": "OK",
+      "target": "reliability-design.md"
+    },
+    {
+      "id": "NFR2.107",
+      "status": "OK",
+      "target": "observability-design.md"
+    },
+    {
+      "id": "NFR2.108",
+      "status": "OK",
+      "target": "observability-design.md"
+    },
+    {
+      "id": "NFR2.109",
+      "status": "OK",
+      "target": "observability-design.md"
+    },
+    {
+      "id": "NFR4.105",
+      "status": "OK",
+      "target": "observability-design.md"
+    },
+    {
+      "id": "NFR6.102",
+      "status": "OK",
+      "target": "observability-design.md"
+    }
+  ]
+}
