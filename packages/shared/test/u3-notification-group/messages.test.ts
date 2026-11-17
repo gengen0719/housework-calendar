@@ -45,7 +45,7 @@ describe('共有パッケージ: U3 で足す印と文言（US1.2）', () => {
     expect(GROUP_JOIN_GUIDE).toContain('『登録』と送ってください');
     expect(GROUP_REGISTER_BUTTON).toBe('このグループをお知らせ先にする');
     expect(NOTIFICATION_GROUP_HOWTO).toBe(
-      '公式アカウントを家族のグループ LINE に招待し、届いたボタンを押してください',
+      '公式アカウントを家族のグループ LINE に招待し、届いたボタンを押してください。すぐに退会する場合は、作り手にグループへの参加許可を確認してください。同じグループに入れる公式アカウントは1つだけです',
     );
   });
 
