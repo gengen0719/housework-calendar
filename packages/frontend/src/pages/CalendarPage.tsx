@@ -148,6 +148,7 @@ export function CalendarPage({
         )}
         {calendar.hasAssignment ? (
           <DayList
+            key={calendar.month}
             calendar={calendar}
             selectedDate={selectedDate}
             isAdmin={isAdmin}
@@ -230,6 +231,22 @@ export function CalendarPage({
           この月のお小遣いを確認
         </Button>
       )}
+      {isAdmin && state.kind === 'ready' && confirming && (
+        <MonthConfirmDialog
+          preview={{
+            month: monthHeading(state.value.month),
+            action: confirming,
+            // 未の件数は、読み込み済みのカレンダーの担当から数える（新しい API は足さない。BR8.10）
+            ...(confirming === 'confirm'
+              ? { todoCount: state.value.duties.filter((d) => d.status === 'todo').length }
+              : {}),
+          }}
+          busy={confirmBusy}
+          onConfirm={() => void submitMonthConfirmation(confirming)}
+          onCancel={() => setConfirming(undefined)}
+        />
+      )}
+      {renderBody()}
       {isAdmin && state.kind === 'ready' && (
         <Stack spacing={1} sx={{ alignItems: 'flex-start' }} data-testid="month-confirm-area">
           {state.value.confirmed ? (
@@ -264,22 +281,6 @@ export function CalendarPage({
           )}
         </Stack>
       )}
-      {isAdmin && state.kind === 'ready' && confirming && (
-        <MonthConfirmDialog
-          preview={{
-            month: monthHeading(state.value.month),
-            action: confirming,
-            // 未の件数は、読み込み済みのカレンダーの担当から数える（新しい API は足さない。BR8.10）
-            ...(confirming === 'confirm'
-              ? { todoCount: state.value.duties.filter((d) => d.status === 'todo').length }
-              : {}),
-          }}
-          busy={confirmBusy}
-          onConfirm={() => void submitMonthConfirmation(confirming)}
-          onCancel={() => setConfirming(undefined)}
-        />
-      )}
-      {renderBody()}
     </Stack>
   );
 }
@@ -305,6 +306,11 @@ function DayList({
   onChanged,
   onRefresh,
 }: DayListProps) {
+  const [expandedMonth, setExpandedMonth] = useState<string>();
+  const pastExpanded = expandedMonth === calendar.month;
+  const dates = datesOfMonth(calendar.month);
+  const pastDates = dates.filter((date) => date < calendar.today);
+  const visibleDates = pastExpanded ? dates : dates.filter((date) => date >= calendar.today);
   const byDate = useMemo(() => {
     const map = new Map<string, Duty[]>();
     for (const duty of calendar.duties) map.set(duty.date, [...(map.get(duty.date) ?? []), duty]);
@@ -337,13 +343,28 @@ function DayList({
           onClose={() => onSelect(selectedDate)}
         />
       )}
+      {pastDates.length > 0 && (
+        <Button
+          aria-expanded={pastExpanded}
+          aria-controls="calendar-days"
+          onClick={() => {
+            setExpandedMonth(pastExpanded ? undefined : calendar.month);
+            if (pastExpanded && selectedDate && selectedDate < calendar.today)
+              onSelect(selectedDate);
+          }}
+          data-testid="toggle-past-days"
+        >
+          {pastExpanded ? '過ぎた日付を折りたたむ' : `過ぎた日付を表示（${pastDates.length}日分）`}
+        </Button>
+      )}
       <Box
+        id="calendar-days"
         component="ol"
         aria-label={`${monthHeading(calendar.month)}の日ごとの担当`}
         data-testid="calendar-grid"
         sx={{ listStyle: 'none', p: 0, m: 0 }}
       >
-        {datesOfMonth(calendar.month).map((date) => {
+        {visibleDates.map((date) => {
           const duties = byDate.get(date) ?? [];
           const isToday = date === calendar.today;
           return (

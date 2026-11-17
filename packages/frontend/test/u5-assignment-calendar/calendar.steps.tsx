@@ -59,6 +59,8 @@ async function monthShown(text: string): Promise<void> {
 
 async function listShown(): Promise<HTMLElement[]> {
   return await waitFor(() => {
+    const toggle = screen.queryByTestId('toggle-past-days');
+    if (toggle?.getAttribute('aria-expanded') === 'false') fireEvent.click(toggle);
     const rows = screen.getAllByTestId('day-row');
     expect(rows.length).toBeGreaterThan(0);
     return rows;
@@ -66,6 +68,8 @@ async function listShown(): Promise<HTMLElement[]> {
 }
 
 const rowOf = (date: string): HTMLElement => {
+  const toggle = screen.queryByTestId('toggle-past-days');
+  if (toggle?.getAttribute('aria-expanded') === 'false') fireEvent.click(toggle);
   const row = screen.getAllByTestId('day-row').find((r) => r.getAttribute('data-date') === date);
   if (!row) throw new Error(`${date} の行がありません`);
   return row;

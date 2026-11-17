@@ -45,12 +45,15 @@ describe('CalendarPage', () => {
     delete (Element.prototype as { scrollIntoView?: unknown }).scrollIntoView;
   });
 
-  it('2026 年 11 月は 30 日分の行と今日の印が出る', async () => {
+  it('過去を展開すると2026 年 11 月の30 日分の行と今日の印が出る', async () => {
     stubCalendar('2026-11-15');
     vi.useFakeTimers({ toFake: ['Date'] });
     vi.setSystemTime(new Date('2026-11-15T03:00:00.000Z'));
     render(<CalendarPage familyName="田中家" authorized={authorized} />);
-    const rows = await screen.findAllByTestId('day-row');
+    await screen.findAllByTestId('day-row');
+    expect(screen.getAllByTestId('day-row')).toHaveLength(16);
+    fireEvent.click(screen.getByTestId('toggle-past-days'));
+    const rows = screen.getAllByTestId('day-row');
     vi.useRealTimers();
     expect(screen.getByTestId('calendar-month')).toHaveTextContent('2026年11月');
     expect(rows).toHaveLength(30);
