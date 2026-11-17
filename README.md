@@ -643,6 +643,14 @@ DynamoDBの呼出し回数は `AWS/DynamoDB` の `SuccessfulRequestLatency` の 
 
 ## 既知の課題
 
+## U10 定時のお知らせと障害メール
+
+毎日16時に全担当の状態つき一覧、月末21時に全員のお小遣い合計を1通ずつ送る通知入口を追加しました。未登録・担当なし・確定した月の日次通知・子供0人のまとめは正常省略です。0円や負額はそのまま表示します。配信受理後に記録へ保存できなかった場合も、同じ本文・宛先・再試行キーを使い、15分未満/最大3試行で照合します。
+
+配備時はSchedulerとSQS連携が既定で無効です。[有効化・停止と復旧](docs/notification-runbook.md)、[実機確認（未実行）](docs/manual-check-u10.md)、[契約変更](docs/contract-changes-u10.md)を参照してください。検査は `npx vitest run u10-notifications`、既存の全体CIにも含まれます。通知用の公開URLはありません。既存の画面/LINEのスモーク24件を維持します。
+
+費用目標は2環境合計で月100円です。設計の約56円は無料枠と利用量・200円/USD・税等10%の仮定による計画値です。実際の税込み見積もりと無料枠を確認するまで有効化しません。AWS Budgetsの0.50USD通知は請求を強制停止しません。メール購読確認、15分以内の実受信、実LINEの重複受理0回、清掃・復旧・費用の実測はまだ行っていません。
+
 - GitHub Actions のサードパーティのアクション（`actions/checkout`、`actions/setup-node`、`aws-actions/configure-aws-credentials`、`gitleaks/gitleaks-action`）は、いまはバージョンのタグで指定しています。コミット SHA の固定は、ネットワークのある環境で調べて置き換えてください。
 - 本番用の OIDC のロールは `environment:production` で絞っています。「`main` のコミットだけ」は、GitHub の環境の Deployment branches と、`deploy-production.yml` の確かめ（ref が `main` にあること）で守っています。
 - ステージングと本番で LINE のチャネルを別にすると、公式アカウントごとに無料で送れるメッセージ数の枠があります。費用 0 円の条件との関係は、要件の段階で確かめてください。

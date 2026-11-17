@@ -9,6 +9,7 @@ export const docClient = DynamoDBDocumentClient.from(new DynamoDBClient({}), {
 
 /** テーブル名は環境変数から読む。 */
 export const tables = {
+  adjustments: () => requireEnv('ADJUSTMENTS_TABLE'),
   users: () => requireEnv('USERS_TABLE'),
   families: () => requireEnv('FAMILIES_TABLE'),
   processedLineEvents: () => requireEnv('PROCESSED_LINE_EVENTS_TABLE'),

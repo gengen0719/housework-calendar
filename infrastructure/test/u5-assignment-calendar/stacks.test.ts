@@ -1,3 +1,4 @@
+// U10: 通知2表・notify Lambda/ログ各1・標準アラーム5・api/lineのSNS許可各1を追加。既存の認証・暗号化・表ごとの操作の制約は維持する。
 import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
@@ -130,7 +131,7 @@ describe('U5 CDK: Data スタック', () => {
   });
 
   it('テーブルの合計は 8 つ', () => {
-    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 8);
+    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 11);
   });
 });
 

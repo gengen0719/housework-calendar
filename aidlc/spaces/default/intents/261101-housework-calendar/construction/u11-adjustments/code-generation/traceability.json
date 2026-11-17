@@ -1,0 +1,224 @@
+{
+  "stage": "code-generation",
+  "unit": "u11-adjustments",
+  "upstream_ids": [
+    "AC8.2.5",
+    "AC8.2.6",
+    "AC8.2.1",
+    "AC8.2.2",
+    "AC8.2.3",
+    "AC8.2.4",
+    "AC8.2.7",
+    "NFR7.201",
+    "NFR7.202",
+    "NFR9.201",
+    "NFR4.201",
+    "NFR4.202",
+    "NFR5.201",
+    "NFR10.201",
+    "NFR1.201",
+    "NFR3.201",
+    "NFR7.203",
+    "NFR6.201",
+    "NFR6.202",
+    "NFR6.203",
+    "NFR6.204",
+    "NFR2.201",
+    "NFR8.201",
+    "NFR11.201",
+    "BR12.1",
+    "BR12.2",
+    "BR12.3",
+    "BR12.4",
+    "BR12.5",
+    "BR12.6",
+    "BR12.7",
+    "BR12.8",
+    "AC1.1.12",
+    "NFR2.202",
+    "NFR5.202",
+    "NFR7.204"
+  ],
+  "coverage": [
+    {
+      "id": "AC8.2.5",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/deletion.test.ts"
+    },
+    {
+      "id": "AC8.2.6",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/adjustment-totals.steps.ts"
+    },
+    {
+      "id": "AC8.2.1",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/adjustments.steps.ts"
+    },
+    {
+      "id": "AC8.2.2",
+      "status": "OK",
+      "target": "packages/shared/test/u11-adjustments/adjustment.test.ts"
+    },
+    {
+      "id": "AC8.2.3",
+      "status": "OK",
+      "target": "packages/shared/test/u11-adjustments/adjustment.test.ts"
+    },
+    {
+      "id": "AC8.2.4",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/registration.test.ts"
+    },
+    {
+      "id": "AC8.2.7",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/adjustment-totals.steps.ts"
+    },
+    {
+      "id": "NFR7.201",
+      "status": "Deferred",
+      "target": "docs/manual-check-u11.md"
+    },
+    {
+      "id": "NFR7.202",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/integration.test.ts"
+    },
+    {
+      "id": "NFR9.201",
+      "status": "Deferred",
+      "target": "docs/manual-check-u11.md"
+    },
+    {
+      "id": "NFR4.201",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/registration.test.ts"
+    },
+    {
+      "id": "NFR4.202",
+      "status": "OK",
+      "target": "packages/shared/test/u11-adjustments/adjustment.test.ts"
+    },
+    {
+      "id": "NFR5.201",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/integration.test.ts"
+    },
+    {
+      "id": "NFR10.201",
+      "status": "OK",
+      "target": "infrastructure/test/u11-adjustments/stacks.test.ts"
+    },
+    {
+      "id": "NFR1.201",
+      "status": "Deferred",
+      "target": "docs/adjustment-runbook.md"
+    },
+    {
+      "id": "NFR3.201",
+      "status": "OK",
+      "target": "infrastructure/test/u11-adjustments/stacks.test.ts"
+    },
+    {
+      "id": "NFR7.203",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/integration.test.ts"
+    },
+    {
+      "id": "NFR6.201",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/adjustmentCalculation.test.ts"
+    },
+    {
+      "id": "NFR6.202",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/registration.test.ts"
+    },
+    {
+      "id": "NFR6.203",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/registration.test.ts"
+    },
+    {
+      "id": "NFR6.204",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/backup.test.ts"
+    },
+    {
+      "id": "NFR2.201",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/integration.test.ts"
+    },
+    {
+      "id": "NFR8.201",
+      "status": "OK",
+      "target": "aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-summary.md"
+    },
+    {
+      "id": "NFR11.201",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/registration.test.ts"
+    },
+    {
+      "id": "BR12.1",
+      "status": "OK",
+      "target": "packages/backend/src/services/adjustmentService.ts"
+    },
+    {
+      "id": "BR12.2",
+      "status": "OK",
+      "target": "packages/shared/src/adjustment.ts"
+    },
+    {
+      "id": "BR12.3",
+      "status": "OK",
+      "target": "packages/shared/src/adjustment.ts"
+    },
+    {
+      "id": "BR12.4",
+      "status": "OK",
+      "target": "packages/backend/src/repositories/adjustmentRepository.ts"
+    },
+    {
+      "id": "BR12.5",
+      "status": "OK",
+      "target": "packages/backend/src/services/allowanceService.ts"
+    },
+    {
+      "id": "BR12.6",
+      "status": "OK",
+      "target": "packages/frontend/src/pages/AdjustmentListPage.tsx"
+    },
+    {
+      "id": "BR12.7",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/registration.test.ts"
+    },
+    {
+      "id": "BR12.8",
+      "status": "OK",
+      "target": "packages/frontend/test/u11-adjustments/AdjustmentPage.test.tsx"
+    },
+    {
+      "id": "AC1.1.12",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/deletion.test.ts"
+    },
+    {
+      "id": "NFR2.202",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/integration.test.ts"
+    },
+    {
+      "id": "NFR5.202",
+      "status": "OK",
+      "target": "packages/backend/test/u11-adjustments/integration.test.ts"
+    },
+    {
+      "id": "NFR7.204",
+      "status": "Deferred",
+      "target": "docs/manual-check-u11.md"
+    }
+  ]
+}

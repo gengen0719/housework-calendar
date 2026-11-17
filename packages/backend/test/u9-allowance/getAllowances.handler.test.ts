@@ -15,7 +15,8 @@ describe('お小遣いの薄い入口', () => {
       allowances: [],
     });
     await getAllowances(ctx, MONTH, new Date(JST_BEFORE_BOUNDARY_ISO));
-    expect(call).toHaveBeenCalledWith(ctx, MONTH, { today: '2027-01-31' });
+    // U11: 理由・金額・生familyIdを運用ログへ出さないAPI経路。
+    expect(call).toHaveBeenCalledWith(ctx, MONTH, { today: '2027-01-31', emitLogs: false });
   });
   it('メンバーの確認を月の形より先にする', async () => {
     await expect(

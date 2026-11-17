@@ -41731,3 +41731,4624 @@
 **Review Finding Dispositions**: {"version":1,"dispositions":[{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u9-allowance/code-generation/code-generation-plan.md","id":"R-03","fingerprint":"sha256:1203dd529ff15130bff78c9d7f5e2e8330d55ef266cbb8f937beec01015d0557","status":"Approved autonomously","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.json","digest":"sha256:542323b2e7f885da667813ee2fba8359ed161b11a91488f4eafa2957abe3c244"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u9-allowance/functional-design/functional-spec.md","id":"R-01","fingerprint":"sha256:7bc56775baf064e865b5e3bff6a224f4b126dbeffd3b266e9d5255fe8b702835","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u9-allowance/924f2e3cbd1e4ff0/1.json","digest":"sha256:7ed74811301b4bb08053d499ba6c33e587e42ff18d3ea5f77e4baaf703e7639d"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u9-allowance/functional-design/functional-spec.md","id":"R-02","fingerprint":"sha256:1f216835eb0ac6c2f735753eebde0d9649e2d3340eebdaeacbe259391f92b77b","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u9-allowance/924f2e3cbd1e4ff0/1.json","digest":"sha256:7ed74811301b4bb08053d499ba6c33e587e42ff18d3ea5f77e4baaf703e7639d"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u9-allowance/functional-design/functional-spec.md","id":"R-03","fingerprint":"sha256:dc5d032bd0c939f87462dd2625f67c4aec530c42d1272b2bf0ef3926648c9d2f","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u9-allowance/924f2e3cbd1e4ff0/1.json","digest":"sha256:7ed74811301b4bb08053d499ba6c33e587e42ff18d3ea5f77e4baaf703e7639d"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u9-allowance/functional-design/functional-spec.md","id":"R-04","fingerprint":"sha256:207fe4b9f3077a9f3c1be1d1c71bdd88f1b996eaa4999aecd1fafc2bea49526c","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u9-allowance/924f2e3cbd1e4ff0/1.json","digest":"sha256:7ed74811301b4bb08053d499ba6c33e587e42ff18d3ea5f77e4baaf703e7639d"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u9-allowance/functional-design/functional-spec.md","id":"R-05","fingerprint":"sha256:b39d889c3c0abc7082ec730e3ffad3eff8b421df9b52714aad1d3703351dd02e","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u9-allowance/924f2e3cbd1e4ff0/1.json","digest":"sha256:7ed74811301b4bb08053d499ba6c33e587e42ff18d3ea5f77e4baaf703e7639d"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u9-allowance/functional-design/functional-spec.md","id":"R-06","fingerprint":"sha256:87ee66557b52d0aba9b4a838ac695adb8bc4ccfe76041372e58c93647b0e918b","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u9-allowance/924f2e3cbd1e4ff0/1.json","digest":"sha256:7ed74811301b4bb08053d499ba6c33e587e42ff18d3ea5f77e4baaf703e7639d"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u9-allowance/nfr-design/security-design.md","id":"R-05","fingerprint":"sha256:069f479564c8df146b144099e5cafa8ee51067ef6be521b5be3afa3c91ba7459","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-design/units/u9-allowance/924f2e3cbd1e4ff0/2.json","digest":"sha256:60af1c2a491cffd6030b0abb4ebd5b462e94d65eba9ef1f9700e9a01879a5ccc"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u9-allowance/nfr-design/security-design.md","id":"R-06","fingerprint":"sha256:c0fbca735102b66ea20f4e3a1c31268a0c2013048f57ad5a4b122006127d9ad7","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-design/units/u9-allowance/924f2e3cbd1e4ff0/2.json","digest":"sha256:60af1c2a491cffd6030b0abb4ebd5b462e94d65eba9ef1f9700e9a01879a5ccc"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u9-allowance/nfr-requirements/security-requirements.md","id":"R-07","fingerprint":"sha256:1813e4bfa5fd1f1b667275284972dfab61e12204404f5120e984d89ae6f83f30","status":"Changed after review","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-requirements/units/u9-allowance/924f2e3cbd1e4ff0/2.json","digest":"sha256:fd806a3d08a95f3a23d6f7a0e46746848fa1093db79ef881f7b9422a461325e4"}}]}
 
 ---
+
+## Unit Started
+**Timestamp**: 2026-11-15T06:51:33Z
+**Event**: UNIT_STARTED
+**Stage**: functional-design
+**Unit**: u10-notifications
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T06:52:19Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/functional-design-questions.md
+**Context**: construction > u10-notifications > functional-design > functional-design-questions.md
+
+---
+
+## Decision Recorded
+**Timestamp**: 2026-11-15T06:52:20Z
+**Event**: DECISION_RECORDED
+**Stage**: functional-design
+**Decision**: U10機能設計Q1・Q2: 遅れた通知の再送期限と対象の子供がいない月末の扱い。functional-design-questions.mdに回答してください。
+**Options**: Q1 A:予定から15分以内だけ再送,Q1 B:当日23:59まで再送,Q1 X:その他,Q2 A:対象の子供がいなければ送らない,Q2 B:対象の子供がいないと1通送る,Q2 X:その他
+**Unit**: u10-notifications
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-15T06:54:31Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: a5443e24
+
+---
+
+## Question Answered
+**Timestamp**: 2026-11-15T06:54:47Z
+**Event**: QUESTION_ANSWERED
+**Stage**: functional-design
+**Details**: Q1: A 予定時刻から15分以内だけ自動再送する; Q2: A 対象の子供がいなければ月末のまとめを送らない
+**Unit**: u10-notifications
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T06:57:35Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/entities.md
+**Context**: construction > u10-notifications > functional-design > entities.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T06:57:35Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/rules.md
+**Context**: construction > u10-notifications > functional-design > rules.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T06:57:35Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/functional-spec.md
+**Context**: construction > u10-notifications > functional-design > functional-spec.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T06:58:07Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/traceability.json
+**Context**: construction > u10-notifications > functional-design > traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T06:58:07Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/functional-design/memory.md
+**Context**: construction > functional-design > memory.md
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T06:58:10Z
+**Event**: SENSOR_FIRED
+**Fire id**: d60c4a09
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/entities.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T06:58:10Z
+**Event**: SENSOR_PASSED
+**Fire id**: d60c4a09
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/entities.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T06:58:10Z
+**Event**: SENSOR_FIRED
+**Fire id**: 36ff6bc6
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/rules.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T06:58:11Z
+**Event**: SENSOR_PASSED
+**Fire id**: 36ff6bc6
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/rules.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T06:58:11Z
+**Event**: SENSOR_FIRED
+**Fire id**: 54672509
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/functional-spec.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T06:58:11Z
+**Event**: SENSOR_PASSED
+**Fire id**: 54672509
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/functional-spec.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T06:58:11Z
+**Event**: SENSOR_FIRED
+**Fire id**: 05432e58
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T06:58:11Z
+**Event**: SENSOR_PASSED
+**Fire id**: 05432e58
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/traceability.json
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T06:58:11Z
+**Event**: SENSOR_FIRED
+**Fire id**: 08e9c51d
+**Sensor ID**: upstream-coverage
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/entities.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T06:58:11Z
+**Event**: SENSOR_PASSED
+**Fire id**: 08e9c51d
+**Sensor ID**: upstream-coverage
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/entities.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T06:58:11Z
+**Event**: SENSOR_FIRED
+**Fire id**: 5682f81e
+**Sensor ID**: traceability
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T06:58:11Z
+**Event**: SENSOR_PASSED
+**Fire id**: 5682f81e
+**Sensor ID**: traceability
+**Stage slug**: functional-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/traceability.json
+**Duration ms**: 53
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-15T06:58:11Z
+**Event**: REVIEW_REQUESTED
+**Stage**: functional-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:a5ff8ba8074411120d1d6cc6ed36bda5d6ce6578872b3c0ce49fd1bee78dd142
+**Request Id**: review:1a8369e08736d6c3a4f56c24400f6da6
+**Review File**: .aidlc-engine/reviews/functional-design/units/u10-notifications/924f2e3cbd1e4ff0/1.1a8369e08736d6c3a4f56c24400f6da6.review.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T06:58:22Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviewer-dispatch.json
+**Context**: .aidlc-engine > reviewer-dispatch.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:00:27Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/functional-design/units/u10-notifications/924f2e3cbd1e4ff0/1.1a8369e08736d6c3a4f56c24400f6da6.review.md
+**Context**: .aidlc-engine > reviews > functional-design > units > u10-notifications > 924f2e3cbd1e4ff0 > 1.1a8369e08736d6c3a4f56c24400f6da6.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-15T07:00:33Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**READY**\n\nU10の機能設計レビューを指定ファイルに記録しました。軽微な指摘は2点です。\n\n- 条件付き更新に使う「版」がエンティティに未定義。\n- 共有AC1.2.4がtraceabilityのcoverageに欠落。\n\nYAML・JSONの解析と宣言済みBR参照は正常でした。
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/functional-design/units/u10-notifications/924f2e3cbd1e4ff0/1.1a8369e08736d6c3a4f56c24400f6da6.review.md=0bcfbc0106fd2b77446d062ffec7a1b9aac5c4a5e56e20b70338f0e912c46a9f
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-15T07:00:43Z
+**Event**: REVIEW_COMPLETED
+**Stage**: functional-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:a5ff8ba8074411120d1d6cc6ed36bda5d6ce6578872b3c0ce49fd1bee78dd142
+**Artifact Fingerprint**: sha256:a5ff8ba8074411120d1d6cc6ed36bda5d6ce6578872b3c0ce49fd1bee78dd142
+**Request Id**: review:1a8369e08736d6c3a4f56c24400f6da6
+**Review Record**: .aidlc-engine/reviews/functional-design/units/u10-notifications/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:c038d07e5c991d53c15e7910b961a6ff283c856a9cf3c7f33e7e745942897c92
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-15T07:00:53Z
+**Event**: UNIT_COMPLETED
+**Stage**: functional-design
+**Unit**: u10-notifications
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-15T07:02:15Z
+**Event**: UNIT_STARTED
+**Stage**: nfr-requirements
+**Unit**: u10-notifications
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:02:16Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/nfr-requirements-questions.md
+**Context**: construction > u10-notifications > nfr-requirements > nfr-requirements-questions.md
+
+---
+
+## Decision Recorded
+**Timestamp**: 2026-11-15T07:02:16Z
+**Event**: DECISION_RECORDED
+**Stage**: nfr-requirements
+**Decision**: U10品質・運用Q1: 作り手への障害通知の受信方法。nfr-requirements-questions.mdに回答してください。
+**Options**: A:メール,B:Slack,X:その他
+**Unit**: u10-notifications
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-15T07:14:35Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: ebc998c8
+
+---
+
+## Question Answered
+**Timestamp**: 2026-11-15T07:14:46Z
+**Event**: QUESTION_ANSWERED
+**Stage**: nfr-requirements
+**Details**: Q1: A メール。配備時に受信用アドレスの登録、購読確認、受信テストを行う。
+**Unit**: u10-notifications
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:16:40Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/performance-requirements.md
+**Context**: construction > u10-notifications > nfr-requirements > performance-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:16:40Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/security-requirements.md
+**Context**: construction > u10-notifications > nfr-requirements > security-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:16:40Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/scalability-requirements.md
+**Context**: construction > u10-notifications > nfr-requirements > scalability-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:16:40Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/reliability-requirements.md
+**Context**: construction > u10-notifications > nfr-requirements > reliability-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:16:41Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/observability-requirements.md
+**Context**: construction > u10-notifications > nfr-requirements > observability-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:16:41Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/tech-stack-decisions.md
+**Context**: construction > u10-notifications > nfr-requirements > tech-stack-decisions.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T07:17:13Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/traceability.json
+**Context**: construction > u10-notifications > nfr-requirements > traceability.json
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:17:17Z
+**Event**: SENSOR_FIRED
+**Fire id**: 94ec7f35
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/performance-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:17:17Z
+**Event**: SENSOR_PASSED
+**Fire id**: 94ec7f35
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/performance-requirements.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:17:17Z
+**Event**: SENSOR_FIRED
+**Fire id**: e3685f06
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/security-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:17:17Z
+**Event**: SENSOR_PASSED
+**Fire id**: e3685f06
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/security-requirements.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:17:17Z
+**Event**: SENSOR_FIRED
+**Fire id**: fcb5370a
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/scalability-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:17:17Z
+**Event**: SENSOR_PASSED
+**Fire id**: fcb5370a
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/scalability-requirements.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:17:17Z
+**Event**: SENSOR_FIRED
+**Fire id**: 9f55dfb0
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/reliability-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:17:17Z
+**Event**: SENSOR_PASSED
+**Fire id**: 9f55dfb0
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/reliability-requirements.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:17:17Z
+**Event**: SENSOR_FIRED
+**Fire id**: c688da8d
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/observability-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:17:17Z
+**Event**: SENSOR_PASSED
+**Fire id**: c688da8d
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/observability-requirements.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:17:18Z
+**Event**: SENSOR_FIRED
+**Fire id**: 5de91830
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/tech-stack-decisions.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:17:18Z
+**Event**: SENSOR_PASSED
+**Fire id**: 5de91830
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/tech-stack-decisions.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:17:18Z
+**Event**: SENSOR_FIRED
+**Fire id**: 7700b99c
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:17:18Z
+**Event**: SENSOR_PASSED
+**Fire id**: 7700b99c
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/traceability.json
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:17:18Z
+**Event**: SENSOR_FIRED
+**Fire id**: 1ba57464
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/performance-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:17:18Z
+**Event**: SENSOR_PASSED
+**Fire id**: 1ba57464
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/performance-requirements.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:17:18Z
+**Event**: SENSOR_FIRED
+**Fire id**: 6eb86500
+**Sensor ID**: traceability
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:17:18Z
+**Event**: SENSOR_PASSED
+**Fire id**: 6eb86500
+**Sensor ID**: traceability
+**Stage slug**: nfr-requirements
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/traceability.json
+**Duration ms**: 61
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-15T07:17:18Z
+**Event**: REVIEW_REQUESTED
+**Stage**: nfr-requirements
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:31fae005ba7f56dfbcbaac1703e7519a1dcd06a58505020ebdb89358548a7c5e
+**Request Id**: review:6297f399e3e8f57bc319bdd436a7654f
+**Review File**: .aidlc-engine/reviews/nfr-requirements/units/u10-notifications/924f2e3cbd1e4ff0/1.6297f399e3e8f57bc319bdd436a7654f.review.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:17:28Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviewer-dispatch.json
+**Context**: .aidlc-engine > reviewer-dispatch.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:18:54Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/nfr-requirements/units/u10-notifications/924f2e3cbd1e4ff0/1.6297f399e3e8f57bc319bdd436a7654f.review.md
+**Context**: .aidlc-engine > reviews > nfr-requirements > units > u10-notifications > 924f2e3cbd1e4ff0 > 1.6297f399e3e8f57bc319bdd436a7654f.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-15T07:18:58Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**READY**\n\n新規指摘なし。詳細NFR29件の一意性、上流NFR1〜11の網羅、参照先の存在を確認しました。\n\n再送期限・メール通知・データ保持・検証条件は機能設計と整合しています。指定ファイルへレビューを記録しました。
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/nfr-requirements/units/u10-notifications/924f2e3cbd1e4ff0/1.6297f399e3e8f57bc319bdd436a7654f.review.md=18f2147675467f0333f5faeeb0cbdc07b1d10ade9cbe8a0eb465474cd10ac641
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-15T07:19:03Z
+**Event**: REVIEW_COMPLETED
+**Stage**: nfr-requirements
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:31fae005ba7f56dfbcbaac1703e7519a1dcd06a58505020ebdb89358548a7c5e
+**Artifact Fingerprint**: sha256:31fae005ba7f56dfbcbaac1703e7519a1dcd06a58505020ebdb89358548a7c5e
+**Request Id**: review:6297f399e3e8f57bc319bdd436a7654f
+**Review Record**: .aidlc-engine/reviews/nfr-requirements/units/u10-notifications/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:2c543090d2cc73d3f6a7a6d2fc3b5afafeb8f10f146fdd6e6b03e617b31f61d1
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-15T07:19:06Z
+**Event**: UNIT_COMPLETED
+**Stage**: nfr-requirements
+**Unit**: u10-notifications
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-15T07:19:44Z
+**Event**: UNIT_STARTED
+**Stage**: nfr-design
+**Unit**: u10-notifications
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:22:16Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/performance-design.md
+**Context**: construction > u10-notifications > nfr-design > performance-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:22:16Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/security-design.md
+**Context**: construction > u10-notifications > nfr-design > security-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:22:16Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/scalability-design.md
+**Context**: construction > u10-notifications > nfr-design > scalability-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:22:16Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/reliability-design.md
+**Context**: construction > u10-notifications > nfr-design > reliability-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:22:16Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/observability-design.md
+**Context**: construction > u10-notifications > nfr-design > observability-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:22:17Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/logical-components.md
+**Context**: construction > u10-notifications > nfr-design > logical-components.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T07:22:41Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/traceability.json
+**Context**: construction > u10-notifications > nfr-design > traceability.json
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:22:44Z
+**Event**: SENSOR_FIRED
+**Fire id**: 33188101
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/performance-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:22:44Z
+**Event**: SENSOR_PASSED
+**Fire id**: 33188101
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/performance-design.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:22:44Z
+**Event**: SENSOR_FIRED
+**Fire id**: 6a3c8c13
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/security-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:22:44Z
+**Event**: SENSOR_PASSED
+**Fire id**: 6a3c8c13
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/security-design.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:22:44Z
+**Event**: SENSOR_FIRED
+**Fire id**: 7de63e47
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/scalability-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:22:44Z
+**Event**: SENSOR_PASSED
+**Fire id**: 7de63e47
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/scalability-design.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:22:44Z
+**Event**: SENSOR_FIRED
+**Fire id**: e044f3c2
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/reliability-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:22:44Z
+**Event**: SENSOR_PASSED
+**Fire id**: e044f3c2
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/reliability-design.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:22:44Z
+**Event**: SENSOR_FIRED
+**Fire id**: 490b1303
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/observability-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:22:44Z
+**Event**: SENSOR_PASSED
+**Fire id**: 490b1303
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/observability-design.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:22:44Z
+**Event**: SENSOR_FIRED
+**Fire id**: 6a165267
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/logical-components.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:22:45Z
+**Event**: SENSOR_PASSED
+**Fire id**: 6a165267
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/logical-components.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:22:45Z
+**Event**: SENSOR_FIRED
+**Fire id**: fc70c168
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:22:45Z
+**Event**: SENSOR_PASSED
+**Fire id**: fc70c168
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/traceability.json
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:22:45Z
+**Event**: SENSOR_FIRED
+**Fire id**: f33ec093
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/performance-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:22:45Z
+**Event**: SENSOR_PASSED
+**Fire id**: f33ec093
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/performance-design.md
+**Duration ms**: 60
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T07:22:45Z
+**Event**: SENSOR_FIRED
+**Fire id**: b3f084f8
+**Sensor ID**: traceability
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T07:22:45Z
+**Event**: SENSOR_PASSED
+**Fire id**: b3f084f8
+**Sensor ID**: traceability
+**Stage slug**: nfr-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/traceability.json
+**Duration ms**: 64
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-15T07:22:45Z
+**Event**: REVIEW_REQUESTED
+**Stage**: nfr-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:2813eac0450c251cd44f5cf7c0aba7c4e271f2adde0d8eac1df094e14c95d8ea
+**Request Id**: review:63618f758d632820de987ea8892559bb
+**Review File**: .aidlc-engine/reviews/nfr-design/units/u10-notifications/924f2e3cbd1e4ff0/1.63618f758d632820de987ea8892559bb.review.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:22:54Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviewer-dispatch.json
+**Context**: .aidlc-engine > reviewer-dispatch.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:24:55Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/nfr-design/units/u10-notifications/924f2e3cbd1e4ff0/1.63618f758d632820de987ea8892559bb.review.md
+**Context**: .aidlc-engine > reviews > nfr-design > units > u10-notifications > 924f2e3cbd1e4ff0 > 1.63618f758d632820de987ea8892559bb.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-15T07:25:05Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**READY**\n\n指定ファイルへ記録しました。軽微な指摘は1点です。\n\n45秒の所有期限が残る間の再試行について、所有権の解放と仕事を失わない再配達条件を明記してください。\n\n詳細NFR29件の対応とLINE公式の再試行仕様を確認しました。
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/nfr-design/units/u10-notifications/924f2e3cbd1e4ff0/1.63618f758d632820de987ea8892559bb.review.md=225b95a5ccb94cdad645ca1cbb3c6def4527db8a01a501099d84c10a324374e8
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-15T07:25:10Z
+**Event**: REVIEW_COMPLETED
+**Stage**: nfr-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:2813eac0450c251cd44f5cf7c0aba7c4e271f2adde0d8eac1df094e14c95d8ea
+**Artifact Fingerprint**: sha256:2813eac0450c251cd44f5cf7c0aba7c4e271f2adde0d8eac1df094e14c95d8ea
+**Request Id**: review:63618f758d632820de987ea8892559bb
+**Review Record**: .aidlc-engine/reviews/nfr-design/units/u10-notifications/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:61823af00e11cda35a569085c730799b03c024123bdabb791d18b9159f06e99d
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-15T07:25:16Z
+**Event**: UNIT_COMPLETED
+**Stage**: nfr-design
+**Unit**: u10-notifications
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-15T07:26:57Z
+**Event**: UNIT_STARTED
+**Stage**: infrastructure-design
+**Unit**: u10-notifications
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T07:26:57Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-design-questions.md
+**Context**: construction > u10-notifications > infrastructure-design > infrastructure-design-questions.md
+
+---
+
+## Decision Recorded
+**Timestamp**: 2026-11-15T07:26:58Z
+**Event**: DECISION_RECORDED
+**Stage**: infrastructure-design
+**Decision**: U10インフラ設計Q1: 費用0円の見積もり前提となるAWSアカウントの作成時期とプラン。infrastructure-design-questions.mdに回答してください。
+**Options**: A:2025年7月15日より前,B:以降のPaidプラン,C:以降のFreeプラン,D:不明または未準備,X:その他
+**Unit**: u10-notifications
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-15T10:41:30Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: 588cdabe
+
+---
+
+## Question Answered
+**Timestamp**: 2026-11-15T10:41:41Z
+**Event**: QUESTION_ANSWERED
+**Stage**: infrastructure-design
+**Details**: Q1: A 2025年7月15日より前に作成したAWSアカウントを使う。継続無料枠と現在の利用量を前提に見積もる。
+**Unit**: u10-notifications
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T10:43:28Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-design-questions.md
+**Context**: construction > u10-notifications > infrastructure-design > infrastructure-design-questions.md
+
+---
+
+## Decision Recorded
+**Timestamp**: 2026-11-15T10:43:29Z
+**Event**: DECISION_RECORDED
+**Stage**: infrastructure-design
+**Decision**: U10インフラ設計Q2: 要件の毎月0円と既存設計の0円〜1円未満・従量課金構成のどちらを優先するか。infrastructure-design-questions.mdのQ2へ回答してください。
+**Options**: A:毎月0円を維持して既存構成も見直す,B:少額課金を許容し月上限を併記,X:その他
+**Unit**: u10-notifications
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-15T10:56:42Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: c9dcc9d0
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-15T10:57:23Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: d27513b2
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T10:57:34Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-design-questions.md
+**Context**: construction > u10-notifications > infrastructure-design > infrastructure-design-questions.md
+
+---
+
+## Question Answered
+**Timestamp**: 2026-11-15T10:57:34Z
+**Event**: QUESTION_ANSWERED
+**Stage**: infrastructure-design
+**Details**: Q2: B 少額課金を許容する。月の上限目標は100円。配備前に見積もりを確認する。
+**Unit**: u10-notifications
+
+---
+
+## 費用条件の解決 — U10
+**Timestamp**: 2026-11-15T10:57:35Z
+利用者の回答: B 100円。毎月0円と既存の微小課金構成の食い違いについて、少額課金を許容し月100円を上限目標とする。配備前の見積確認は維持し、課金の強制停止を保証しない。
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-15T11:00:56Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: nfr-requirements
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/scalability-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T11:00:57Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/inception/requirements-analysis/requirements.md
+**Context**: inception > requirements-analysis > requirements.md
+**Summary Authorization Id**: 29dc3a9fed03921a35bb31460cd20e1e2f001ea6fb102c6d0cf87778efb4e1f8
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T11:00:57Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/ideation/feasibility/constraint-register.md
+**Context**: ideation > feasibility > constraint-register.md
+**Summary Authorization Id**: 9507fc1dc483ce7cfb170c84f416498dc448f8889665b0e4f215f15a21e50830
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T11:00:57Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/scalability-requirements.md
+**Context**: construction > u10-notifications > nfr-requirements > scalability-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T11:00:57Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-design-questions.md
+**Context**: construction > u10-notifications > infrastructure-design > infrastructure-design-questions.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T11:04:17Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-specification.md
+**Context**: construction > u10-notifications > infrastructure-design > infrastructure-specification.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T11:04:18Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/monitoring-design.md
+**Context**: construction > u10-notifications > infrastructure-design > monitoring-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T11:04:18Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u10-notifications > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T11:05:23Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-specification.md
+**Context**: construction > u10-notifications > infrastructure-design > infrastructure-specification.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T11:06:06Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-specification.md
+**Context**: construction > u10-notifications > infrastructure-design > infrastructure-specification.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T11:06:06Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/monitoring-design.md
+**Context**: construction > u10-notifications > infrastructure-design > monitoring-design.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T11:06:07Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u10-notifications > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T11:06:29Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/traceability.json
+**Context**: construction > u10-notifications > infrastructure-design > traceability.json
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T11:06:32Z
+**Event**: SENSOR_FIRED
+**Fire id**: 958b8868
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-specification.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T11:06:32Z
+**Event**: SENSOR_PASSED
+**Fire id**: 958b8868
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-specification.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T11:06:32Z
+**Event**: SENSOR_FIRED
+**Fire id**: f952af6c
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/monitoring-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T11:06:32Z
+**Event**: SENSOR_PASSED
+**Fire id**: f952af6c
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/monitoring-design.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T11:06:32Z
+**Event**: SENSOR_FIRED
+**Fire id**: e37cfef8
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/cicd-pipeline.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T11:06:32Z
+**Event**: SENSOR_PASSED
+**Fire id**: e37cfef8
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/cicd-pipeline.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T11:06:32Z
+**Event**: SENSOR_FIRED
+**Fire id**: ccb74698
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T11:06:32Z
+**Event**: SENSOR_PASSED
+**Fire id**: ccb74698
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/traceability.json
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T11:06:32Z
+**Event**: SENSOR_FIRED
+**Fire id**: a3dbeb0c
+**Sensor ID**: upstream-coverage
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-specification.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T11:06:33Z
+**Event**: SENSOR_PASSED
+**Fire id**: a3dbeb0c
+**Sensor ID**: upstream-coverage
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-specification.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T11:06:33Z
+**Event**: SENSOR_FIRED
+**Fire id**: fd352c72
+**Sensor ID**: traceability
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T11:06:33Z
+**Event**: SENSOR_PASSED
+**Fire id**: fd352c72
+**Sensor ID**: traceability
+**Stage slug**: infrastructure-design
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/traceability.json
+**Duration ms**: 53
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-15T11:06:33Z
+**Event**: REVIEW_REQUESTED
+**Stage**: infrastructure-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:6d9acbf7e19505dab37349003b919fa73bc739575b6892af05c790037ee78c00
+**Request Id**: review:0c312436270b8af3ef8b056e75f2adc4
+**Review File**: .aidlc-engine/reviews/infrastructure-design/units/u10-notifications/924f2e3cbd1e4ff0/1.0c312436270b8af3ef8b056e75f2adc4.review.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T11:06:45Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviewer-dispatch.json
+**Context**: .aidlc-engine > reviewer-dispatch.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T11:09:57Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/infrastructure-design/units/u10-notifications/924f2e3cbd1e4ff0/1.0c312436270b8af3ef8b056e75f2adc4.review.md
+**Context**: .aidlc-engine > reviews > infrastructure-design > units > u10-notifications > 924f2e3cbd1e4ff0 > 1.0c312436270b8af3ef8b056e75f2adc4.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-15T11:10:02Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**READY**\n\n指定ファイルに記録しました。軽微な指摘は1点です。\n\n7日超のバックアップを特定するため、一覧取得権限または作成ARNの保存台帳を定義してください。\n\nSQS再試行、監視、本文保持、月100円の計画前提は整合しています。
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/infrastructure-design/units/u10-notifications/924f2e3cbd1e4ff0/1.0c312436270b8af3ef8b056e75f2adc4.review.md=c251b5aab6bda8351e7944f7562780b4adbc172a31f0fca9f3b7b212f11178c2
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-15T11:10:07Z
+**Event**: REVIEW_COMPLETED
+**Stage**: infrastructure-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:6d9acbf7e19505dab37349003b919fa73bc739575b6892af05c790037ee78c00
+**Artifact Fingerprint**: sha256:6d9acbf7e19505dab37349003b919fa73bc739575b6892af05c790037ee78c00
+**Request Id**: review:0c312436270b8af3ef8b056e75f2adc4
+**Review Record**: .aidlc-engine/reviews/infrastructure-design/units/u10-notifications/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:9cf9c8e94aef14c4b4dd4cb38548b5dd7bcb6fa497d5730942f8e913cc052777
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-15T11:10:10Z
+**Event**: UNIT_COMPLETED
+**Stage**: infrastructure-design
+**Unit**: u10-notifications
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T12:48:38Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-generation-plan.md
+**Context**: construction > u10-notifications > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T12:48:40Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/unit-test-instructions.md
+**Context**: construction > u10-notifications > code-generation > unit-test-instructions.md
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-15T13:13:41Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: f4f2f4c4
+
+---
+
+## Plan Approval Recorded
+**Timestamp**: 2026-11-15T13:13:46Z
+**Event**: PLAN_APPROVAL_RECORDED
+**Stage**: code-generation
+**Details**: Approve Plan
+**Checkpoint**: plan-approval
+**Plan Target**: unit:u10-notifications
+**Intent**: 01a1967f-db0b-7bae-aec4-e42e999878c1
+**Directive Epoch**: sha256:66bfe083dd4e6c8216d95022b782fa3bdc093ac232faabab1e3809b20ab05b91
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+**Approval Fingerprint**: sha256:v3:86f3c634f566298af28f54129c842a64cada1f1a89554e51adbeb3938f89d081
+**Questions File**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-generation-questions.md
+**Questions SHA-256**: bf9f6cb3daab649af9f991daed36db5c78cf5c849fafa46a043f82ecab46a63a
+**Prompt SHA-256**: e84e02d87efe9bf5784c000d023f030bca46583264567185e32d950739ab784b
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Asked By**: engine
+**Person Reply**: 1
+**Message Id**: f4f2f4c4
+**Unit**: u10-notifications
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-15T13:14:46Z
+**Event**: UNIT_STARTED
+**Stage**: code-generation
+**Unit**: u10-notifications
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T13:14:48Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/u10-developer-brief.txt
+**Context**: .aidlc-engine > u10-developer-brief.txt
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-15T13:22:20Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Agent ID**: 01a1ddd2-ad1e-7f60-9208-ae8ebb67a278
+**Message**: U10の実装編集は停止しています。\n\n- brief・機能/NFR/インフラ設計を読込み済み。\n- Step1の全体確認を起動しましたが、結果は未回収（session `56091`）。\n- Step2の準備確認とStep3の固定SDK追加を呼びましたが、昇格依頼を含む呼出し全体が356.9秒後にユーザー中断となりました。承認・実行状況は未確認です。\n- U10アプリソースの編集、計画チェックの更
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T13:28:14Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-generation-plan.md
+**Context**: construction > u10-notifications > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T13:52:28Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/traceability.json
+**Context**: construction > u10-notifications > code-generation > traceability.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T13:52:29Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/source-manifest.json
+**Context**: construction > u10-notifications > code-generation > source-manifest.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T13:54:51Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-generation-plan.md
+**Context**: construction > u10-notifications > code-generation > code-generation-plan.md
+
+---
+
+## Session Compacted
+**Timestamp**: 2026-11-15T13:54:52Z
+**Event**: SESSION_COMPACTED
+**Current Stage**: functional-design
+**State Validity**: valid
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T13:57:49Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/source-manifest.json
+**Context**: construction > u10-notifications > code-generation > source-manifest.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T13:57:49Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-summary.md
+**Context**: construction > u10-notifications > code-generation > code-summary.md
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-15T15:56:33Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: 96ad9063
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-15T15:57:20Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: 0ce9fa4b
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T15:57:42Z
+**Event**: SENSOR_FIRED
+**Fire id**: 3477bece
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-generation-plan.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T15:57:42Z
+**Event**: SENSOR_PASSED
+**Fire id**: 3477bece
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-generation-plan.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T15:57:42Z
+**Event**: SENSOR_FIRED
+**Fire id**: 33260f3a
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/unit-test-instructions.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T15:57:42Z
+**Event**: SENSOR_PASSED
+**Fire id**: 33260f3a
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/unit-test-instructions.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T15:57:42Z
+**Event**: SENSOR_FIRED
+**Fire id**: 48e7c814
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-summary.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T15:57:42Z
+**Event**: SENSOR_PASSED
+**Fire id**: 48e7c814
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-summary.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T15:57:42Z
+**Event**: SENSOR_FIRED
+**Fire id**: fed3dbfc
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T15:57:42Z
+**Event**: SENSOR_PASSED
+**Fire id**: fed3dbfc
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/traceability.json
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T15:57:42Z
+**Event**: SENSOR_FIRED
+**Fire id**: 376c8f22
+**Sensor ID**: traceability
+**Stage slug**: code-generation
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T15:57:42Z
+**Event**: SENSOR_PASSED
+**Fire id**: 376c8f22
+**Sensor ID**: traceability
+**Stage slug**: code-generation
+**Unit**: u10-notifications
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/traceability.json
+**Duration ms**: 54
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T15:57:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u9-allowance
+**Checkpoint**: review-receipt
+**Changed**: README.md, infrastructure/test/u9-allowance/stacks.test.ts, packages/backend/src/entries/api.ts, packages/backend/src/services/allowanceService.ts, packages/backend/src/services/calendarService.ts, packages/backend/src/services/familyMemberService.ts, packages/backend/test/fixtures/fakeSecrets.ts, packages/shared/src/index.ts
+**Recorded**: sha256:eacd96b17c7c6383d2162a20bab1d36270b9081afc80a18896486cdefadcee7d
+**Current**: sha256:07c8e006d77f325e475f37ba6c3f09b3ff479c1d70d74b81696f7e5b08e163c5
+**Details**: README.md, infrastructure/test/u9-allowance/stacks.test.ts, packages/backend/src/entries/api.ts, packages/backend/src/services/allowanceService.ts, packages/backend/src/services/calendarService.ts, packages/backend/src/services/familyMemberService.ts, packages/backend/test/fixtures/fakeSecrets.ts, packages/shared/src/index.ts changed after the allowance Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T15:57:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u8-swap
+**Checkpoint**: review-receipt
+**Changed**: README.md, docs/contract-changes-u8.md, infrastructure/test/u8-swap/stacks.test.ts, packages/backend/src/entries/api.ts, packages/backend/src/entries/line.ts, packages/backend/src/models.ts, packages/backend/src/repositories/calendarRepository.ts, packages/backend/src/services/dutyReassignedHook.ts, packages/backend/src/services/swapService.ts, packages/backend/test/fixtures/fakeSecrets.ts (and 3 more)
+**Recorded**: sha256:f90d3300654c23434c694f67aab15d3c943fc5ff2542e2b946f45bf38d7ebd0e
+**Current**: sha256:dead59c0673e3fcc3a8a3b7c5cb16b14d5929040b001c57c1f158c35fea96400
+**Details**: The swap Unit's list of files changed after it was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T15:57:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u7-review-confirm
+**Checkpoint**: review-receipt
+**Changed**: infrastructure/test/u7-review-confirm/stacks.test.ts, packages/backend/test/u7-review-confirm/changeDutyStatus.test.ts, packages/backend/test/u7-review-confirm/confirmMonth.test.ts
+**Recorded**: sha256:bd8e66618bf6cb7b329075685762acd5772e30f48eb1d1913da9329e3b3343c1
+**Current**: sha256:a2cc3f2d78f57629fa850e984a21bbc6c4a3f0b301a262e65a293d52792fc641
+**Details**: infrastructure/test/u7-review-confirm/stacks.test.ts, packages/backend/test/u7-review-confirm/changeDutyStatus.test.ts, packages/backend/test/u7-review-confirm/confirmMonth.test.ts changed after the review confirm Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T15:57:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u6-recording
+**Checkpoint**: review-receipt
+**Changed**: infrastructure/lib/app-stack.ts
+**Recorded**: sha256:39fe94db136dd0cf2eabc7d7d110dcf8c280bd9c4d84bd6606cdb944c9a7132a
+**Current**: sha256:7c8bb96f8ce8d3f8cae7e63b478b20a816525b1e34eee2c2fc9c8a4197d1e8ed
+**Details**: infrastructure/lib/app-stack.ts changed after the recording Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T15:57:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u5-assignment-calendar
+**Checkpoint**: review-receipt
+**Changed**: docs/contract-changes-u5.md, infrastructure/lib/app.ts, infrastructure/lib/data-stack.ts, infrastructure/test/u1-skeleton-family/stacks.test.ts, infrastructure/test/u4-chore-types/stacks.test.ts, infrastructure/test/u5-assignment-calendar/stacks.test.ts
+**Recorded**: sha256:be60e64b768e6bb108bdcb8cb7fab0886a7ffe9177d1200f579c709af2884c4d
+**Current**: sha256:8b89514d58be4f46cdd1e8c8c17dcd9f3a5258612392c3c0b03a35191c3cf3fd
+**Details**: docs/contract-changes-u5.md, infrastructure/lib/app.ts, infrastructure/lib/data-stack.ts, infrastructure/test/u1-skeleton-family/stacks.test.ts, infrastructure/test/u4-chore-types/stacks.test.ts, infrastructure/test/u5-assignment-calendar/stacks.test.ts changed after the assignment calendar Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T15:57:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u4-chore-types
+**Checkpoint**: review-receipt
+**Changed**: packages/backend/test/u4-chore-types/choreTypeChangeTransactions.test.ts, packages/backend/test/u4-chore-types/createChoreTypeTransaction.test.ts, packages/backend/test/u4-chore-types/getCurrentUnitPrice.test.ts, packages/backend/test/u4-chore-types/update-chore-type.steps.ts, packages/frontend/src/pages/ChoreTypesPage.tsx, packages/frontend/test/u4-chore-types/screens.feature, packages/shared/test/u4-chore-types/messages.test.ts
+**Recorded**: sha256:aee849c22bbcfbee99dcf73670cde627ba8b8ffde2bbaae6a2810287f6ccec04
+**Current**: sha256:83c87339b7ad57bda2e51f5b9d123d0a7de6fc82ae78762b050a11b9d259082b
+**Details**: packages/backend/test/u4-chore-types/choreTypeChangeTransactions.test.ts, packages/backend/test/u4-chore-types/createChoreTypeTransaction.test.ts, packages/backend/test/u4-chore-types/getCurrentUnitPrice.test.ts, packages/backend/test/u4-chore-types/update-chore-type.steps.ts, packages/frontend/src/pages/ChoreTypesPage.tsx, packages/frontend/test/u4-chore-types/screens.feature, packages/shared/test/u4-chore-types/messages.test.ts changed after the chore types Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T15:57:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u3-notification-group
+**Checkpoint**: review-receipt
+**Changed**: infrastructure/test/u3-notification-group/stacks.test.ts, packages/backend/src/repositories/familyRepository.ts, packages/backend/src/repositories/notificationGroupRepository.ts, packages/backend/test/u3-notification-group/groupCommandGate.test.ts, packages/backend/test/u3-notification-group/line-routing.steps.ts, packages/backend/test/u3-notification-group/register-group.feature, packages/backend/test/u3-notification-group/register-group.steps.ts, packages/backend/test/u3-notification-group/registerNotificationGroupTransaction.test.ts, packages/frontend/src/hooks/useNotificationGroup.ts, packages/frontend/test/u3-notification-group/screens.feature
+**Recorded**: sha256:f09dada0c1d23295ce4ae547392d477f4a5995495b2988b1c7b45689e9b9cfe0
+**Current**: sha256:d3332361c4b968a7f9ac2457b28430addd007a336981dcd8f88db805a066922a
+**Details**: infrastructure/test/u3-notification-group/stacks.test.ts, packages/backend/src/repositories/familyRepository.ts, packages/backend/src/repositories/notificationGroupRepository.ts, packages/backend/test/u3-notification-group/groupCommandGate.test.ts, packages/backend/test/u3-notification-group/line-routing.steps.ts, packages/backend/test/u3-notification-group/register-group.feature, packages/backend/test/u3-notification-group/register-group.steps.ts, packages/backend/test/u3-notification-group/registerNotificationGroupTransaction.test.ts, packages/frontend/src/hooks/useNotificationGroup.ts, packages/frontend/test/u3-notification-group/screens.feature changed after the notification group Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T15:57:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u2-invitation
+**Checkpoint**: review-receipt
+**Changed**: infrastructure/test/u2-invitation/stacks.test.ts, packages/backend/src/repositories/requestRecordRepository.ts, packages/backend/test/u2-invitation/accept-invitation.steps.ts, packages/backend/test/u2-invitation/acceptInvitationTransaction.test.ts, packages/backend/test/u2-invitation/acceptUnexplainedUserCondition.test.ts, packages/backend/test/u2-invitation/helpers/seed.ts, packages/backend/test/u2-invitation/invitationRepository.test.ts, packages/backend/test/u2-invitation/resolveUsableInvitation.test.ts, packages/backend/test/u2-invitation/rotateInvitation.test.ts, packages/backend/test/u2-invitation/router.test.ts (and 6 more)
+**Recorded**: sha256:8bd6e3c103e77a722dfd50e19f76db65bd1dce46c3bac8f86881444b25c7f6ac
+**Current**: sha256:fbba4d415c958ffd0ad95bc18583a105c65274a7e2d48c0546c437f91aad1233
+**Details**: infrastructure/test/u2-invitation/stacks.test.ts, packages/backend/src/repositories/requestRecordRepository.ts, packages/backend/test/u2-invitation/accept-invitation.steps.ts, packages/backend/test/u2-invitation/acceptInvitationTransaction.test.ts, packages/backend/test/u2-invitation/acceptUnexplainedUserCondition.test.ts, packages/backend/test/u2-invitation/helpers/seed.ts, packages/backend/test/u2-invitation/invitationRepository.test.ts, packages/backend/test/u2-invitation/resolveUsableInvitation.test.ts, packages/backend/test/u2-invitation/rotateInvitation.test.ts, packages/backend/test/u2-invitation/router.test.ts (and 6 more) changed after the invitation Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T15:57:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u1-skeleton-family
+**Checkpoint**: review-receipt
+**Changed**: .github/workflows/deploy-production.yml, .github/workflows/deploy-staging.yml, .gitignore, .prettierignore, infrastructure/lib/account-stack.ts, package-lock.json, package.json, packages/backend/package.json, packages/backend/src/entries/notify.ts, packages/backend/src/lib/config.ts (and 20 more)
+**Recorded**: sha256:d1dae5a48615067ed3c30ece18b6033b55030e10c290497eabc8002398c08d01
+**Current**: sha256:0ab82b4e18f89c025cbcc9798f2b430d2f2945d24301885e521bb9a40d3da86a
+**Details**: .github/workflows/deploy-production.yml, .github/workflows/deploy-staging.yml, .gitignore, .prettierignore, infrastructure/lib/account-stack.ts, package-lock.json, package.json, packages/backend/package.json, packages/backend/src/entries/notify.ts, packages/backend/src/lib/config.ts (and 20 more) changed after the skeleton family Unit was reviewed; carrying on.
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-15T15:57:43Z
+**Event**: REVIEW_REQUESTED
+**Stage**: code-generation
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:b9c7e5ee0c221162be78a25645ee912b1a7d27cc5b9eb69f05a3fd2c42fe863a
+**Request Id**: review:9c1a87357dc387f5961d3144c93b1fd4
+**Source Fingerprint**: 6601826b07e5f79df216938e2c203b146ce45d877b4ac89f5e28766d19fcb318
+**Unit Source Fingerprint**: sha256:0d32ee99f8c3578eeca4f9de852a78a3d2de1c0905e0e5ccbd3789cfd539601d
+**Review File**: .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.9c1a87357dc387f5961d3144c93b1fd4.review.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T19:41:24Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-generation-plan.md
+**Context**: construction > u10-notifications > code-generation > code-generation-plan.md
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-15T19:41:30Z
+**Event**: REVIEW_REQUESTED
+**Stage**: code-generation
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:4a67aeb067e0b66b4de2dabce80bc7fa0835098b8ac349bf53a3b87f62e16f9e
+**Request Id**: review:02d05f6f7e59d500dabacfc7ec78d4a8
+**Replaces Request Id**: review:9c1a87357dc387f5961d3144c93b1fd4
+**Source Fingerprint**: 6601826b07e5f79df216938e2c203b146ce45d877b4ac89f5e28766d19fcb318
+**Unit Source Fingerprint**: sha256:0d32ee99f8c3578eeca4f9de852a78a3d2de1c0905e0e5ccbd3789cfd539601d
+**Review File**: .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.02d05f6f7e59d500dabacfc7ec78d4a8.review.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T19:41:39Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviewer-dispatch.json
+**Context**: .aidlc-engine > reviewer-dispatch.json
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-15T23:02:28Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: b578d25c
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:07:03Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.02d05f6f7e59d500dabacfc7ec78d4a8.review.md
+**Context**: .aidlc-engine > reviews > code-generation > units > u10-notifications > 924f2e3cbd1e4ff0 > 1.02d05f6f7e59d500dabacfc7ec78d4a8.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-15T23:07:10Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**READY**\n\n指定ファイルへ記録しました。\n\n- Major: APIの`ApiError`が500でも障害通知を通らない。\n- Minor: 重複抑止・期限切れの結果ログが不足。\n- Minor: 秘密検査と実機確認が未完了。\n\nU10の203件は通過。全体確認は初回に環境由来の可能性がある
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.9c1a87357dc387f5961d3144c93b1fd4.review.md=absent; .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.02d05f6f7e59d500dabacfc7ec78d4a8.review.md=915419bdc32f807f8d85b1dd2c0b75e8fd9422b4765779b401755ef4c3cfcff5
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T23:09:06Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.02d05f6f7e59d500dabacfc7ec78d4a8.review.md
+**Context**: .aidlc-engine > reviews > code-generation > units > u10-notifications > 924f2e3cbd1e4ff0 > 1.02d05f6f7e59d500dabacfc7ec78d4a8.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-15T23:09:13Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n実在する経路を確認しました。\n\n`PUT /v1/months/:month/assignment` → 書込の残り時間不足・競合上限 → [calendarService.ts:331](/Users/gengen0719/WorkSpaces/private_project/housework-c
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.9c1a87357dc387f5961d3144c93b1fd4.review.md=absent; .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.02d05f6f7e59d500dabacfc7ec78d4a8.review.md=d631b5254f902f4ef1359cecc5f1e7ec1e9de8c8daf5b5cf43757b31a1a27c05
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-15T23:10:23Z
+**Event**: REVIEW_COMPLETED
+**Stage**: code-generation
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:4a67aeb067e0b66b4de2dabce80bc7fa0835098b8ac349bf53a3b87f62e16f9e
+**Artifact Fingerprint**: sha256:4a67aeb067e0b66b4de2dabce80bc7fa0835098b8ac349bf53a3b87f62e16f9e
+**Request Id**: review:02d05f6f7e59d500dabacfc7ec78d4a8
+**Request Source Fingerprint**: 6601826b07e5f79df216938e2c203b146ce45d877b4ac89f5e28766d19fcb318
+**Source Fingerprint**: 6601826b07e5f79df216938e2c203b146ce45d877b4ac89f5e28766d19fcb318
+**Source Listing**: sha256:e7fc2377f63037c679bda70231a1b9f94fa0c6f58f1e89eb2ca79bbcc94dcb92
+**Unit Source Fingerprint**: sha256:0d32ee99f8c3578eeca4f9de852a78a3d2de1c0905e0e5ccbd3789cfd539601d
+**Review Record**: .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:83308d0be041c8aba52eb42006bb3a41511294062822d9a235e578cc10d1f816
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:11:21Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/u10-repair-brief.txt
+**Context**: .aidlc-engine > u10-repair-brief.txt
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-15T23:13:55Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: code-generation
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/traceability.json
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-15T23:13:58Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: code-generation
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-summary.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T23:13:59Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/source-manifest.json
+**Context**: construction > u10-notifications > code-generation > source-manifest.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T23:13:59Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/traceability.json
+**Context**: construction > u10-notifications > code-generation > traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T23:13:59Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-summary.md
+**Context**: construction > u10-notifications > code-generation > code-summary.md
+
+---
+
+## Guard Stood Aside
+**Timestamp**: 2026-11-15T23:14:16Z
+**Event**: GUARD_STOOD_ASIDE
+**Guard**: review-freeze
+**Authority**: instruction
+**Grant**: none
+**Actor**: main
+**Stage**: code-generation
+**Tool**: Edit
+**Details**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-summary.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T23:14:17Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-summary.md
+**Context**: construction > u10-notifications > code-generation > code-summary.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-15T23:14:32Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Agent ID**: 01a1ddd2-ad1e-7f60-9208-ae8ebb67a278
+**Message**: 修復完了、編集を停止しました。\n\n- **R-01**: ApiErrorが500以上でも定型の障害通知を実行。応答を維持し、4xxは通知しません。\n- **R-02**: 重複と期限切れを許可項目だけで記録。本文・金額・生の家族IDは含めません。\n- 回帰15件を先に追加し、修正前8失敗→修正後全成功を確認しました。\n\n**検証結果**\n\n- U10: 24ファイル、218件成功。\n- 指定全体
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T23:14:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u8-swap
+**Checkpoint**: review-receipt
+**Changed**: README.md, docs/contract-changes-u8.md, infrastructure/test/u8-swap/stacks.test.ts, packages/backend/src/entries/api.ts, packages/backend/src/entries/line.ts, packages/backend/src/models.ts, packages/backend/src/repositories/calendarRepository.ts, packages/backend/src/services/dutyReassignedHook.ts, packages/backend/src/services/swapService.ts, packages/backend/test/fixtures/fakeSecrets.ts (and 3 more)
+**Recorded**: sha256:f90d3300654c23434c694f67aab15d3c943fc5ff2542e2b946f45bf38d7ebd0e
+**Current**: sha256:a2c83d9cec49d5b598ec4df3951ce9cf9ee790e7b3ab26dbbc0ca0352ca48005
+**Details**: The swap Unit's list of files changed after it was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T23:14:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u7-review-confirm
+**Checkpoint**: review-receipt
+**Changed**: packages/backend/test/u7-review-confirm/changeDutyStatus.test.ts, packages/backend/test/u7-review-confirm/confirmMonth.test.ts
+**Recorded**: sha256:bd8e66618bf6cb7b329075685762acd5772e30f48eb1d1913da9329e3b3343c1
+**Current**: sha256:e4b28ccff85ccdbe9f39817435c8a34a35b4a200d9a60b1d634e6da3bd15ae9f
+**Details**: packages/backend/test/u7-review-confirm/changeDutyStatus.test.ts, packages/backend/test/u7-review-confirm/confirmMonth.test.ts changed after the review confirm Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T23:14:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u5-assignment-calendar
+**Checkpoint**: review-receipt
+**Changed**: docs/contract-changes-u5.md, infrastructure/test/u4-chore-types/stacks.test.ts
+**Recorded**: sha256:be60e64b768e6bb108bdcb8cb7fab0886a7ffe9177d1200f579c709af2884c4d
+**Current**: sha256:92509fc79024e1e97644daa270a8437ec3b4bee25d65f4088260f0cbaf9827e5
+**Details**: docs/contract-changes-u5.md, infrastructure/test/u4-chore-types/stacks.test.ts changed after the assignment calendar Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T23:14:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u4-chore-types
+**Checkpoint**: review-receipt
+**Changed**: packages/backend/test/u4-chore-types/choreTypeChangeTransactions.test.ts, packages/backend/test/u4-chore-types/createChoreTypeTransaction.test.ts, packages/backend/test/u4-chore-types/getCurrentUnitPrice.test.ts, packages/backend/test/u4-chore-types/update-chore-type.steps.ts, packages/frontend/src/pages/ChoreTypesPage.tsx, packages/frontend/test/u4-chore-types/screens.feature, packages/shared/test/u4-chore-types/messages.test.ts
+**Recorded**: sha256:aee849c22bbcfbee99dcf73670cde627ba8b8ffde2bbaae6a2810287f6ccec04
+**Current**: sha256:0db6e70d37e1ffb8e5eb41dfab43a8a11b99c532a4de0591b9cf405a7af90466
+**Details**: packages/backend/test/u4-chore-types/choreTypeChangeTransactions.test.ts, packages/backend/test/u4-chore-types/createChoreTypeTransaction.test.ts, packages/backend/test/u4-chore-types/getCurrentUnitPrice.test.ts, packages/backend/test/u4-chore-types/update-chore-type.steps.ts, packages/frontend/src/pages/ChoreTypesPage.tsx, packages/frontend/test/u4-chore-types/screens.feature, packages/shared/test/u4-chore-types/messages.test.ts changed after the chore types Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T23:14:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u3-notification-group
+**Checkpoint**: review-receipt
+**Changed**: infrastructure/test/u3-notification-group/stacks.test.ts, packages/backend/src/repositories/notificationGroupRepository.ts, packages/backend/test/u3-notification-group/groupCommandGate.test.ts, packages/backend/test/u3-notification-group/line-routing.steps.ts, packages/backend/test/u3-notification-group/register-group.feature, packages/backend/test/u3-notification-group/register-group.steps.ts, packages/backend/test/u3-notification-group/registerNotificationGroupTransaction.test.ts, packages/frontend/src/hooks/useNotificationGroup.ts, packages/frontend/test/u3-notification-group/screens.feature
+**Recorded**: sha256:f09dada0c1d23295ce4ae547392d477f4a5995495b2988b1c7b45689e9b9cfe0
+**Current**: sha256:0783d0558c28396ca6dc2fa3ae239081449468f684d7a96135a81c733d47e317
+**Details**: infrastructure/test/u3-notification-group/stacks.test.ts, packages/backend/src/repositories/notificationGroupRepository.ts, packages/backend/test/u3-notification-group/groupCommandGate.test.ts, packages/backend/test/u3-notification-group/line-routing.steps.ts, packages/backend/test/u3-notification-group/register-group.feature, packages/backend/test/u3-notification-group/register-group.steps.ts, packages/backend/test/u3-notification-group/registerNotificationGroupTransaction.test.ts, packages/frontend/src/hooks/useNotificationGroup.ts, packages/frontend/test/u3-notification-group/screens.feature changed after the notification group Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T23:14:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u2-invitation
+**Checkpoint**: review-receipt
+**Changed**: infrastructure/test/u2-invitation/stacks.test.ts, packages/backend/src/repositories/requestRecordRepository.ts, packages/backend/test/u2-invitation/accept-invitation.steps.ts, packages/backend/test/u2-invitation/acceptInvitationTransaction.test.ts, packages/backend/test/u2-invitation/acceptUnexplainedUserCondition.test.ts, packages/backend/test/u2-invitation/helpers/seed.ts, packages/backend/test/u2-invitation/invitationRepository.test.ts, packages/backend/test/u2-invitation/resolveUsableInvitation.test.ts, packages/backend/test/u2-invitation/rotateInvitation.test.ts, packages/backend/test/u2-invitation/router.test.ts (and 6 more)
+**Recorded**: sha256:8bd6e3c103e77a722dfd50e19f76db65bd1dce46c3bac8f86881444b25c7f6ac
+**Current**: sha256:19061a282c839d3e99ec62a72f86379d9211a217ec0f158fee0b7a69e90ae607
+**Details**: infrastructure/test/u2-invitation/stacks.test.ts, packages/backend/src/repositories/requestRecordRepository.ts, packages/backend/test/u2-invitation/accept-invitation.steps.ts, packages/backend/test/u2-invitation/acceptInvitationTransaction.test.ts, packages/backend/test/u2-invitation/acceptUnexplainedUserCondition.test.ts, packages/backend/test/u2-invitation/helpers/seed.ts, packages/backend/test/u2-invitation/invitationRepository.test.ts, packages/backend/test/u2-invitation/resolveUsableInvitation.test.ts, packages/backend/test/u2-invitation/rotateInvitation.test.ts, packages/backend/test/u2-invitation/router.test.ts (and 6 more) changed after the invitation Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T23:14:43Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u1-skeleton-family
+**Checkpoint**: review-receipt
+**Changed**: .gitignore, .prettierignore, package.json, packages/backend/test/u1-skeleton-family/create-family.steps.ts, packages/backend/test/u1-skeleton-family/createFamilyService.test.ts, packages/backend/test/u1-skeleton-family/familyMemberService.test.ts, packages/backend/test/u1-skeleton-family/familyRepository.test.ts, packages/backend/test/u1-skeleton-family/follow.steps.ts, packages/backend/test/u1-skeleton-family/lineEntry.test.ts, packages/backend/test/u1-skeleton-family/requestRecordRepository.test.ts (and 2 more)
+**Recorded**: sha256:d1dae5a48615067ed3c30ece18b6033b55030e10c290497eabc8002398c08d01
+**Current**: sha256:10bda7f2cee344c8d8c2d62233e3d61a962f4c956cff18316fd2d0678f6050aa
+**Details**: .gitignore, .prettierignore, package.json, packages/backend/test/u1-skeleton-family/create-family.steps.ts, packages/backend/test/u1-skeleton-family/createFamilyService.test.ts, packages/backend/test/u1-skeleton-family/familyMemberService.test.ts, packages/backend/test/u1-skeleton-family/familyRepository.test.ts, packages/backend/test/u1-skeleton-family/follow.steps.ts, packages/backend/test/u1-skeleton-family/lineEntry.test.ts, packages/backend/test/u1-skeleton-family/requestRecordRepository.test.ts (and 2 more) changed after the skeleton family Unit was reviewed; carrying on.
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-15T23:14:43Z
+**Event**: REVIEW_REQUESTED
+**Stage**: code-generation
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 2
+**Recovery**: stale-receipt
+**Recovery Cause**: artifact
+**Artifact Fingerprint**: sha256:8dce524735aa4dad17455fc69055cbdc2ffef5d589bdaad4a24291742c2b1a84
+**Request Id**: review:b0fafe46f654e9c59d24841eb13fb949
+**Source Fingerprint**: d24aa4a88fab9ba9cadfc2493789022ff83662022d4bcf6ca7dc6cc8b3680049
+**Unit Source Fingerprint**: sha256:e6b5266d00702a423e2456106bd6bb806d657e40a625baccc584c51a5249e477
+**Review File**: .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/2.b0fafe46f654e9c59d24841eb13fb949.review.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:14:51Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviewer-dispatch.json
+**Context**: .aidlc-engine > reviewer-dispatch.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:16:36Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/2.b0fafe46f654e9c59d24841eb13fb949.review.md
+**Context**: .aidlc-engine > reviews > code-generation > units > u10-notifications > 924f2e3cbd1e4ff0 > 2.b0fafe46f654e9c59d24841eb13fb949.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-15T23:16:41Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**READY**\n\nR-01・R-02は修正済み。U10の218件と指定の全体確認が成功し、行カバレッジ96.54%を確認しました。\n\nR-03の秘密検査・実機確認は未完了のままです。指定されたレビュー2のファイルに記録しました。
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.9c1a87357dc387f5961d3144c93b1fd4.review.md=absent; .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/2.b0fafe46f654e9c59d24841eb13fb949.review.md=c7403de84425bfa99fd9b2adf10188ece7c8bc69dfa7a4fa33a9043f43edefe7
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-15T23:16:48Z
+**Event**: REVIEW_COMPLETED
+**Stage**: code-generation
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u10-notifications
+**Iteration**: 2
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:8dce524735aa4dad17455fc69055cbdc2ffef5d589bdaad4a24291742c2b1a84
+**Artifact Fingerprint**: sha256:8dce524735aa4dad17455fc69055cbdc2ffef5d589bdaad4a24291742c2b1a84
+**Request Id**: review:b0fafe46f654e9c59d24841eb13fb949
+**Request Source Fingerprint**: d24aa4a88fab9ba9cadfc2493789022ff83662022d4bcf6ca7dc6cc8b3680049
+**Source Fingerprint**: d24aa4a88fab9ba9cadfc2493789022ff83662022d4bcf6ca7dc6cc8b3680049
+**Source Listing**: sha256:24090652462365bfed2e73446b2cc9723de8fbac58333c0bb1b6c655b3a13848
+**Unit Source Fingerprint**: sha256:e6b5266d00702a423e2456106bd6bb806d657e40a625baccc584c51a5249e477
+**Review Record**: .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/2.json
+**Review Record Digest**: sha256:50cdda666b25d53fabe60993deec52b8af2707c5c44b17d0d445c2f206251b81
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-15T23:16:53Z
+**Event**: UNIT_COMPLETED
+**Stage**: code-generation
+**Unit**: u10-notifications
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-15T23:17:34Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: nfr-requirements
+**Unit**: u10-notifications
+**Checkpoint**: review-receipt
+**Changed**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/scalability-requirements.md
+**Recorded**: sha256:31fae005ba7f56dfbcbaac1703e7519a1dcd06a58505020ebdb89358548a7c5e
+**Current**: sha256:57a18ffbab1fe23c8055bd0dfbd63c2913a3ff431e6bc4b22f3e72ef1a567781
+**Details**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-requirements/scalability-requirements.md changed after the notifications Unit was reviewed; carrying on.
+
+---
+
+## Checkpoint Verification Recorded
+**Timestamp**: 2026-11-15T23:18:14Z
+**Event**: CHECKPOINT_VERIFICATION_RECORDED
+**Unit**: u10-notifications
+**Kind**: unit
+**Stage**: code-generation
+**Stages**: functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation
+**Verification Id**: b475303b-ebff-4ae6-87b2-7c32c1181504
+**Fingerprint**: sha256:5aa0b3e0466fdc3bd860aa1b30eb6db29f2713f5b16b0c85ddceb4cb63aa9d25
+**Command SHA-256**: d627b40b8f8333ac3908513cffe51b7c69127393ee6a6a5479a92ede78c13c53
+**Exit Code**: 0
+**Verified**: true
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Gate Approved
+**Timestamp**: 2026-11-15T23:19:00Z
+**Event**: GATE_APPROVED
+**Unit**: u10-notifications
+**Stage**: code-generation
+**Stages**: functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation
+**Gate Stages**: functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation
+**Gate Scope**: unit-end
+**Checkpoint**: construction-unit
+**Fingerprint**: sha256:5aa0b3e0466fdc3bd860aa1b30eb6db29f2713f5b16b0c85ddceb4cb63aa9d25
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+**Run floors**: {"functional-design":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","nfr-requirements":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","nfr-design":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","infrastructure-design":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","code-generation":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1"}
+**Verification Command SHA-256**: d627b40b8f8333ac3908513cffe51b7c69127393ee6a6a5479a92ede78c13c53
+**Verification Id**: b475303b-ebff-4ae6-87b2-7c32c1181504
+**Approved Evidence**: {"functional-design":["sha256:a5ff8ba8074411120d1d6cc6ed36bda5d6ce6578872b3c0ce49fd1bee78dd142",null],"nfr-requirements":["sha256:31fae005ba7f56dfbcbaac1703e7519a1dcd06a58505020ebdb89358548a7c5e",null],"nfr-design":["sha256:2813eac0450c251cd44f5cf7c0aba7c4e271f2adde0d8eac1df094e14c95d8ea",null],"infrastructure-design":["sha256:6d9acbf7e19505dab37349003b919fa73bc739575b6892af05c790037ee78c00",null],"code-generation":["sha256:8dce524735aa4dad17455fc69055cbdc2ffef5d589bdaad4a24291742c2b1a84","sha256:e6b5266d00702a423e2456106bd6bb806d657e40a625baccc584c51a5249e477"]}
+**Autonomous**: true
+**Review Finding Dispositions**: {"version":1,"dispositions":[{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-generation-plan.md","id":"R-03","fingerprint":"sha256:72549cced1c9ef9fd1f91b91548dae4e234acb3c23416ce5c7452e1fe45b6aeb","status":"Approved autonomously","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/2.json","digest":"sha256:50cdda666b25d53fabe60993deec52b8af2707c5c44b17d0d445c2f206251b81"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/functional-spec.md","id":"R-01","fingerprint":"sha256:f479a27deeb478b21fefd90ec0487f707e19cbf989cdee3893af645c80626e54","status":"Approved autonomously","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u10-notifications/924f2e3cbd1e4ff0/1.json","digest":"sha256:c038d07e5c991d53c15e7910b961a6ff283c856a9cf3c7f33e7e745942897c92"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/functional-spec.md","id":"R-02","fingerprint":"sha256:f39c854bfbc4a798799e49637c364c148e4b273351c6d1f0f83dfab85f1dac53","status":"Approved autonomously","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u10-notifications/924f2e3cbd1e4ff0/1.json","digest":"sha256:c038d07e5c991d53c15e7910b961a6ff283c856a9cf3c7f33e7e745942897c92"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/cicd-pipeline.md","id":"R-01","fingerprint":"sha256:b9c64dd64f9ae65a5300aeb60039334ed018de1ae443abf0bbcb4984b833eee7","status":"Approved autonomously","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/infrastructure-design/units/u10-notifications/924f2e3cbd1e4ff0/1.json","digest":"sha256:9cf9c8e94aef14c4b4dd4cb38548b5dd7bcb6fa497d5730942f8e913cc052777"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/nfr-design/security-design.md","id":"R-01","fingerprint":"sha256:ebf568b6c436a7680d503db04a69ca3f741d2753735939115460c2abf3f76cd3","status":"Approved autonomously","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/nfr-design/units/u10-notifications/924f2e3cbd1e4ff0/1.json","digest":"sha256:61823af00e11cda35a569085c730799b03c024123bdabb791d18b9159f06e99d"}}]}
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-15T23:19:47Z
+**Event**: UNIT_STARTED
+**Stage**: functional-design
+**Unit**: u11-adjustments
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Session Compacted
+**Timestamp**: 2026-11-15T23:20:03Z
+**Event**: SESSION_COMPACTED
+**Current Stage**: functional-design
+**State Validity**: valid
+
+---
+
+## Session End
+**Timestamp**: 2026-11-15T23:21:43Z
+**Event**: SESSION_ENDED
+**Reason**: inferred — Codex has no SessionEnd event (D-4); reconciled at next SessionStart. Prior session 01a1ddde-0a0e-7a20-82cc-fb2ae9808d0e last seen 2026-11-15T06:21:19.878Z.
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:22:54Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/functional-design-questions.md
+**Context**: construction > u11-adjustments > functional-design > functional-design-questions.md
+
+---
+
+## Decision Recorded
+**Timestamp**: 2026-11-15T23:22:55Z
+**Event**: DECISION_RECORDED
+**Stage**: functional-design
+**Decision**: Q1: 加算・減額の理由の文字数上限
+**Options**: A: 100文字まで（推奨）,B: 500文字まで,X: その他
+**Unit**: u11-adjustments
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-15T23:50:37Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: 312f18d3
+
+---
+
+## Question Answered
+**Timestamp**: 2026-11-15T23:50:46Z
+**Event**: QUESTION_ANSWERED
+**Stage**: functional-design
+**Details**: Q1: A（理由は100文字まで）
+**Unit**: u11-adjustments
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:54:07Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/entities.md
+**Context**: construction > u11-adjustments > functional-design > entities.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:54:07Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/rules.md
+**Context**: construction > u11-adjustments > functional-design > rules.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:54:07Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/functional-spec.md
+**Context**: construction > u11-adjustments > functional-design > functional-spec.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:54:08Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/frontend-components.md
+**Context**: construction > u11-adjustments > functional-design > frontend-components.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T23:54:08Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/traceability.json
+**Context**: construction > u11-adjustments > functional-design > traceability.json
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:54:18Z
+**Event**: SENSOR_FIRED
+**Fire id**: ed5860f0
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/entities.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:54:18Z
+**Event**: SENSOR_PASSED
+**Fire id**: ed5860f0
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/entities.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:54:18Z
+**Event**: SENSOR_FIRED
+**Fire id**: a4f51440
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/rules.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:54:18Z
+**Event**: SENSOR_PASSED
+**Fire id**: a4f51440
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/rules.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:54:18Z
+**Event**: SENSOR_FIRED
+**Fire id**: 15081d6c
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/functional-spec.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:54:18Z
+**Event**: SENSOR_PASSED
+**Fire id**: 15081d6c
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/functional-spec.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:54:18Z
+**Event**: SENSOR_FIRED
+**Fire id**: 61a6cbaf
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:54:18Z
+**Event**: SENSOR_PASSED
+**Fire id**: 61a6cbaf
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/traceability.json
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:54:19Z
+**Event**: SENSOR_FIRED
+**Fire id**: ddaf97ce
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/frontend-components.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:54:19Z
+**Event**: SENSOR_PASSED
+**Fire id**: ddaf97ce
+**Sensor ID**: required-sections
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/frontend-components.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:54:19Z
+**Event**: SENSOR_FIRED
+**Fire id**: 12251394
+**Sensor ID**: upstream-coverage
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/entities.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:54:19Z
+**Event**: SENSOR_PASSED
+**Fire id**: 12251394
+**Sensor ID**: upstream-coverage
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/entities.md
+**Duration ms**: 64
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:54:19Z
+**Event**: SENSOR_FIRED
+**Fire id**: f351a527
+**Sensor ID**: traceability
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:54:19Z
+**Event**: SENSOR_PASSED
+**Fire id**: f351a527
+**Sensor ID**: traceability
+**Stage slug**: functional-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/traceability.json
+**Duration ms**: 53
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-15T23:54:19Z
+**Event**: REVIEW_REQUESTED
+**Stage**: functional-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u11-adjustments
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:7c84ca2b25e27c57444cbd7ddb3e16768e35bfa03a1b250694a858617cb258f4
+**Request Id**: review:c93b952691db30722f975616f4ee6f86
+**Review File**: .aidlc-engine/reviews/functional-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.c93b952691db30722f975616f4ee6f86.review.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:54:26Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviewer-dispatch.json
+**Context**: .aidlc-engine > reviewer-dispatch.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T23:55:04Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/functional-design/memory.md
+**Context**: construction > functional-design > memory.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:56:48Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/functional-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.c93b952691db30722f975616f4ee6f86.review.md
+**Context**: .aidlc-engine > reviews > functional-design > units > u11-adjustments > 924f2e3cbd1e4ff0 > 1.c93b952691db30722f975616f4ee6f86.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-15T23:56:54Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**READY**\n\n指定ファイルへ記録しました。\n\n- Major: 有効な上限額の登録で集計が範囲外になると、S5が読めず画面から削除・訂正できない。\n- Minor: 共有AC1.1.12の対応表が不足。\n- Minor: 「既存INVALID_INPUT」が共有契約に存在しない。\n\nYAML・
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.9c1a87357dc387f5961d3144c93b1fd4.review.md=absent; .aidlc-engine/reviews/functional-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.c93b952691db30722f975616f4ee6f86.review.md=fc0bea40bdff84c9bcf5703d8a4d1ed8be7f7b186805330bcec245a09745c519
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-15T23:57:05Z
+**Event**: REVIEW_COMPLETED
+**Stage**: functional-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u11-adjustments
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:7c84ca2b25e27c57444cbd7ddb3e16768e35bfa03a1b250694a858617cb258f4
+**Artifact Fingerprint**: sha256:7c84ca2b25e27c57444cbd7ddb3e16768e35bfa03a1b250694a858617cb258f4
+**Request Id**: review:c93b952691db30722f975616f4ee6f86
+**Review Record**: .aidlc-engine/reviews/functional-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:e415ef3059cfacc7cce62f0b7f0dbd51364b416e184c57bfdbb3a45927bc5665
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-15T23:57:09Z
+**Event**: UNIT_COMPLETED
+**Stage**: functional-design
+**Unit**: u11-adjustments
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-15T23:57:44Z
+**Event**: UNIT_STARTED
+**Stage**: nfr-requirements
+**Unit**: u11-adjustments
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:59:26Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/nfr-requirements-questions.md
+**Context**: construction > u11-adjustments > nfr-requirements > nfr-requirements-questions.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:59:26Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/performance-requirements.md
+**Context**: construction > u11-adjustments > nfr-requirements > performance-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:59:26Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/security-requirements.md
+**Context**: construction > u11-adjustments > nfr-requirements > security-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:59:27Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/scalability-requirements.md
+**Context**: construction > u11-adjustments > nfr-requirements > scalability-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:59:27Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/reliability-requirements.md
+**Context**: construction > u11-adjustments > nfr-requirements > reliability-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:59:27Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/observability-requirements.md
+**Context**: construction > u11-adjustments > nfr-requirements > observability-requirements.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-15T23:59:27Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/tech-stack-decisions.md
+**Context**: construction > u11-adjustments > nfr-requirements > tech-stack-decisions.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T23:59:53Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/traceability.json
+**Context**: construction > u11-adjustments > nfr-requirements > traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-15T23:59:53Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/nfr-requirements/memory.md
+**Context**: construction > nfr-requirements > memory.md
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:59:57Z
+**Event**: SENSOR_FIRED
+**Fire id**: ddddb6cf
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/performance-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:59:57Z
+**Event**: SENSOR_PASSED
+**Fire id**: ddddb6cf
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/performance-requirements.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:59:57Z
+**Event**: SENSOR_FIRED
+**Fire id**: 05b19771
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/security-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:59:57Z
+**Event**: SENSOR_PASSED
+**Fire id**: 05b19771
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/security-requirements.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:59:57Z
+**Event**: SENSOR_FIRED
+**Fire id**: 7c152459
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/scalability-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:59:57Z
+**Event**: SENSOR_PASSED
+**Fire id**: 7c152459
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/scalability-requirements.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:59:57Z
+**Event**: SENSOR_FIRED
+**Fire id**: 2c5769e1
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/reliability-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:59:57Z
+**Event**: SENSOR_PASSED
+**Fire id**: 2c5769e1
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/reliability-requirements.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:59:57Z
+**Event**: SENSOR_FIRED
+**Fire id**: f8d63973
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/observability-requirements.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:59:57Z
+**Event**: SENSOR_PASSED
+**Fire id**: f8d63973
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/observability-requirements.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:59:58Z
+**Event**: SENSOR_FIRED
+**Fire id**: 25c351b8
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/tech-stack-decisions.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:59:58Z
+**Event**: SENSOR_PASSED
+**Fire id**: 25c351b8
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/tech-stack-decisions.md
+**Duration ms**: 62
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:59:58Z
+**Event**: SENSOR_FIRED
+**Fire id**: daa7b59b
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:59:58Z
+**Event**: SENSOR_PASSED
+**Fire id**: daa7b59b
+**Sensor ID**: required-sections
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/traceability.json
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:59:58Z
+**Event**: SENSOR_FIRED
+**Fire id**: 42714a23
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/performance-requirements.md
+
+---
+
+## Sensor Failed
+**Timestamp**: 2026-11-15T23:59:58Z
+**Event**: SENSOR_FAILED
+**Fire id**: 42714a23
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/performance-requirements.md
+**Detail path**: aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/sensors/nfr-requirements/upstream-coverage-42714a23.md
+**Findings count**: 2
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-15T23:59:58Z
+**Event**: SENSOR_FIRED
+**Fire id**: 46e1479d
+**Sensor ID**: traceability
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-15T23:59:58Z
+**Event**: SENSOR_PASSED
+**Fire id**: 46e1479d
+**Sensor ID**: traceability
+**Stage slug**: nfr-requirements
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/traceability.json
+**Duration ms**: 52
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T00:00:10Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/performance-requirements.md
+**Context**: construction > u11-adjustments > nfr-requirements > performance-requirements.md
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-16T00:00:13Z
+**Event**: REVIEW_REQUESTED
+**Stage**: nfr-requirements
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u11-adjustments
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:99718710c4cab304b8c655ceab854f9fb1ad7658fc5e4f42301b3a2994641c19
+**Request Id**: review:d1eed10ffc913c9ea091cf9770507b51
+**Review File**: .aidlc-engine/reviews/nfr-requirements/units/u11-adjustments/924f2e3cbd1e4ff0/1.d1eed10ffc913c9ea091cf9770507b51.review.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:00:21Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviewer-dispatch.json
+**Context**: .aidlc-engine > reviewer-dispatch.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:01:23Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/nfr-requirements/units/u11-adjustments/924f2e3cbd1e4ff0/1.d1eed10ffc913c9ea091cf9770507b51.review.md
+**Context**: .aidlc-engine > reviews > nfr-requirements > units > u11-adjustments > 924f2e3cbd1e4ff0 > 1.d1eed10ffc913c9ea091cf9770507b51.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-16T00:01:29Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**READY**\n\n新規指摘なし。詳細NFR20件の一意性、NFR1〜11の網羅、参照先を確認しました。\n\n合計範囲外でも画面から訂正できる条件が明確になっています。指定ファイルに記録しました。
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.9c1a87357dc387f5961d3144c93b1fd4.review.md=absent; .aidlc-engine/reviews/nfr-requirements/units/u11-adjustments/924f2e3cbd1e4ff0/1.d1eed10ffc913c9ea091cf9770507b51.review.md=2d8e18fec19acb118aeddffe79d57891729106c9de08ebf6636e32de0c7842c6
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-16T00:01:35Z
+**Event**: REVIEW_COMPLETED
+**Stage**: nfr-requirements
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u11-adjustments
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:99718710c4cab304b8c655ceab854f9fb1ad7658fc5e4f42301b3a2994641c19
+**Artifact Fingerprint**: sha256:99718710c4cab304b8c655ceab854f9fb1ad7658fc5e4f42301b3a2994641c19
+**Request Id**: review:d1eed10ffc913c9ea091cf9770507b51
+**Review Record**: .aidlc-engine/reviews/nfr-requirements/units/u11-adjustments/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:82179771ce8a41919be44d31c4b30ef48f71d16e4b4f7b15f3415e8a39d94c57
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-16T00:01:41Z
+**Event**: UNIT_COMPLETED
+**Stage**: nfr-requirements
+**Unit**: u11-adjustments
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-16T00:02:19Z
+**Event**: UNIT_STARTED
+**Stage**: nfr-design
+**Unit**: u11-adjustments
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:05:01Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/nfr-design-questions.md
+**Context**: construction > u11-adjustments > nfr-design > nfr-design-questions.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:05:02Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/performance-design.md
+**Context**: construction > u11-adjustments > nfr-design > performance-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:05:02Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/security-design.md
+**Context**: construction > u11-adjustments > nfr-design > security-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:05:02Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/scalability-design.md
+**Context**: construction > u11-adjustments > nfr-design > scalability-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:05:02Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/reliability-design.md
+**Context**: construction > u11-adjustments > nfr-design > reliability-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:05:02Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/observability-design.md
+**Context**: construction > u11-adjustments > nfr-design > observability-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:05:02Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/logical-components.md
+**Context**: construction > u11-adjustments > nfr-design > logical-components.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T00:05:52Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/traceability.json
+**Context**: construction > u11-adjustments > nfr-design > traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T00:05:52Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/nfr-design/memory.md
+**Context**: construction > nfr-design > memory.md
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:05:56Z
+**Event**: SENSOR_FIRED
+**Fire id**: 812bc80b
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/performance-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:05:56Z
+**Event**: SENSOR_PASSED
+**Fire id**: 812bc80b
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/performance-design.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:05:56Z
+**Event**: SENSOR_FIRED
+**Fire id**: 4818097b
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/security-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:05:56Z
+**Event**: SENSOR_PASSED
+**Fire id**: 4818097b
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/security-design.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:05:56Z
+**Event**: SENSOR_FIRED
+**Fire id**: fe8d76ac
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/scalability-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:05:56Z
+**Event**: SENSOR_PASSED
+**Fire id**: fe8d76ac
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/scalability-design.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:05:56Z
+**Event**: SENSOR_FIRED
+**Fire id**: 110bbb3c
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/reliability-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:05:56Z
+**Event**: SENSOR_PASSED
+**Fire id**: 110bbb3c
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/reliability-design.md
+**Duration ms**: 52
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:05:57Z
+**Event**: SENSOR_FIRED
+**Fire id**: d46921fb
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/observability-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:05:57Z
+**Event**: SENSOR_PASSED
+**Fire id**: d46921fb
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/observability-design.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:05:57Z
+**Event**: SENSOR_FIRED
+**Fire id**: ee8386c0
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/logical-components.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:05:57Z
+**Event**: SENSOR_PASSED
+**Fire id**: ee8386c0
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/logical-components.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:05:57Z
+**Event**: SENSOR_FIRED
+**Fire id**: 655c0f4b
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:05:57Z
+**Event**: SENSOR_PASSED
+**Fire id**: 655c0f4b
+**Sensor ID**: required-sections
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/traceability.json
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:05:57Z
+**Event**: SENSOR_FIRED
+**Fire id**: d22ae2df
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/performance-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:05:57Z
+**Event**: SENSOR_PASSED
+**Fire id**: d22ae2df
+**Sensor ID**: upstream-coverage
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/performance-design.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:05:57Z
+**Event**: SENSOR_FIRED
+**Fire id**: a69a56a0
+**Sensor ID**: traceability
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:05:57Z
+**Event**: SENSOR_PASSED
+**Fire id**: a69a56a0
+**Sensor ID**: traceability
+**Stage slug**: nfr-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-design/traceability.json
+**Duration ms**: 52
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-16T00:05:57Z
+**Event**: REVIEW_REQUESTED
+**Stage**: nfr-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u11-adjustments
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:ee8c4d99600a02b6ca192bd90407377d55e84af087dfce8b2876716538f4c97a
+**Request Id**: review:5c33be98d2e69f4f63c86b60a6be983f
+**Review File**: .aidlc-engine/reviews/nfr-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.5c33be98d2e69f4f63c86b60a6be983f.review.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:06:06Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviewer-dispatch.json
+**Context**: .aidlc-engine > reviewer-dispatch.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:07:51Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/nfr-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.5c33be98d2e69f4f63c86b60a6be983f.review.md
+**Context**: .aidlc-engine > reviews > nfr-design > units > u11-adjustments > 924f2e3cbd1e4ff0 > 1.5c33be98d2e69f4f63c86b60a6be983f.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-16T00:07:56Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**READY**\n\n新規指摘なし。20件の要件対応、参照セクション、既存の理由コード・24時間の操作記録・月ガードを確認しました。\n\n独立した訂正経路とBigInt集計、原子的保存は整合しています。指定ファイルに記録しました。
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.9c1a87357dc387f5961d3144c93b1fd4.review.md=absent; .aidlc-engine/reviews/nfr-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.5c33be98d2e69f4f63c86b60a6be983f.review.md=eb75039b28cacc15ca30e444f4829dbd455ad2c99aa359a160f52d0785f245bf
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-16T00:08:04Z
+**Event**: REVIEW_COMPLETED
+**Stage**: nfr-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u11-adjustments
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:ee8c4d99600a02b6ca192bd90407377d55e84af087dfce8b2876716538f4c97a
+**Artifact Fingerprint**: sha256:ee8c4d99600a02b6ca192bd90407377d55e84af087dfce8b2876716538f4c97a
+**Request Id**: review:5c33be98d2e69f4f63c86b60a6be983f
+**Review Record**: .aidlc-engine/reviews/nfr-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:d949bbbccf6db94439db0ac8d79e16ecd39b0a75aa5184a3f698e61935ec01c1
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-16T00:08:08Z
+**Event**: UNIT_COMPLETED
+**Stage**: nfr-design
+**Unit**: u11-adjustments
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-16T00:08:45Z
+**Event**: UNIT_STARTED
+**Stage**: infrastructure-design
+**Unit**: u11-adjustments
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:15:49Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/infrastructure-design-questions.md
+**Context**: construction > u11-adjustments > infrastructure-design > infrastructure-design-questions.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:15:49Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/infrastructure-specification.md
+**Context**: construction > u11-adjustments > infrastructure-design > infrastructure-specification.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:15:49Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/monitoring-design.md
+**Context**: construction > u11-adjustments > infrastructure-design > monitoring-design.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:15:49Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/cicd-pipeline.md
+**Context**: construction > u11-adjustments > infrastructure-design > cicd-pipeline.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T00:16:21Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/traceability.json
+**Context**: construction > u11-adjustments > infrastructure-design > traceability.json
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T00:16:21Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/infrastructure-design/memory.md
+**Context**: construction > infrastructure-design > memory.md
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:16:24Z
+**Event**: SENSOR_FIRED
+**Fire id**: b3eca76c
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/infrastructure-specification.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: SENSOR_PASSED
+**Fire id**: b3eca76c
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/infrastructure-specification.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: SENSOR_FIRED
+**Fire id**: 4b86bea4
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/monitoring-design.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: SENSOR_PASSED
+**Fire id**: 4b86bea4
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/monitoring-design.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: SENSOR_FIRED
+**Fire id**: f2af90ae
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/cicd-pipeline.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: SENSOR_PASSED
+**Fire id**: f2af90ae
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/cicd-pipeline.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: SENSOR_FIRED
+**Fire id**: db5ef83b
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: SENSOR_PASSED
+**Fire id**: db5ef83b
+**Sensor ID**: required-sections
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/traceability.json
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: SENSOR_FIRED
+**Fire id**: f1c2e93a
+**Sensor ID**: upstream-coverage
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/infrastructure-specification.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: SENSOR_PASSED
+**Fire id**: f1c2e93a
+**Sensor ID**: upstream-coverage
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/infrastructure-specification.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: SENSOR_FIRED
+**Fire id**: a516ff6e
+**Sensor ID**: traceability
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: SENSOR_PASSED
+**Fire id**: a516ff6e
+**Sensor ID**: traceability
+**Stage slug**: infrastructure-design
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/traceability.json
+**Duration ms**: 52
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-16T00:16:25Z
+**Event**: REVIEW_REQUESTED
+**Stage**: infrastructure-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u11-adjustments
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:5f4b2e2c88653ed54f8101e93a35ec8273fee87a1ce808511e085d14618402f8
+**Request Id**: review:4af4d2c9a25a87f51f43de385764eaaa
+**Review File**: .aidlc-engine/reviews/infrastructure-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.4af4d2c9a25a87f51f43de385764eaaa.review.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T00:16:32Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviewer-dispatch.json
+**Context**: .aidlc-engine > reviewer-dispatch.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T01:43:59Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/infrastructure-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.4af4d2c9a25a87f51f43de385764eaaa.review.md
+**Context**: .aidlc-engine > reviews > infrastructure-design > units > u11-adjustments > 924f2e3cbd1e4ff0 > 1.4af4d2c9a25a87f51f43de385764eaaa.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-16T01:44:07Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**READY**\n\nMajorを1件記録しました。既存機構では通知無効時にbackup起動と入口も無効になるため、調整表を追加するだけでは日次バックアップが動きません。維持管理の有効化を外向き通知から分離する必要があります。\n\n20件の要件対応、IAM、復旧方針、条件付き費用計算は確認済みです。
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.9c1a87357dc387f5961d3144c93b1fd4.review.md=absent; .aidlc-engine/reviews/infrastructure-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.4af4d2c9a25a87f51f43de385764eaaa.review.md=adc258677329ed8a75472069f85fbde2610a1129efcc31e709612f7c8af675b2
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-16T01:44:39Z
+**Event**: REVIEW_COMPLETED
+**Stage**: infrastructure-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u11-adjustments
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:5f4b2e2c88653ed54f8101e93a35ec8273fee87a1ce808511e085d14618402f8
+**Artifact Fingerprint**: sha256:5f4b2e2c88653ed54f8101e93a35ec8273fee87a1ce808511e085d14618402f8
+**Request Id**: review:4af4d2c9a25a87f51f43de385764eaaa
+**Review Record**: .aidlc-engine/reviews/infrastructure-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:55050ea98be65376642c06f316ac3bf017783762ab89ee6300d9f8ef61daa479
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-16T01:44:44Z
+**Event**: UNIT_COMPLETED
+**Stage**: infrastructure-design
+**Unit**: u11-adjustments
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-16T05:42:39Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: 0851ba11
+
+---
+
+## Unit Started
+**Timestamp**: 2026-11-16T05:43:23Z
+**Event**: UNIT_STARTED
+**Stage**: code-generation
+**Unit**: u11-adjustments
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T05:45:29Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-generation-plan.md
+**Context**: construction > u11-adjustments > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T05:45:29Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/unit-test-instructions.md
+**Context**: construction > u11-adjustments > code-generation > unit-test-instructions.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T06:04:08Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-generation-plan.md
+**Context**: construction > u11-adjustments > code-generation > code-generation-plan.md
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-16T09:18:52Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: 6c18f465
+
+---
+
+## Plan Approval Recorded
+**Timestamp**: 2026-11-16T09:19:00Z
+**Event**: PLAN_APPROVAL_RECORDED
+**Stage**: code-generation
+**Details**: Approve Plan
+**Checkpoint**: plan-approval
+**Plan Target**: unit:u11-adjustments
+**Intent**: 01a1967f-db0b-7bae-aec4-e42e999878c1
+**Directive Epoch**: sha256:8c5de6d00ddcc8458020800509a77f93f0a8848846dae09fe291326099cac846
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+**Approval Fingerprint**: sha256:v3:da27cf6269264368fb1cb38ea7353641ab18b304661c3286acba7b81602d7419
+**Questions File**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-generation-questions.md
+**Questions SHA-256**: cfdcf22e3164399acf63f273498cc373e809f23a68d15f9658a5d5fb8c6fc07d
+**Prompt SHA-256**: 165bd2100fbfcd889c034e2cdc35516dd4b961ba7a90db5852887ae10ce35ca5
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Asked By**: engine
+**Person Reply**: 1
+**Message Id**: 6c18f465
+**Unit**: u11-adjustments
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-16T10:30:22Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: cd8f2b22
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T10:34:45Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/code-generation/memory.md
+**Context**: construction > code-generation > memory.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T10:56:34Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-generation-plan.md
+**Context**: construction > u11-adjustments > code-generation > code-generation-plan.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T10:59:18Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/traceability.json
+**Context**: construction > u11-adjustments > code-generation > traceability.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T10:59:18Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/source-manifest.json
+**Context**: construction > u11-adjustments > code-generation > source-manifest.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T11:01:56Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-summary.md
+**Context**: construction > u11-adjustments > code-generation > code-summary.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T11:02:32Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-summary.md
+**Context**: construction > u11-adjustments > code-generation > code-summary.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T11:02:34Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-generation-plan.md
+**Context**: construction > u11-adjustments > code-generation > code-generation-plan.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-16T11:02:54Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-developer-agent
+**Agent ID**: 01a1ddd2-ad1e-7f60-9208-ae8ebb67a278
+**Message**: U11の18ステップを完了し、編集を停止しました。\n\n- 登録・独立一覧・確認削除、再送抑止、確定との取引保護、BigInt集計、画面と通知への反映を実装。\n- 通知false／backup trueでバックアップだけを動かす構成と、メール・予算確認・既存障害警報を接続。\n- BDDの先行失敗とGreenを記録済み。\n\n検証結果：\n\n- U11：15ファイル、161件成功。\n- 指定全体連結確認：
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T11:03:06Z
+**Event**: SENSOR_FIRED
+**Fire id**: eeb677e6
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-generation-plan.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T11:03:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: eeb677e6
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-generation-plan.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T11:03:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: 87a9a522
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/unit-test-instructions.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T11:03:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: 87a9a522
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/unit-test-instructions.md
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T11:03:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: a218b97f
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-summary.md
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T11:03:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: a218b97f
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-summary.md
+**Duration ms**: 51
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T11:03:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: b06bce4b
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T11:03:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: b06bce4b
+**Sensor ID**: required-sections
+**Stage slug**: code-generation
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/traceability.json
+**Duration ms**: 50
+
+---
+
+## Sensor Fired
+**Timestamp**: 2026-11-16T11:03:07Z
+**Event**: SENSOR_FIRED
+**Fire id**: 0cadc9b2
+**Sensor ID**: traceability
+**Stage slug**: code-generation
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/traceability.json
+
+---
+
+## Sensor Passed
+**Timestamp**: 2026-11-16T11:03:07Z
+**Event**: SENSOR_PASSED
+**Fire id**: 0cadc9b2
+**Sensor ID**: traceability
+**Stage slug**: code-generation
+**Unit**: u11-adjustments
+**Output path**: aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/traceability.json
+**Duration ms**: 54
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-16T11:03:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u10-notifications
+**Checkpoint**: review-receipt
+**Changed**: .github/workflows/deploy-production.yml, .github/workflows/deploy-staging.yml, docs/notification-runbook.md, infrastructure/lib/app-stack.ts, infrastructure/lib/app.ts, infrastructure/lib/data-stack.ts, infrastructure/lib/notification-construct.ts, infrastructure/test/u1-skeleton-family/stacks.test.ts, infrastructure/test/u10-notifications/stacks.test.ts, infrastructure/test/u5-assignment-calendar/stacks.test.ts (and 13 more)
+**Recorded**: sha256:e6b5266d00702a423e2456106bd6bb806d657e40a625baccc584c51a5249e477
+**Current**: sha256:415de4fc557021fd450988cdc579a129f05ca9d147bab0e8b45fcfbb619e827a
+**Details**: .github/workflows/deploy-production.yml, .github/workflows/deploy-staging.yml, docs/notification-runbook.md, infrastructure/lib/app-stack.ts, infrastructure/lib/app.ts, infrastructure/lib/data-stack.ts, infrastructure/lib/notification-construct.ts, infrastructure/test/u1-skeleton-family/stacks.test.ts, infrastructure/test/u10-notifications/stacks.test.ts, infrastructure/test/u5-assignment-calendar/stacks.test.ts (and 13 more) changed after the notifications Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-16T11:03:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u9-allowance
+**Checkpoint**: review-receipt
+**Changed**: packages/backend/src/handlers/allowances/getAllowances.ts, packages/backend/test/u1-skeleton-family/helpers/fakeDynamo.ts, packages/backend/test/u9-allowance/allowance-reads.steps.ts, packages/backend/test/u9-allowance/getAllowances.handler.test.ts, packages/frontend/src/api/client.ts, packages/frontend/src/pages/AllowancePage.tsx, packages/shared/src/messages.ts
+**Recorded**: sha256:eacd96b17c7c6383d2162a20bab1d36270b9081afc80a18896486cdefadcee7d
+**Current**: sha256:d7c45fbead5d2a7d73d2a5512083f13f534e4fdec2ce0beae50350ce4b5bf3a5
+**Details**: packages/backend/src/handlers/allowances/getAllowances.ts, packages/backend/test/u1-skeleton-family/helpers/fakeDynamo.ts, packages/backend/test/u9-allowance/allowance-reads.steps.ts, packages/backend/test/u9-allowance/getAllowances.handler.test.ts, packages/frontend/src/api/client.ts, packages/frontend/src/pages/AllowancePage.tsx, packages/shared/src/messages.ts changed after the allowance Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-16T11:03:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u8-swap
+**Checkpoint**: review-receipt
+**Changed**: README.md, docs/contract-changes-u8.md, infrastructure/test/u8-swap/stacks.test.ts, packages/backend/src/entries/api.ts, packages/backend/src/entries/line.ts, packages/backend/src/models.ts, packages/backend/src/repositories/calendarRepository.ts, packages/backend/src/services/dutyReassignedHook.ts, packages/backend/src/services/swapService.ts, packages/backend/test/fixtures/fakeSecrets.ts (and 4 more)
+**Recorded**: sha256:f90d3300654c23434c694f67aab15d3c943fc5ff2542e2b946f45bf38d7ebd0e
+**Current**: sha256:f4e5d0e41dc2c004ed1f15fcfb276bc73fe2565caf0c8ab0afd31da7b436009f
+**Details**: The swap Unit's list of files changed after it was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-16T11:03:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u7-review-confirm
+**Checkpoint**: review-receipt
+**Changed**: packages/backend/test/u7-review-confirm/changeDutyStatus.test.ts, packages/backend/test/u7-review-confirm/confirmMonth.test.ts
+**Recorded**: sha256:bd8e66618bf6cb7b329075685762acd5772e30f48eb1d1913da9329e3b3343c1
+**Current**: sha256:6c571c190839d663e2b4d0da3e46b50d15ca4a9e0182d7d66df668f6552122db
+**Details**: packages/backend/test/u7-review-confirm/changeDutyStatus.test.ts, packages/backend/test/u7-review-confirm/confirmMonth.test.ts changed after the review confirm Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-16T11:03:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u6-recording
+**Checkpoint**: review-receipt
+**Changed**: packages/backend/src/lib/dynamoClient.ts
+**Recorded**: sha256:39fe94db136dd0cf2eabc7d7d110dcf8c280bd9c4d84bd6606cdb944c9a7132a
+**Current**: sha256:5cc1ec62b9e8708c68be0b5a152c2926f6edcf333531397f07caa1230cc078fc
+**Details**: packages/backend/src/lib/dynamoClient.ts changed after the recording Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-16T11:03:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u5-assignment-calendar
+**Checkpoint**: review-receipt
+**Changed**: docs/contract-changes-u5.md, infrastructure/test/u4-chore-types/stacks.test.ts, packages/backend/test/u1-skeleton-family/helpers/world.ts
+**Recorded**: sha256:be60e64b768e6bb108bdcb8cb7fab0886a7ffe9177d1200f579c709af2884c4d
+**Current**: sha256:5f89510e0bc5e1161ed41ddd2dcf12ead23662cb2418345a32c27377e304c841
+**Details**: docs/contract-changes-u5.md, infrastructure/test/u4-chore-types/stacks.test.ts, packages/backend/test/u1-skeleton-family/helpers/world.ts changed after the assignment calendar Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-16T11:03:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u4-chore-types
+**Checkpoint**: review-receipt
+**Changed**: packages/backend/test/u4-chore-types/choreTypeChangeTransactions.test.ts, packages/backend/test/u4-chore-types/createChoreTypeTransaction.test.ts, packages/backend/test/u4-chore-types/getCurrentUnitPrice.test.ts, packages/backend/test/u4-chore-types/update-chore-type.steps.ts, packages/frontend/src/pages/ChoreTypesPage.tsx, packages/frontend/test/u4-chore-types/screens.feature, packages/shared/test/u4-chore-types/messages.test.ts
+**Recorded**: sha256:aee849c22bbcfbee99dcf73670cde627ba8b8ffde2bbaae6a2810287f6ccec04
+**Current**: sha256:36803480084a6c473d2f3c963a14c3ee20408d1889563222613bd0cc34cf5ad5
+**Details**: packages/backend/test/u4-chore-types/choreTypeChangeTransactions.test.ts, packages/backend/test/u4-chore-types/createChoreTypeTransaction.test.ts, packages/backend/test/u4-chore-types/getCurrentUnitPrice.test.ts, packages/backend/test/u4-chore-types/update-chore-type.steps.ts, packages/frontend/src/pages/ChoreTypesPage.tsx, packages/frontend/test/u4-chore-types/screens.feature, packages/shared/test/u4-chore-types/messages.test.ts changed after the chore types Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-16T11:03:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u3-notification-group
+**Checkpoint**: review-receipt
+**Changed**: infrastructure/test/u3-notification-group/stacks.test.ts, packages/backend/src/repositories/notificationGroupRepository.ts, packages/backend/test/u3-notification-group/groupCommandGate.test.ts, packages/backend/test/u3-notification-group/line-routing.steps.ts, packages/backend/test/u3-notification-group/register-group.feature, packages/backend/test/u3-notification-group/register-group.steps.ts, packages/backend/test/u3-notification-group/registerNotificationGroupTransaction.test.ts, packages/frontend/src/hooks/useNotificationGroup.ts, packages/frontend/test/u3-notification-group/screens.feature
+**Recorded**: sha256:f09dada0c1d23295ce4ae547392d477f4a5995495b2988b1c7b45689e9b9cfe0
+**Current**: sha256:0bdfc55b806bb9534178a968e13a132125c81304d45ef24321ca12c3773b4cf5
+**Details**: infrastructure/test/u3-notification-group/stacks.test.ts, packages/backend/src/repositories/notificationGroupRepository.ts, packages/backend/test/u3-notification-group/groupCommandGate.test.ts, packages/backend/test/u3-notification-group/line-routing.steps.ts, packages/backend/test/u3-notification-group/register-group.feature, packages/backend/test/u3-notification-group/register-group.steps.ts, packages/backend/test/u3-notification-group/registerNotificationGroupTransaction.test.ts, packages/frontend/src/hooks/useNotificationGroup.ts, packages/frontend/test/u3-notification-group/screens.feature changed after the notification group Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-16T11:03:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u2-invitation
+**Checkpoint**: review-receipt
+**Changed**: infrastructure/test/u2-invitation/stacks.test.ts, packages/backend/src/repositories/requestRecordRepository.ts, packages/backend/test/u2-invitation/accept-invitation.steps.ts, packages/backend/test/u2-invitation/acceptInvitationTransaction.test.ts, packages/backend/test/u2-invitation/acceptUnexplainedUserCondition.test.ts, packages/backend/test/u2-invitation/helpers/seed.ts, packages/backend/test/u2-invitation/invitationRepository.test.ts, packages/backend/test/u2-invitation/resolveUsableInvitation.test.ts, packages/backend/test/u2-invitation/rotateInvitation.test.ts, packages/backend/test/u2-invitation/router.test.ts (and 6 more)
+**Recorded**: sha256:8bd6e3c103e77a722dfd50e19f76db65bd1dce46c3bac8f86881444b25c7f6ac
+**Current**: sha256:aeaa5b92d451509fa74f6b85d2b507233e330caabb165075e5dda23e7bdb7bd8
+**Details**: infrastructure/test/u2-invitation/stacks.test.ts, packages/backend/src/repositories/requestRecordRepository.ts, packages/backend/test/u2-invitation/accept-invitation.steps.ts, packages/backend/test/u2-invitation/acceptInvitationTransaction.test.ts, packages/backend/test/u2-invitation/acceptUnexplainedUserCondition.test.ts, packages/backend/test/u2-invitation/helpers/seed.ts, packages/backend/test/u2-invitation/invitationRepository.test.ts, packages/backend/test/u2-invitation/resolveUsableInvitation.test.ts, packages/backend/test/u2-invitation/rotateInvitation.test.ts, packages/backend/test/u2-invitation/router.test.ts (and 6 more) changed after the invitation Unit was reviewed; carrying on.
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-16T11:03:08Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Unit**: u1-skeleton-family
+**Checkpoint**: review-receipt
+**Changed**: .gitignore, .prettierignore, package.json, packages/backend/src/handlers/allowances/createAdjustment.ts, packages/backend/src/handlers/allowances/manageAdjustments.ts, packages/backend/src/repositories/adjustmentRepository.ts, packages/backend/src/services/adjustmentService.ts, packages/backend/test/u1-skeleton-family/create-family.steps.ts, packages/backend/test/u1-skeleton-family/createFamilyService.test.ts, packages/backend/test/u1-skeleton-family/familyMemberService.test.ts (and 9 more)
+**Recorded**: sha256:d1dae5a48615067ed3c30ece18b6033b55030e10c290497eabc8002398c08d01
+**Current**: sha256:5779c20b23c3729202f48c9cebd8f8ea2fa8c0ad02bf15dde25b5cf3606e95c8
+**Details**: .gitignore, .prettierignore, package.json, packages/backend/src/handlers/allowances/createAdjustment.ts, packages/backend/src/handlers/allowances/manageAdjustments.ts, packages/backend/src/repositories/adjustmentRepository.ts, packages/backend/src/services/adjustmentService.ts, packages/backend/test/u1-skeleton-family/create-family.steps.ts, packages/backend/test/u1-skeleton-family/createFamilyService.test.ts, packages/backend/test/u1-skeleton-family/familyMemberService.test.ts (and 9 more) changed after the skeleton family Unit was reviewed; carrying on.
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-16T11:03:08Z
+**Event**: REVIEW_REQUESTED
+**Stage**: code-generation
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u11-adjustments
+**Iteration**: 1
+**Artifact Fingerprint**: sha256:70c24f222b86dcd71aedd2609a853c59acfd64544f5cda5b88d6ac81358ed107
+**Request Id**: review:0b4bf1a6dfc9660e683941ef32236c61
+**Source Fingerprint**: 01940fc943b0a115778edc3f6fbe8c7799cdeadc88c7e3c3c06aafd0dd59059b
+**Unit Source Fingerprint**: sha256:ccffa4c2bc30c54f0e5d191d69df9aef22f0fb492a0cdc880e7c6be2002c63e6
+**Review File**: .aidlc-engine/reviews/code-generation/units/u11-adjustments/924f2e3cbd1e4ff0/1.0b4bf1a6dfc9660e683941ef32236c61.review.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T11:03:20Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviewer-dispatch.json
+**Context**: .aidlc-engine > reviewer-dispatch.json
+
+---
+
+## Session Compacted
+**Timestamp**: 2026-11-16T11:03:55Z
+**Event**: SESSION_COMPACTED
+**Current Stage**: functional-design
+**State Validity**: valid
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T11:07:41Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/reviews/code-generation/units/u11-adjustments/924f2e3cbd1e4ff0/1.0b4bf1a6dfc9660e683941ef32236c61.review.md
+**Context**: .aidlc-engine > reviews > code-generation > units > u11-adjustments > 924f2e3cbd1e4ff0 > 1.0b4bf1a6dfc9660e683941ef32236c61.review.md
+
+---
+
+## Subagent Completed
+**Timestamp**: 2026-11-16T11:07:46Z
+**Event**: SUBAGENT_COMPLETED
+**Agent Type**: aidlc-architecture-reviewer-agent
+**Agent ID**: 01a1dde0-7afa-7301-94f6-a2d7fb823034
+**Message**: **Reviewer:** aidlc-architecture-reviewer-agent\n\n**Verdict: READY**\n\n指定reviewFileへ記録しました。製品不具合は確認できませんでした。U11専用161件成功、全体確認exit0、行96.27%です。\n\nMinorとして、gitleaks未導入による秘密検査未完了と実環境確認の残件を記録しました。
+**Review File Digest**: .aidlc-engine/reviews/functional-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/2.51eb45b14f18d19495f6a1abf85a8ddb.review.md=5d5ceb6fb8a92a918426ab9f4251d12d335b526e77b50600198d973e7962a810; .aidlc-engine/reviews/nfr-design/units/u5-assignment-calendar/924f2e3cbd1e4ff0/1.c7332057d3d458fc26faa4af5c326c01.review.md=7bfe4efd1d0c09dd591bbc2f37a8f80abf7c8aab0fc265719e239668171a10b4; .aidlc-engine/reviews/functional-design/units/u6-recording/924f2e3cbd1e4ff0/2.762e9460636482eebdcf7c5a130bd739.review.md=35e92d3751b6db91630138814c8aeb4a3ed8e76b7487265f2a1fe73fced503a7; .aidlc-engine/reviews/code-generation/units/u9-allowance/924f2e3cbd1e4ff0/2.052d869b30a448a9c04c53c4f90e68fa.review.md=absent; .aidlc-engine/reviews/code-generation/units/u10-notifications/924f2e3cbd1e4ff0/1.9c1a87357dc387f5961d3144c93b1fd4.review.md=absent; .aidlc-engine/reviews/code-generation/units/u11-adjustments/924f2e3cbd1e4ff0/1.0b4bf1a6dfc9660e683941ef32236c61.review.md=bce43120928f91f2d0820b95edd1ae2ecd7ba023130696c5ffb1f63bdb459cf8
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-16T11:07:50Z
+**Event**: REVIEW_COMPLETED
+**Stage**: code-generation
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u11-adjustments
+**Iteration**: 1
+**Verdict**: READY
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:70c24f222b86dcd71aedd2609a853c59acfd64544f5cda5b88d6ac81358ed107
+**Artifact Fingerprint**: sha256:70c24f222b86dcd71aedd2609a853c59acfd64544f5cda5b88d6ac81358ed107
+**Request Id**: review:0b4bf1a6dfc9660e683941ef32236c61
+**Request Source Fingerprint**: 01940fc943b0a115778edc3f6fbe8c7799cdeadc88c7e3c3c06aafd0dd59059b
+**Source Fingerprint**: 01940fc943b0a115778edc3f6fbe8c7799cdeadc88c7e3c3c06aafd0dd59059b
+**Source Listing**: sha256:b1928ef9abd25a2c0c9dd66d60e16ed26af897cb24377a33b8b0af136c09ed44
+**Unit Source Fingerprint**: sha256:ccffa4c2bc30c54f0e5d191d69df9aef22f0fb492a0cdc880e7c6be2002c63e6
+**Review Record**: .aidlc-engine/reviews/code-generation/units/u11-adjustments/924f2e3cbd1e4ff0/1.json
+**Review Record Digest**: sha256:010e3591db3473b92902fd6048480fedb291477c8c124aab01908857b4189977
+
+---
+
+## Unit Completed
+**Timestamp**: 2026-11-16T11:07:58Z
+**Event**: UNIT_COMPLETED
+**Stage**: code-generation
+**Unit**: u11-adjustments
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Checkpoint Verification Recorded
+**Timestamp**: 2026-11-16T11:09:20Z
+**Event**: CHECKPOINT_VERIFICATION_RECORDED
+**Unit**: u11-adjustments
+**Kind**: unit
+**Stage**: code-generation
+**Stages**: functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation
+**Verification Id**: 58f8346d-92c5-4c60-ac42-f871df824e50
+**Fingerprint**: sha256:07e7cd2ab8986e7a7ff169d75859299ce6be941eefac1c898d8f4a9dced501c1
+**Command SHA-256**: d627b40b8f8333ac3908513cffe51b7c69127393ee6a6a5479a92ede78c13c53
+**Exit Code**: 0
+**Verified**: true
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+
+---
+
+## Gate Approved
+**Timestamp**: 2026-11-16T11:09:59Z
+**Event**: GATE_APPROVED
+**Unit**: u11-adjustments
+**Stage**: code-generation
+**Stages**: functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation
+**Gate Stages**: functional-design, nfr-requirements, nfr-design, infrastructure-design, code-generation
+**Gate Scope**: unit-end
+**Checkpoint**: construction-unit
+**Fingerprint**: sha256:07e7cd2ab8986e7a7ff169d75859299ce6be941eefac1c898d8f4a9dced501c1
+**Run floor**: WORKFLOW_STARTED:2026-11-01T09:45:23Z#1
+**Run floors**: {"functional-design":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","nfr-requirements":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","nfr-design":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","infrastructure-design":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1","code-generation":"WORKFLOW_STARTED:2026-11-01T09:45:23Z#1"}
+**Verification Command SHA-256**: d627b40b8f8333ac3908513cffe51b7c69127393ee6a6a5479a92ede78c13c53
+**Verification Id**: 58f8346d-92c5-4c60-ac42-f871df824e50
+**Approved Evidence**: {"functional-design":["sha256:7c84ca2b25e27c57444cbd7ddb3e16768e35bfa03a1b250694a858617cb258f4",null],"nfr-requirements":["sha256:99718710c4cab304b8c655ceab854f9fb1ad7658fc5e4f42301b3a2994641c19",null],"nfr-design":["sha256:ee8c4d99600a02b6ca192bd90407377d55e84af087dfce8b2876716538f4c97a",null],"infrastructure-design":["sha256:5f4b2e2c88653ed54f8101e93a35ec8273fee87a1ce808511e085d14618402f8",null],"code-generation":["sha256:70c24f222b86dcd71aedd2609a853c59acfd64544f5cda5b88d6ac81358ed107","sha256:ccffa4c2bc30c54f0e5d191d69df9aef22f0fb492a0cdc880e7c6be2002c63e6"]}
+**Autonomous**: true
+**Review Finding Dispositions**: {"version":1,"dispositions":[{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/code-generation/code-generation-plan.md","id":"R-01","fingerprint":"sha256:a00ee49a3ede4081d8ed5397a7ad6c3713f23c662a5a15121a4a635c20b042d0","status":"Approved autonomously","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/code-generation/units/u11-adjustments/924f2e3cbd1e4ff0/1.json","digest":"sha256:010e3591db3473b92902fd6048480fedb291477c8c124aab01908857b4189977"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/functional-spec.md","id":"R-01","fingerprint":"sha256:026c69e1c12cc99fc9ee90086d7c826058964ba52c2411ba83488e9a2b676d1c","status":"Approved autonomously","decided_at_severity":"Major","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.json","digest":"sha256:e415ef3059cfacc7cce62f0b7f0dbd51364b416e184c57bfdbb3a45927bc5665"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/functional-spec.md","id":"R-02","fingerprint":"sha256:8e09cac2dd7b4b468bd9a26bfe344cf4787024f972797e1e8eff0131ee36ef5b","status":"Approved autonomously","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.json","digest":"sha256:e415ef3059cfacc7cce62f0b7f0dbd51364b416e184c57bfdbb3a45927bc5665"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/functional-design/functional-spec.md","id":"R-03","fingerprint":"sha256:50b0912472bc8bc08f550159b35eab216a89a52d2c48075b625c40a3f528f141","status":"Approved autonomously","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/functional-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.json","digest":"sha256:e415ef3059cfacc7cce62f0b7f0dbd51364b416e184c57bfdbb3a45927bc5665"}},{"artifact":"aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/infrastructure-design/cicd-pipeline.md","id":"R-01","fingerprint":"sha256:c7bd4072a8baedc52f8c5961dcf2e1daf571feeeab2ab4038b807c4dd20076b9","status":"Approved autonomously","decided_at_severity":"Major","reviewed_record":{"path":".aidlc-engine/reviews/infrastructure-design/units/u11-adjustments/924f2e3cbd1e4ff0/1.json","digest":"sha256:55050ea98be65376642c06f316ac3bf017783762ab89ee6300d9f8ef61daa479"}}]}
+
+---
+
+## Stage Awaiting Approval
+**Timestamp**: 2026-11-16T11:10:44Z
+**Event**: STAGE_AWAITING_APPROVAL
+**Stage**: functional-design
+**Next Stage**: nfr-requirements
+**Brief Digest**: none
+**Sensor State**: required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/functional-design/entities.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/functional-design/rules.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/functional-design/functional-spec.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/functional-design/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/functional-design/entities.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/functional-design/rules.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/functional-design/functional-spec.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/functional-design/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/functional-design/entities.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/functional-design/rules.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/functional-design/functional-spec.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/functional-design/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/entities.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/rules.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/functional-spec.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/functional-design/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u3-notification-group/functional-design/entities.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u3-notification-group/functional-design/rules.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u3-notification-group/functional-design/functional-spec.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u3-notification-group/functional-design/traceability.json=passed; +47 more
+**Open Decisions**: 0
+
+---
+
+## Gate Approved
+**Timestamp**: 2026-11-16T11:11:09Z
+**Event**: GATE_APPROVED
+**Stage**: functional-design
+**Brief Digest**: none
+
+---
+
+## Stage Completion
+**Timestamp**: 2026-11-16T11:11:09Z
+**Event**: STAGE_COMPLETED
+**Stage**: functional-design
+**Validation Basis**: {"graphContract":"sha256:9bcda5bd8a06c0847db3e05cd9c841a992450b498f36fead53d3737b78517a4e","inputs":[{"artifact":"components","contentHash":"sha256:d9e7b69200887903fb97985014db4f1c40b24b31e828bbea445d81866de77d43","instanceCount":1,"presentCount":1,"producer":"domain-design","required":true,"structureHash":"sha256:83130ea239802ff43fc44a23da6ddde3f316c57a06a72afb5247b47144aa9698"},{"artifact":"contract-summary","contentHash":"sha256:41034e6a84f003b7b8100c90eab477364e9f4fb8fa8949f49b17eb32c7090139","instanceCount":1,"presentCount":1,"producer":"contract-design","required":false,"structureHash":"sha256:c2cdfaebb848c62b25ad31d1baeb088d5c5ea2b4c28eb19db15657fc6a799494"},{"artifact":"requirements","contentHash":"sha256:b52c45f67548a645bdc183262e9cc5b76d96bf55ce8c5511a683ace2385a4909","instanceCount":1,"presentCount":1,"producer":"requirements-analysis","required":true,"structureHash":"sha256:7707dd8d064f3ff23adf0e78f05b4aa00c9467b9ab0b412ecf16ad04390ebd6f"},{"artifact":"stories","contentHash":"sha256:3b067996e50557cec999eeb037546ad3c7747d98be15a5bacc1f65658b00565d","instanceCount":1,"presentCount":1,"producer":"user-stories","required":false,"structureHash":"sha256:474a7872070fe3326524c61bdf5c26f0afd2e176cae931616aaadac4047e8f05"},{"artifact":"unit-of-work-story-map","contentHash":"sha256:08c7effa66e5fd12ebc201d778f7fafd70e88f90295936440da453f33cf70bcf","instanceCount":1,"presentCount":1,"producer":"units-generation","required":false,"structureHash":"sha256:89cab6d5b9dc50f48969b30502fb0daf834204ea687ca6ac99491ae9f0c21556"},{"artifact":"unit-of-work","contentHash":"sha256:8ca8fca8304bfd7374d3fc3562590145454e5f6a597d55c4d0a291103519d52f","instanceCount":1,"presentCount":1,"producer":"units-generation","required":true,"structureHash":"sha256:c13b39cfe1832208cb5d71406523e5f879fbd4abe89fe58a47612a74a48ab8a1"}],"outputs":[{"artifact":"entities","contentHash":"sha256:5d35fecf16b6c2e57cc5de5c6a890305059dda67d41156dec0483983db71c929","instanceCount":11,"presentCount":11,"producer":"functional-design","required":true,"structureHash":"sha256:0d74e6ed7fd0aeb42b9f041e992bc34d34f9e08d0794daec12590590b5c73111"},{"artifact":"functional-spec","contentHash":"sha256:889503a493e024926704e8430112b17b0f018a5ec41c765a562dd851c2db5894","instanceCount":11,"presentCount":11,"producer":"functional-design","required":true,"structureHash":"sha256:6064985a45a3748e639dba63b84b1e2067d743e8aee4897c3783aca0b08c5e77"},{"artifact":"rules","contentHash":"sha256:62b9890042c89b0bbd4a75955597fb30cfa5efe60c2e232911272a3697ebc816","instanceCount":11,"presentCount":11,"producer":"functional-design","required":true,"structureHash":"sha256:0db0b43c812eaf5219177317cd3794b49c966650b1a101bbd1e9a44f823341a0"},{"artifact":"traceability","contentHash":"sha256:04323d938e18f38fd349be66229a7776d0bf52cc7c4dc51518e8e9c028b9cd71","instanceCount":11,"presentCount":11,"producer":"functional-design","required":true,"structureHash":"sha256:a7271b32d8b20e19cb2a7fc6fe8c795f925059fde00a79171c52c53c4a2b3ca4"}],"projectType":"greenfield","schema":3}
+**Details**: Stage Functional Design approved by gate
+
+---
+
+## Stage Start
+**Timestamp**: 2026-11-16T11:11:09Z
+**Event**: STAGE_STARTED
+**Stage**: nfr-requirements
+**Agent**: aidlc-architect-agent
+**Answer Mode**: file (reused from intent-capture)
+
+---
+
+## Stage Awaiting Approval
+**Timestamp**: 2026-11-16T11:11:52Z
+**Event**: STAGE_AWAITING_APPROVAL
+**Stage**: nfr-requirements
+**Next Stage**: nfr-design
+**Brief Digest**: none
+**Sensor State**: upstream-coverage@aidlc/spaces/default/intents/261101-housework-calendar/construction/u11-adjustments/nfr-requirements/performance-requirements.md=failed(2) [detail: aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/sensors/nfr-requirements/upstream-coverage-42714a23.md]; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-requirements/performance-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-requirements/security-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-requirements/scalability-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-requirements/reliability-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-requirements/observability-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-requirements/tech-stack-decisions.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-requirements/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-requirements/performance-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-requirements/security-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-requirements/scalability-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-requirements/reliability-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-requirements/observability-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-requirements/tech-stack-decisions.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-requirements/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/nfr-requirements/performance-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/nfr-requirements/security-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/nfr-requirements/scalability-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/nfr-requirements/reliability-requirements.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/nfr-requirements/observability-requirements.md=passed; +79 more
+**Open Decisions**: 0
+
+---
+
+## Gate Approved
+**Timestamp**: 2026-11-16T11:12:17Z
+**Event**: GATE_APPROVED
+**Stage**: nfr-requirements
+**Brief Digest**: none
+
+---
+
+## Stage Completion
+**Timestamp**: 2026-11-16T11:12:17Z
+**Event**: STAGE_COMPLETED
+**Stage**: nfr-requirements
+**Validation Basis**: {"graphContract":"sha256:42740ba129331fd7be59c025acef08cda33aa1e1b365637b9662dd2b529d969c","inputs":[{"artifact":"contract-summary","contentHash":"sha256:41034e6a84f003b7b8100c90eab477364e9f4fb8fa8949f49b17eb32c7090139","instanceCount":1,"presentCount":1,"producer":"contract-design","required":false,"structureHash":"sha256:c2cdfaebb848c62b25ad31d1baeb088d5c5ea2b4c28eb19db15657fc6a799494"},{"artifact":"functional-spec","contentHash":"sha256:889503a493e024926704e8430112b17b0f018a5ec41c765a562dd851c2db5894","instanceCount":11,"presentCount":11,"producer":"functional-design","required":true,"structureHash":"sha256:6064985a45a3748e639dba63b84b1e2067d743e8aee4897c3783aca0b08c5e77"},{"artifact":"requirements","contentHash":"sha256:b52c45f67548a645bdc183262e9cc5b76d96bf55ce8c5511a683ace2385a4909","instanceCount":1,"presentCount":1,"producer":"requirements-analysis","required":true,"structureHash":"sha256:7707dd8d064f3ff23adf0e78f05b4aa00c9467b9ab0b412ecf16ad04390ebd6f"},{"artifact":"rules","contentHash":"sha256:62b9890042c89b0bbd4a75955597fb30cfa5efe60c2e232911272a3697ebc816","instanceCount":11,"presentCount":11,"producer":"functional-design","required":true,"structureHash":"sha256:0db0b43c812eaf5219177317cd3794b49c966650b1a101bbd1e9a44f823341a0"}],"outputs":[{"artifact":"observability-requirements","contentHash":"sha256:92973b38a0e1695b5edef1e7365bf86fa3a51725700f985537498ae7c52ca888","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:869704b418d8d86da0e36ceb73137b1a1e007b05a2d08fbf62e604206c3ac822"},{"artifact":"performance-requirements","contentHash":"sha256:d44bb87b32b78cd3fcc156bce8a714c5eb6b6e92d3df0e3e2ed3cbfa5e537711","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:04ef2ba9ffea1022538efb8795b17bcb2b343c36911879ed8d7fc72c5c87c3ca"},{"artifact":"reliability-requirements","contentHash":"sha256:4157d3d7b41f40df301fb627842230ee57b81fc26b90b48c81ddd9ed0426bcc1","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:e3e00f4447a08cbab1780f4a23b814ed19d3bbfcb22e5c56ba4f2768d236676f"},{"artifact":"scalability-requirements","contentHash":"sha256:98ea390485db0a81d9fe0ad5b72b664e688e94426f223f88b39e68514decd8f6","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:b5251cba12054706d3774100b4cc1e6b27703fdc5b22d67f2f48cff8001af5d8"},{"artifact":"security-requirements","contentHash":"sha256:a4df2d2775ca7f7b015569364a18d1b3a38ecb7dfa75e183556e9e980ef09b54","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:d69ddba709cbac4b37d78aa5170a9e5eefceb0251bea57f211b2808bcb174715"},{"artifact":"tech-stack-decisions","contentHash":"sha256:7c9f3cfbd0ea9ea9c88b438074ff2977fde535cfd2a56964b2b7c108cfd6d32a","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:d1300b1f26a32ed1ad65cae32fead11febffeaa127be6cdd34cadc337d3b6dfd"},{"artifact":"traceability","contentHash":"sha256:9cb2e1e254adbc3afbfec8e09e20d84d595bceb63e2207d7c6879ff5b3756927","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:4abc0b9ec4688276d3376a2c9e4a74008759cd9cbcb72d2d36da51fac622943a"}],"projectType":"greenfield","schema":3}
+**Details**: Stage NFR Requirements approved by gate
+
+---
+
+## Stage Start
+**Timestamp**: 2026-11-16T11:12:17Z
+**Event**: STAGE_STARTED
+**Stage**: nfr-design
+**Agent**: aidlc-architect-agent
+**Answer Mode**: file (reused from intent-capture)
+
+---
+
+## Stage Awaiting Approval
+**Timestamp**: 2026-11-16T11:13:00Z
+**Event**: STAGE_AWAITING_APPROVAL
+**Stage**: nfr-design
+**Next Stage**: infrastructure-design
+**Brief Digest**: none
+**Sensor State**: required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-design/performance-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-design/security-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-design/scalability-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-design/reliability-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-design/observability-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-design/logical-components.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/nfr-design/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-design/performance-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-design/security-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-design/scalability-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-design/reliability-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-design/observability-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-design/logical-components.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/nfr-design/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/nfr-design/performance-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/nfr-design/security-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/nfr-design/scalability-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/nfr-design/reliability-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/nfr-design/observability-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/nfr-design/logical-components.md=passed; +79 more
+**Open Decisions**: 0
+
+---
+
+## Gate Approved
+**Timestamp**: 2026-11-16T11:13:25Z
+**Event**: GATE_APPROVED
+**Stage**: nfr-design
+**Brief Digest**: none
+
+---
+
+## Stage Completion
+**Timestamp**: 2026-11-16T11:13:25Z
+**Event**: STAGE_COMPLETED
+**Stage**: nfr-design
+**Validation Basis**: {"graphContract":"sha256:ef880741298a28ff1b153f7995686a9c571a06744a85ec1852b3998a0ee954fb","inputs":[{"artifact":"contract-summary","contentHash":"sha256:41034e6a84f003b7b8100c90eab477364e9f4fb8fa8949f49b17eb32c7090139","instanceCount":1,"presentCount":1,"producer":"contract-design","required":false,"structureHash":"sha256:c2cdfaebb848c62b25ad31d1baeb088d5c5ea2b4c28eb19db15657fc6a799494"},{"artifact":"functional-spec","contentHash":"sha256:889503a493e024926704e8430112b17b0f018a5ec41c765a562dd851c2db5894","instanceCount":11,"presentCount":11,"producer":"functional-design","required":true,"structureHash":"sha256:6064985a45a3748e639dba63b84b1e2067d743e8aee4897c3783aca0b08c5e77"},{"artifact":"observability-requirements","contentHash":"sha256:92973b38a0e1695b5edef1e7365bf86fa3a51725700f985537498ae7c52ca888","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:869704b418d8d86da0e36ceb73137b1a1e007b05a2d08fbf62e604206c3ac822"},{"artifact":"performance-requirements","contentHash":"sha256:d44bb87b32b78cd3fcc156bce8a714c5eb6b6e92d3df0e3e2ed3cbfa5e537711","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:04ef2ba9ffea1022538efb8795b17bcb2b343c36911879ed8d7fc72c5c87c3ca"},{"artifact":"reliability-requirements","contentHash":"sha256:4157d3d7b41f40df301fb627842230ee57b81fc26b90b48c81ddd9ed0426bcc1","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:e3e00f4447a08cbab1780f4a23b814ed19d3bbfcb22e5c56ba4f2768d236676f"},{"artifact":"scalability-requirements","contentHash":"sha256:98ea390485db0a81d9fe0ad5b72b664e688e94426f223f88b39e68514decd8f6","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:b5251cba12054706d3774100b4cc1e6b27703fdc5b22d67f2f48cff8001af5d8"},{"artifact":"security-requirements","contentHash":"sha256:a4df2d2775ca7f7b015569364a18d1b3a38ecb7dfa75e183556e9e980ef09b54","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:d69ddba709cbac4b37d78aa5170a9e5eefceb0251bea57f211b2808bcb174715"},{"artifact":"tech-stack-decisions","contentHash":"sha256:7c9f3cfbd0ea9ea9c88b438074ff2977fde535cfd2a56964b2b7c108cfd6d32a","instanceCount":11,"presentCount":11,"producer":"nfr-requirements","required":true,"structureHash":"sha256:d1300b1f26a32ed1ad65cae32fead11febffeaa127be6cdd34cadc337d3b6dfd"}],"outputs":[{"artifact":"logical-components","contentHash":"sha256:59fbfc995e3817e3c36596cc587795ded185e48b198f7b931254e98fea22ea94","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:52e82a2d92f7ddcdb6c861ec7e27c213ca36f9dadefb80b5a7ad491838b8a9a3"},{"artifact":"observability-design","contentHash":"sha256:eae35d73ce187cc7ba2072a6075ca29766aa89185baf5f68fb344b83c88106fe","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:ec590d3435c31d1b60ac6d28d88ffbe094595509efacc67fb2c2ee48ff5a6a21"},{"artifact":"performance-design","contentHash":"sha256:31f30537a69ddb51a2c86d1ef3bdc09df705c0d71e45276b61a62774341bf6d5","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:dbc48e3dab3f3573c47a563fdebcf641af6bea569596a8c1cea27655834e2e76"},{"artifact":"reliability-design","contentHash":"sha256:793300c06afabfe0f2a63d86ef479ee0e69d9a0e13fb2d55b16d147e3b7254c8","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:3c597068133fcc1d095f1ffd6eb197ce5d30f3766c4588f916ca19ead0eea058"},{"artifact":"scalability-design","contentHash":"sha256:bbf1cf47b6427a60f4ab226bd4ab5ac7c9f9015a4b92debf53f088c8b01344f8","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:3759e7b5f667738000628ddc8cbf977775549ecd111840633a08a3c27d47df6c"},{"artifact":"security-design","contentHash":"sha256:25f17563d80aa3eacce1b5f5da8d1ea0e7f15639bd15d3d3c32869dde6b66210","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:ad99e79727eade67d044079b286a07c727ea83f3b8c560381bb9ca4ed0b548ca"},{"artifact":"traceability","contentHash":"sha256:03b39e0e957c43635e5b38f3b787ebc072e7e1fcc7497b39bddd2668ea5723d1","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:0f36ca8bcf085ce95aab02d5e2f6f73992519f63418a734fbcd3066b2878c9a7"}],"projectType":"greenfield","schema":3}
+**Details**: Stage NFR Design approved by gate
+
+---
+
+## Stage Start
+**Timestamp**: 2026-11-16T11:13:25Z
+**Event**: STAGE_STARTED
+**Stage**: infrastructure-design
+**Agent**: aidlc-aws-platform-agent
+**Answer Mode**: file (reused from intent-capture)
+
+---
+
+## Stage Awaiting Approval
+**Timestamp**: 2026-11-16T11:14:08Z
+**Event**: STAGE_AWAITING_APPROVAL
+**Stage**: infrastructure-design
+**Next Stage**: code-generation
+**Brief Digest**: none
+**Sensor State**: upstream-coverage@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/infrastructure-design/infrastructure-specification.md=failed(2) [detail: aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/sensors/infrastructure-design/upstream-coverage-918e7134.md]; upstream-coverage@aidlc/spaces/default/intents/261101-housework-calendar/construction/u3-notification-group/infrastructure-design/infrastructure-specification.md=failed(2) [detail: aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/sensors/infrastructure-design/upstream-coverage-01e7206c.md]; upstream-coverage@aidlc/spaces/default/intents/261101-housework-calendar/construction/u6-recording/infrastructure-design/infrastructure-specification.md=failed(2) [detail: aidlc/spaces/default/intents/261101-housework-calendar/.aidlc-engine/sensors/infrastructure-design/upstream-coverage-c9d1ab11.md]; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/infrastructure-design/infrastructure-specification.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/infrastructure-design/monitoring-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/infrastructure-design/cicd-pipeline.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/infrastructure-design/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/infrastructure-design/infrastructure-specification.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/infrastructure-design/monitoring-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/infrastructure-design/cicd-pipeline.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/infrastructure-design/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/infrastructure-design/infrastructure-specification.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/infrastructure-design/monitoring-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/infrastructure-design/cicd-pipeline.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/infrastructure-design/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/infrastructure-specification.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/monitoring-design.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/cicd-pipeline.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/infrastructure-design/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u3-notification-group/infrastructure-design/infrastructure-specification.md=passed; +46 more
+**Open Decisions**: 0
+
+---
+
+## Gate Approved
+**Timestamp**: 2026-11-16T11:14:34Z
+**Event**: GATE_APPROVED
+**Stage**: infrastructure-design
+**Brief Digest**: none
+
+---
+
+## Stage Completion
+**Timestamp**: 2026-11-16T11:14:34Z
+**Event**: STAGE_COMPLETED
+**Stage**: infrastructure-design
+**Validation Basis**: {"graphContract":"sha256:5b36300e4a848f35345dfd56bbf1a1355d108707996db2db5863ed6de1e50085","inputs":[{"artifact":"components","contentHash":"sha256:d9e7b69200887903fb97985014db4f1c40b24b31e828bbea445d81866de77d43","instanceCount":1,"presentCount":1,"producer":"domain-design","required":true,"structureHash":"sha256:83130ea239802ff43fc44a23da6ddde3f316c57a06a72afb5247b47144aa9698"},{"artifact":"contract-summary","contentHash":"sha256:41034e6a84f003b7b8100c90eab477364e9f4fb8fa8949f49b17eb32c7090139","instanceCount":1,"presentCount":1,"producer":"contract-design","required":false,"structureHash":"sha256:c2cdfaebb848c62b25ad31d1baeb088d5c5ea2b4c28eb19db15657fc6a799494"},{"artifact":"functional-spec","contentHash":"sha256:889503a493e024926704e8430112b17b0f018a5ec41c765a562dd851c2db5894","instanceCount":11,"presentCount":11,"producer":"functional-design","required":true,"structureHash":"sha256:6064985a45a3748e639dba63b84b1e2067d743e8aee4897c3783aca0b08c5e77"},{"artifact":"logical-components","contentHash":"sha256:59fbfc995e3817e3c36596cc587795ded185e48b198f7b931254e98fea22ea94","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:52e82a2d92f7ddcdb6c861ec7e27c213ca36f9dadefb80b5a7ad491838b8a9a3"},{"artifact":"observability-design","contentHash":"sha256:eae35d73ce187cc7ba2072a6075ca29766aa89185baf5f68fb344b83c88106fe","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:ec590d3435c31d1b60ac6d28d88ffbe094595509efacc67fb2c2ee48ff5a6a21"},{"artifact":"performance-design","contentHash":"sha256:31f30537a69ddb51a2c86d1ef3bdc09df705c0d71e45276b61a62774341bf6d5","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:dbc48e3dab3f3573c47a563fdebcf641af6bea569596a8c1cea27655834e2e76"},{"artifact":"reliability-design","contentHash":"sha256:793300c06afabfe0f2a63d86ef479ee0e69d9a0e13fb2d55b16d147e3b7254c8","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:3c597068133fcc1d095f1ffd6eb197ce5d30f3766c4588f916ca19ead0eea058"},{"artifact":"scalability-design","contentHash":"sha256:bbf1cf47b6427a60f4ab226bd4ab5ac7c9f9015a4b92debf53f088c8b01344f8","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:3759e7b5f667738000628ddc8cbf977775549ecd111840633a08a3c27d47df6c"},{"artifact":"security-design","contentHash":"sha256:25f17563d80aa3eacce1b5f5da8d1ea0e7f15639bd15d3d3c32869dde6b66210","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":true,"structureHash":"sha256:ad99e79727eade67d044079b286a07c727ea83f3b8c560381bb9ca4ed0b548ca"}],"outputs":[{"artifact":"cicd-pipeline","contentHash":"sha256:282aa982a8a526908f1ddefdc3caf3058d23a9ae51a201f7b2c0f3a90bbcaa36","instanceCount":11,"presentCount":11,"producer":"infrastructure-design","required":true,"structureHash":"sha256:4468a178c1559fad7121bb7395960c525db6f6f839eb0337091c7c3ee0e023f4"},{"artifact":"infrastructure-specification","contentHash":"sha256:e7c813260c6bf83e19a60d0950a2d6087a72133bda300ac49769df18f89bb783","instanceCount":11,"presentCount":11,"producer":"infrastructure-design","required":true,"structureHash":"sha256:ecfddc3e71d3b29783e8a330799ccc3702eaa2374b4fbee0ad5aa2cdcd077ee9"},{"artifact":"monitoring-design","contentHash":"sha256:23c4c6393c0a74c7671016871b8457d1576be92403ebf54d6303760159ddc7e0","instanceCount":11,"presentCount":11,"producer":"infrastructure-design","required":true,"structureHash":"sha256:9ad542326eb1a1568c1a8ee3c712765a770f42bd92fd0df373f85bb283e2b63f"},{"artifact":"traceability","contentHash":"sha256:f15b59b72e69bcefdadce128eebb2a99344d849401adf584798f698a73c8f911","instanceCount":11,"presentCount":11,"producer":"infrastructure-design","required":true,"structureHash":"sha256:50da749d3033fe91db5bd0955549aad5452be9c894209714cc50427a139269e2"}],"projectType":"greenfield","schema":3}
+**Details**: Stage Infrastructure Design approved by gate
+
+---
+
+## Stage Start
+**Timestamp**: 2026-11-16T11:14:34Z
+**Event**: STAGE_STARTED
+**Stage**: code-generation
+**Agent**: aidlc-developer-agent
+**Answer Mode**: file (reused from intent-capture)
+**Source Baseline**: sha256:b1928ef9abd25a2c0c9dd66d60e16ed26af897cb24377a33b8b0af136c09ed44
+
+---
+
+## Change Accepted
+**Timestamp**: 2026-11-16T11:15:05Z
+**Event**: CHANGE_ACCEPTED
+**Stage**: code-generation
+**Checkpoint**: review-receipt
+**Changed**: .gitleaks.toml, .gitleaksignore, packages/backend/test/u6-recording/buildMessages.test.ts, packages/backend/test/u6-recording/buildRecordCarousel.test.ts, packages/backend/test/u6-recording/buildTextMessage.test.ts, packages/backend/test/u6-recording/calendarRepository.recordItems.test.ts, packages/backend/test/u6-recording/dutyRecordedHook.test.ts, packages/backend/test/u6-recording/helpers/events.ts, packages/backend/test/u6-recording/helpers/seed.ts, packages/backend/test/u6-recording/listTodayRecordableDuties.test.ts
+**Recorded**: (outside the units)
+**Current**: sha256:50a51d992265f6ab8b25289b0ebbbdc9b47dab0a2528409186742c1570720ca8
+**Details**: These files changed outside any unit's work in Code Generation: .gitleaks.toml, .gitleaksignore, packages/backend/test/u6-recording/buildMessages.test.ts, packages/backend/test/u6-recording/buildRecordCarousel.test.ts, packages/backend/test/u6-recording/buildTextMessage.test.ts, packages/backend/test/u6-recording/calendarRepository.recordItems.test.ts, packages/backend/test/u6-recording/dutyRecordedHook.test.ts, packages/backend/test/u6-recording/helpers/events.ts, packages/backend/test/u6-recording/helpers/seed.ts, packages/backend/test/u6-recording/listTodayRecordableDuties.test.ts and 25 more. Kept them.
+
+---
+
+## Stage Awaiting Approval
+**Timestamp**: 2026-11-16T11:15:22Z
+**Event**: STAGE_AWAITING_APPROVAL
+**Stage**: code-generation
+**Next Stage**: build-and-test
+**Brief Digest**: none
+**Sensor State**: required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/code-generation/code-generation-plan.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/code-generation/unit-test-instructions.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/code-generation/code-summary.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u4-chore-types/code-generation/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/code-generation/code-generation-plan.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/code-generation/unit-test-instructions.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/code-generation/code-summary.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u8-swap/code-generation/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/code-generation/code-generation-plan.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/code-generation/unit-test-instructions.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/code-generation/code-summary.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u2-invitation/code-generation/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-generation-plan.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/unit-test-instructions.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/code-summary.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u10-notifications/code-generation/traceability.json=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u3-notification-group/code-generation/code-generation-plan.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u3-notification-group/code-generation/unit-test-instructions.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u3-notification-group/code-generation/code-summary.md=passed; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/u3-notification-group/code-generation/traceability.json=passed; +35 more
+**Open Decisions**: 0
+
+---
+
+## Gate Approved
+**Timestamp**: 2026-11-16T11:15:51Z
+**Event**: GATE_APPROVED
+**Stage**: code-generation
+**Brief Digest**: none
+
+---
+
+## Stage Completion
+**Timestamp**: 2026-11-16T11:15:51Z
+**Event**: STAGE_COMPLETED
+**Stage**: code-generation
+**Validation Basis**: {"graphContract":"sha256:ac0ef7ae03ae2fcfab9e2a94500d84c4fe00d00384d1f8dcff92c96b2e1f50de","inputs":[{"artifact":"contract-summary","contentHash":"sha256:41034e6a84f003b7b8100c90eab477364e9f4fb8fa8949f49b17eb32c7090139","instanceCount":1,"presentCount":1,"producer":"contract-design","required":false,"structureHash":"sha256:c2cdfaebb848c62b25ad31d1baeb088d5c5ea2b4c28eb19db15657fc6a799494"},{"artifact":"entities","contentHash":"sha256:5d35fecf16b6c2e57cc5de5c6a890305059dda67d41156dec0483983db71c929","instanceCount":11,"presentCount":11,"producer":"functional-design","required":false,"structureHash":"sha256:0d74e6ed7fd0aeb42b9f041e992bc34d34f9e08d0794daec12590590b5c73111"},{"artifact":"functional-spec","contentHash":"sha256:889503a493e024926704e8430112b17b0f018a5ec41c765a562dd851c2db5894","instanceCount":11,"presentCount":11,"producer":"functional-design","required":false,"structureHash":"sha256:6064985a45a3748e639dba63b84b1e2067d743e8aee4897c3783aca0b08c5e77"},{"artifact":"infrastructure-specification","contentHash":"sha256:e7c813260c6bf83e19a60d0950a2d6087a72133bda300ac49769df18f89bb783","instanceCount":11,"presentCount":11,"producer":"infrastructure-design","required":false,"structureHash":"sha256:ecfddc3e71d3b29783e8a330799ccc3702eaa2374b4fbee0ad5aa2cdcd077ee9"},{"artifact":"performance-design","contentHash":"sha256:31f30537a69ddb51a2c86d1ef3bdc09df705c0d71e45276b61a62774341bf6d5","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":false,"structureHash":"sha256:dbc48e3dab3f3573c47a563fdebcf641af6bea569596a8c1cea27655834e2e76"},{"artifact":"requirements","contentHash":"sha256:b52c45f67548a645bdc183262e9cc5b76d96bf55ce8c5511a683ace2385a4909","instanceCount":1,"presentCount":1,"producer":"requirements-analysis","required":true,"structureHash":"sha256:7707dd8d064f3ff23adf0e78f05b4aa00c9467b9ab0b412ecf16ad04390ebd6f"},{"artifact":"rules","contentHash":"sha256:62b9890042c89b0bbd4a75955597fb30cfa5efe60c2e232911272a3697ebc816","instanceCount":11,"presentCount":11,"producer":"functional-design","required":false,"structureHash":"sha256:0db0b43c812eaf5219177317cd3794b49c966650b1a101bbd1e9a44f823341a0"},{"artifact":"security-design","contentHash":"sha256:25f17563d80aa3eacce1b5f5da8d1ea0e7f15639bd15d3d3c32869dde6b66210","instanceCount":11,"presentCount":11,"producer":"nfr-design","required":false,"structureHash":"sha256:ad99e79727eade67d044079b286a07c727ea83f3b8c560381bb9ca4ed0b548ca"},{"artifact":"unit-of-work","contentHash":"sha256:8ca8fca8304bfd7374d3fc3562590145454e5f6a597d55c4d0a291103519d52f","instanceCount":1,"presentCount":1,"producer":"units-generation","required":true,"structureHash":"sha256:c13b39cfe1832208cb5d71406523e5f879fbd4abe89fe58a47612a74a48ab8a1"}],"outputs":[{"artifact":"code-generation-plan","contentHash":"sha256:7f0a588a447c969a099fed75ede7adc6b6fc701a80b52b1d8e3d42eb61dfa57b","instanceCount":11,"presentCount":11,"producer":"code-generation","required":true,"structureHash":"sha256:09818b339eb9939387952a4d57b17ba67c997a15428ff09442fc584a0f6cfd61"},{"artifact":"code-summary","contentHash":"sha256:52629cdd17030f703ed976e0764fc65c7dd56339af0cd1df57b58a798bb167fa","instanceCount":11,"presentCount":11,"producer":"code-generation","required":true,"structureHash":"sha256:3afb0c1d139fc3164e55cdfbbc3185a73261af2a38cf8fbbb13e0c6b63e5a50c"},{"artifact":"traceability","contentHash":"sha256:621d17f7eff0950d18e0b50973040ceca2b232bb6ec887814533d40a061ff11d","instanceCount":11,"presentCount":11,"producer":"code-generation","required":true,"structureHash":"sha256:66866bc703c8f1389e23d57a1efbf51500a2f9fee3b556f566d2285dcdbee93d"},{"artifact":"unit-test-instructions","contentHash":"sha256:6a4350463b7aa7991984f9d330b7386fdef305af7909ac1e8b09665b45cfee1e","instanceCount":11,"presentCount":11,"producer":"code-generation","required":true,"structureHash":"sha256:ab5772854ed14a50c24f728a6f7f21f385eac3a868c1e6b7c04720a6272d410d"}],"projectType":"greenfield","schema":3}
+**Details**: Stage Code Generation approved by gate
+
+---
+
+## Stage Start
+**Timestamp**: 2026-11-16T11:15:52Z
+**Event**: STAGE_STARTED
+**Stage**: build-and-test
+**Agent**: aidlc-quality-agent
+**Answer Mode**: file (reused from intent-capture)
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T11:24:35Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/source-inventory.json
+**Context**: construction > build-and-test > source-inventory.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T11:24:35Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/build-instructions.md
+**Context**: construction > build-and-test > build-instructions.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T11:24:35Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/integration-test-instructions.md
+**Context**: construction > build-and-test > integration-test-instructions.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T11:24:36Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/build-and-test-summary.md
+**Context**: construction > build-and-test > build-and-test-summary.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T11:28:49Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/build-instructions.md
+**Context**: construction > build-and-test > build-instructions.md
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-16T16:01:16Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: 5507516a
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T16:06:31Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/build-and-test-summary.md
+**Context**: construction > build-and-test > build-and-test-summary.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T16:06:31Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/test-results.md
+**Context**: construction > build-and-test > test-results.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T16:06:31Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/cross-unit-traceability.md
+**Context**: construction > build-and-test > cross-unit-traceability.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T16:06:32Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/cross-unit-raw.json
+**Context**: construction > build-and-test > cross-unit-raw.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T16:06:32Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/command-results.json
+**Context**: construction > build-and-test > command-results.json
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T16:06:32Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/performance-test-instructions.md
+**Context**: construction > build-and-test > performance-test-instructions.md
+
+---
+
+## Artifact Created
+**Timestamp**: 2026-11-16T16:06:32Z
+**Event**: ARTIFACT_CREATED
+**Tool**: Write
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/security-test-instructions.md
+**Context**: construction > build-and-test > security-test-instructions.md
+
+---
+
+## Session Compacted
+**Timestamp**: 2026-11-16T16:06:32Z
+**Event**: SESSION_COMPACTED
+**Current Stage**: build-and-test
+**State Validity**: valid
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T23:01:17Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/build-and-test-summary.md
+**Context**: construction > build-and-test > build-and-test-summary.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-16T23:01:17Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/test-results.md
+**Context**: construction > build-and-test > test-results.md
+
+---
+
+## Decision Recorded
+**Timestamp**: 2026-11-16T23:01:18Z
+**Event**: DECISION_RECORDED
+**Stage**: build-and-test
+**Decision**: ローカル4165件成功ですが、実環境の性能・通知・費用が未確認、要件対応17件未解決、U10の過去のBDD順序逸脱、レビュー内テスト例の秘密検査2件検出によりBuild and Testは未合格です。コードやライブラリの置換で実測や過去の順序を成立させる修正はありません。ループバック0/3。未合格を記録して承認へ進むか、ここで停止しますか？
+**Options**: Accept failure,Abort
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-17T00:38:49Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: 3347a7a6
+
+---
+
+## Question Answered
+**Timestamp**: 2026-11-17T00:39:02Z
+**Event**: QUESTION_ANSWERED
+**Stage**: build-and-test
+**Details**: Accept failure
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-17T00:39:02Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/test-results.md
+**Context**: construction > build-and-test > test-results.md
+
+---
+
+## Stage Awaiting Approval
+**Timestamp**: 2026-11-17T00:39:33Z
+**Event**: STAGE_AWAITING_APPROVAL
+**Stage**: build-and-test
+**Next Stage**: ci-pipeline
+**Brief Digest**: none
+**Sensor State**: required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/build-instructions.md=not-run; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/build-and-test-summary.md=not-run; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/test-results.md=not-run; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/cross-unit-traceability.md=not-run; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/integration-test-instructions.md=not-run; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/performance-test-instructions.md=not-run; required-sections@aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/security-test-instructions.md=not-run; upstream-coverage@aidlc/spaces/default/intents/261101-housework-calendar/construction/build-and-test/build-instructions.md=not-run
+**Open Decisions**: 0
+
+---
+
+## Human Turn
+**Timestamp**: 2026-11-17T00:58:42Z
+**Event**: HUMAN_TURN
+**Session**: 01a1ddd1-8078-7b33-ba8f-9505dadc937f
+**Origin**: person
+**Source**: typed
+**Message Id**: 19adfccd
+
+---
+
+## Gate Approved
+**Timestamp**: 2026-11-17T00:59:14Z
+**Event**: GATE_APPROVED
+**Stage**: build-and-test
+**User Input**: Approve
+**Brief Digest**: none
+
+---
+
+## Stage Completion
+**Timestamp**: 2026-11-17T00:59:14Z
+**Event**: STAGE_COMPLETED
+**Stage**: build-and-test
+**Validation Basis**: {"graphContract":"sha256:1aed809bd5f1f235d6ab1b1495c41997dd8cc201478d4991c474c4f1638a2b55","inputs":[{"artifact":"code-generation-plan","contentHash":"sha256:7f0a588a447c969a099fed75ede7adc6b6fc701a80b52b1d8e3d42eb61dfa57b","instanceCount":11,"presentCount":11,"producer":"code-generation","required":true,"structureHash":"sha256:09818b339eb9939387952a4d57b17ba67c997a15428ff09442fc584a0f6cfd61"},{"artifact":"code-summary","contentHash":"sha256:52629cdd17030f703ed976e0764fc65c7dd56339af0cd1df57b58a798bb167fa","instanceCount":11,"presentCount":11,"producer":"code-generation","required":true,"structureHash":"sha256:3afb0c1d139fc3164e55cdfbbc3185a73261af2a38cf8fbbb13e0c6b63e5a50c"},{"artifact":"unit-test-instructions","contentHash":"sha256:6a4350463b7aa7991984f9d330b7386fdef305af7909ac1e8b09665b45cfee1e","instanceCount":11,"presentCount":11,"producer":"code-generation","required":true,"structureHash":"sha256:ab5772854ed14a50c24f728a6f7f21f385eac3a868c1e6b7c04720a6272d410d"}],"outputs":[{"artifact":"build-and-test-summary","contentHash":"sha256:3cefdf1b92023250b07b8e123d04f9e46dd09d812213666e103093158ef501b4","instanceCount":1,"presentCount":1,"producer":"build-and-test","required":true,"structureHash":"sha256:01646aee3c4b5a4a6a610e474ce6c5931c147a022dbd4c85200585199e6d1e32"},{"artifact":"build-instructions","contentHash":"sha256:c68584f6b9ac1241ce11d0eaedb0aff8ccd3925172fc1076d5d9994d07fe3358","instanceCount":1,"presentCount":1,"producer":"build-and-test","required":true,"structureHash":"sha256:9c6b656a7308d7388cd37e7a63b133fd02c470fa7abdb889a827a057b901cbac"},{"artifact":"build-test-results","contentHash":"sha256:8a938366ba3bde5529413f6163d8724c93738b69c379035c06d7e12e1abe415e","instanceCount":1,"presentCount":1,"producer":"build-and-test","required":true,"structureHash":"sha256:08f922270272959e2e7923b33d6bbdf100bd5fdde215a3422cd07731084e2bdd"},{"artifact":"cross-unit-traceability","contentHash":"sha256:4c1a92576116919ee8f559dac8ad9e88211a2d8877e8afac452fdbc1fce569a7","instanceCount":1,"presentCount":1,"producer":"build-and-test","required":true,"structureHash":"sha256:ccd49a005e1a2830536561c9ed842e1937134cfefd7a54a886a469f1040b49b0"},{"artifact":"integration-test-instructions","contentHash":"sha256:ee6a86bb45ed996e1b979d3cdf4d7b7eb008dd3d79c01024b8d342686ddd80e9","instanceCount":1,"presentCount":1,"producer":"build-and-test","required":false,"structureHash":"sha256:57f46e199a988925251f64c2be1a802ef0dfb44d0372f5cc58880375a9372191"},{"artifact":"performance-test-instructions","contentHash":"sha256:969ac3391bd1e9064943ce68b3016771e123dad72051fc01f25021fedb34456b","instanceCount":1,"presentCount":1,"producer":"build-and-test","required":false,"structureHash":"sha256:df8df0e152a54177bdb6a0889857cf4f53a5aa291cad9846cdea77363e10ec92"},{"artifact":"security-test-instructions","contentHash":"sha256:76321c338529685be931df1e2edcd9263a35bc8ab9d64248d6b6bc73bb91c67d","instanceCount":1,"presentCount":1,"producer":"build-and-test","required":false,"structureHash":"sha256:51e97b1e2b722278843ec09f73ed41a4ed4d30cbc008e1b26ff6f9fbe34bf027"}],"projectType":"greenfield","schema":3}
+**Details**: Stage Build and Test approved by gate
+
+---
+
+## Stage Start
+**Timestamp**: 2026-11-17T00:59:14Z
+**Event**: STAGE_STARTED
+**Stage**: ci-pipeline
+**Agent**: aidlc-pipeline-deploy-agent
+**Answer Mode**: file (reused from intent-capture)
+
+---
+
+## Memory Empty
+**Timestamp**: 2026-11-17T00:59:14Z
+**Event**: MEMORY_EMPTY
+**Stage**: build-and-test
+
+---
+
+## Stage Skip
+**Timestamp**: 2026-11-17T01:00:07Z
+**Event**: STAGE_SKIPPED
+**Stage**: ci-pipeline
+**Reason**: 既存.github/workflows/ci.ymlがPRとmain pushで整形・lint・4構成の型検査・全体テストと行80%以上・gitleaks・frontend build・CDK synthを実行し、Nodeは.nvmrcを使用、contents readのみで配備から再利用できるため、新設や大幅変更は不要。Build and Testで承認された未合格・未確認事項は解消したとは扱わず保持する。
+**Skip Kind**: conditional-runtime
+
+---
+
+## Phase Completion
+**Timestamp**: 2026-11-17T01:00:07Z
+**Event**: PHASE_COMPLETED
+**From phase**: construction
+**To phase**: (end)
+**Stages completed**: 21
+
+---
+
+## Phase Verification
+**Timestamp**: 2026-11-17T01:00:07Z
+**Event**: PHASE_VERIFIED
+**Phase boundary**: construction → end
+
+---
+
+## Workflow Completion
+**Timestamp**: 2026-11-17T01:00:07Z
+**Event**: WORKFLOW_COMPLETED
+**Scope**: mvp
+**Details**: Scope: mvp, final stage ci-pipeline skipped
+**Reason**: 既存.github/workflows/ci.ymlがPRとmain pushで整形・lint・4構成の型検査・全体テストと行80%以上・gitleaks・frontend build・CDK synthを実行し、Nodeは.nvmrcを使用、contents readのみで配備から再利用できるため、新設や大幅変更は不要。Build and Testで承認された未合格・未確認事項は解消したとは扱わず保持する。
+
+---

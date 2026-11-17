@@ -1,3 +1,4 @@
+// U10: 通知2表・notify Lambda/ログ各1・標準アラーム5・api/lineのSNS許可各1を追加。既存の認証・暗号化・表ごとの操作の制約は維持する。
 import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
@@ -205,10 +206,10 @@ describe('U6 CDK: line の環境変数', () => {
 
 describe('U6 CDK: 数と設定が U6 の前後で変わらない（NFR1.25）', () => {
   it('テーブル・Lambda・ロググループ・MetricFilter の数が U5 のまま', () => {
-    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 8);
+    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 11);
     // api・line の 2 関数に、CDK が作る補助の関数（S3 の自動削除・配備のカスタムリソース）2 つ
-    t('Housework-staging-App').resourceCountIs('AWS::Lambda::Function', 4);
-    t('Housework-staging-App').resourceCountIs('AWS::Logs::LogGroup', 2);
+    t('Housework-staging-App').resourceCountIs('AWS::Lambda::Function', 5);
+    t('Housework-staging-App').resourceCountIs('AWS::Logs::LogGroup', 3);
     t('Housework-staging-App').resourceCountIs('AWS::Logs::MetricFilter', 1);
   });
 

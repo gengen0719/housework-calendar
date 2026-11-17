@@ -18,5 +18,8 @@ export async function getAllowances(
 ): Promise<AllowanceMonthView> {
   const ctx = requireMembership(auth);
   const month = resolveMonthParam(monthParam, now);
-  return allowanceService.getAllowanceMonthView(ctx, month, { today: jstDateOf(now) });
+  return allowanceService.getAllowanceMonthView(ctx, month, {
+    today: jstDateOf(now),
+    emitLogs: false,
+  });
 }

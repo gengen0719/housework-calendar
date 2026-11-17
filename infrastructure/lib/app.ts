@@ -54,26 +54,7 @@ export function buildApp(app: App = new App()): App {
     throw new Error('reservedConcurrency は 1 以上の整数にしてください');
   }
 
-  for (const envName of ENV_NAMES) {
-    const data = new DataStack(app, `Housework-${envName}-Data`, { env, envName });
-    new AppStack(app, `Housework-${envName}-App`, {
-      env,
-      envName,
-      users: data.users,
-      families: data.families,
-      processedLineEvents: data.processedLineEvents,
-      requestRecords: data.requestRecords,
-      invitations: data.invitations,
-      notificationGroups: data.notificationGroups,
-      choreTypes: data.choreTypes,
-      calendar: data.calendar,
-      originVerifySecret,
-      frontendDistPath,
-      reservedConcurrency,
-    });
-  }
-
-  // 作り手が最初に 1 回、手元から反映する。3 つのコンテキストがそろったときだけ作る
+  // 不正なアカウント設定はLambdaのバンドルより前に検出する。
   const githubOwner: unknown = app.node.tryGetContext('githubOwner');
   const githubRepo: unknown = app.node.tryGetContext('githubRepo');
   const budgetEmail: unknown = app.node.tryGetContext('budgetEmail');
@@ -93,5 +74,45 @@ export function buildApp(app: App = new App()): App {
       budgetEmail,
     });
   }
+
+  for (const envName of ENV_NAMES) {
+    const data = new DataStack(app, `Housework-${envName}-Data`, { env, envName });
+    new AppStack(app, `Housework-${envName}-App`, {
+      env,
+      envName,
+      users: data.users,
+      families: data.families,
+      processedLineEvents: data.processedLineEvents,
+      requestRecords: data.requestRecords,
+      invitations: data.invitations,
+      notificationGroups: data.notificationGroups,
+      choreTypes: data.choreTypes,
+      calendar: data.calendar,
+      notificationDispatches: data.notificationDispatches,
+      notificationPayloads: data.notificationPayloads,
+      adjustments: data.adjustments,
+      backupsEnabled:
+        optionalContextString(app, `${envName}BackupsEnabled`) === undefined
+          ? undefined
+          : optionalContextString(app, `${envName}BackupsEnabled`) === 'true',
+      notificationsEnabled:
+        app.node.tryGetContext(`${envName}NotificationsEnabled`) === true ||
+        app.node.tryGetContext(`${envName}NotificationsEnabled`) === 'true',
+      notificationEmail: optionalContextString(app, `${envName}NotificationEmail`),
+      notificationChecksPassed:
+        app.node.tryGetContext(`${envName}NotificationChecksPassed`) === true ||
+        app.node.tryGetContext(`${envName}NotificationChecksPassed`) === 'true',
+      notificationBudgetVerified:
+        app.node.tryGetContext(`${envName}NotificationBudgetVerified`) === true ||
+        app.node.tryGetContext(`${envName}NotificationBudgetVerified`) === 'true',
+      notificationEstimatedJpy: Number(
+        app.node.tryGetContext(`${envName}NotificationEstimatedJpy`),
+      ),
+      originVerifySecret,
+      frontendDistPath,
+      reservedConcurrency,
+    });
+  }
+
   return app;
 }

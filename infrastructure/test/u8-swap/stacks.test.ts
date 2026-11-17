@@ -1,3 +1,4 @@
+// U10: 通知2表・notify Lambda/ログ各1・標準アラーム5・api/lineのSNS許可各1を追加。既存の認証・暗号化・表ごとの操作の制約は維持する。
 import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
@@ -150,8 +151,8 @@ describe('U8 CDK: api のロールは U8 で変わらない', () => {
   });
 
   it('IAM の文の数は U7 のまま（U8 で文を足していない）', () => {
-    expect(apiStatements()).toHaveLength(11);
-    expect(lineStatements()).toHaveLength(9);
+    expect(apiStatements()).toHaveLength(13);
+    expect(lineStatements()).toHaveLength(10);
   });
 
   it('line と api の環境変数に、U8 で足された表の名前も秘密の値もない', () => {
@@ -167,12 +168,12 @@ describe('U8 CDK: api のロールは U8 で変わらない', () => {
 
 describe('U8 CDK: 数と設定が U8 の前後で変わらない（NFR1.33）', () => {
   it('テーブル・Lambda・ロググループ・MetricFilter・アラームの数が U7 のまま', () => {
-    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 8);
-    t('Housework-staging-App').resourceCountIs('AWS::Lambda::Function', 4);
-    t('Housework-staging-App').resourceCountIs('AWS::Logs::LogGroup', 2);
+    t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 11);
+    t('Housework-staging-App').resourceCountIs('AWS::Lambda::Function', 5);
+    t('Housework-staging-App').resourceCountIs('AWS::Logs::LogGroup', 3);
     t('Housework-staging-App').resourceCountIs('AWS::Logs::MetricFilter', 1);
-    t('Housework-staging-App').resourceCountIs('AWS::CloudWatch::Alarm', 0);
-    t('Housework-production-App').resourceCountIs('AWS::CloudWatch::Alarm', 0);
+    t('Housework-staging-App').resourceCountIs('AWS::CloudWatch::Alarm', 5);
+    t('Housework-production-App').resourceCountIs('AWS::CloudWatch::Alarm', 5);
   });
 
   it('Calendar に TTL と新しい索引がない', () => {

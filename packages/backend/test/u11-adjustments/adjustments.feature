@@ -1,0 +1,18 @@
+Feature: 管理者の加算減額登録
+  Scenario: 有効な加算と減額を一度だけ保存する
+    Given 未確定月の家族に管理者と子供がいる
+    When 管理者が同じキーで加算を二度登録する
+    Then どちらも201で同じ調整が返る
+  Scenario: 不正な入力を保存しない
+    Given 未確定月の家族に管理者と子供がいる
+    When 管理者が空の理由で登録する
+    Then 422で理由REASON_REQUIREDを返す
+  Scenario: 子供からの変更を拒否する
+    Given 未確定月の家族に管理者と子供がいる
+    When 子供が加算を登録する
+    Then 403で理由ADMIN_ONLYを返す
+  Scenario: 確定月へ登録しない
+    Given 未確定月の家族に管理者と子供がいる
+    And その月が確定している
+    When 管理者が加算を登録する
+    Then 409で理由MONTH_CONFIRMEDを返す

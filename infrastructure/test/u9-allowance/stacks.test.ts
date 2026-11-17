@@ -1,3 +1,4 @@
+// U10: 通知2表・notify Lambda/ログ各1・標準アラーム5・api/lineのSNS許可各1を追加。既存の認証・暗号化・表ごとの操作の制約は維持する。
 import { resolve } from 'node:path';
 import { App } from 'aws-cdk-lib';
 import { CachePolicy } from 'aws-cdk-lib/aws-cloudfront';
@@ -43,8 +44,8 @@ beforeAll(() => {
 
 describe('U9 はインフラを増やさない', () => {
   it('IAM の文は api 11、line 9 のまま', () => {
-    expect(statements('api')).toHaveLength(11);
-    expect(statements('line')).toHaveLength(9);
+    expect(statements('api')).toHaveLength(13);
+    expect(statements('line')).toHaveLength(10);
   });
   it.each(['api', 'line'])('%s に広い DynamoDB の許可がない', (entry) => {
     for (const s of statements(entry).filter((s) =>
@@ -93,6 +94,7 @@ describe('U9 はインフラを増やさない', () => {
       .Properties.Environment!.Variables;
     expect(Object.keys(vars).sort()).toEqual(
       [
+        'ALERT_TOPIC_ARN',
         'CALENDAR_TABLE',
         'CHORE_TYPES_TABLE',
         'ENTRY',
@@ -102,7 +104,7 @@ describe('U9 はインフラを増やさない', () => {
         'SSM_PREFIX',
         'USERS_TABLE',
         ...(entry === 'api'
-          ? ['INVITATIONS_TABLE', 'REQUEST_RECORDS_TABLE']
+          ? ['ADJUSTMENTS_TABLE', 'INVITATIONS_TABLE', 'REQUEST_RECORDS_TABLE']
           : ['PROCESSED_LINE_EVENTS_TABLE']),
       ].sort(),
     );
@@ -111,11 +113,11 @@ describe('U9 はインフラを増やさない', () => {
     expect(JSON.stringify(t().toJSON())).not.toContain('ReservedConcurrentExecutions');
   });
   it('資源数を保つ', () => {
-    templates['Housework-staging-Data']!.resourceCountIs('AWS::DynamoDB::Table', 8);
-    t().resourceCountIs('AWS::Lambda::Function', 4);
-    t().resourceCountIs('AWS::Logs::LogGroup', 2);
+    templates['Housework-staging-Data']!.resourceCountIs('AWS::DynamoDB::Table', 11);
+    t().resourceCountIs('AWS::Lambda::Function', 5);
+    t().resourceCountIs('AWS::Logs::LogGroup', 3);
     t().resourceCountIs('AWS::Logs::MetricFilter', 1);
-    t().resourceCountIs('AWS::CloudWatch::Alarm', 0);
+    t().resourceCountIs('AWS::CloudWatch::Alarm', 5);
   });
   it('ログは30日保管', () => {
     for (const r of Object.values(t().findResources('AWS::Logs::LogGroup')))

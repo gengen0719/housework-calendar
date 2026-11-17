@@ -31,6 +31,7 @@ const ALL_KEYS = Object.keys(PARAMETER_PATHS) as (keyof AppConfig)[];
 const KEYS_BY_ENTRY: Record<string, readonly (keyof AppConfig)[]> = {
   api: ALL_KEYS,
   line: ['channelSecret', 'channelAccessToken', 'liffUrl', 'originVerifySecret'],
+  notify: ['channelAccessToken'],
 };
 
 export function requireEnv(name: string): string {

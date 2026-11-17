@@ -3,6 +3,7 @@ import type {
   APIGatewayProxyStructuredResultV2,
   Context,
 } from 'aws-lambda';
+import { reportEntryFailure } from '../services/operationalAlertService';
 import { handleFollow } from '../handlers/line/followHandler';
 import { isOneToOneRegisterRequest, parseGroupCommand } from '../handlers/line/groupCommand';
 import { handleJoin } from '../handlers/line/joinHandler';
@@ -139,6 +140,7 @@ export async function handler(
     return json(200, {});
   } catch (err) {
     logger.error({ event: 'REQUEST_ERROR', ...describeError(err) });
+    await reportEntryFailure('line');
     return json(500, { error: { reason: 'INTERNAL' } });
   } finally {
     logger.info({ event: 'REQUEST_END', durationMs: Date.now() - startedAt });

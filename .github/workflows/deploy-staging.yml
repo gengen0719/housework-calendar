@@ -66,9 +66,21 @@ jobs:
           --require-approval never
           --outputs-file ../cdk-outputs.json
           -c originVerifySecret="${ORIGIN_VERIFY_SECRET}"
+          -c "stagingNotificationsEnabled=${NOTIFICATIONS_ENABLED:-false}"
+          -c "stagingBackupsEnabled=${BACKUPS_ENABLED}"
+          -c "stagingNotificationEmail=${NOTIFICATION_EMAIL}"
+          -c "stagingNotificationChecksPassed=${NOTIFICATION_CHECKS_PASSED:-false}"
+          -c "stagingNotificationBudgetVerified=${NOTIFICATION_BUDGET_VERIFIED:-false}"
+          -c "stagingNotificationEstimatedJpy=${NOTIFICATION_ESTIMATED_JPY}"
           ${RESERVED_CONCURRENCY:+-c reservedConcurrency="${RESERVED_CONCURRENCY}"}
         env:
           RESERVED_CONCURRENCY: ${{ vars.RESERVED_CONCURRENCY }}
+          NOTIFICATIONS_ENABLED: ${{ vars.STAGING_NOTIFICATIONS_ENABLED }}
+          BACKUPS_ENABLED: ${{ vars.STAGING_BACKUPS_ENABLED }}
+          NOTIFICATION_EMAIL: ${{ vars.STAGING_NOTIFICATION_EMAIL }}
+          NOTIFICATION_CHECKS_PASSED: ${{ vars.STAGING_NOTIFICATION_CHECKS_PASSED }}
+          NOTIFICATION_BUDGET_VERIFIED: ${{ vars.STAGING_NOTIFICATION_BUDGET_VERIFIED }}
+          NOTIFICATION_ESTIMATED_JPY: ${{ vars.NOTIFICATION_TOTAL_ESTIMATED_JPY }}
 
       - name: 反映後の確かめ
         run: |

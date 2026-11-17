@@ -22,6 +22,20 @@ import * as invitationRepository from '../repositories/invitationRepository';
 import * as notificationGroupRepository from '../repositories/notificationGroupRepository';
 import * as requestRecordRepository from '../repositories/requestRecordRepository';
 import * as userRepository from '../repositories/userRepository';
+import { tables } from '../lib/dynamoClient';
+
+/** C6限定窓口: 同じ取引で対象がこの家族の子供のままか確認する。 */
+export function buildChildMembershipGuard(scope: FamilyScope, userId: string) {
+  return {
+    ConditionCheck: {
+      TableName: tables.users(),
+      Key: { userId },
+      ConditionExpression: '#familyId = :familyId AND #role = :child',
+      ExpressionAttributeNames: { '#familyId': 'familyId', '#role': 'role' },
+      ExpressionAttributeValues: { ':familyId': scope.familyId, ':child': 'child' },
+    },
+  };
+}
 import * as lineApiService from './lineApiService';
 import {
   buildInvitationUrl,
@@ -694,7 +708,7 @@ export async function unregisterNotificationGroupByGroup(
  * 画面には返さない（画面用は getNotificationGroupView）。
  */
 export async function getNotificationGroup(
-  ctx: FamilyContext,
+  ctx: FamilyScope,
 ): Promise<Result<string, 'NOTIFICATION_GROUP_NOT_REGISTERED'>> {
   const family = await familyRepository.findById(ctx.familyId, { consistent: true });
   if (!family) throw new Error(`利用者の家族の記録が見つかりません: ${ctx.familyId}`);
@@ -737,4 +751,13 @@ export async function getMe(userId: string): Promise<Result<Me, 'NOT_FOUND'>> {
       notificationGroupRegistered: false,
     },
   });
+}
+/** 通知入口だけが使うページ列挙。外部から家族範囲を受け取らない。 */
+export async function* listNotificationFamilies(): AsyncGenerator<string[]> {
+  let cursor: Record<string, unknown> | undefined;
+  do {
+    const page = await familyRepository.listNotificationFamilies(cursor);
+    yield page.familyIds;
+    cursor = page.cursor;
+  } while (cursor);
 }

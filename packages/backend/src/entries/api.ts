@@ -3,6 +3,9 @@ import type {
   APIGatewayProxyStructuredResultV2,
   Context,
 } from 'aws-lambda';
+import { reportEntryFailure } from '../services/operationalAlertService';
+import { addAdjustment } from '../handlers/allowances/createAdjustment';
+import { deleteAdjustment, listAdjustments } from '../handlers/allowances/manageAdjustments';
 import { createChoreType } from '../handlers/choreType/create';
 import { listChoreTypes } from '../handlers/choreType/list';
 import { removeChoreType } from '../handlers/choreType/remove';
@@ -93,6 +96,39 @@ function parseJsonBody(event: APIGatewayProxyEventV2): unknown {
  * 追加するときは、ここに 1 行足す。
  */
 export const routes: Record<string, Route> = {
+  'GET /v1/months/:month/adjustments': async ({ event, config, now, params }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return {
+      status: 200,
+      body: await listAdjustments(auth, params.month ?? '', now),
+      headers: NO_STORE_HEADERS,
+    };
+  },
+  'DELETE /v1/adjustments/:adjustmentId': async ({
+    event,
+    config,
+    now,
+    params,
+    remainingTimeMs,
+  }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    await deleteAdjustment(auth, params.adjustmentId ?? '', remainingTimeMs);
+    return { status: 204, body: undefined };
+  },
+  'POST /v1/months/:month/adjustments': async ({ event, config, now, params, remainingTimeMs }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return {
+      status: 201,
+      body: await addAdjustment(
+        auth,
+        params.month ?? '',
+        () => readJsonBody(event),
+        event.headers,
+        now,
+        remainingTimeMs,
+      ),
+    };
+  },
   'POST /v1/sessions': async ({ event, config, now }) => ({
     status: 200,
     body: await createSession(parseJsonBody(event), config, now),
@@ -268,9 +304,11 @@ export async function handler(
   } catch (err) {
     if (err instanceof ApiError) {
       logger.info({ event: 'REQUEST_REJECTED', status: err.status, reason: err.reason, path });
+      if (err.status >= 500) await reportEntryFailure('api');
       return errorResponse(err);
     }
     logger.error({ event: 'REQUEST_ERROR', path, ...describeError(err) });
+    await reportEntryFailure('api');
     return json(500, { error: { reason: 'INTERNAL' } });
   } finally {
     logger.info({

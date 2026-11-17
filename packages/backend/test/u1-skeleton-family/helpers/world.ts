@@ -135,6 +135,7 @@ export function setupWorld() {
   process.env.NOTIFICATION_GROUPS_TABLE = NOTIFICATION_GROUPS_TABLE;
   process.env.CHORE_TYPES_TABLE = CHORE_TYPES_TABLE;
   process.env.CALENDAR_TABLE = CALENDAR_TABLE;
+  process.env.ADJUSTMENTS_TABLE = 'Adjustments-test';
   resetConfigCache();
   setRequestId(undefined);
   const dynamo = installFakeDynamo();

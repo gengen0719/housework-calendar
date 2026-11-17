@@ -1,0 +1,96 @@
+{
+  "stage": "nfr-design",
+  "unit": "u11-adjustments",
+  "upstream_ids": [
+    "NFR7.201",
+    "NFR7.202",
+    "NFR9.201",
+    "NFR4.201",
+    "NFR4.202",
+    "NFR5.201",
+    "NFR10.201",
+    "NFR1.201",
+    "NFR3.201",
+    "NFR7.203",
+    "NFR6.201",
+    "NFR6.202",
+    "NFR6.203",
+    "NFR6.204",
+    "NFR2.201",
+    "NFR8.201",
+    "NFR11.201", "NFR2.202", "NFR5.202", "NFR7.204"
+  ],
+  "coverage": [
+    {"id":"NFR2.202","status":"OK","target":"observability-design.md Structured Events"},
+    {"id":"NFR5.202","status":"OK","target":"observability-design.md Structured Events"},
+    {"id":"NFR7.204","status":"OK","target":"observability-design.md SLI and Measurement"},
+    {
+      "id": "NFR7.201",
+      "status": "OK", "target": "performance-design.md Read and Interaction Budgets"
+    },
+    {
+      "id": "NFR7.202",
+      "status": "OK", "target": "performance-design.md Query Strategy"
+    },
+    {
+      "id": "NFR9.201",
+      "status": "OK", "target": "performance-design.md Validation"
+    },
+    {
+      "id": "NFR4.201",
+      "status": "OK", "target": "security-design.md Authorization and Validation"
+    },
+    {
+      "id": "NFR4.202",
+      "status": "OK", "target": "security-design.md Authorization and Validation"
+    },
+    {
+      "id": "NFR5.201",
+      "status": "OK", "target": "security-design.md Data Protection; observability-design.md Structured Events"
+    },
+    {
+      "id": "NFR10.201",
+      "status": "OK", "target": "security-design.md Data Protection"
+    },
+    {
+      "id": "NFR1.201",
+      "status": "OK", "target": "scalability-design.md Cost Boundary"
+    },
+    {
+      "id": "NFR3.201",
+      "status": "OK", "target": "scalability-design.md Storage and Isolation"
+    },
+    {
+      "id": "NFR7.203",
+      "status": "OK", "target": "scalability-design.md Integration and Growth"
+    },
+    {
+      "id": "NFR6.201",
+      "status": "OK", "target": "performance-design.md Exact Calculation and Recovery"
+    },
+    {
+      "id": "NFR6.202",
+      "status": "OK", "target": "reliability-design.md Atomic Writes and Ownership"
+    },
+    {
+      "id": "NFR6.203",
+      "status": "OK", "target": "reliability-design.md Retry and Idempotency"
+    },
+    {
+      "id": "NFR6.204",
+      "status": "OK", "target": "reliability-design.md Recovery and Backup"
+    },
+    {
+      "id": "NFR2.201",
+      "status": "OK", "target": "reliability-design.md Retry and Idempotency"
+    },
+    {
+      "id": "NFR8.201",
+      "status": "OK", "target": "reliability-design.md Validation"
+    },
+    {
+      "id": "NFR11.201",
+      "status": "OK", "target": "reliability-design.md Validation"
+    }
+  ]
+}
