@@ -257,15 +257,20 @@ async function backupTarget(now: number, target: BackupTarget, deadline: number)
     for (const row of await listMetadataPartition('BACKUPS')) {
       if (typeof row.sk !== 'string' || !row.sk.startsWith(`${target.arn}/backup/`)) continue;
       if (typeof row.createdAt !== 'number' || now - row.createdAt <= 7 * 86400000) continue;
-      const result = await db.send(new DescribeBackupCommand({ BackupArn: row.sk }), bounded());
-      const desc = result.BackupDescription;
-      if (
-        desc?.SourceTableDetails?.TableArn !== target.arn ||
-        !desc.BackupDetails?.BackupName?.startsWith(backupPrefix(target)) ||
-        desc.BackupDetails.BackupStatus !== 'AVAILABLE'
-      )
-        continue;
-      await db.send(new DeleteBackupCommand({ BackupArn: row.sk }), bounded());
+      try {
+        const result = await db.send(new DescribeBackupCommand({ BackupArn: row.sk }), bounded());
+        const desc = result.BackupDescription;
+        if (
+          desc?.SourceTableDetails?.TableArn !== target.arn ||
+          !desc.BackupDetails?.BackupName?.startsWith(backupPrefix(target)) ||
+          desc.BackupDetails.BackupStatus !== 'AVAILABLE'
+        )
+          continue;
+        await db.send(new DeleteBackupCommand({ BackupArn: row.sk }), bounded());
+      } catch (error) {
+        // 削除後・台帳消去前の中断も再開できる。他の障害は隠さない。
+        if (!(error instanceof Error) || error.name !== 'BackupNotFoundException') throw error;
+      }
       await docClient.send(
         new DeleteCommand({ TableName: dispatchTable(), Key: { pk: 'BACKUPS', sk: row.sk } }),
         options(),

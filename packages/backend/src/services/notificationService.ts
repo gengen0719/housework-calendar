@@ -218,7 +218,6 @@ export async function dispatchFamily(
       });
       return { outcome: 'sent' };
     }
-    await alert(result.reason);
     const wait = Math.max(
       (record.attempts === 1 ? 5000 : 20000) + (options.random?.() ?? randomInt(1001)),
       result.retryAfterMs ?? 0,
@@ -243,6 +242,8 @@ export async function dispatchFamily(
       reason: result.reason,
       attempt: record.attempts,
     });
+    // SNS障害でも恒久失敗・Retry-Afterの保存を妨げない。
+    await alert(result.reason);
     return retry ? { outcome: 'retry', at } : { outcome: 'failed' };
   } catch (error) {
     await alert(error instanceof NotificationContentError ? error.reason : 'internal');

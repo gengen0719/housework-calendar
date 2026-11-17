@@ -59,6 +59,32 @@ describe('家族ごとの配信', () => {
     expect((await dispatchFamily(job, w.options)).outcome).toBe('failed');
     expect(w.alert).toHaveBeenCalledTimes(1);
   });
+  it.each([false, true])(
+    'SNS障害でもLINEの再送制約を保存する（再送可能=%s）',
+    async (retryable) => {
+      const w = workflow();
+      w.provider.mockResolvedValueOnce({
+        accepted: false,
+        retryable,
+        reason: retryable ? 'rateLimit' : 'permanent',
+        ambiguous: false,
+        retryAfterMs: 600000,
+      });
+      w.alert.mockRejectedValue(new Error('OPERATIONAL_ALERT_FAILED'));
+      await expect(dispatchFamily(job, w.options)).rejects.toThrow();
+      expect(w.records.get(job.familyId)?.leaseUntil).toBeUndefined();
+      w.advance(180000);
+      const result = await dispatchFamily(job, w.options);
+      expect(result.outcome).toBe(retryable ? 'retry' : 'duplicate');
+      expect(w.provider).toHaveBeenCalledTimes(1);
+      if (retryable) {
+        expect(result).toEqual({ outcome: 'retry', at: w.options.now() + 420000 });
+        w.advance(420000);
+        expect(await dispatchFamily(job, w.options)).toEqual({ outcome: 'sent' });
+        expect(w.provider).toHaveBeenCalledTimes(2);
+      }
+    },
+  );
   it('所有中の重複は仕事を残す', async () => {
     const w = workflow();
     w.failNextSent();

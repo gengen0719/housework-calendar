@@ -18,6 +18,7 @@ import {
   GetCommand,
   PutCommand,
   QueryCommand,
+  DeleteCommand,
 } from '@aws-sdk/lib-dynamodb';
 import {
   watchdog,
@@ -199,5 +200,39 @@ describe('メタデータだけのバックアップ', () => {
     } as never);
     await backup(now);
     expect(db.commandCalls(DeleteBackupCommand)).toHaveLength(0);
+  });
+  it.each(['describe', 'delete'])('削除済みの台帳を除去して次も清掃する（%s）', async (phase) => {
+    db.on(ListBackupsCommand).resolves({ BackupSummaries: [own] });
+    doc.on(PutCommand).resolves({});
+    doc.on(DeleteCommand).resolves({});
+    const stale = `${tableArn}/backup/stale`;
+    const next = `${tableArn}/backup/next`;
+    doc.on(QueryCommand).resolves({
+      Items: [stale, next].map((sk) => ({ sk, createdAt: now - 8 * 86400000 })),
+    });
+    db.on(DescribeBackupCommand).resolves({
+      BackupDescription: {
+        SourceTableDetails: { TableArn: tableArn },
+        BackupDetails: { BackupName: own.BackupName, BackupStatus: 'AVAILABLE' },
+      },
+    } as never);
+    db.on(DeleteBackupCommand).resolves({});
+    const missing = Object.assign(new Error('gone'), { name: 'BackupNotFoundException' });
+    if (phase === 'describe') db.on(DescribeBackupCommand, { BackupArn: stale }).rejects(missing);
+    else db.on(DeleteBackupCommand, { BackupArn: stale }).rejects(missing);
+    await backup(now);
+    expect(doc.commandCalls(DeleteCommand).map((c) => c.args[0].input.Key?.sk)).toEqual([
+      stale,
+      next,
+    ]);
+    expect(db.commandCalls(DeleteBackupCommand).at(-1)?.args[0].input.BackupArn).toBe(next);
+  });
+  it('Describeの他の障害では台帳を消さず失敗を返す', async () => {
+    db.on(ListBackupsCommand).resolves({ BackupSummaries: [own] });
+    doc.on(PutCommand).resolves({});
+    doc.on(QueryCommand).resolves({ Items: [{ sk: own.BackupArn, createdAt: 0 }] });
+    db.on(DescribeBackupCommand).rejects(new Error('offline'));
+    await expect(backup(now)).rejects.toThrow('BACKUP_FAILED');
+    expect(doc.commandCalls(DeleteCommand)).toHaveLength(0);
   });
 });
