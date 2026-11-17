@@ -341,9 +341,14 @@ describe('U1 CDK stacks', () => {
 
   it('Account: ID は両方そろって数字だけのときに受け付ける', () => {
     const base = { githubOwner: 'octo', githubRepo: 'housework', budgetEmail: 'owner@example.com' };
-    expect(() => buildApp(makeApp({ ...base, githubOwnerId: '74813858' }))).toThrow(/両方/);
-    expect(() =>
-      buildApp(makeApp({ ...base, githubOwnerId: '74813858', githubRepoId: '1441*' })),
-    ).toThrow(/数字/);
+    const missing = makeApp({ ...base, githubOwnerId: '74813858' });
+    const invalid = makeApp({ ...base, githubOwnerId: '74813858', githubRepoId: '1441*' });
+    expect(() => buildApp(missing)).toThrow(/両方/);
+    expect(() => buildApp(invalid)).toThrow(/数字/);
+    // 入力エラーで両環境のLambdaバンドルを始めない。
+    for (const app of [missing, invalid])
+      expect(
+        app.node.children.some((child) => /Housework-(staging|production)-/.test(child.node.id)),
+      ).toBe(false);
   });
 });

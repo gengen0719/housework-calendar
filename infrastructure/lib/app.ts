@@ -54,6 +54,27 @@ export function buildApp(app: App = new App()): App {
     throw new Error('reservedConcurrency は 1 以上の整数にしてください');
   }
 
+  // 不正なアカウント設定はLambdaのバンドルより前に検出する。
+  const githubOwner: unknown = app.node.tryGetContext('githubOwner');
+  const githubRepo: unknown = app.node.tryGetContext('githubRepo');
+  const budgetEmail: unknown = app.node.tryGetContext('budgetEmail');
+  const githubOwnerId = optionalContextString(app, 'githubOwnerId');
+  const githubRepoId = optionalContextString(app, 'githubRepoId');
+  if (
+    typeof githubOwner === 'string' &&
+    typeof githubRepo === 'string' &&
+    typeof budgetEmail === 'string'
+  ) {
+    new AccountStack(app, 'Housework-Account', {
+      env,
+      githubOwner,
+      githubRepo,
+      githubOwnerId,
+      githubRepoId,
+      budgetEmail,
+    });
+  }
+
   for (const envName of ENV_NAMES) {
     const data = new DataStack(app, `Housework-${envName}-Data`, { env, envName });
     new AppStack(app, `Housework-${envName}-App`, {
@@ -93,25 +114,5 @@ export function buildApp(app: App = new App()): App {
     });
   }
 
-  // 作り手が最初に 1 回、手元から反映する。3 つのコンテキストがそろったときだけ作る
-  const githubOwner: unknown = app.node.tryGetContext('githubOwner');
-  const githubRepo: unknown = app.node.tryGetContext('githubRepo');
-  const budgetEmail: unknown = app.node.tryGetContext('budgetEmail');
-  const githubOwnerId = optionalContextString(app, 'githubOwnerId');
-  const githubRepoId = optionalContextString(app, 'githubRepoId');
-  if (
-    typeof githubOwner === 'string' &&
-    typeof githubRepo === 'string' &&
-    typeof budgetEmail === 'string'
-  ) {
-    new AccountStack(app, 'Housework-Account', {
-      env,
-      githubOwner,
-      githubRepo,
-      githubOwnerId,
-      githubRepoId,
-      budgetEmail,
-    });
-  }
   return app;
 }
