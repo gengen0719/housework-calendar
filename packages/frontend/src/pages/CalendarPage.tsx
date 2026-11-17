@@ -16,7 +16,6 @@ import {
   NO_ASSIGNMENT_MESSAGE,
   NO_DUTY_LABEL,
   datesOfMonth,
-  monthOfDate,
   isEditableMonth,
   type Duty,
   type MonthCalendar,
@@ -185,16 +184,6 @@ export function CalendarPage({
           家族の設定
         </Button>
       )}
-      {onOpenAllowance && (
-        <Button
-          onClick={() =>
-            onOpenAllowance(state.kind === 'ready' ? monthOfDate(state.value.today) : 'current')
-          }
-          data-testid="open-allowance-button"
-        >
-          お小遣い
-        </Button>
-      )}
       {/* 子供には出さない（BR4.11）。子供の画面は API も呼ばない（App が管理者のときだけ読む） */}
       {role === 'admin' &&
         notificationGroup?.kind === 'ready' &&
@@ -228,6 +217,18 @@ export function CalendarPage({
         >
           {MONTH_CONFIRMED_LABEL}
         </Typography>
+      )}
+      {onOpenAllowance && (
+        <Button
+          variant={state.kind === 'ready' && state.value.confirmed ? 'contained' : 'outlined'}
+          disabled={state.kind !== 'ready'}
+          onClick={() => {
+            if (state.kind === 'ready') onOpenAllowance(state.value.month);
+          }}
+          data-testid="open-allowance-button"
+        >
+          この月のお小遣いを確認
+        </Button>
       )}
       {isAdmin && state.kind === 'ready' && (
         <Stack spacing={1} sx={{ alignItems: 'flex-start' }} data-testid="month-confirm-area">

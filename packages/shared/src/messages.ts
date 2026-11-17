@@ -151,7 +151,7 @@ export function NOTIFICATION_GROUP_REGISTERED(familyName: string): string {
 
 /** カレンダーの枠の画面に出す手順（BR4.11）。 */
 export const NOTIFICATION_GROUP_HOWTO =
-  '公式アカウントを家族のグループ LINE に招待し、届いたボタンを押してください';
+  '公式アカウントを家族のグループ LINE に招待し、届いたボタンを押してください。すぐに退会する場合は、作り手にグループへの参加許可を確認してください。同じグループに入れる公式アカウントは1つだけです';
 
 export const GROUP_REGISTER_IN_GROUP_ONLY =
   'お知らせ先の登録は、家族のグループ LINE の中で行ってください';
