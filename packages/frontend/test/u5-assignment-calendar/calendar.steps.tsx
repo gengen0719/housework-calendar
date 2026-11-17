@@ -469,6 +469,8 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
       },
     );
     Then('「割り当てを変える」が出て「割り当てを入力する」は出ない', async () => {
+      await screen.findByTestId('calendar-grid');
+      fireEvent.click(screen.getByTestId('family-menu-button'));
       expect(await screen.findByTestId('edit-assignment-button')).toHaveTextContent(
         '割り当てを変える',
       );
@@ -526,6 +528,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     );
     Then('家族の名前「田中家」と「家族の設定」のボタンとお知らせ先の案内が出る', async () => {
       expect(screen.getByTestId('family-name')).toHaveTextContent('田中家');
+      fireEvent.click(screen.getByTestId('family-menu-button'));
       expect(screen.getByTestId('open-settings-button')).toHaveTextContent('家族の設定');
       expect(await screen.findByTestId('notification-group-hint')).toHaveTextContent(
         NOTIFICATION_GROUP_HOWTO,

@@ -145,6 +145,7 @@ function openAs(person: 'admin' | 'child', initial: ChoreType[]): void {
 async function goToChoreTypes(): Promise<void> {
   await waitFor(() => expect(screen.queryByTestId('loading')).toBeNull());
   await screen.findByTestId('calendar-page');
+  fireEvent.click(screen.getByTestId('family-menu-button'));
   fireEvent.click(screen.getByTestId('open-settings-button'));
   fireEvent.click(await screen.findByTestId('open-chore-types-button'));
   await screen.findByTestId('chore-types-page');

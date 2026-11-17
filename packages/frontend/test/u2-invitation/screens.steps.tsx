@@ -118,6 +118,7 @@ async function loaded(): Promise<void> {
 }
 async function goToSettings(): Promise<void> {
   await loaded();
+  fireEvent.click(screen.getByTestId('family-menu-button'));
   fireEvent.click(screen.getByTestId('open-settings-button'));
 }
 describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) => {

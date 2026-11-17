@@ -4,7 +4,10 @@ import {
   Box,
   Button,
   CircularProgress,
+  IconButton,
   ListItemButton,
+  Menu,
+  MenuItem,
   Stack,
   Typography,
 } from '@mui/material';
@@ -69,7 +72,15 @@ export function CalendarPage({
   const { month, state, previous, next, reload, refresh, replace } = useMonthCalendar(authorized);
   const [selectedDate, setSelectedDate] = useState<string | undefined>(undefined);
   const [editing, setEditing] = useState(false);
+  const [menuAnchor, setMenuAnchor] = useState<HTMLElement | null>(null);
   const isAdmin = role === 'admin';
+  const canChangeAssignment =
+    state.kind === 'ready' &&
+    state.value.hasAssignment &&
+    isAdmin &&
+    !state.value.confirmed &&
+    isEditableMonth(month, state.value.today) &&
+    !editing;
   const [confirming, setConfirming] = useState<'confirm' | 'unconfirm' | undefined>(undefined);
   const [confirmBusy, setConfirmBusy] = useState(false);
   const [confirmError, setConfirmError] = useState<string | undefined>(undefined);
@@ -98,6 +109,7 @@ export function CalendarPage({
   }
 
   function move(go: () => void) {
+    setMenuAnchor(null);
     setSelectedDate(undefined);
     setConfirming(undefined);
     setConfirmError(undefined);
@@ -134,16 +146,14 @@ export function CalendarPage({
     }
     return (
       <>
-        {canEdit && (
+        {canEdit && !calendar.hasAssignment && (
           <Button
             variant="outlined"
             onClick={() => setEditing(true)}
             sx={{ alignSelf: 'flex-start' }}
-            data-testid={
-              calendar.hasAssignment ? 'edit-assignment-button' : 'enter-assignment-button'
-            }
+            data-testid="enter-assignment-button"
           >
-            {calendar.hasAssignment ? '割り当てを変える' : '割り当てを入力する'}
+            割り当てを入力する
           </Button>
         )}
         {calendar.hasAssignment ? (
@@ -172,19 +182,68 @@ export function CalendarPage({
 
   return (
     <Stack spacing={2} data-testid="calendar-page">
-      <Typography component="h1" variant="h5" data-testid="family-name">
-        {familyName}
-      </Typography>
-      {onOpenSettings && (
-        <Button
-          variant="outlined"
-          onClick={onOpenSettings}
-          sx={{ alignSelf: 'flex-start' }}
-          data-testid="open-settings-button"
+      <Stack direction="row" spacing={1} sx={{ alignItems: 'center', minWidth: 0 }}>
+        <Typography
+          component="h1"
+          variant="h5"
+          data-testid="family-name"
+          sx={{ flex: 1, minWidth: 0, overflowWrap: 'anywhere' }}
         >
-          家族の設定
-        </Button>
-      )}
+          {familyName}
+        </Typography>
+        <IconButton
+          id="family-menu-button"
+          aria-label="家族のメニュー"
+          aria-haspopup="menu"
+          aria-expanded={Boolean(menuAnchor)}
+          aria-controls={menuAnchor ? 'family-menu' : undefined}
+          data-testid="family-menu-button"
+          sx={{ flexShrink: 0 }}
+          onClick={(event) => setMenuAnchor(menuAnchor ? null : event.currentTarget)}
+          onKeyDown={(event) => {
+            if (event.key === 'ArrowDown') {
+              event.preventDefault();
+              setMenuAnchor(event.currentTarget);
+            }
+          }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <circle cx="5" cy="12" r="2" />
+            <circle cx="12" cy="12" r="2" />
+            <circle cx="19" cy="12" r="2" />
+          </svg>
+        </IconButton>
+      </Stack>
+      <Menu
+        id="family-menu"
+        anchorEl={menuAnchor}
+        open={Boolean(menuAnchor)}
+        onClose={() => setMenuAnchor(null)}
+        slotProps={{ list: { 'aria-labelledby': 'family-menu-button' } }}
+      >
+        {onOpenSettings && (
+          <MenuItem
+            data-testid="open-settings-button"
+            onClick={() => {
+              setMenuAnchor(null);
+              onOpenSettings();
+            }}
+          >
+            家族の設定
+          </MenuItem>
+        )}
+        {canChangeAssignment && (
+          <MenuItem
+            data-testid="edit-assignment-button"
+            onClick={() => {
+              setMenuAnchor(null);
+              setEditing(true);
+            }}
+          >
+            割り当てを変える
+          </MenuItem>
+        )}
+      </Menu>
       {/* 子供には出さない（BR4.11）。子供の画面は API も呼ばない（App が管理者のときだけ読む） */}
       {role === 'admin' &&
         notificationGroup?.kind === 'ready' &&

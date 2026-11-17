@@ -67,6 +67,9 @@ async function openCalendar(role: 'admin' | 'child'): Promise<void> {
 }
 
 async function openEditor(buttonTestId = 'enter-assignment-button'): Promise<void> {
+  if (buttonTestId === 'edit-assignment-button') {
+    fireEvent.click(screen.getByTestId('family-menu-button'));
+  }
   fireEvent.click(await screen.findByTestId(buttonTestId));
   await screen.findByTestId('assignment-page');
   await screen.findAllByTestId('chore-section');
@@ -321,6 +324,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
         expect(put?.body).toEqual({ rules: [rule(DISHES_ID, TARO.userId, [MONDAY, THURSDAY])] });
         expect(put?.headers.get('Authorization')).toBe('Bearer session-token-1');
         expect(screen.getByText('皿洗い=太郎(未)')).toBeInTheDocument();
+        fireEvent.click(screen.getByTestId('family-menu-button'));
         expect(screen.getByTestId('edit-assignment-button')).toBeInTheDocument();
       },
     );

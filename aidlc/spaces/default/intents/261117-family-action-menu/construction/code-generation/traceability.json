@@ -1,0 +1,13 @@
+{
+  "stage": "code-generation",
+  "upstream_ids": ["FR1", "FR2", "FR3", "FR4", "NFR1", "NFR2"],
+  "coverage": [
+    {"id":"FR1","status":"OK","target":"packages/frontend/src/pages/CalendarPage.tsx"},
+    {"id":"FR2","status":"OK","target":"packages/frontend/src/pages/CalendarPage.tsx"},
+    {"id":"FR3","status":"OK","target":"packages/frontend/src/pages/CalendarPage.tsx"},
+    {"id":"FR4","status":"OK","target":"packages/frontend/src/pages/CalendarPage.tsx"},
+    {"id":"NFR1","status":"OK","target":"packages/frontend/src/pages/CalendarPage.tsx"},
+    {"id":"NFR2","status":"OK","target":"packages/frontend/test/family-action-menu/CalendarPage.test.tsx"}
+  ],
+  "reverse": []
+}
