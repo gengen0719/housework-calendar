@@ -1,3 +1,5 @@
+> 以前の調査内容を保持。今回の追加・差分は末尾の重点調査節を参照。精読範囲はreverse-engineering-timestamp.mdに記録。
+
 # コード品質
 
 | 観点 | 評価・根拠 |
@@ -13,3 +15,9 @@ CI は Prettier、ESLint、TypeScript、Vitest V8 行80%以上、gitleaks、画�
 変更時の注意: U2 invitation、U3 notification-group、U4 chore-types の screens.steps.tsx が open-settings-button を直接クリックする。U5 calendar.steps.tsx と assignment.steps.tsx が enter/edit-assignment-button の存在とクリックを扱う。メニューを開く操作を追加し、管理者・子供、確定済み・過去月、未割り当ての分岐を保つ。U9 のレイアウト・金額導線も維持する。
 
 新しいメニューはキーボード操作、名前、開閉状態、閉じる操作、長い家族名のレイアウトを検証する必要がある。既存公開 API と保存処理への影響は小さい。
+
+## 臨時担当の検証候補
+
+関連テストはfrontend/backendのu5-assignment-calendar、u6-recording、u7-review-confirm、u9-allowance、u10-notificationsに存在（今回一覧を確認、実行していない）。現時点の成功・カバレッジは主張しない。
+
+追加時は管理者成功、子供拒否、他家族ID、無効種類、実在しない日、範囲外、確定競合、同日同種類、二重送信、保存後再読込、未割り当て月の導線、月ルール再保存による保持を検証する。自由記述を扱うなら型・長さ・金額保存方式も新たに決める必要がある。前回メニュー変更の説明は過去の知識として保持。

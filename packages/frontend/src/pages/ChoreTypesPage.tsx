@@ -29,6 +29,7 @@ import type { Authorized } from '../hooks/useSession';
 import { ErrorRetry } from './ErrorRetry';
 
 interface Props {
+  purpose?: 'regular' | 'adhoc';
   role: Role;
   authorized: Authorized;
   onBack: () => void;
@@ -53,7 +54,7 @@ function parseUnitPriceText(text: string): number {
 }
 
 /** F1〜F6: お手伝いの種類の一覧と、管理者だけの登録・変更・使う／使わない・消す。 */
-export function ChoreTypesPage({ role, authorized, onBack }: Props) {
+export function ChoreTypesPage({ role, authorized, onBack, purpose = 'regular' }: Props) {
   const isAdmin = role === 'admin';
   const [list, setList] = useState<Loaded<ChoreType[]>>({ kind: 'loading' });
   const [form, setForm] = useState<FormTarget | undefined>(undefined);
@@ -63,11 +64,12 @@ export function ChoreTypesPage({ role, authorized, onBack }: Props) {
 
   const fetchList = useCallback(async (): Promise<Loaded<ChoreType[]>> => {
     try {
-      return { kind: 'ready', value: await authorized(listChoreTypes) };
+      const value = await authorized(listChoreTypes);
+      return { kind: 'ready', value: value.filter((c) => (c.purpose ?? 'regular') === purpose) };
     } catch {
       return { kind: 'error' };
     }
-  }, [authorized]);
+  }, [authorized, purpose]);
   useEffect(() => {
     let active = true;
     void fetchList().then((next) => active && setList(next));
@@ -168,7 +170,7 @@ export function ChoreTypesPage({ role, authorized, onBack }: Props) {
   return (
     <Stack spacing={2} data-testid="chore-types-page">
       <Typography component="h1" variant="h5">
-        お手伝いの種類
+        {purpose === 'adhoc' ? '臨時のお手伝いの種類' : 'お手伝いの種類'}
       </Typography>
       {notice && (
         <Typography color="error" role="alert" data-testid="chore-type-notice">
@@ -215,6 +217,7 @@ export function ChoreTypesPage({ role, authorized, onBack }: Props) {
         <ChoreTypeForm
           key={form.mode === 'edit' ? form.choreType.choreTypeId : 'create'}
           target={form}
+          purpose={purpose}
           authorized={authorized}
           onClose={() => setForm(undefined)}
           onSaved={() => {
@@ -321,16 +324,18 @@ function ChoreTypeRow({
               使う
             </Button>
           )}
-          <Button
-            size="small"
-            variant="outlined"
-            color="error"
-            disabled={busy}
-            onClick={onDelete}
-            data-testid="delete-button"
-          >
-            消す
-          </Button>
+          {choreType.purpose !== 'adhoc' && (
+            <Button
+              size="small"
+              variant="outlined"
+              color="error"
+              disabled={busy}
+              onClick={onDelete}
+              data-testid="delete-button"
+            >
+              消す
+            </Button>
+          )}
         </Stack>
       )}
     </Stack>
@@ -338,6 +343,7 @@ function ChoreTypeRow({
 }
 
 interface FormProps {
+  purpose: 'regular' | 'adhoc';
   target: FormTarget;
   authorized: Authorized;
   onClose: () => void;
@@ -354,7 +360,7 @@ interface FieldErrors {
 }
 
 /** F2・F3: 登録と変更の入力欄。確かめに通らないときは、入力はそのまま残して欄の下に文言を出す（AC2.1.2）。 */
-function ChoreTypeForm({ target, authorized, onClose, onSaved, onGone }: FormProps) {
+function ChoreTypeForm({ target, authorized, onClose, onSaved, onGone, purpose }: FormProps) {
   const editing = target.mode === 'edit' ? target.choreType : undefined;
   const [name, setName] = useState(editing?.name ?? '');
   const [unitPrice, setUnitPrice] = useState(editing ? String(editing.unitPrice) : '');
@@ -385,6 +391,7 @@ function ChoreTypeForm({ target, authorized, onClose, onSaved, onGone }: FormPro
       return;
     }
     const input: ChoreTypeInput = {
+      ...(purpose === 'adhoc' ? { purpose } : {}),
       name: checkedName.value,
       unitPrice: checkedPrice.value,
       ...(checkedDescription.value !== undefined ? { description: checkedDescription.value } : {}),

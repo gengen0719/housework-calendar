@@ -6,6 +6,7 @@ import { isReason, type Reason } from './reasons';
  * 要件（requirements.md）の書き方をそのまま使う。
  */
 export const MESSAGES: Record<Reason, string> = {
+  DUTY_ALREADY_EXISTS: 'この日には同じお手伝いがあります。既存のお手伝いから担当を変更してください',
   UNAUTHENTICATED: 'ログインし直してください',
   NOT_FAMILY_MEMBER: 'このアプリは家族のメンバーだけが使えます',
   ADMIN_ONLY: 'この操作ができるのは管理者だけです',

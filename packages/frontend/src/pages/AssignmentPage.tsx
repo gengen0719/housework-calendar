@@ -107,7 +107,9 @@ export function AssignmentPage({ month, calendar, authorized, onSaved, onCancel 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoaded({ kind: 'loading' });
     Promise.all([
-      authorized((token) => listChoreTypes(token)),
+      authorized(async (token) =>
+        (await listChoreTypes(token)).filter((t) => t.purpose !== 'adhoc'),
+      ),
       authorized((token) => getAssignment(token, month, controller.signal)),
     ]).then(
       ([types, assignment]) => {

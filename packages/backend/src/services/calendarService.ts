@@ -110,6 +110,9 @@ function judgeRequest(
   retried: boolean,
 ): SaveAssignmentFailure | undefined {
   const types = new Map(snapshot.choreTypes.map((type) => [type.choreTypeId, type]));
+  if (rules.some((rule) => types.get(rule.choreTypeId)?.purpose === 'adhoc')) {
+    return { ok: false, reason: 'CHORE_TYPE_INACTIVE' };
+  }
   if (rules.some((rule) => !types.has(rule.choreTypeId))) {
     return { ok: false, reason: retried ? 'CHORE_TYPE_INACTIVE' : 'NOT_FOUND' };
   }
@@ -513,6 +516,7 @@ function toDutyView(
 ): Duty {
   return {
     dutyId: duty.dutyId,
+    ...(duty.adhoc ? { adhoc: true } : {}),
     date: duty.date,
     choreTypeId: duty.choreTypeId,
     choreName: types.get(duty.choreTypeId)?.name ?? '',

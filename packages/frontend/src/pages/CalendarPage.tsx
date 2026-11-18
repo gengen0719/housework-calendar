@@ -156,7 +156,10 @@ export function CalendarPage({
             割り当てを入力する
           </Button>
         )}
-        {calendar.hasAssignment ? (
+        {!calendar.hasAssignment && (
+          <Typography data-testid="no-assignment-message">{NO_ASSIGNMENT_MESSAGE}</Typography>
+        )}
+        {
           <DayList
             key={calendar.month}
             calendar={calendar}
@@ -173,9 +176,7 @@ export function CalendarPage({
             }
             onRefresh={refresh}
           />
-        ) : (
-          <Typography data-testid="no-assignment-message">{NO_ASSIGNMENT_MESSAGE}</Typography>
-        )}
+        }
       </>
     );
   }
@@ -461,7 +462,7 @@ function DayList({
                       data-testid="duty-item"
                       style={{ color: STATUS_COLOR[duty.status] }}
                     >
-                      {`${duty.choreName}=${childName(calendar.children, duty.childUserId)}(${STATUS_LABEL[duty.status]})`}
+                      {`${duty.choreName}${duty.adhoc ? '（臨時）' : ''}=${childName(calendar.children, duty.childUserId)}(${STATUS_LABEL[duty.status]})`}
                     </span>
                   ))}
                 </Stack>

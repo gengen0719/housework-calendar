@@ -15,6 +15,7 @@ export type { DutyOrigin, DutyStatus };
  * 説明がなければ description はない。テーブルの項目は sk（`TYPE#<choreTypeId>`）を足した形（choreTypeRepository）。
  */
 export interface ChoreTypeRecord {
+  purpose?: 'regular' | 'adhoc';
   familyId: string;
   choreTypeId: string;
   name: string;
@@ -50,6 +51,7 @@ export interface AssignmentRecord {
  * recordedAt・recordedBy・unitPrice は U6〜U8 が書く（U5 は読むだけ）。
  */
 export interface DutyRecord {
+  adhoc?: boolean;
   dutyId: string;
   familyId: string;
   month: string;

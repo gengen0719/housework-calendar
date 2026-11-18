@@ -183,6 +183,7 @@ export function planDutyChanges(input: {
   const operations: DutyOperation[] = [];
   const changes: HashedChange[] = [];
   for (const duty of input.existing) {
+    if (duty.adhoc) continue;
     if (!inRange.has(duty.date) || duty.status !== 'todo') continue;
     const wanted = desired.get(slotKey(duty.date, duty.choreTypeId));
     const overwritten = duty.origin === 'manual' || duty.origin === 'swap';

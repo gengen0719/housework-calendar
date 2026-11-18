@@ -22,6 +22,7 @@ const MAX_ATTEMPTS = 2;
 
 /** 画面から受け取った入力（確かめる前）。C7 の窓口が受け取る形。 */
 export interface ChoreTypeInputRaw {
+  purpose?: 'regular' | 'adhoc';
   name: unknown;
   unitPrice: unknown;
   description?: unknown;
@@ -40,6 +41,7 @@ export type ChoreTypeValidationFailure =
 export function toView(record: ChoreTypeRecord): ChoreType {
   return {
     choreTypeId: record.choreTypeId,
+    ...(record.purpose ? { purpose: record.purpose } : {}),
     name: record.name,
     unitPrice: record.unitPrice,
     ...(record.description !== undefined ? { description: record.description } : {}),
@@ -162,7 +164,7 @@ export async function update(
       return {
         ok: false,
         reason: 'CHORE_TYPE_NAME_TAKEN',
-        conflictActive: await isConflictActive(ctx.familyId, valid.value.name),
+        conflictActive: await isConflictActive(ctx.familyId, valid.value.name, record.purpose),
       };
     }
     const fresh = await choreTypeRepository.findById(ctx.familyId, record.choreTypeId);
@@ -207,6 +209,8 @@ export async function remove(
 ): Promise<Result<undefined, RemoveChoreTypeFailure>> {
   let record = await choreTypeRepository.setActive(ctx.familyId, choreTypeId, false, now);
   if (!record) return err('NOT_FOUND');
+  // 臨時用マスタは使用停止で管理し、追加済み担当の参照を失わない。
+  if (record.purpose === 'adhoc') return err('CHORE_TYPE_IN_USE');
   // 手順 1 で「使わない」に変わった。あとで IN_USE になっても変わったままなので、だれがいつ変えたかをログに残す
   logger.info({
     event: 'CHORE_TYPE_ACTIVE_CHANGED',
@@ -262,8 +266,12 @@ function replay(
 }
 
 /** 名前の印が指す種類が「使う」か。種類が見つからない（直後に消された）ときは「使う」の相手と同じ扱い。 */
-async function isConflictActive(familyId: string, name: string): Promise<boolean> {
-  const marker = await choreTypeRepository.findNameMarker(familyId, name);
+async function isConflictActive(
+  familyId: string,
+  name: string,
+  purpose?: 'regular' | 'adhoc',
+): Promise<boolean> {
+  const marker = await choreTypeRepository.findNameMarker(familyId, name, purpose);
   if (!marker) return true;
   const other = await choreTypeRepository.findById(familyId, marker.choreTypeId);
   return other?.active ?? true;
@@ -286,13 +294,14 @@ export async function create(
     logRejected(ctx, valid.reason);
     return valid;
   }
-  const target = requestTarget(valid.value);
+  const target = requestTarget(valid.value) + (input.purpose === 'adhoc' ? ':adhoc' : '');
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     // 毎回の最初に送り直しの記録を（強い整合性で）読む。同時の要求で負けて戻ってきたときは、ここで勝った側の結果を返す
     const previous = await requestRecordRepository.find(ctx.userId, idempotencyKey, now);
     if (previous) return replay(previous, target, ctx);
 
     const record: ChoreTypeRecord = {
+      ...(input.purpose === 'adhoc' ? { purpose: 'adhoc' as const } : {}),
       familyId: ctx.familyId,
       choreTypeId: randomUUID(),
       name: valid.value.name,
@@ -335,7 +344,7 @@ export async function create(
       return {
         ok: false,
         reason: 'CHORE_TYPE_NAME_TAKEN',
-        conflictActive: await isConflictActive(ctx.familyId, valid.value.name),
+        conflictActive: await isConflictActive(ctx.familyId, valid.value.name, input.purpose),
       };
     }
   }

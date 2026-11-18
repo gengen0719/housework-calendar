@@ -426,7 +426,8 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
         expect(screen.getByTestId('enter-assignment-button')).toHaveTextContent(
           '割り当てを入力する',
         );
-        expect(screen.queryAllByTestId('day-row')).toHaveLength(0);
+        // 通常割り当てがなくても日付から臨時のお手伝いを依頼できる。
+        expect(screen.queryAllByTestId('day-row').length).toBeGreaterThan(0);
       });
       And('「次の月」を押した 12 月にも「割り当てを入力する」が出る', async () => {
         pressNext();
