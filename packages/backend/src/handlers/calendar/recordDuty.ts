@@ -76,6 +76,7 @@ async function dutyView(ctx: FamilyContext, duty: DutyRecord): Promise<Duty> {
   }
   return {
     dutyId: duty.dutyId,
+    ...(duty.adhoc ? { adhoc: true } : {}),
     date: duty.date,
     choreTypeId: duty.choreTypeId,
     choreName: type?.name ?? '',

@@ -1,3 +1,5 @@
+> 以前の調査内容を保持。今回の追加・差分は末尾の重点調査節を参照。精読範囲はreverse-engineering-timestamp.mdに記録。
+
 # コード構成
 
 | 場所 | 分類・責務 |
@@ -17,3 +19,7 @@
 | scripts、.github/workflows、docs | 運用・CI・利用手順 |
 
 依頼箇所は packages/frontend/src/pages/CalendarPage.tsx。App.tsx が利用する。テストへの影響は code-quality-assessment.md。
+
+## 臨時担当の関連箇所
+
+新機能の入口候補はpages/DayDetail.tsx、親のCalendarPage.tsx。API契約はshared/src/api-types.ts、通信はfrontend/src/api/client.ts、経路はbackend/src/entries/api.ts。calendarServiceとcalendarRepositoryが担当永続化を扱う。assignmentPlannerは月再保存時の臨時担当保持に影響する。現状の詳細はapi-documentation.md。

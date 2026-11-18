@@ -18,6 +18,7 @@ export function App() {
     useSession();
   const [showSettings, setShowSettings] = useState(false);
   const [showChoreTypes, setShowChoreTypes] = useState(false);
+  const [chorePurpose, setChorePurpose] = useState<'regular' | 'adhoc'>('regular');
   const [allowanceMonth, setAllowanceMonth] = useState<string>();
   // お知らせ先は、管理者のカレンダーの枠と、家族の設定（管理者も子供も）のためだけに読む。子供のカレンダーの枠では呼ばない（BR4.11）
   const role = state.kind === 'ready' && !invitation ? state.me.family?.role : undefined;
@@ -80,6 +81,8 @@ export function App() {
         if (showSettings && showChoreTypes) {
           return (
             <ChoreTypesPage
+              key={chorePurpose}
+              purpose={chorePurpose}
               role={family.role}
               authorized={authorized}
               onBack={() => setShowChoreTypes(false)}
@@ -89,7 +92,14 @@ export function App() {
         if (showSettings) {
           return (
             <FamilySettingsPage
-              onOpenChoreTypes={() => setShowChoreTypes(true)}
+              onOpenChoreTypes={() => {
+                setChorePurpose('regular');
+                setShowChoreTypes(true);
+              }}
+              onOpenAdhocChoreTypes={() => {
+                setChorePurpose('adhoc');
+                setShowChoreTypes(true);
+              }}
               familyName={family.name}
               role={family.role}
               authorized={authorized}

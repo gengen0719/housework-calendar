@@ -27,6 +27,7 @@ import { getAssignment } from '../handlers/calendar/getAssignment';
 import { getCalendar } from '../handlers/calendar/getCalendar';
 import { saveAssignment } from '../handlers/calendar/saveAssignment';
 import { createSession } from '../handlers/session/createSession';
+import { createAdhocDuty } from '../handlers/calendar/createAdhocDuty';
 import { getConfig, type AppConfig } from '../lib/config';
 import { ApiError } from '../lib/errors';
 import { errorResponse, json } from '../lib/http';
@@ -156,6 +157,10 @@ export const routes: Record<string, Route> = {
       status: 201,
       body: await createChoreType(auth, parseJsonBody(event), event.headers, now),
     };
+  },
+  'POST /v1/duties': async ({ event, config, now }) => {
+    const auth = await requireAuth(event.headers, config.signingSecret, now);
+    return { status: 201, body: await createAdhocDuty(auth, readJsonBody(event), now) };
   },
   // U4: 変更（PUT）・使わない／使う（PATCH）・消す（DELETE）。ID の形と種類の確かめは各ハンドラーで（本文の確かめより先に 404）
   'PUT /v1/chore-types/:choreTypeId': async ({ event, config, now, params }) => {

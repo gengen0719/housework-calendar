@@ -1,3 +1,5 @@
+> 以前の調査内容を保持。今回の追加・差分は末尾の重点調査節を参照。精読範囲はreverse-engineering-timestamp.mdに記録。
+
 ## Architecture Analysis
 
 ### System Overview
@@ -48,3 +50,25 @@ sequenceDiagram
 ```
 
 テキスト: カレンダーから設定を選ぶと callback が App の state を更新し、設定画面を表示する。sequenceDiagram 構文を目視確認済み。
+
+## 臨時担当に関係する現状
+
+DayListがDayDetailへ日付・担当・子供一覧を渡す。月カレンダーはhasAssignment=falseだと日付一覧を表示せず、dutiesがあっても画面には出ない。DayDetailのonChangedを親がmapで差し替えるため、追加担当のappendまたは月再取得経路が必要。MonthCalendar.choreTypesは使用済み種類に絞られるため、新規選択にはlistChoreTypesなど全体一覧が必要。
+
+```mermaid
+sequenceDiagram
+  actor Admin
+  participant DayDetail
+  participant Client
+  participant API
+  participant CalendarService
+  participant CalendarRepository
+  Admin->>DayDetail: 既存担当の子供を変更
+  DayDetail->>Client: changeDutyChild
+  Client->>API: PATCH duties
+  API->>CalendarService: changeDutyChild
+  CalendarService->>CalendarRepository: 条件付き取引
+  CalendarRepository-->>DayDetail: 更新後担当
+```
+
+テキスト: 既存変更は認証・所属・管理者判定後、家族内の担当と月状態を確認し、未状態/version/未確定条件で保存する。図はsequenceDiagramの参加者・メッセージ構文を目視確認済み。単発新規作成はこの経路には存在しない。

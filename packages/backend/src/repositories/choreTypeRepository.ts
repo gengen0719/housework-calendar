@@ -23,7 +23,8 @@ const TYPE_PREFIX = 'TYPE#';
 const NAME_PREFIX = 'NAME#';
 
 export const typeSortKey = (choreTypeId: string): string => `${TYPE_PREFIX}${choreTypeId}`;
-export const nameSortKey = (name: string): string => `${NAME_PREFIX}${name}`;
+export const nameSortKey = (name: string, purpose?: 'regular' | 'adhoc'): string =>
+  `${purpose === 'adhoc' ? 'ADHOCNAME#' : NAME_PREFIX}${name}`;
 
 /** テーブルの種類の項目 */
 interface ChoreTypeItem extends ChoreTypeRecord {
@@ -44,6 +45,7 @@ function toItem(record: ChoreTypeRecord): ChoreTypeItem {
 function toRecord(item: ChoreTypeItem): ChoreTypeRecord {
   return {
     familyId: item.familyId,
+    ...(item.purpose ? { purpose: item.purpose } : {}),
     choreTypeId: item.choreTypeId,
     name: item.name,
     unitPrice: item.unitPrice,
@@ -93,11 +95,12 @@ export async function findById(
 export async function findNameMarker(
   familyId: string,
   name: string,
+  purpose?: 'regular' | 'adhoc',
 ): Promise<NameMarkerItem | undefined> {
   const result = await docClient.send(
     new GetCommand({
       TableName: tables.choreTypes(),
-      Key: { familyId, sk: nameSortKey(name) },
+      Key: { familyId, sk: nameSortKey(name, purpose) },
       ConsistentRead: true,
     }),
   );
@@ -135,7 +138,7 @@ export function buildCreateItems(input: CreateChoreTypeInput, now: Date) {
         TableName: tables.choreTypes(),
         Item: {
           familyId: record.familyId,
-          sk: nameSortKey(record.name),
+          sk: nameSortKey(record.name, record.purpose),
           choreTypeId: record.choreTypeId,
         } satisfies NameMarkerItem,
         ConditionExpression: 'attribute_not_exists(sk)',
@@ -212,6 +215,7 @@ function buildChangeExpression(change: ChoreTypeChange, now: Date, withName: boo
 
 function changed(record: ChoreTypeRecord, change: ChoreTypeChange, now: Date): ChoreTypeRecord {
   return {
+    ...(record.purpose ? { purpose: record.purpose } : {}),
     familyId: record.familyId,
     choreTypeId: record.choreTypeId,
     active: record.active,
@@ -273,7 +277,7 @@ export function buildRenameItems(current: ChoreTypeRecord, change: ChoreTypeChan
         TableName: tables.choreTypes(),
         Item: {
           familyId: current.familyId,
-          sk: nameSortKey(change.name),
+          sk: nameSortKey(change.name, current.purpose),
           choreTypeId: current.choreTypeId,
         } satisfies NameMarkerItem,
         ConditionExpression: 'attribute_not_exists(sk)',
@@ -282,7 +286,7 @@ export function buildRenameItems(current: ChoreTypeRecord, change: ChoreTypeChan
     {
       Delete: {
         TableName: tables.choreTypes(),
-        Key: { familyId: current.familyId, sk: nameSortKey(current.name) },
+        Key: { familyId: current.familyId, sk: nameSortKey(current.name, current.purpose) },
         ConditionExpression: 'choreTypeId = :id',
         ExpressionAttributeValues: { ':id': current.choreTypeId },
       },
@@ -392,7 +396,7 @@ export function buildDeleteItems(record: ChoreTypeRecord) {
     {
       Delete: {
         TableName: tables.choreTypes(),
-        Key: { familyId: record.familyId, sk: nameSortKey(record.name) },
+        Key: { familyId: record.familyId, sk: nameSortKey(record.name, record.purpose) },
         ConditionExpression: 'choreTypeId = :id',
         ExpressionAttributeValues: { ':id': record.choreTypeId },
       },

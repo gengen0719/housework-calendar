@@ -19,6 +19,7 @@ interface Props {
   onBack: () => void;
   /** 「お手伝いの種類」の画面へ進む（U4）。渡さなければボタンは出さない */
   onOpenChoreTypes?: () => void;
+  onOpenAdhocChoreTypes?: () => void;
   /** お知らせ先の読み込み結果（U3。App が読む）。渡さなければ表示しない */
   notificationGroup?: NotificationGroupState;
 }
@@ -36,6 +37,7 @@ export function FamilySettingsPage({
   authorized,
   onBack,
   onOpenChoreTypes,
+  onOpenAdhocChoreTypes,
   notificationGroup,
 }: Props) {
   const isAdmin = role === 'admin';
@@ -47,6 +49,15 @@ export function FamilySettingsPage({
       <MemberList authorized={authorized} />
       <NotificationGroupSection state={notificationGroup} />
       {isAdmin && <InvitationSection familyName={familyName} authorized={authorized} />}
+      {isAdmin && onOpenAdhocChoreTypes && (
+        <Button
+          variant="contained"
+          onClick={onOpenAdhocChoreTypes}
+          data-testid="open-adhoc-chore-types-button"
+        >
+          臨時のお手伝いの種類
+        </Button>
+      )}
       {onOpenChoreTypes && (
         <Button
           variant="contained"

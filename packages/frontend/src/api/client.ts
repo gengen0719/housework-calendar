@@ -160,6 +160,13 @@ export function acceptInvitation(
 
 const choreTypePath = (choreTypeId: string) => `/v1/chore-types/${encodeURIComponent(choreTypeId)}`;
 
+export function createAdhocDuty(
+  token: string,
+  input: { date: string; choreTypeId: string; childUserId: string },
+): Promise<Duty> {
+  return request('POST', '/v1/duties', { token, body: input });
+}
+
 /** お手伝いの種類の一覧（家族のメンバー全員が見られる。「使う」が先、「使わない」があと。BR5.11） */
 export function listChoreTypes(token: string): Promise<ChoreType[]> {
   return request('GET', '/v1/chore-types', { token });

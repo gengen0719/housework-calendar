@@ -12,6 +12,7 @@ import * as choreTypeService from '../../services/choreTypeService';
  * 知らない項目（familyId、choreTypeId、active、createdAt など）は捨てる。
  */
 export const ChoreTypeBodySchema = z.object({
+  purpose: z.enum(['regular', 'adhoc']).optional(),
   name: z.unknown().optional(),
   unitPrice: z.unknown().optional(),
   description: z.unknown().optional(),
@@ -37,6 +38,7 @@ export async function createChoreType(
       name: parsed.data.name,
       unitPrice: parsed.data.unitPrice,
       description: parsed.data.description,
+      ...(parsed.data.purpose ? { purpose: parsed.data.purpose } : {}),
     },
     key,
     now,

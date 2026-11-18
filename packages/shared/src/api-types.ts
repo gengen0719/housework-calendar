@@ -72,6 +72,8 @@ export interface NotificationGroupView {
 
 /** お手伝いの種類（U4。entities.md の ChoreType）。家族の ID は返さない。日時は UTC の ISO 8601。説明がなければ description はない */
 export interface ChoreType {
+  /** 省略された既存データは通常用。用途は登録後に変更しない。 */
+  purpose?: 'regular' | 'adhoc';
   choreTypeId: string;
   name: string;
   unitPrice: number;
@@ -83,6 +85,7 @@ export interface ChoreType {
 
 /** POST・PUT /v1/chore-types の本文（U4）。active は含めない */
 export interface ChoreTypeInput {
+  purpose?: 'regular' | 'adhoc';
   name: string;
   unitPrice: number;
   description?: string;
@@ -105,6 +108,8 @@ export type DutyOrigin = 'rule' | 'manual' | 'swap';
  * version は担当が変わるたびに増える（U6〜U8 が条件に使う）。
  */
 export interface Duty {
+  /** 月割り当ての再生成では変更しない単発依頼。originとは独立して保持する。 */
+  adhoc?: boolean;
   dutyId: string;
   date: string;
   choreTypeId: string;

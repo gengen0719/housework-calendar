@@ -14,5 +14,13 @@
     "scope": "express",
     "status": "complete",
     "request": "ac9cf1ab"
+  },
+  {
+    "uuid": "01a1e9d0-f116-76d5-8a55-5692f8f92df3",
+    "slug": "ad-hoc-chores",
+    "dirName": "261117-ad-hoc-chores",
+    "scope": "express",
+    "status": "complete",
+    "request": "9911a792"
   }
 ]

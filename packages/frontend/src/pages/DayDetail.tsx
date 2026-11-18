@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { Button, Stack, TextField, Typography } from '@mui/material';
-import { NO_DUTY_LABEL, getMessage, type CalendarChild, type Duty } from '@housework/shared';
+import {
+  NO_DUTY_LABEL,
+  getMessage,
+  isEditableMonth,
+  type CalendarChild,
+  type Duty,
+} from '@housework/shared';
+import { AdhocDutyForm } from '../components/AdhocDutyForm';
 import { ApiFailure, changeDutyChild } from '../api/client';
 import { STATUS_LABEL, childName, formatTimeJst, longDayLabel } from '../calendar/format';
 import { DutyRecordAction } from '../components/DutyRecordAction';
@@ -47,6 +54,13 @@ export function DayDetail({
   onRefresh,
   onClose,
 }: Props) {
+  const [adding, setAdding] = useState(false);
+  const canAdd =
+    isAdmin &&
+    !confirmed &&
+    Boolean(today) &&
+    date >= today &&
+    isEditableMonth(date.slice(0, 7), today);
   return (
     <Stack
       component="section"
@@ -59,6 +73,24 @@ export function DayDetail({
         {longDayLabel(date)}
       </Typography>
       {duties.length === 0 && <Typography>{NO_DUTY_LABEL}</Typography>}
+      {canAdd && !adding && (
+        <Button data-testid="add-adhoc-duty-button" onClick={() => setAdding(true)}>
+          臨時のお手伝いを依頼
+        </Button>
+      )}
+      {canAdd && adding && (
+        <AdhocDutyForm
+          key={date}
+          date={date}
+          children={kids}
+          authorized={authorized}
+          onSaved={() => {
+            setAdding(false);
+            onRefresh();
+          }}
+          onCancel={() => setAdding(false)}
+        />
+      )}
       {duties.map((duty) => (
         <DutyDetail
           key={duty.dutyId}
@@ -133,6 +165,7 @@ function DutyDetail({
     <Stack spacing={0.5} data-testid="day-detail-duty" sx={{ overflowWrap: 'anywhere' }}>
       <Typography component="h4" variant="subtitle1" data-testid="detail-chore">
         {duty.choreName}
+        {duty.adhoc && '（臨時）'}
       </Typography>
       <Typography>
         子供: <span data-testid="detail-child">{childName(kids, duty.childUserId)}</span>
