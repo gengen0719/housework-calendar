@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Button, IconButton, Stack, TextField, Typography } from '@mui/material';
 import {
   NO_DUTY_LABEL,
   getMessage,
@@ -69,9 +69,19 @@ export function DayDetail({
       data-testid="day-detail"
       sx={{ p: 2, border: '1px solid', borderColor: 'text.secondary', bgcolor: 'background.paper' }}
     >
-      <Typography component="h3" variant="h6" id="day-detail-heading">
-        {longDayLabel(date)}
-      </Typography>
+      <Stack direction="row" alignItems="center" justifyContent="space-between" gap={1}>
+        <Typography component="h3" variant="h6" id="day-detail-heading">
+          {longDayLabel(date)}
+        </Typography>
+        <IconButton
+          aria-label="日の詳細を閉じる"
+          onClick={onClose}
+          data-testid="day-detail-close"
+          sx={{ flexShrink: 0, width: 32, height: 32 }}
+        >
+          ×
+        </IconButton>
+      </Stack>
       {duties.length === 0 && <Typography>{NO_DUTY_LABEL}</Typography>}
       {canAdd && !adding && (
         <Button data-testid="add-adhoc-duty-button" onClick={() => setAdding(true)}>
@@ -105,14 +115,6 @@ export function DayDetail({
           onRefresh={onRefresh}
         />
       ))}
-      <Button
-        variant="outlined"
-        onClick={onClose}
-        sx={{ alignSelf: 'flex-start' }}
-        data-testid="day-detail-close"
-      >
-        閉じる
-      </Button>
     </Stack>
   );
 }
