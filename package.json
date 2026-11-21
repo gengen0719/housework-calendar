@@ -10,6 +10,7 @@
     "infrastructure"
   ],
   "scripts": {
+    "check:ci": "bash scripts/check-ci.sh",
     "test": "vitest run --coverage",
     "test:u1": "vitest run u1-skeleton-family --coverage --coverage.include='packages/*/src/**' --coverage.include='infrastructure/lib/**'",
     "lint": "eslint .",

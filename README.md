@@ -48,7 +48,7 @@ CloudFront のドメイン（`xxxx.cloudfront.net`）は、AWS に反映する�
 
 自分で作る必要があるのは、**セッション用の鍵**と **CloudFront の秘密のヘッダーの値**の 2 つだけです。どちらも環境ごと（ステージングと本番）に別の値を作ります。
 
-**GitHub Actions の Secrets には、何も入れません。** AWS の権限は OIDC で一時的に受け取り、秘密の値はパラメータストアから読むためです。`ci.yml` が使う `GITHUB_TOKEN` は、GitHub が自動で用意します。例外として、リポジトリの持ち主が組織（Organization）の場合は、`gitleaks/gitleaks-action` のライセンスキー（`GITLEAKS_LICENSE`）を Secrets に入れる必要があります。個人のアカウントなら要りません。
+**GitHub Actions の Secrets には、何も入れません。** AWS の権限は OIDC で一時的に受け取り、秘密の値はパラメータストアから読みます。
 
 ### 1. LINE のチャネルを作る
 
@@ -252,11 +252,29 @@ npm run secrets:scan
 1. Git の履歴（コミット済みの内容）: `gitleaks git --redact --no-banner -v`。CI の gitleaks と同じ範囲です。
 2. 作業ツリー全体（まだ `git add` していない新しいファイルも含む）: `gitleaks dir . --redact --no-banner -v`。
 
-どちらも、リポジトリ直下の `.gitleaks.toml` を読みます。この設定は既定のルールをそのまま使い（`[extend] useDefault = true`）、`node_modules`・`dist`・`cdk.out`・`coverage` のフォルダだけを読み飛ばします（`[allowlist] paths`）。これらはどれも `.gitignore` の対象で Git に入らないため（`git ls-files` で 1 件もないことを確かめ済み）、CI の gitleaks（履歴の検査。`gitleaks-action` もこのファイルを自動で読みます）の結果は、この 4 つのフォルダを読み飛ばす以外は変わりません。
+どちらも、リポジトリ直下の `.gitleaks.toml` を読みます。この設定は既定のルールを使い（`[extend] useDefault = true`）、`node_modules`・`dist`・`cdk.out`・`coverage` のフォルダを読み飛ばします（`[allowlist] paths`）。CI 相当の検査では Git の履歴を検査します。未コミットの内容も調べる場合は `npm run secrets:scan` を実行します。
+
+## 実装の完了前に行う検査
+
+`.nvmrc` の Node.js と Gitleaks 8.30.1（CI と同じバージョン）を用意します。初回やロックファイル変更後は `npm ci` を実行します。最後の変更後、リポジトリのルートで次のコマンドを実行し、全項目の成功を確認してから実装を完了とします。
+
+```bash
+npm run check:ci
+```
+
+このコマンドは GitHub Actions でも使います。Prettier、ESLint、4 パッケージの型チェック、全テストとカバレッジ、Gitleaks、フロントエンドのビルド、CDK synth を順に実行します。ビルドと synth にはダミー値を使います。
+
+クローンごとに次の設定を一度実行すると、push 前にも同じ検査が走り、失敗した場合は push が止まります。
+
+```bash
+git config --local core.hooksPath .githooks
+```
+
+GitHub 側でマージを強制的に止めるには、`main` の保護ルールで CI の `check` ジョブを必須ステータスチェックに指定します。
 
 ## 反映の流れ
 
-- `ci.yml`: プルリクエストと `main` への push。Prettier、ESLint、tsc、Vitest とカバレッジ、gitleaks、`cdk synth`。AWS の権限は付けません。
+- `ci.yml`: プルリクエストと `main` への push。`npm run check:ci` を実行します。AWS の権限は付けません。
 - `deploy-staging.yml`: `main` への push のあと、同じ検査が通ったらステージングに自動で反映し、`scripts/smoke-check.sh` で確かめます。
 - `deploy-production.yml`: 作り手が手動で実行します（`ref` に反映するコミットを入れる）。`main` にあるコミットだけが対象で、環境 `production` の承認を待ちます。
 - 前の版に戻すとき: 問題のコミットを `git revert` して `main` に取り込み、ステージングで確かめてから本番を手動で実行します。DynamoDB のデータは戻しません（項目やテーブルを足すだけにして、消したり名前を変えたりしません）。
@@ -654,6 +672,6 @@ DynamoDBの呼出し回数は `AWS/DynamoDB` の `SuccessfulRequestLatency` の 
 
 費用目標は2環境合計で月100円です。設計の約56円は無料枠と利用量・200円/USD・税等10%の仮定による計画値です。実際の税込み見積もりと無料枠を確認するまで有効化しません。AWS Budgetsの0.50USD通知は請求を強制停止しません。メール購読確認、15分以内の実受信、実LINEの重複受理0回、清掃・復旧・費用の実測はまだ行っていません。
 
-- GitHub Actions のサードパーティのアクション（`actions/checkout`、`actions/setup-node`、`aws-actions/configure-aws-credentials`、`gitleaks/gitleaks-action`）は、いまはバージョンのタグで指定しています。コミット SHA の固定は、ネットワークのある環境で調べて置き換えてください。
+- GitHub Actions のサードパーティのアクション（`actions/checkout`、`actions/setup-node`、`aws-actions/configure-aws-credentials`）は、いまはバージョンのタグで指定しています。コミット SHA の固定は、ネットワークのある環境で調べて置き換えてください。
 - 本番用の OIDC のロールは `environment:production` で絞っています。「`main` のコミットだけ」は、GitHub の環境の Deployment branches と、`deploy-production.yml` の確かめ（ref が `main` にあること）で守っています。
 - ステージングと本番で LINE のチャネルを別にすると、公式アカウントごとに無料で送れるメッセージ数の枠があります。費用 0 円の条件との関係は、要件の段階で確かめてください。

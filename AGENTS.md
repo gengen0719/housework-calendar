@@ -59,3 +59,9 @@ Commit the `aidlc/` workspace tree — the record (state, the per-clone audit sh
 - `aidlc/spaces/*/intents/*/.aidlc-*` (the record's `.aidlc-engine/` framework state)
 - harness-local files your harness's shipped `.gitignore` block adds
 <!-- END AI-DLC:agents -->
+
+## 実装の完了条件
+
+このリポジトリを変更する作業者は、最後の変更後にリポジトリのルートで `npm run check:ci` を実行し、全項目の成功を確認してから実装を完了とする。初回やロックファイル変更後は、先に `npm ci` を実行する。Node.js と Gitleaks の準備および push 前の自動実行の設定は README の「実装の完了前に行う検査」に従う。
+
+検査に失敗したら原因を修正して、同じコマンドを最初から再実行する。実行できない場合は、未完了の検査と理由を報告する。

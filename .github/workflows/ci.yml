@@ -42,38 +42,17 @@ jobs:
       - name: 依存の取り込み
         run: npm ci
 
-      - name: 整形の確かめ（Prettier）
-        run: npx prettier --check .
-
-      - name: 検査（ESLint）
-        run: npx eslint .
-
-      - name: 型の確かめ（tsc）
+      - name: Gitleaks の取り込み
+        working-directory: ${{ runner.temp }}
         run: |
-          npx tsc --noEmit -p packages/shared
-          npx tsc --noEmit -p packages/backend
-          npx tsc --noEmit -p packages/frontend
-          npx tsc --noEmit -p infrastructure
+          version=8.30.1
+          archive="gitleaks_${version}_linux_x64.tar.gz"
+          release="https://github.com/gitleaks/gitleaks/releases/download/v${version}"
+          curl --fail --silent --show-error --location --remote-name "${release}/${archive}"
+          printf '%s  %s\n' 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb "$archive" | sha256sum --check
+          mkdir -p gitleaks-bin
+          tar -xzf "$archive" -C gitleaks-bin gitleaks
+          echo "$PWD/gitleaks-bin" >> "$GITHUB_PATH"
 
-      - name: テストとカバレッジ（Vitest。行 80% 以上）
-        run: npx vitest run --coverage
-
-      - name: 秘密の情報の検査（gitleaks）
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 画面のビルド（ダミーの公開値）
-        run: npm run build -w packages/frontend
-        env:
-          VITE_LIFF_ID: ci-dummy-liff-id
-          VITE_LINE_OA_ID: '@ci-dummy'
-
-      - name: CDK の組み立て（ダミーのコンテキスト。AWS の権限は使わない）
-        working-directory: infrastructure
-        run: >
-          npx cdk synth --quiet
-          -c originVerifySecret=ci-dummy-origin-verify-secret
-          -c githubOwner=ci-owner
-          -c githubRepo=ci-repo
-          -c budgetEmail=ci@example.com
+      - name: CI と同じ検査
+        run: npm run check:ci
