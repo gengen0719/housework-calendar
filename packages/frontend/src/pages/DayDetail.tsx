@@ -69,7 +69,7 @@ export function DayDetail({
       data-testid="day-detail"
       sx={{ p: 2, border: '1px solid', borderColor: 'text.secondary', bgcolor: 'background.paper' }}
     >
-      <Stack direction="row" alignItems="center" justifyContent="space-between" gap={1}>
+      <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
         <Typography component="h3" variant="h6" id="day-detail-heading">
           {longDayLabel(date)}
         </Typography>
