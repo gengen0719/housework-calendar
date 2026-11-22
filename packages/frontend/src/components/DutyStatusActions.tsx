@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Stack, Typography } from '@mui/material';
+import { Button, Menu, MenuItem, Stack, Typography } from '@mui/material';
 import {
   MONTH_RECONFIRM_RETRY,
   STATUS_DROP_FROM_COUNT_NOTE,
@@ -14,13 +14,15 @@ import {
 import { ApiFailure, changeDutyStatus, listChoreTypes } from '../api/client';
 import { childName } from '../calendar/format';
 import type { Authorized } from '../hooks/useSession';
-import { colors } from '../theme';
 import { StatusChangeDialog } from './StatusChangeDialog';
 
 interface Props {
   duty: Duty;
   kids: readonly CalendarChild[];
-  isAdmin: boolean;
+  anchorEl: HTMLButtonElement | null;
+  menuId: string;
+  onCloseMenu: () => void;
+  onChangeChild?: () => void;
   authorized: Authorized;
   /** 変更できたとき（応答の担当で画面を差し替える） */
   onChanged: (duty: Duty) => void;
@@ -32,23 +34,21 @@ interface ActionDef {
   action: StatusChangeAction;
   label: string;
   to: DutyStatus;
-  /** 元に戻す側の操作か（色を分ける） */
-  revert: boolean;
 }
 
 /** 今の状態からできる操作（F1 の表。BR8.9）。表にない操作のボタンは出さない。 */
 const ACTIONS_BY_STATUS: Record<DutyStatus, readonly ActionDef[]> = {
   todo: [
-    { action: 'markDone', label: '済にする', to: 'done', revert: false },
-    { action: 'markSkipped', label: 'やらなかったにする', to: 'skipped', revert: true },
+    { action: 'markDone', label: '済にする', to: 'done' },
+    { action: 'markSkipped', label: 'やらなかったにする', to: 'skipped' },
   ],
   done: [
-    { action: 'cancel', label: '取り消す', to: 'todo', revert: true },
-    { action: 'markSkipped', label: 'やらなかったにする', to: 'skipped', revert: true },
+    { action: 'cancel', label: '取り消す', to: 'todo' },
+    { action: 'markSkipped', label: 'やらなかったにする', to: 'skipped' },
   ],
   skipped: [
-    { action: 'unmarkSkipped', label: 'やらなかったを外す', to: 'todo', revert: true },
-    { action: 'markDone', label: '済にする', to: 'done', revert: false },
+    { action: 'unmarkSkipped', label: 'やらなかったを外す', to: 'todo' },
+    { action: 'markDone', label: '済にする', to: 'done' },
   ],
 };
 
@@ -60,13 +60,16 @@ interface Pending {
 }
 
 /**
- * 管理者の「状態を変える」ボタン・確認ダイアログ・失敗の文言（U7。F1、F2）。子供には何も出さない。
+ * 管理者の操作メニュー・状態変更の確認ダイアログ・失敗の文言。
  * 「済にする」の確認の単価は、確認を出す時点の種類の一覧（既存の読み取り）から引く。
  */
 export function DutyStatusActions({
   duty,
   kids,
-  isAdmin,
+  anchorEl,
+  menuId,
+  onCloseMenu,
+  onChangeChild,
   authorized,
   onChanged,
   onRefresh,
@@ -75,8 +78,6 @@ export function DutyStatusActions({
   const [preparing, setPreparing] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<{ text: string; retry: boolean } | undefined>(undefined);
-
-  if (!isAdmin) return null;
 
   async function open(def: ActionDef) {
     setError(undefined);
@@ -136,24 +137,42 @@ export function DutyStatusActions({
   }
 
   return (
-    <Stack spacing={0.5} data-testid="duty-status-actions">
-      <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', gap: 1 }}>
+    <>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={onCloseMenu}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        slotProps={{
+          list: { id: menuId, 'aria-label': anchorEl?.getAttribute('aria-label') ?? undefined },
+        }}
+      >
         {ACTIONS_BY_STATUS[duty.status].map((def) => (
-          <Button
+          <MenuItem
             key={def.action}
-            variant="contained"
             disabled={preparing || sending}
-            onClick={() => void open(def)}
-            data-testid={`status-action-${def.action}`}
-            sx={{
-              bgcolor: def.revert ? colors.reviewRevertButton : colors.reviewActionButton,
-              color: def.revert ? colors.reviewRevertButtonText : colors.reviewActionButtonText,
+            onClick={() => {
+              onCloseMenu();
+              void open(def);
             }}
+            data-testid={`status-action-${def.action}`}
           >
             {def.label}
-          </Button>
+          </MenuItem>
         ))}
-      </Stack>
+        {onChangeChild && (
+          <MenuItem
+            onClick={() => {
+              onCloseMenu();
+              onChangeChild();
+            }}
+            data-testid="change-duty-button"
+          >
+            担当を変える
+          </MenuItem>
+        )}
+      </Menu>
       {pending && (
         <StatusChangeDialog
           preview={pending.preview}
@@ -174,7 +193,7 @@ export function DutyStatusActions({
           )}
         </Stack>
       )}
-    </Stack>
+    </>
   );
 }
 

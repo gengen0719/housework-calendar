@@ -78,7 +78,8 @@ const actionLabels = (): string[] =>
 
 const pressAction = async (label: string): Promise<void> => {
   const detail = await screen.findByTestId('day-detail');
-  fireEvent.click(within(detail).getByRole('button', { name: label }));
+  fireEvent.click(within(detail).getByTestId('duty-actions-menu-button'));
+  fireEvent.click(screen.getByRole('menuitem', { name: label }));
 };
 
 const pressYes = async (): Promise<void> => {
@@ -128,6 +129,8 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
         },
       );
       Then('日の詳細に「済にする」と「やらなかったにする」だけが出る', () => {
+        expect(actionLabels()).toEqual([]);
+        fireEvent.click(screen.getByTestId('duty-actions-menu-button'));
         expect(actionLabels()).toEqual(['やらなかったにする', '済にする']);
       });
     },
@@ -143,6 +146,8 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
         },
       );
       Then('日の詳細に「取り消す」と「やらなかったにする」だけが出る', () => {
+        expect(actionLabels()).toEqual([]);
+        fireEvent.click(screen.getByTestId('duty-actions-menu-button'));
         expect(actionLabels()).toEqual(['やらなかったにする', '取り消す']);
       });
     },
@@ -156,6 +161,8 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
       },
     );
     Then('日の詳細に「やらなかったを外す」と「済にする」だけが出る', () => {
+      expect(actionLabels()).toEqual([]);
+      fireEvent.click(screen.getByTestId('duty-actions-menu-button'));
       expect(actionLabels()).toEqual(['やらなかったを外す', '済にする']);
     });
   });
@@ -169,6 +176,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
     );
     Then('日の詳細に状態を変えるボタンは出ない', () => {
       expect(screen.getByTestId('day-detail')).toBeInTheDocument();
+      expect(screen.queryByTestId('duty-actions-menu-button')).toBeNull();
       expect(actionLabels()).toEqual([]);
     });
   });

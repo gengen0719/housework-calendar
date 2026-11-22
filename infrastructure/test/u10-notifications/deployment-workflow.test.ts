@@ -1,9 +1,12 @@
 import { readFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { describe, expect, it } from 'vitest';
 
+const runFile = promisify(execFile);
+
 /** 実際の配備ステップをシェルで展開し、npxを差し替えて引数だけ検査する。 */
-function contexts(environment: string, variables: Record<string, string>) {
+async function contexts(environment: string, variables: Record<string, string>) {
   const yaml = readFileSync(`.github/workflows/deploy-${environment}.yml`, 'utf8');
   const step = yaml.split('      - name: 反映\n')[1]!.split('\n      - name:')[0]!;
   const command = step
@@ -15,12 +18,11 @@ function contexts(environment: string, variables: Record<string, string>) {
   const env: Record<string, string> = {};
   for (const match of step.matchAll(/^ {10}(\w+): \$\{\{ vars\.(\w+) \}\}/gm))
     env[match[1]!] = variables[match[2]!] ?? '';
-  const args = execFileSync('bash', ['-c', `npx() { printf '%s\\n' "$@"; }; ${command}`], {
+  const { stdout } = await runFile('bash', ['-c', `npx() { printf '%s\\n' "$@"; }; ${command}`], {
     env,
     encoding: 'utf8',
-  })
-    .trim()
-    .split('\n');
+  });
+  const args = stdout.trim().split('\n');
   const result: Record<string, string> = {};
   args.forEach((arg, index) => {
     if (arg === '-c') {
@@ -33,9 +35,9 @@ function contexts(environment: string, variables: Record<string, string>) {
 }
 
 describe.each(['staging', 'production'])('%s配備の通知設定', (environment) => {
-  it('通知・復元・メール・確認・合算見積りを対応するCDK contextへ渡す', () => {
+  it('通知・復元・メール・確認・合算見積りを対応するCDK contextへ渡す', async () => {
     const prefix = environment.toUpperCase();
-    const result = contexts(environment, {
+    const result = await contexts(environment, {
       [`${prefix}_NOTIFICATIONS_ENABLED`]: 'true',
       [`${prefix}_BACKUPS_ENABLED`]: 'false',
       [`${prefix}_NOTIFICATION_EMAIL`]: 'operator+alerts@example.com',
@@ -52,17 +54,17 @@ describe.each(['staging', 'production'])('%s配備の通知設定', (environment
       [`${environment}NotificationEstimatedJpy`]: '91',
     });
   });
-  it('未設定なら有効化しない', () => {
-    expect(contexts(environment, {})).toMatchObject({
+  it('未設定なら有効化しない', async () => {
+    expect(await contexts(environment, {})).toMatchObject({
       [`${environment}NotificationsEnabled`]: 'false',
       [`${environment}BackupsEnabled`]: '',
       [`${environment}NotificationChecksPassed`]: 'false',
       [`${environment}NotificationBudgetVerified`]: 'false',
     });
   });
-  it('通知を無効のままバックアップだけ有効化できる', () => {
+  it('通知を無効のままバックアップだけ有効化できる', async () => {
     expect(
-      contexts(environment, {
+      await contexts(environment, {
         [`${environment.toUpperCase()}_BACKUPS_ENABLED`]: 'true',
       }),
     ).toMatchObject({
