@@ -83,6 +83,20 @@ export function DayDetail({
         </IconButton>
       </Stack>
       {duties.length === 0 && <Typography>{NO_DUTY_LABEL}</Typography>}
+      {duties.map((duty) => (
+        <DutyDetail
+          key={duty.dutyId}
+          duty={duty}
+          kids={kids}
+          isAdmin={isAdmin}
+          authorized={authorized}
+          currentUserId={currentUserId}
+          confirmed={confirmed}
+          today={today}
+          onChanged={onChanged}
+          onRefresh={onRefresh}
+        />
+      ))}
       {canAdd && !adding && (
         <Button data-testid="add-adhoc-duty-button" onClick={() => setAdding(true)}>
           臨時のお手伝いを依頼
@@ -101,20 +115,6 @@ export function DayDetail({
           onCancel={() => setAdding(false)}
         />
       )}
-      {duties.map((duty) => (
-        <DutyDetail
-          key={duty.dutyId}
-          duty={duty}
-          kids={kids}
-          isAdmin={isAdmin}
-          authorized={authorized}
-          currentUserId={currentUserId}
-          confirmed={confirmed}
-          today={today}
-          onChanged={onChanged}
-          onRefresh={onRefresh}
-        />
-      ))}
     </Stack>
   );
 }
