@@ -97,6 +97,7 @@ function seedChangeableDuty() {
 async function changeChildToJiro(date: string): Promise<void> {
   await listShown();
   pressRow(date);
+  fireEvent.click(screen.getByTestId('duty-actions-menu-button'));
   fireEvent.click(await screen.findByTestId('change-duty-button'));
   fireEvent.change(screen.getByTestId('change-child-select'), { target: { value: JIRO.userId } });
   fireEvent.click(screen.getByTestId('change-child-confirm-button'));

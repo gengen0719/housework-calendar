@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Button, IconButton, Stack, TextField, Typography } from '@mui/material';
+import { useId, useState } from 'react';
+import { Button, Chip, IconButton, Stack, TextField, Typography } from '@mui/material';
 import {
   NO_DUTY_LABEL,
   getMessage,
@@ -83,10 +83,11 @@ export function DayDetail({
         </IconButton>
       </Stack>
       {duties.length === 0 && <Typography>{NO_DUTY_LABEL}</Typography>}
-      {duties.map((duty) => (
+      {duties.map((duty, index) => (
         <DutyDetail
           key={duty.dutyId}
           duty={duty}
+          separated={isAdmin && index > 0}
           kids={kids}
           isAdmin={isAdmin}
           authorized={authorized}
@@ -99,7 +100,7 @@ export function DayDetail({
       ))}
       {canAdd && !adding && (
         <Button data-testid="add-adhoc-duty-button" onClick={() => setAdding(true)}>
-          臨時のお手伝いを依頼
+          <span aria-hidden="true">＋</span> 臨時のお手伝いを依頼
         </Button>
       )}
       {canAdd && adding && (
@@ -121,6 +122,7 @@ export function DayDetail({
 
 interface DutyProps {
   duty: Duty;
+  separated: boolean;
   kids: readonly CalendarChild[];
   isAdmin: boolean;
   authorized: Authorized;
@@ -133,6 +135,7 @@ interface DutyProps {
 
 function DutyDetail({
   duty,
+  separated,
   kids,
   isAdmin,
   authorized,
@@ -142,6 +145,8 @@ function DutyDetail({
   onChanged,
   onRefresh,
 }: DutyProps) {
+  const menuId = useId();
+  const [menuAnchor, setMenuAnchor] = useState<HTMLButtonElement | null>(null);
   const [changing, setChanging] = useState(false);
   const [selected, setSelected] = useState(duty.childUserId);
   const [busy, setBusy] = useState(false);
@@ -164,20 +169,60 @@ function DutyDetail({
   }
 
   return (
-    <Stack spacing={0.5} data-testid="day-detail-duty" sx={{ overflowWrap: 'anywhere' }}>
-      <Typography component="h4" variant="subtitle1" data-testid="detail-chore">
-        {duty.choreName}
-        {duty.adhoc && '（臨時）'}
-      </Typography>
-      <Typography>
-        子供: <span data-testid="detail-child">{childName(kids, duty.childUserId)}</span>
-      </Typography>
-      <Typography>
-        状態:{' '}
-        <strong data-testid="detail-status" style={{ color: STATUS_COLOR[duty.status] }}>
-          {STATUS_LABEL[duty.status]}
-        </strong>
-      </Typography>
+    <Stack
+      spacing={0.5}
+      data-testid="day-detail-duty"
+      sx={{
+        overflowWrap: 'anywhere',
+        ...(separated && { borderTop: 1, borderColor: 'divider', pt: 1.5 }),
+      }}
+    >
+      <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
+        <Typography component="h4" variant="subtitle1" data-testid="detail-chore">
+          {duty.choreName}
+          {duty.adhoc && (isAdmin ? <Chip label="臨時" size="small" sx={{ ml: 1 }} /> : '（臨時）')}
+        </Typography>
+        {isAdmin && (
+          <IconButton
+            aria-label={`${duty.choreName}${duty.adhoc ? '（臨時）' : ''}の操作`}
+            aria-haspopup="menu"
+            aria-expanded={Boolean(menuAnchor)}
+            aria-controls={menuAnchor ? menuId : undefined}
+            onClick={(event) => setMenuAnchor(event.currentTarget)}
+            data-testid="duty-actions-menu-button"
+            sx={{ width: 44, height: 44, flexShrink: 0 }}
+          >
+            ⋯
+          </IconButton>
+        )}
+      </Stack>
+      <Stack
+        direction={isAdmin ? 'row' : 'column'}
+        spacing={0.5}
+        sx={{ justifyContent: 'space-between', alignItems: isAdmin ? 'center' : 'stretch' }}
+      >
+        <Typography>
+          {isAdmin ? '担当' : '子供'}:{' '}
+          <span data-testid="detail-child">{childName(kids, duty.childUserId)}</span>
+        </Typography>
+        {isAdmin ? (
+          <Chip
+            label={STATUS_LABEL[duty.status]}
+            aria-label={`状態: ${STATUS_LABEL[duty.status]}`}
+            size="small"
+            variant="outlined"
+            data-testid="detail-status"
+            sx={{ color: STATUS_COLOR[duty.status], fontWeight: 'bold', flexShrink: 0 }}
+          />
+        ) : (
+          <Typography>
+            状態:{' '}
+            <strong data-testid="detail-status" style={{ color: STATUS_COLOR[duty.status] }}>
+              {STATUS_LABEL[duty.status]}
+            </strong>
+          </Typography>
+        )}
+      </Stack>
       {duty.recordedAt && (
         <Typography>
           記録した時刻: <span data-testid="detail-time">{formatTimeJst(duty.recordedAt)}</span>
@@ -198,27 +243,26 @@ function DutyDetail({
         onChanged={onChanged}
         onRefresh={onRefresh}
       />
-      <DutyStatusActions
-        duty={duty}
-        kids={kids}
-        isAdmin={isAdmin}
-        authorized={authorized}
-        onChanged={onChanged}
-        onRefresh={onRefresh}
-      />
-      {isAdmin && duty.status === 'todo' && !changing && (
-        <Button
-          variant="outlined"
-          onClick={() => {
-            setSelected(duty.childUserId);
-            setError(undefined);
-            setChanging(true);
-          }}
-          sx={{ alignSelf: 'flex-start' }}
-          data-testid="change-duty-button"
-        >
-          担当を変える
-        </Button>
+      {isAdmin && (
+        <DutyStatusActions
+          duty={duty}
+          kids={kids}
+          anchorEl={menuAnchor}
+          menuId={menuId}
+          onCloseMenu={() => setMenuAnchor(null)}
+          onChangeChild={
+            duty.status === 'todo' && !changing
+              ? () => {
+                  setSelected(duty.childUserId);
+                  setError(undefined);
+                  setChanging(true);
+                }
+              : undefined
+          }
+          authorized={authorized}
+          onChanged={onChanged}
+          onRefresh={onRefresh}
+        />
       )}
       {isAdmin && changing && duty.status === 'todo' && (
         <Stack spacing={1}>

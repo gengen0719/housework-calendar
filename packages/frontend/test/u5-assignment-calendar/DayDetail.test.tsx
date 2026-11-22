@@ -61,6 +61,7 @@ function renderDetail(duties: Duty[], isAdmin = true) {
 }
 
 async function startChange(): Promise<void> {
+  fireEvent.click(screen.getByTestId('duty-actions-menu-button'));
   fireEvent.click(screen.getByTestId('change-duty-button'));
   fireEvent.change(await screen.findByTestId('change-child-select'), {
     target: { value: FAKE_CHILD_USER_ID_2 },
@@ -176,6 +177,7 @@ describe('DayDetail', () => {
 
     fireEvent.click(screen.getByTestId('change-child-cancel-button'));
     expect(screen.queryByTestId('change-child-select')).toBeNull();
+    fireEvent.click(screen.getByTestId('duty-actions-menu-button'));
     expect(screen.getByTestId('change-duty-button')).toBeInTheDocument();
   });
 });
