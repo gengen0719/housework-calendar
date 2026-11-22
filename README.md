@@ -256,7 +256,7 @@ npm run secrets:scan
 
 ## 実装の完了前に行う検査
 
-`.nvmrc` の Node.js と Gitleaks 8.30.1（CI と同じバージョン）を用意します。初回やロックファイル変更後は `npm ci` を実行します。最後の変更後、リポジトリのルートで次のコマンドを実行し、全項目の成功を確認してから実装を完了とします。
+`.nvmrc` の Node.js と Gitleaks 8.30.1（CI と同じバージョン）を用意します。初回やロックファイル変更後は `npm ci` を実行します。最後の変更後、リポジトリのルートで次のコマンドを実行し、全項目の成功を確認します。
 
 ```bash
 npm run check:ci
@@ -273,6 +273,8 @@ git config --local core.hooksPath .githooks
 GitHub 側でマージを強制的に止めるには、`main` の保護ルールで CI の `check` ジョブを必須ステータスチェックに指定します。
 
 ## 反映の流れ
+
+変更作業は GitHub に PR を作成して完了とします。コミットから完了報告までの手順は [AGENTS.md の変更作業の完了条件](AGENTS.md#変更作業の完了条件) を参照してください。
 
 - `ci.yml`: プルリクエストと `main` への push。`npm run check:ci` を実行します。AWS の権限は付けません。
 - `deploy-staging.yml`: `main` への push のあと、同じ検査が通ったらステージングに自動で反映し、`scripts/smoke-check.sh` で確かめます。
