@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+runner="$PWD/scripts/check-ci.sh"
+checked_commits=' '
+
+while read -r local_ref local_oid remote_ref remote_oid; do
+  # 削除やコミットを指さないタグには検査対象がない。
+  if ! commit=$(git rev-parse --verify --quiet "$local_oid^{commit}"); then
+    continue
+  fi
+  case "$checked_commits" in
+    *" $commit "*) continue ;;
+  esac
+
+  echo "push 前の検査: $local_ref ($commit)"
+  (
+    temp_dir=$(mktemp -d "${TMPDIR:-/tmp}/housework-pre-push.XXXXXXXX")
+    worktree="$temp_dir/repo"
+    trap 'git worktree remove --force "$worktree" 2>/dev/null || true; rm -rf -- "$temp_dir"' EXIT
+    git worktree add --quiet --detach "$worktree" "$commit"
+    (
+      # 元のチェックアウトに対する Git の環境変数を引き継がない。
+      for variable in $(git rev-parse --local-env-vars); do
+        unset "$variable"
+      done
+      cd "$worktree"
+      npm ci
+      if [ -f scripts/check-ci.sh ]; then
+        npm run check:ci
+      else
+        bash "$runner"
+      fi
+    ) </dev/null
+  )
+  checked_commits+="$commit "
+done

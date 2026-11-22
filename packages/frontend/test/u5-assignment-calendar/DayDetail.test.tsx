@@ -77,11 +77,14 @@ describe('DayDetail', () => {
   it('日付の見出しを出し、担当がない日は「担当なし」と出して閉じるを押せる', () => {
     const { onClose } = renderDetail([]);
 
-    expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent('11月10日(火)');
+    const heading = screen.getByRole('heading', { level: 3, name: '11月10日(火)' });
+    const close = screen.getByRole('button', { name: '日の詳細を閉じる' });
+    expect(close).toHaveTextContent(/^×$/);
+    expect(heading.nextElementSibling).toBe(close);
     expect(screen.getByText(NO_DUTY_LABEL)).toBeInTheDocument();
     expect(screen.queryAllByTestId('day-detail-duty')).toHaveLength(0);
 
-    fireEvent.click(screen.getByTestId('day-detail-close'));
+    fireEvent.click(close);
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
