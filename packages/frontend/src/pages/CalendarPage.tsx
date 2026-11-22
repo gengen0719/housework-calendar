@@ -442,7 +442,7 @@ function DayList({
                 selected={date === selectedDate}
                 sx={{ alignItems: 'flex-start', gap: 2, bgcolor: 'background.paper' }}
               >
-                <Box sx={{ minWidth: 72, fontWeight: 'bold' }}>
+                <Box sx={{ minWidth: 72, flexShrink: 0, whiteSpace: 'nowrap', fontWeight: 'bold' }}>
                   <span data-testid="day-label">{dayLabel(date)}</span>
                   {isToday && (
                     <Box
@@ -454,16 +454,29 @@ function DayList({
                     </Box>
                   )}
                 </Box>
-                <Stack spacing={0.5} sx={{ overflowWrap: 'anywhere' }}>
+                <Stack spacing={0.5} sx={{ flex: 1, minWidth: 0 }}>
                   {duties.length === 0 && <span>{NO_DUTY_LABEL}</span>}
                   {duties.map((duty) => (
-                    <span
+                    <Box
+                      component="span"
                       key={duty.dutyId}
                       data-testid="duty-item"
-                      style={{ color: STATUS_COLOR[duty.status] }}
+                      sx={{
+                        display: 'flex',
+                        color: STATUS_COLOR[duty.status],
+                        whiteSpace: 'nowrap',
+                      }}
                     >
-                      {`${duty.choreName}${duty.adhoc ? '（臨時）' : ''}=${childName(calendar.children, duty.childUserId)}(${STATUS_LABEL[duty.status]})`}
-                    </span>
+                      <Box
+                        component="span"
+                        sx={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis' }}
+                      >
+                        {`${duty.choreName}${duty.adhoc ? '（臨時）' : ''}=${childName(calendar.children, duty.childUserId)}`}
+                      </Box>
+                      <Box component="span" sx={{ flexShrink: 0 }}>
+                        {`(${STATUS_LABEL[duty.status]})`}
+                      </Box>
+                    </Box>
                   ))}
                 </Stack>
               </ListItemButton>
