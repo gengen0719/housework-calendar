@@ -29,6 +29,15 @@ jobs:
       # NOTE: サードパーティのアクションはバージョンのタグで指定している。
       # フルコミット SHA での固定は、ネットワークのある環境で行う（README の「既知の課題」を参照）。
       - uses: actions/checkout@v4
+        if: ${{ inputs.ref }}
+        with:
+          persist-credentials: false
+
+      - name: 検査スクリプトを退避
+        if: ${{ inputs.ref }}
+        run: cp scripts/check-ci.sh "$RUNNER_TEMP/housework-check-ci.sh"
+
+      - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref }}
           fetch-depth: 0
@@ -55,4 +64,11 @@ jobs:
           echo "$PWD/gitleaks-bin" >> "$GITHUB_PATH"
 
       - name: CI と同じ検査
-        run: npm run check:ci
+        env:
+          CHECKOUT_REF: ${{ inputs.ref }}
+        run: |
+          if [ -n "$CHECKOUT_REF" ]; then
+            bash "$RUNNER_TEMP/housework-check-ci.sh"
+          else
+            npm run check:ci
+          fi

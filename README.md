@@ -262,9 +262,9 @@ npm run secrets:scan
 npm run check:ci
 ```
 
-このコマンドは GitHub Actions でも使います。Prettier、ESLint、4 パッケージの型チェック、全テストとカバレッジ、Gitleaks、フロントエンドのビルド、CDK synth を順に実行します。ビルドと synth にはダミー値を使います。
+このコマンドは GitHub Actions でも使います。Prettier、ESLint、4 パッケージの型チェック、全テストとカバレッジ、Gitleaks、フロントエンドのビルド、CDK synth を順に実行します。ビルドと synth にはダミー値を使い、生成物は一時ディレクトリに出します。
 
-クローンごとに次の設定を一度実行すると、push 前にも同じ検査が走り、失敗した場合は push が止まります。
+クローンごとに次の設定を一度実行すると、push 対象のコミットごとに一時 worktree で `npm ci` と同じ検査を実行し、失敗した場合は push が止まります。
 
 ```bash
 git config --local core.hooksPath .githooks
