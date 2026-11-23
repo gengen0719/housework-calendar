@@ -19,6 +19,7 @@ import {
   PutCommand,
   QueryCommand,
   DeleteCommand,
+  UpdateCommand,
 } from '@aws-sdk/lib-dynamodb';
 import {
   watchdog,
@@ -63,12 +64,126 @@ describe('起動と滞留の見守り', () => {
     expect(await watchdog(Date.parse('2027-01-31T06:00:00Z'))).toBe(true);
     expect(cw.commandCalls(PutMetricDataCommand)[0]!.args[0].input.MetricData?.[0]?.Value).toBe(1);
   });
-  it('予定が5分過ぎてRUNがなければ0', async () => {
-    cw.on(GetMetricStatisticsCommand).resolves({});
-    cw.on(PutMetricDataCommand).resolves({});
-    vi.spyOn(repo, 'getRun').mockResolvedValue(undefined);
-    expect(await watchdog(Date.parse('2027-01-31T07:05:00Z'))).toBe(false);
-    expect(alert.operationalAlert).toHaveBeenCalledWith('notify', 'runMissing', expect.anything());
+  describe('runMissing の送信記録', () => {
+    const now = Date.parse('2027-01-31T07:05:00Z');
+    const daily = { kind: 'dailyReminder', targetDate: '2027-01-31' };
+    const missingAlerts = () =>
+      vi.mocked(alert.operationalAlert).mock.calls.filter(([, reason]) => reason === 'runMissing');
+
+    beforeEach(() => {
+      cw.on(GetMetricStatisticsCommand).resolves({});
+      cw.on(PutMetricDataCommand).resolves({});
+      vi.spyOn(repo, 'getRun').mockResolvedValue(undefined);
+
+      const records = new Map<string, { attempt?: string; leaseUntil?: number }>();
+      const conflict = Object.assign(new Error('condition failed'), {
+        name: 'ConditionalCheckFailedException',
+      });
+      doc.on(PutCommand).callsFake(({ Item, ConditionExpression, ExpressionAttributeValues }) => {
+        expect(ConditionExpression).toBe('attribute_not_exists(pk) OR leaseUntil <= :now');
+        const record = records.get(Item.pk);
+        if (record && (record.leaseUntil ?? Infinity) > ExpressionAttributeValues[':now'])
+          throw conflict;
+        records.set(Item.pk, { attempt: Item.attempt, leaseUntil: Item.leaseUntil });
+        return {};
+      });
+      doc.on(UpdateCommand).callsFake((input) => {
+        expect(input.ConditionExpression).toBe('attempt = :attempt');
+        expect(input.UpdateExpression).toBe('REMOVE leaseUntil, attempt');
+        expect(records.get(input.Key.pk)?.attempt).toBe(
+          input.ExpressionAttributeValues[':attempt'],
+        );
+        records.set(input.Key.pk, {});
+        return {};
+      });
+      doc.on(DeleteCommand).callsFake((input) => {
+        expect(input.ConditionExpression).toBe('attempt = :attempt');
+        expect(records.get(input.Key.pk)?.attempt).toBe(
+          input.ExpressionAttributeValues[':attempt'],
+        );
+        records.delete(input.Key.pk);
+        return {};
+      });
+    });
+
+    it('未完了が続いても対象日ごとに初回だけ送信し、毎回ヘルスを更新する', async () => {
+      vi.mocked(repo.getRun).mockResolvedValue({
+        expected: 2,
+        completed: 1,
+        enumerationDone: true,
+        ttl: 0,
+      });
+      expect(await watchdog(now)).toBe(false);
+      expect(await watchdog(now + 60_000)).toBe(false);
+      expect(missingAlerts()).toEqual([['notify', 'runMissing', daily]]);
+      expect(repo.getRun).toHaveBeenCalledTimes(2);
+      expect(cw.commandCalls(GetMetricStatisticsCommand)).toHaveLength(2);
+      expect(
+        cw.commandCalls(PutMetricDataCommand).map(({ args }) => args[0].input.MetricData?.[0]),
+      ).toEqual(
+        [now, now + 60_000].map((instant) => ({
+          MetricName: 'NotifyHealth',
+          Value: 0,
+          Unit: 'Count',
+          Timestamp: new Date(instant),
+        })),
+      );
+
+      expect(await watchdog(now + 86_400_000)).toBe(false);
+      expect(missingAlerts().at(-1)).toEqual([
+        'notify',
+        'runMissing',
+        { ...daily, targetDate: '2027-02-01' },
+      ]);
+      expect(missingAlerts()).toHaveLength(2);
+    });
+
+    it('月末は日次と月次を別々に記録する', async () => {
+      await watchdog(now);
+      await watchdog(now + 5 * 3600_000);
+      expect(missingAlerts()).toEqual([
+        ['notify', 'runMissing', daily],
+        ['notify', 'runMissing', { ...daily, kind: 'monthlySummary' }],
+      ]);
+    });
+
+    it('並行実行でも送信権を取った実行だけが送信する', async () => {
+      expect(await Promise.all([watchdog(now), watchdog(now)])).toEqual([false, false]);
+      expect(missingAlerts()).toHaveLength(1);
+      expect(doc.commandCalls(UpdateCommand)).toHaveLength(1);
+    });
+
+    it('失敗時に送信権を解放できなければリース切れ後に再試行する', async () => {
+      const clock = vi.spyOn(Date, 'now').mockReturnValue(now);
+      vi.mocked(alert.operationalAlert).mockRejectedValueOnce(new Error('SNS unavailable'));
+      doc.on(DeleteCommand).rejectsOnce(new Error('DynamoDB unavailable'));
+
+      await expect(watchdog(now)).rejects.toThrow('WATCHDOG_FAILED');
+      clock.mockReturnValue(now + 59_999);
+      expect(await watchdog(now + 59_999)).toBe(false);
+      expect(missingAlerts()).toHaveLength(1);
+
+      clock.mockReturnValue(now + 60_000);
+      expect(await watchdog(now + 60_000)).toBe(false);
+      expect(missingAlerts()).toHaveLength(2);
+    });
+
+    it('SNS送信に失敗してもヘルスを更新し、次回のチェックで再試行する', async () => {
+      vi.mocked(alert.operationalAlert).mockRejectedValueOnce(new Error('SNS unavailable'));
+      await expect(watchdog(now)).rejects.toThrow('WATCHDOG_FAILED');
+      expect(cw.commandCalls(PutMetricDataCommand)[0]?.args[0].input.MetricData?.[0]?.Value).toBe(
+        0,
+      );
+      expect(doc.commandCalls(DeleteCommand)).toHaveLength(1);
+      expect(doc.commandCalls(UpdateCommand)).toHaveLength(0);
+
+      expect(await watchdog(now + 60_000)).toBe(false);
+      expect(await watchdog(now + 120_000)).toBe(false);
+      expect(missingAlerts()).toEqual([
+        ['notify', 'runMissing', daily],
+        ['notify', 'runMissing', daily],
+      ]);
+    });
   });
   it('0家族の列挙完了も正常', async () => {
     cw.on(GetMetricStatisticsCommand).resolves({});
