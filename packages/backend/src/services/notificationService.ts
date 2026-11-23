@@ -23,15 +23,21 @@ export interface DispatchOptions {
 export type DispatchResult =
   | { outcome: 'sent' | 'skipped' | 'failed' | 'expired' | 'duplicate' }
   | { outcome: 'retry'; at: number };
+export type TriggerStage = 'window' | 'beginRun' | 'enumerateFamilies' | 'finishRun';
+
 /** 列挙の再実行で未完了の家族を再投入する。RUNの対象数は家族ごとの印で重複加算しない。 */
 export async function dispatchTrigger(
   trigger: NotificationTrigger,
   options: DispatchOptions,
+  onStage?: (stage: TriggerStage) => void,
 ): Promise<void> {
+  onStage?.('window');
   const now = options.now ?? Date.now;
   const window = notificationWindow(trigger, new Date(now()));
   if (window.status !== 'active') throw new Error('INACTIVE_NOTIFICATION');
+  onStage?.('beginRun');
   await store.beginRun(trigger, window.scheduledAt);
+  onStage?.('enumerateFamilies');
   for await (const page of family.listNotificationFamilies())
     await mapWithConcurrency(page, 2, async (familyId) => {
       await store.registerRunFamily(
@@ -41,6 +47,7 @@ export async function dispatchTrigger(
       );
       await enqueue({ ...trigger, familyId });
     });
+  onStage?.('finishRun');
   await store.finishRunEnumeration(trigger);
 }
 export async function dispatchFamily(
