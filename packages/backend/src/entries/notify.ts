@@ -4,6 +4,7 @@ import {
   dispatchFamily,
   dispatchTrigger,
   type DispatchOptions,
+  type TriggerStage,
 } from '../services/notificationService';
 import { parseJob, defer } from '../services/notificationQueueService';
 import { completeRunFamily } from '../repositories/notificationRepository';
@@ -15,6 +16,44 @@ import {
   backup,
 } from '../services/notificationMaintenanceService';
 import { requireEnv } from '../lib/config';
+import { logger } from '../lib/logger';
+
+const inputErrors = new Set([
+  'INVALID_BATCH',
+  'INVALID_EVENT',
+  'INVALID_NOTIFICATION',
+  'INVALID_SCHEDULE',
+  'NOT_MONTH_END',
+  'INACTIVE_NOTIFICATION',
+  'MISSING_OPERATIONAL_KEY',
+  'WATCHDOG_FAILED',
+  'CLEANUP_FAILED',
+]);
+const serviceErrors = new Set([
+  'AccessDenied',
+  'AccessDeniedException',
+  'AbortError',
+  'TimeoutError',
+  'ParameterNotFound',
+  'InvalidKeyId',
+  'ResourceNotFoundException',
+  'ValidationException',
+  'ProvisionedThroughputExceededException',
+  'ThrottlingException',
+  'TransactionCanceledException',
+  'QueueDoesNotExist',
+  'KMSAccessDeniedException',
+]);
+
+function failureCode(error: unknown): string {
+  if (!(error instanceof Error)) return 'UNKNOWN';
+  if (inputErrors.has(error.message)) return error.message;
+  if (serviceErrors.has(error.name)) return error.name;
+  if (/^環境変数 [A-Z_]+ が設定されていません$/.test(error.message))
+    return 'MISSING_ENVIRONMENT_VARIABLE';
+  return 'UNKNOWN';
+}
+
 export async function handler(event: unknown): Promise<SQSBatchResponse | void> {
   const backupOnly =
     event !== null &&
@@ -33,8 +72,14 @@ export async function handler(event: unknown): Promise<SQSBatchResponse | void> 
     }
   }
   if (process.env.NOTIFICATIONS_ENABLED !== 'true') throw new Error('NOTIFICATIONS_DISABLED');
+  let operation = 'unknown';
+  let stage: TriggerStage | 'input' | 'environment' | 'operationalKey' | 'watchdog' | 'cleanup' =
+    'input';
+  let kind: 'dailyReminder' | 'monthlySummary' | undefined;
+  let targetDate: string | undefined;
   try {
     if (event && typeof event === 'object' && 'Records' in event) {
+      operation = 'sqs';
       const records = (event as SQSEvent).Records;
       if (!Array.isArray(records) || records.length !== 1) throw new Error('INVALID_BATCH');
       const failures: { itemIdentifier: string }[] = [];
@@ -65,13 +110,17 @@ export async function handler(event: unknown): Promise<SQSBatchResponse | void> 
     if (!event || typeof event !== 'object') throw new Error('INVALID_EVENT');
     const input = event as Record<string, unknown>;
     if (input.operation === 'watchdog') {
+      operation = stage = 'watchdog';
       await watchdog(Date.now());
       return;
     }
     if (input.operation === 'cleanup') {
+      operation = stage = 'cleanup';
       await cleanup(Date.now());
       return;
     }
+    if (input.kind === 'dailyReminder' || input.kind === 'monthlySummary') kind = input.kind;
+    operation = input.operation === 'scheduled' ? 'scheduled' : 'direct';
     let trigger;
     if (input.operation === 'scheduled') {
       if (
@@ -83,11 +132,23 @@ export async function handler(event: unknown): Promise<SQSBatchResponse | void> 
       trigger = fromScheduledTime(input.kind, input.scheduledTime);
       if (!trigger) return;
     } else trigger = parseTrigger(input);
-    await dispatchTrigger(trigger, {
-      env: requireEnv('ENV'),
-      operationalKey: await operationalKey(),
+    targetDate = trigger.targetDate;
+    stage = 'environment';
+    const env = requireEnv('ENV');
+    stage = 'operationalKey';
+    const key = await operationalKey();
+    await dispatchTrigger(trigger, { env, operationalKey: key }, (dispatchStage) => {
+      stage = dispatchStage;
     });
-  } catch {
+  } catch (error) {
+    logger.error({
+      event: 'NOTIFY_ENTRY_DIAGNOSTIC',
+      operation,
+      stage,
+      kind,
+      targetDate,
+      errorCode: failureCode(error),
+    });
     await operationalAlert('notify', 'invalid');
     throw new Error('NOTIFY_ENTRY_FAILED');
   }

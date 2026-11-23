@@ -1,4 +1,5 @@
 import { beforeEach, afterEach, describe, it, expect, vi } from 'vitest';
+import { logger } from '../../src/lib/logger';
 import { handler } from '../../src/entries/notify';
 import * as service from '../../src/services/notificationService';
 import * as queue from '../../src/services/notificationQueueService';
@@ -82,6 +83,48 @@ describe('通知の入口とキュー応答', () => {
     await handler({ operation });
     expect(spy).toHaveBeenCalled();
   });
+  it('日次通知の予定時刻が不正な場合は入力の検証段階を記録する', async () => {
+    const log = vi.spyOn(logger, 'error').mockImplementation(() => {});
+    await expect(
+      handler({
+        operation: 'scheduled',
+        kind: 'dailyReminder',
+        scheduledTime: '2026-11-23T05:30:00Z',
+      }),
+    ).rejects.toThrow('NOTIFY_ENTRY_FAILED');
+    expect(log).toHaveBeenCalledWith(
+      expect.objectContaining({
+        event: 'NOTIFY_ENTRY_DIAGNOSTIC',
+        operation: 'scheduled',
+        kind: 'dailyReminder',
+        stage: 'input',
+        errorCode: 'INVALID_SCHEDULE',
+      }),
+    );
+  });
+
+  it('SSMの例外メッセージを含めず取得失敗を記録する', async () => {
+    const log = vi.spyOn(logger, 'error').mockImplementation(() => {});
+    const error = new Error(FAKE_U10_OPERATIONAL_SECRET);
+    error.name = 'ParameterNotFound';
+    vi.mocked(ops.operationalKey).mockRejectedValue(error);
+    await expect(
+      handler({
+        operation: 'scheduled',
+        kind: 'dailyReminder',
+        scheduledTime: '2026-11-23T07:00:00Z',
+      }),
+    ).rejects.toThrow('NOTIFY_ENTRY_FAILED');
+    expect(log).toHaveBeenCalledExactlyOnceWith({
+      event: 'NOTIFY_ENTRY_DIAGNOSTIC',
+      operation: 'scheduled',
+      kind: 'dailyReminder',
+      targetDate: '2026-11-23',
+      stage: 'operationalKey',
+      errorCode: 'ParameterNotFound',
+    });
+  });
+
   it('不正な種類を拒否', async () => {
     await expect(handler({ kind: 'push', targetDate: '2027-01-31' })).rejects.toThrow();
   });
