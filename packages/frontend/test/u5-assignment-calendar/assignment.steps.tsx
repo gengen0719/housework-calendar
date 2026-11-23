@@ -323,7 +323,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
         const [put] = putCalls();
         expect(put?.body).toEqual({ rules: [rule(DISHES_ID, TARO.userId, [MONDAY, THURSDAY])] });
         expect(put?.headers.get('Authorization')).toBe('Bearer session-token-1');
-        expect(screen.getByText('皿洗い=太郎(未)')).toBeInTheDocument();
+        expect(screen.getByTestId('calendar-grid')).toHaveTextContent('皿洗い=太郎(未)');
         fireEvent.click(screen.getByTestId('family-menu-button'));
         expect(screen.getByTestId('edit-assignment-button')).toBeInTheDocument();
       },

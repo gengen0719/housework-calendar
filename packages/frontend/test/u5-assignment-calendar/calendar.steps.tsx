@@ -287,7 +287,7 @@ describeFeature(feature, ({ BeforeEachScenario, AfterEachScenario, Scenario }) =
       Then('画面は 2026年11月のままで、12 月の要求は取り消されている', async () => {
         expect(screen.getByTestId('calendar-month')).toHaveTextContent('2026年11月');
         expect(await listShown()).toHaveLength(30);
-        expect(screen.queryByText('皿洗い=太郎(未)')).toBeNull();
+        expect(screen.getByTestId('calendar-grid')).not.toHaveTextContent('皿洗い=太郎(未)');
         const december = callsTo('GET', '/v1/months/2026-12/calendar');
         expect(december).toHaveLength(1);
         expect(december[0]?.signal?.aborted).toBe(true);
