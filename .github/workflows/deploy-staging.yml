@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-staging
+  group: ${{ github.ref == 'refs/heads/main' && 'deploy-staging' || 'deploy-staging-skipped' }}
   cancel-in-progress: false
 
 permissions:
