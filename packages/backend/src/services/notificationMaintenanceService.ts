@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import {
   CloudWatchClient,
   GetMetricStatisticsCommand,
@@ -11,9 +12,9 @@ import {
   ListBackupsCommand,
   type BackupSummary,
 } from '@aws-sdk/client-dynamodb';
-import { DeleteCommand, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { DeleteCommand, GetCommand, PutCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { GetParameterCommand, SSMClient } from '@aws-sdk/client-ssm';
-import { jstDateOf } from '@housework/shared';
+import { jstDateOf, type NotificationTrigger } from '@housework/shared';
 import { docClient } from '../lib/dynamoClient';
 import { requireEnv } from '../lib/config';
 import {
@@ -63,6 +64,51 @@ export async function queueAge(now: number): Promise<number> {
   );
   return Math.max(0, ...(r.Datapoints ?? []).map((p) => p.Maximum ?? 0));
 }
+async function alertRunMissing(trigger: NotificationTrigger): Promise<void> {
+  const Key = { pk: `OPS#runMissing#${trigger.kind}#${trigger.targetDate}`, sk: 'META' };
+  const TableName = dispatchTable();
+  const attempt = randomUUID();
+  const now = Date.now();
+  try {
+    await docClient.send(
+      new PutCommand({
+        TableName,
+        Item: {
+          ...Key,
+          attempt,
+          // Lambda の最大実行時間（30秒）より長く確保する。
+          leaseUntil: now + 60_000,
+          ttl: Math.floor(now / 1000) + 35 * 86400,
+        },
+        ConditionExpression: 'attribute_not_exists(pk) OR leaseUntil <= :now',
+        ExpressionAttributeValues: { ':now': now },
+      }),
+      options(),
+    );
+  } catch (error) {
+    if (conditionalFailure(error)) return;
+    throw error;
+  }
+
+  const owned = {
+    TableName,
+    Key,
+    ConditionExpression: 'attempt = :attempt',
+    ExpressionAttributeValues: { ':attempt': attempt },
+  };
+  try {
+    await operationalAlert('notify', 'runMissing', trigger);
+  } catch (error) {
+    await docClient.send(new DeleteCommand(owned), options());
+    throw error;
+  }
+  // リースを消すと、TTLで削除されるまで再取得できない。
+  await docClient.send(
+    new UpdateCommand({ ...owned, UpdateExpression: 'REMOVE leaseUntil, attempt' }),
+    options(),
+  );
+}
+
 export async function watchdog(now: number): Promise<boolean> {
   let healthy = true;
   try {
@@ -70,6 +116,7 @@ export async function watchdog(now: number): Promise<boolean> {
       healthy = false;
       await operationalAlert('notify', 'queueAge');
     }
+    const missing: NotificationTrigger[] = [];
     const date = jstDateOf(new Date(now));
     for (const kind of ['dailyReminder', 'monthlySummary'] as const) {
       const scheduledAt = Date.parse(
@@ -80,8 +127,16 @@ export async function watchdog(now: number): Promise<boolean> {
         const run = await getRun(trigger);
         if (!run || !run.enumerationDone || run.completed < run.expected) {
           healthy = false;
-          await operationalAlert('notify', 'runMissing', trigger);
+          missing.push(trigger);
         }
+      }
+    }
+    let alertFailed = false;
+    for (const trigger of missing) {
+      try {
+        await alertRunMissing(trigger);
+      } catch {
+        alertFailed = true;
       }
     }
     await cw.send(
@@ -98,6 +153,7 @@ export async function watchdog(now: number): Promise<boolean> {
       }),
       options(),
     );
+    if (alertFailed) throw new Error('RUN_MISSING_ALERT_FAILED');
     return healthy;
   } catch {
     await operationalAlert('notify', 'internal');
