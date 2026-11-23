@@ -277,7 +277,7 @@ GitHub 側でマージを強制的に止めるには、`main` の保護ルール
 変更作業では GitHub に PR を作成し、最新コミットの必須 CI がすべて成功し、レビュー指摘がすべて解消されるまで修正と確認を繰り返します。コミットから完了報告までの手順は [AGENTS.md の変更作業の完了条件](AGENTS.md#変更作業の完了条件) を参照してください。
 
 - `ci.yml`: プルリクエストと `main` への push。`npm run check:ci` を実行します。AWS の権限は付けません。
-- `deploy-staging.yml`: `main` への push のあと、同じ検査が通ったらステージングに自動で反映し、`scripts/smoke-check.sh` で確かめます。
+- `deploy-staging.yml`: `main` への push で自動実行します。手動で実行する場合は、GitHub の Actions で `Deploy staging` を開き、`Run workflow` から `main` を選びます。どちらも同じ検査が通ったらステージングに反映し、`scripts/smoke-check.sh` で確かめます。
 - `deploy-production.yml`: 作り手が手動で実行します（`ref` に反映するコミットを入れる）。`main` にあるコミットだけが対象で、環境 `production` の承認を待ちます。
 - 前の版に戻すとき: 問題のコミットを `git revert` して `main` に取り込み、ステージングで確かめてから本番を手動で実行します。DynamoDB のデータは戻しません（項目やテーブルを足すだけにして、消したり名前を変えたりしません）。
 

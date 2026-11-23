@@ -1,12 +1,13 @@
 name: Deploy staging
 
-# main への push のたびに、検査が通ったあとステージングへ自動で反映する。
+# main への push または手動実行で、検査が通ったあとステージングへ反映する。
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
-  group: deploy-staging
+  group: ${{ github.ref == 'refs/heads/main' && 'deploy-staging' || 'deploy-staging-skipped' }}
   cancel-in-progress: false
 
 permissions:
@@ -14,6 +15,7 @@ permissions:
 
 jobs:
   ci:
+    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/ci.yml
     permissions:
       contents: read
