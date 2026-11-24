@@ -58,6 +58,63 @@ describe('U1 CDK stacks', () => {
     ]);
   });
 
+  it('Codex Cloud の OIDC ロールは staging の接続に固定する', () => {
+    const staging = t('Housework-staging-App');
+    const stagingTemplate = staging.toJSON();
+    staging.hasResourceProperties('AWS::IAM::OIDCProvider', {
+      Url: 'https://auth.openai.com',
+      ClientIdList: ['sts.amazonaws.com'],
+    });
+    expect(stagingTemplate.Conditions.CodexStagingTargetAccount).toEqual({
+      'Fn::Equals': [{ Ref: 'AWS::AccountId' }, '160885291636'],
+    });
+    expect(stagingTemplate.Resources.CodexOidcProvider.Condition).toBe('CodexStagingTargetAccount');
+    const role = stagingTemplate.Resources.CodexStagingReadOnlyRole;
+    expect(role.Condition).toBe('CodexStagingTargetAccount');
+    expect(role.Properties.AssumeRolePolicyDocument).toEqual({
+      Version: '2012-10-17',
+      Statement: [
+        {
+          Effect: 'Allow',
+          Principal: { Federated: { 'Fn::GetAtt': ['CodexOidcProvider', 'Arn'] } },
+          Action: 'sts:AssumeRoleWithWebIdentity',
+          Condition: {
+            StringEquals: {
+              'auth.openai.com:aud': 'sts.amazonaws.com',
+              'auth.openai.com:sub': 'oai:v1:oic:oic_6b05140f427c81a3af5fe5fd6c8c2a1d',
+            },
+          },
+        },
+      ],
+    });
+
+    const [policy] = role.Properties.Policies;
+    for (const statement of policy.PolicyDocument.Statement) {
+      expect(statement.Resource).not.toContain('*');
+      expect(statement.Action).not.toContain('sts:AssumeRole');
+      expect(JSON.stringify(statement.Resource)).not.toContain('production');
+    }
+    const actions = policy.PolicyDocument.Statement.flatMap(
+      (statement: { Action: string[] }) => statement.Action,
+    );
+    for (const action of [
+      'cloudfront:GetDistribution',
+      'cloudfront:GetDistributionConfig',
+      'cloudformation:DescribeStackEvents',
+      'cloudformation:GetTemplate',
+    ]) {
+      expect(actions).not.toContain(action);
+    }
+    expect(stagingTemplate.Outputs.CodexStagingReadOnlyRoleArn).toMatchObject({
+      Condition: 'CodexStagingTargetAccount',
+      Value: { 'Fn::GetAtt': ['CodexStagingReadOnlyRole', 'Arn'] },
+    });
+    t('Housework-production-App').resourceCountIs('AWS::IAM::OIDCProvider', 0);
+    expect(
+      t('Housework-production-App').toJSON().Resources.CodexStagingReadOnlyRole,
+    ).toBeUndefined();
+  });
+
   it('Lambda は Node.js 22・arm64・256MB・30 秒で、関数 URL は認証 NONE', () => {
     const app = t('Housework-staging-App');
     app.hasResourceProperties('AWS::Lambda::Function', {
