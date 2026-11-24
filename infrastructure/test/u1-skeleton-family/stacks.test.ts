@@ -93,6 +93,17 @@ describe('U1 CDK stacks', () => {
       expect(statement.Action).not.toContain('sts:AssumeRole');
       expect(JSON.stringify(statement.Resource)).not.toContain('production');
     }
+    const actions = policy.PolicyDocument.Statement.flatMap(
+      (statement: { Action: string[] }) => statement.Action,
+    );
+    for (const action of [
+      'cloudfront:GetDistribution',
+      'cloudfront:GetDistributionConfig',
+      'cloudformation:DescribeStackEvents',
+      'cloudformation:GetTemplate',
+    ]) {
+      expect(actions).not.toContain(action);
+    }
     expect(stagingTemplate.Outputs.CodexStagingReadOnlyRoleArn.Condition).toBe(
       'CodexStagingReadOnlyEnabled',
     );

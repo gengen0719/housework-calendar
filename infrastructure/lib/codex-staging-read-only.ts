@@ -55,7 +55,6 @@ export function addCodexStagingReadOnly(
     {
       actions: [
         'cloudformation:DescribeStacks',
-        'cloudformation:DescribeStackEvents',
         'cloudformation:DescribeStackResource',
         'cloudformation:DescribeStackResources',
         'cloudformation:ListStackResources',
@@ -124,11 +123,8 @@ export function addCodexStagingReadOnly(
       resources: [bucket.arnForObjects('*')],
     },
     {
-      actions: [
-        'cloudfront:GetDistribution',
-        'cloudfront:GetDistributionConfig',
-        'cloudfront:ListTagsForResource',
-      ],
+      // Distribution の設定取得はオリジン認証ヘッダーの値も返す。
+      actions: ['cloudfront:ListTagsForResource'],
       resources: [distribution.distributionArn],
     },
     {
