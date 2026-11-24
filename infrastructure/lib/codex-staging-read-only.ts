@@ -1,4 +1,4 @@
-import { ArnFormat, CfnOutput, Stack } from 'aws-cdk-lib';
+import { ArnFormat, Aws, CfnCondition, CfnOutput, Fn, Stack } from 'aws-cdk-lib';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import type * as s3 from 'aws-cdk-lib/aws-s3';
@@ -14,10 +14,14 @@ export function addCodexStagingReadOnly(
   const issuerHost = 'auth.openai.com';
   const audience = 'sts.amazonaws.com';
   const subject = 'oai:v1:oic:oic_6b05140f427c81a3af5fe5fd6c8c2a1d';
+  const targetAccount = new CfnCondition(stack, 'CodexStagingTargetAccount', {
+    expression: Fn.conditionEquals(Aws.ACCOUNT_ID, '160885291636'),
+  });
   const provider = new iam.CfnOIDCProvider(stack, 'CodexOidcProvider', {
     url: `https://${issuerHost}`,
     clientIdList: [audience],
   });
+  provider.cfnOptions.condition = targetAccount;
 
   const regionalArn = (
     service: string,
@@ -194,7 +198,9 @@ export function addCodexStagingReadOnly(
       },
     ],
   });
+  role.cfnOptions.condition = targetAccount;
   new CfnOutput(stack, 'CodexStagingReadOnlyRoleArn', {
     value: role.attrArn,
+    condition: targetAccount,
   });
 }

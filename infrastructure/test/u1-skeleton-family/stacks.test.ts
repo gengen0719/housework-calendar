@@ -65,7 +65,12 @@ describe('U1 CDK stacks', () => {
       Url: 'https://auth.openai.com',
       ClientIdList: ['sts.amazonaws.com'],
     });
+    expect(stagingTemplate.Conditions.CodexStagingTargetAccount).toEqual({
+      'Fn::Equals': [{ Ref: 'AWS::AccountId' }, '160885291636'],
+    });
+    expect(stagingTemplate.Resources.CodexOidcProvider.Condition).toBe('CodexStagingTargetAccount');
     const role = stagingTemplate.Resources.CodexStagingReadOnlyRole;
+    expect(role.Condition).toBe('CodexStagingTargetAccount');
     expect(role.Properties.AssumeRolePolicyDocument).toEqual({
       Version: '2012-10-17',
       Statement: [
@@ -100,8 +105,9 @@ describe('U1 CDK stacks', () => {
     ]) {
       expect(actions).not.toContain(action);
     }
-    expect(stagingTemplate.Outputs.CodexStagingReadOnlyRoleArn.Value).toEqual({
-      'Fn::GetAtt': ['CodexStagingReadOnlyRole', 'Arn'],
+    expect(stagingTemplate.Outputs.CodexStagingReadOnlyRoleArn).toMatchObject({
+      Condition: 'CodexStagingTargetAccount',
+      Value: { 'Fn::GetAtt': ['CodexStagingReadOnlyRole', 'Arn'] },
     });
     t('Housework-production-App').resourceCountIs('AWS::IAM::OIDCProvider', 0);
     expect(

@@ -190,7 +190,7 @@ LIFF ID と LIFF の URL は変わらないので、パラメータストアと 
 
 Codex Cloud の対象環境で **Advanced → OIDC** を開き、AWS 接続 `oic_6b05140f427c81a3af5fe5fd6c8c2a1d` を選びます。ロール ARN は `arn:aws:iam::160885291636:role/housework-calendar-codex-staging-read-only` です。[Codex Cloud の OIDC 設定](https://learn.chatgpt.com/docs/environments/cloud-environments#access-cloud-resources-with-oidc)
 
-Issuer、Audience、Subject は CDK に定義しています。通常の staging デプロイで IAM OIDC プロバイダーと読み取り専用ロールが作成され、`CodexStagingReadOnlyRoleArn` が出力されます。同じ Issuer の IAM OIDC プロバイダーがすでにある場合は、先にプロバイダーの管理方法を確認してください。
+Issuer、Audience、Subject は CDK に定義しています。AWS アカウント `160885291636` の staging デプロイで IAM OIDC プロバイダーと読み取り専用ロールが作成され、`CodexStagingReadOnlyRoleArn` が出力されます。同じ Issuer の IAM OIDC プロバイダーがすでにある場合は、先にプロバイダーの管理方法を確認してください。
 
 ロールには staging のスタックと関連リソースの構成、CloudWatch Logs のログ、配信用 S3 オブジェクトの参照権限があります。DynamoDB はテーブルの設定を参照できます。テーブルのレコード、SSM パラメータ値、アカウント全体の一覧やメトリクスの取得は権限の対象外です。CloudFront ディストリビューションの ID とドメインは CloudFormation で、タグは CloudFront で参照できます。オリジン検証ヘッダーを含むディストリビューション設定と、リソースの設定値を含む CloudFormation のイベントは権限の対象外です。
 
