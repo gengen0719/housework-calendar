@@ -86,7 +86,7 @@ describe('調整表と通知に依存しないバックアップ', () => {
     expect(variables('line')).not.toHaveProperty('ADJUSTMENTS_TABLE');
   });
   it('既存Lambda/予定/有料警報は増やさない', () => {
-    app().resourceCountIs('AWS::Lambda::Function', 5);
+    app().resourceCountIs('AWS::Lambda::Function', 6);
     app().resourceCountIs('AWS::Scheduler::Schedule', 5);
     app().resourceCountIs('AWS::CloudWatch::Alarm', 5);
   });

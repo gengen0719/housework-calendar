@@ -4,7 +4,7 @@ U11では外向き通知とバックアップを分離しました。`STAGING_BA
 
 ## 有効化
 
-初回はすべて無効で配備します。通知用の公開URLはありません。SSMの環境別 `line/channel-access-token` と `notifications/operational-hash-key` を設定し、環境別SNSのメール購読確認を終えます。運用鍵はランダムに作ってSSMへ保存し、コンテキストやログに渡しません。値の記載例は `<作り物の値>` のみです。
+初回はすべて無効で配備します。通知用の公開URLはありません。SSMの環境別 `line/channel-access-token` を設定し、環境別SNSのメール購読確認を終えます。CDKは環境ごとに `notifications/operational-hash-key` をランダムに生成し、初回配備時にSSMへ `SecureString` として保存します。再配備やスタック削除時も鍵は保持されます。
 
 GitHub変数の `STAGING_` / `PRODUCTION_` に続けて `NOTIFICATIONS_ENABLED`、`NOTIFICATION_EMAIL`、`NOTIFICATION_CHECKS_PASSED`、`NOTIFICATION_BUDGET_VERIFIED` を設定します。合算額は共通 `NOTIFICATION_TOTAL_ESTIMATED_JPY` です。有効化するにはメール、購読・実機試験の確認、費用確認、0〜100円の合算額がそろう必要があります。これらは秘密ではなく、実際の値をコードへ入れません。API/LINEの既存OIDCとproductionの手動承認を通して反映します。
 

@@ -114,7 +114,7 @@ describe('U9 はインフラを増やさない', () => {
   });
   it('資源数を保つ', () => {
     templates['Housework-staging-Data']!.resourceCountIs('AWS::DynamoDB::Table', 11);
-    t().resourceCountIs('AWS::Lambda::Function', 5);
+    t().resourceCountIs('AWS::Lambda::Function', 6);
     t().resourceCountIs('AWS::Logs::LogGroup', 3);
     t().resourceCountIs('AWS::Logs::MetricFilter', 1);
     t().resourceCountIs('AWS::CloudWatch::Alarm', 5);

@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import { App } from 'aws-cdk-lib';
-import { Template } from 'aws-cdk-lib/assertions';
+import { Match, Template } from 'aws-cdk-lib/assertions';
 import { beforeAll, describe, it, expect } from 'vitest';
 import { buildApp } from '../../lib/app';
 import { FAKE_ORIGIN_VERIFY_SECRET } from '../fixtures/fakeSecrets';
@@ -29,7 +29,25 @@ describe('通知の配備構成', () => {
     for (const env of ['staging', 'production'])
       templates[`Housework-${env}-Data`]!.resourceCountIs('AWS::DynamoDB::Table', 11);
   });
-  it('新しいLambdaは1つだけ', () => app().resourceCountIs('AWS::Lambda::Function', 5));
+  it('通知処理と運用鍵の作成を含めてLambdaは6つ', () =>
+    app().resourceCountIs('AWS::Lambda::Function', 6));
+  it.each(['staging', 'production'])('%sの通知を環境固有の運用鍵の作成後に配備する', (env) => {
+    const template = templates[`Housework-${env}-App`]!;
+    const keyResources = template.findResources('Custom::NotificationOperationalKey');
+    const [keyId] = Object.keys(keyResources);
+    expect(Object.keys(keyResources)).toHaveLength(1);
+    template.hasResource('AWS::Lambda::Function', {
+      DependsOn: Match.arrayWith([keyId]),
+      Properties: { Environment: { Variables: Match.objectLike({ ENTRY: 'notify' }) } },
+    });
+    template.hasResourceProperties('AWS::Lambda::Function', {
+      Environment: {
+        Variables: {
+          OPERATIONAL_KEY_PARAMETER: `/housework-calendar/${env}/notifications/operational-hash-key`,
+        },
+      },
+    });
+  });
   it('公開URLは元の2つだけ', () => app().resourceCountIs('AWS::Lambda::Url', 2));
   it('キューはWorkとDLQの2つ', () => app().resourceCountIs('AWS::SQS::Queue', 2));
   it('予定は5つ', () => app().resourceCountIs('AWS::Scheduler::Schedule', 5));
