@@ -186,6 +186,24 @@ npx cdk deploy Housework-staging-Data Housework-staging-App \
 
 LIFF ID と LIFF の URL は変わらないので、パラメータストアと GitHub の Variables はそのままで構いません。
 
+### Codex Cloud から staging を参照する
+
+Codex Cloud の対象環境で **Advanced → OIDC → Add** を開き、AWS 接続を作成します。ロール ARN の入力が必要な場合は `arn:aws:iam::<AWS アカウント ID>:role/housework-calendar-codex-staging-read-only` を指定します。接続画面に表示された Issuer、Audience、Subject を使います。[Codex Cloud の OIDC 設定](https://learn.chatgpt.com/docs/environments/cloud-environments#access-cloud-resources-with-oidc)
+
+初回は、通常の staging の CDK デプロイに次の 3 つの引数を追加します。Issuer は先頭の `https://` と末尾の `/` を除いて渡します。通常どおり、staging のフロントエンドをビルドし、既存の反映で使っている CDK コンテキストを渡してください。
+
+```bash
+--parameters "Housework-staging-App:CodexOidcIssuer=$CODEX_OIDC_ISSUER" \
+--parameters "Housework-staging-App:CodexOidcAudience=$CODEX_OIDC_AUDIENCE" \
+--parameters "Housework-staging-App:CodexOidcSubject=$CODEX_OIDC_SUBJECT"
+```
+
+3 つの値がそろうと、IAM OIDC プロバイダーと読み取り専用ロールが作成され、`CodexStagingReadOnlyRoleArn` が出力されます。以後の CDK デプロイでは前回のパラメータ値が使われます。同じ Issuer の IAM OIDC プロバイダーがすでにある場合は、先にプロバイダーの管理方法を確認してください。
+
+ロールには staging のスタックと関連リソースの構成、CloudWatch Logs のログ、配信用 S3 オブジェクトの参照権限があります。DynamoDB はテーブルの設定を参照できます。テーブルのレコード、SSM パラメータ値、アカウント全体の一覧やメトリクスの取得は権限の対象外です。CloudFront の構成には staging のオリジン検証ヘッダーの値が含まれます。
+
+接続を環境に付けて公開し、新しいタスクで `aws sts get-caller-identity` と `aws cloudformation list-stack-resources --region ap-northeast-1 --stack-name Housework-staging-App` を実行します。必要に応じて接続のエイリアスを `AWS_PROFILE` に指定します。production のスタックに対する同じ操作が拒否されることも確認します。
+
 ## 画面のビルド
 
 `VITE_LIFF_ID`（必須）と `VITE_LINE_OA_ID`（任意）は、公開してよい値です。CI では GitHub の変数から入れます。

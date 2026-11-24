@@ -10,6 +10,7 @@ import * as logs from 'aws-cdk-lib/aws-logs';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
 import type { Construct } from 'constructs';
+import { addCodexStagingReadOnly } from './codex-staging-read-only.js';
 import { ssmPrefix, type EnvName } from './env.js';
 import { NotificationConstruct } from './notification-construct.js';
 
@@ -393,6 +394,10 @@ export class AppStack extends Stack {
       distribution: this.distribution,
       distributionPaths: ['/*'],
     });
+
+    if (envName === 'staging') {
+      addCodexStagingReadOnly(this, bucket, this.distribution, securityHeaders, spaRewrite);
+    }
 
     new CfnOutput(this, 'DistributionDomain', { value: this.distribution.distributionDomainName });
     new CfnOutput(this, 'ApiFunctionUrl', { value: apiUrl.url });

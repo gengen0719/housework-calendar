@@ -58,6 +58,50 @@ describe('U1 CDK stacks', () => {
     ]);
   });
 
+  it('Codex Cloud の OIDC ロールは staging でのみ有効化できる', () => {
+    const staging = t('Housework-staging-App');
+    const stagingTemplate = staging.toJSON();
+    expect(stagingTemplate.Parameters).toMatchObject({
+      CodexOidcIssuer: { Default: '' },
+      CodexOidcAudience: { Default: '' },
+      CodexOidcSubject: { Default: '' },
+    });
+    expect(stagingTemplate.Resources.CodexOidcProvider.Condition).toBe(
+      'CodexStagingReadOnlyEnabled',
+    );
+    const role = stagingTemplate.Resources.CodexStagingReadOnlyRole;
+    expect(role.Condition).toBe('CodexStagingReadOnlyEnabled');
+    const [trust, variables] = role.Properties.AssumeRolePolicyDocument['Fn::Sub'];
+    expect(variables.ProviderArn).toEqual({ 'Fn::GetAtt': ['CodexOidcProvider', 'Arn'] });
+    expect(JSON.parse(trust).Statement).toEqual([
+      {
+        Effect: 'Allow',
+        Principal: { Federated: '${ProviderArn}' },
+        Action: 'sts:AssumeRoleWithWebIdentity',
+        Condition: {
+          StringEquals: {
+            '${CodexOidcIssuer}:aud': '${CodexOidcAudience}',
+            '${CodexOidcIssuer}:sub': '${CodexOidcSubject}',
+          },
+        },
+      },
+    ]);
+
+    const [policy] = role.Properties.Policies;
+    for (const statement of policy.PolicyDocument.Statement) {
+      expect(statement.Resource).not.toContain('*');
+      expect(statement.Action).not.toContain('sts:AssumeRole');
+      expect(JSON.stringify(statement.Resource)).not.toContain('production');
+    }
+    expect(stagingTemplate.Outputs.CodexStagingReadOnlyRoleArn.Condition).toBe(
+      'CodexStagingReadOnlyEnabled',
+    );
+    t('Housework-production-App').resourceCountIs('AWS::IAM::OIDCProvider', 0);
+    expect(
+      t('Housework-production-App').toJSON().Resources.CodexStagingReadOnlyRole,
+    ).toBeUndefined();
+  });
+
   it('Lambda は Node.js 22・arm64・256MB・30 秒で、関数 URL は認証 NONE', () => {
     const app = t('Housework-staging-App');
     app.hasResourceProperties('AWS::Lambda::Function', {
