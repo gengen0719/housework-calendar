@@ -89,13 +89,15 @@ export function addCodexStagingReadOnly(
       resources: [regionalArn('lambda', 'function', appPrefix, ArnFormat.COLON_RESOURCE_NAME)],
     },
     {
-      actions: [
-        'logs:DescribeLogStreams',
-        'logs:FilterLogEvents',
-        'logs:GetLogEvents',
-        'logs:DescribeMetricFilters',
-        'logs:ListTagsForResource',
-      ],
+      actions: ['logs:DescribeLogStreams', 'logs:FilterLogEvents', 'logs:DescribeMetricFilters'],
+      resources: [`${logGroup}:*`],
+    },
+    {
+      actions: ['logs:GetLogEvents'],
+      resources: [`${logGroup}:log-stream:*`],
+    },
+    {
+      actions: ['logs:ListTagsForResource'],
       resources: [logGroup],
     },
     {
