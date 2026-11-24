@@ -208,8 +208,8 @@ describe('U6 CDK: 数と設定が U6 の前後で変わらない（NFR1.25）', 
   it('テーブル・Lambda・ロググループ・MetricFilter の数が U5 のまま', () => {
     t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 11);
     // api・line の 2 関数に、CDK が作る補助の関数（S3 の自動削除・配備のカスタムリソース）2 つ
-    t('Housework-staging-App').resourceCountIs('AWS::Lambda::Function', 5);
-    t('Housework-staging-App').resourceCountIs('AWS::Logs::LogGroup', 3);
+    t('Housework-staging-App').resourceCountIs('AWS::Lambda::Function', 6);
+    t('Housework-staging-App').resourceCountIs('AWS::Logs::LogGroup', 4);
     t('Housework-staging-App').resourceCountIs('AWS::Logs::MetricFilter', 1);
   });
 

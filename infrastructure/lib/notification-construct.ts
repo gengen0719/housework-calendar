@@ -1,5 +1,5 @@
 import { resolve } from 'node:path';
-import { ArnFormat, Duration, RemovalPolicy, Stack } from 'aws-cdk-lib';
+import { ArnFormat, CustomResource, Duration, RemovalPolicy, Stack } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as nodejs from 'aws-cdk-lib/aws-lambda-nodejs';
@@ -157,17 +157,51 @@ export class NotificationConstruct extends Construct {
     policy(['cloudwatch:PutMetricData'], ['*'], {
       StringEquals: { 'cloudwatch:namespace': `Housework/${env}` },
     });
-    const param = (suffix: string) =>
+    const parameterArn = (name: string) =>
       stack.formatArn({
         service: 'ssm',
         resource: 'parameter',
-        resourceName: `${ssmPrefix(env).slice(1)}/${suffix}`,
+        resourceName: name.slice(1),
         arnFormat: ArnFormat.SLASH_RESOURCE_NAME,
       });
+    const operationalKeyName = `${ssmPrefix(env)}/notifications/operational-hash-key`;
+    const operationalKeyArn = parameterArn(operationalKeyName);
     policy(
       ['ssm:GetParameter', 'ssm:GetParameters'],
-      [param('line/channel-access-token'), param('notifications/operational-hash-key')],
+      [parameterArn(`${ssmPrefix(env)}/line/channel-access-token`), operationalKeyArn],
     );
+    const provisionerLogGroup = new logs.LogGroup(this, 'OperationalKeyProvisionerLogGroup', {
+      retention: logs.RetentionDays.ONE_MONTH,
+      removalPolicy: RemovalPolicy.DESTROY,
+    });
+    const provisioner = new nodejs.NodejsFunction(this, 'OperationalKeyProvisioner', {
+      entry: resolve(import.meta.dirname, 'handlers', 'provision-operational-key.ts'),
+      handler: 'handler',
+      depsLockFilePath: resolve(root, 'package-lock.json'),
+      projectRoot: root,
+      runtime: lambda.Runtime.NODEJS_22_X,
+      architecture: lambda.Architecture.ARM_64,
+      timeout: Duration.seconds(20),
+      logGroup: provisionerLogGroup,
+      environment: { OPERATIONAL_KEY_PARAMETER: operationalKeyName },
+    });
+    const provisionerPolicy = new iam.Policy(this, 'OperationalKeyProvisionerPolicy', {
+      roles: [provisioner.role!],
+      statements: [
+        new iam.PolicyStatement({
+          actions: ['ssm:PutParameter'],
+          resources: [operationalKeyArn],
+          conditions: { StringEquals: { 'ssm:Overwrite': 'false' } },
+        }),
+      ],
+    });
+    const operationalKey = new CustomResource(this, 'OperationalKey', {
+      resourceType: 'Custom::NotificationOperationalKey',
+      serviceToken: provisioner.functionArn,
+      serviceTimeout: Duration.minutes(1),
+    });
+    operationalKey.node.addDependency(provisionerPolicy);
+    this.notify.node.addDependency(operationalKey);
     policy(['kms:Decrypt'], ['*'], {
       StringEquals: { 'kms:ViaService': `ssm.${stack.region}.amazonaws.com` },
     });
