@@ -58,34 +58,30 @@ describe('U1 CDK stacks', () => {
     ]);
   });
 
-  it('Codex Cloud の OIDC ロールは staging でのみ有効化できる', () => {
+  it('Codex Cloud の OIDC ロールは staging の接続に固定する', () => {
     const staging = t('Housework-staging-App');
     const stagingTemplate = staging.toJSON();
-    expect(stagingTemplate.Parameters).toMatchObject({
-      CodexOidcIssuer: { Default: '' },
-      CodexOidcAudience: { Default: '' },
-      CodexOidcSubject: { Default: '' },
+    staging.hasResourceProperties('AWS::IAM::OIDCProvider', {
+      Url: 'https://auth.openai.com',
+      ClientIdList: ['sts.amazonaws.com'],
     });
-    expect(stagingTemplate.Resources.CodexOidcProvider.Condition).toBe(
-      'CodexStagingReadOnlyEnabled',
-    );
     const role = stagingTemplate.Resources.CodexStagingReadOnlyRole;
-    expect(role.Condition).toBe('CodexStagingReadOnlyEnabled');
-    const [trust, variables] = role.Properties.AssumeRolePolicyDocument['Fn::Sub'];
-    expect(variables.ProviderArn).toEqual({ 'Fn::GetAtt': ['CodexOidcProvider', 'Arn'] });
-    expect(JSON.parse(trust).Statement).toEqual([
-      {
-        Effect: 'Allow',
-        Principal: { Federated: '${ProviderArn}' },
-        Action: 'sts:AssumeRoleWithWebIdentity',
-        Condition: {
-          StringEquals: {
-            '${CodexOidcIssuer}:aud': '${CodexOidcAudience}',
-            '${CodexOidcIssuer}:sub': '${CodexOidcSubject}',
+    expect(role.Properties.AssumeRolePolicyDocument).toEqual({
+      Version: '2012-10-17',
+      Statement: [
+        {
+          Effect: 'Allow',
+          Principal: { Federated: { 'Fn::GetAtt': ['CodexOidcProvider', 'Arn'] } },
+          Action: 'sts:AssumeRoleWithWebIdentity',
+          Condition: {
+            StringEquals: {
+              'auth.openai.com:aud': 'sts.amazonaws.com',
+              'auth.openai.com:sub': 'oai:v1:oic:oic_6b05140f427c81a3af5fe5fd6c8c2a1d',
+            },
           },
         },
-      },
-    ]);
+      ],
+    });
 
     const [policy] = role.Properties.Policies;
     for (const statement of policy.PolicyDocument.Statement) {
@@ -104,9 +100,9 @@ describe('U1 CDK stacks', () => {
     ]) {
       expect(actions).not.toContain(action);
     }
-    expect(stagingTemplate.Outputs.CodexStagingReadOnlyRoleArn.Condition).toBe(
-      'CodexStagingReadOnlyEnabled',
-    );
+    expect(stagingTemplate.Outputs.CodexStagingReadOnlyRoleArn.Value).toEqual({
+      'Fn::GetAtt': ['CodexStagingReadOnlyRole', 'Arn'],
+    });
     t('Housework-production-App').resourceCountIs('AWS::IAM::OIDCProvider', 0);
     expect(
       t('Housework-production-App').toJSON().Resources.CodexStagingReadOnlyRole,

@@ -1,4 +1,4 @@
-import { ArnFormat, CfnCondition, CfnOutput, CfnParameter, Fn, Stack } from 'aws-cdk-lib';
+import { ArnFormat, CfnOutput, Stack } from 'aws-cdk-lib';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import type * as s3 from 'aws-cdk-lib/aws-s3';
@@ -11,34 +11,13 @@ export function addCodexStagingReadOnly(
   securityHeaders: cloudfront.IResponseHeadersPolicy,
   spaRewrite: cloudfront.IFunction,
 ): void {
-  const issuer = new CfnParameter(stack, 'CodexOidcIssuer', {
-    type: 'String',
-    default: '',
-    description: 'Codex Cloud OIDC issuer URL, without https:// or a trailing slash',
-    allowedPattern: '^(?:[A-Za-z0-9.-]+(?:/[A-Za-z0-9._~%-]+)*)?$',
-  });
-  const audience = new CfnParameter(stack, 'CodexOidcAudience', {
-    type: 'String',
-    default: '',
-    allowedPattern: '^[A-Za-z0-9._~:/@%+=,-]*$',
-  });
-  const subject = new CfnParameter(stack, 'CodexOidcSubject', {
-    type: 'String',
-    default: '',
-    allowedPattern: '^[A-Za-z0-9._~:/@%+=,-]*$',
-  });
-  const enabled = new CfnCondition(stack, 'CodexStagingReadOnlyEnabled', {
-    expression: Fn.conditionAnd(
-      Fn.conditionNot(Fn.conditionEquals(issuer.valueAsString, '')),
-      Fn.conditionNot(Fn.conditionEquals(audience.valueAsString, '')),
-      Fn.conditionNot(Fn.conditionEquals(subject.valueAsString, '')),
-    ),
-  });
+  const issuerHost = 'auth.openai.com';
+  const audience = 'sts.amazonaws.com';
+  const subject = 'oai:v1:oic:oic_6b05140f427c81a3af5fe5fd6c8c2a1d';
   const provider = new iam.CfnOIDCProvider(stack, 'CodexOidcProvider', {
-    url: `https://${issuer.valueAsString}`,
-    clientIdList: [audience.valueAsString],
+    url: `https://${issuerHost}`,
+    clientIdList: [audience],
   });
-  provider.cfnOptions.condition = enabled;
 
   const regionalArn = (
     service: string,
@@ -183,26 +162,22 @@ export function addCodexStagingReadOnly(
   const role = new iam.CfnRole(stack, 'CodexStagingReadOnlyRole', {
     roleName: 'housework-calendar-codex-staging-read-only',
     maxSessionDuration: 3600,
-    // CloudFormation substitutes the issuer in the condition keys as well as in values.
-    assumeRolePolicyDocument: Fn.sub(
-      JSON.stringify({
-        Version: '2012-10-17',
-        Statement: [
-          {
-            Effect: 'Allow',
-            Principal: { Federated: '${ProviderArn}' },
-            Action: 'sts:AssumeRoleWithWebIdentity',
-            Condition: {
-              StringEquals: {
-                '${CodexOidcIssuer}:aud': '${CodexOidcAudience}',
-                '${CodexOidcIssuer}:sub': '${CodexOidcSubject}',
-              },
+    assumeRolePolicyDocument: {
+      Version: '2012-10-17',
+      Statement: [
+        {
+          Effect: 'Allow',
+          Principal: { Federated: provider.attrArn },
+          Action: 'sts:AssumeRoleWithWebIdentity',
+          Condition: {
+            StringEquals: {
+              [`${issuerHost}:aud`]: audience,
+              [`${issuerHost}:sub`]: subject,
             },
           },
-        ],
-      }),
-      { ProviderArn: provider.attrArn },
-    ),
+        },
+      ],
+    },
     policies: [
       {
         policyName: 'StagingResourceReadOnly',
@@ -219,9 +194,7 @@ export function addCodexStagingReadOnly(
       },
     ],
   });
-  role.cfnOptions.condition = enabled;
   new CfnOutput(stack, 'CodexStagingReadOnlyRoleArn', {
     value: role.attrArn,
-    condition: enabled,
   });
 }
