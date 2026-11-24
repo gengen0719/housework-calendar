@@ -179,7 +179,7 @@ describe('U7 CDK: 数と設定が U7 の前後で変わらない（NFR1.31）', 
   it('テーブル・Lambda・ロググループ・MetricFilter の数が U6 のまま', () => {
     t('Housework-staging-Data').resourceCountIs('AWS::DynamoDB::Table', 11);
     t('Housework-staging-App').resourceCountIs('AWS::Lambda::Function', 6);
-    t('Housework-staging-App').resourceCountIs('AWS::Logs::LogGroup', 3);
+    t('Housework-staging-App').resourceCountIs('AWS::Logs::LogGroup', 4);
     t('Housework-staging-App').resourceCountIs('AWS::Logs::MetricFilter', 1);
   });
 

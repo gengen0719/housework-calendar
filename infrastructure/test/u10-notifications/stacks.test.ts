@@ -40,7 +40,12 @@ describe('通知の配備構成', () => {
       DependsOn: Match.arrayWith([keyId]),
       Properties: { Environment: { Variables: Match.objectLike({ ENTRY: 'notify' }) } },
     });
+    const provisionerLogs = Object.entries(template.findResources('AWS::Logs::LogGroup')).find(
+      ([id]) => id.startsWith('NotificationsOperationalKeyProvisionerLogGroup'),
+    );
+    expect(provisionerLogs?.[1].Properties).toMatchObject({ RetentionInDays: 30 });
     template.hasResourceProperties('AWS::Lambda::Function', {
+      LoggingConfig: { LogGroup: { Ref: provisionerLogs?.[0] } },
       Environment: {
         Variables: {
           OPERATIONAL_KEY_PARAMETER: `/housework-calendar/${env}/notifications/operational-hash-key`,
@@ -53,8 +58,8 @@ describe('通知の配備構成', () => {
   it('予定は5つ', () => app().resourceCountIs('AWS::Scheduler::Schedule', 5));
   it('SNSは環境に1つ', () => app().resourceCountIs('AWS::SNS::Topic', 1));
   it('アラームは環境に5つ', () => app().resourceCountIs('AWS::CloudWatch::Alarm', 5));
-  it('ログは3入口で30日', () => {
-    app().resourceCountIs('AWS::Logs::LogGroup', 3);
+  it('ログは運用鍵作成を含めて4グループで30日', () => {
+    app().resourceCountIs('AWS::Logs::LogGroup', 4);
     for (const row of resources('AWS::Logs::LogGroup'))
       expect(row.Properties.RetentionInDays).toBe(30);
   });

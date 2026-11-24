@@ -170,6 +170,10 @@ export class NotificationConstruct extends Construct {
       ['ssm:GetParameter', 'ssm:GetParameters'],
       [parameterArn(`${ssmPrefix(env)}/line/channel-access-token`), operationalKeyArn],
     );
+    const provisionerLogGroup = new logs.LogGroup(this, 'OperationalKeyProvisionerLogGroup', {
+      retention: logs.RetentionDays.ONE_MONTH,
+      removalPolicy: RemovalPolicy.DESTROY,
+    });
     const provisioner = new nodejs.NodejsFunction(this, 'OperationalKeyProvisioner', {
       entry: resolve(import.meta.dirname, 'handlers', 'provision-operational-key.ts'),
       handler: 'handler',
@@ -178,6 +182,7 @@ export class NotificationConstruct extends Construct {
       runtime: lambda.Runtime.NODEJS_22_X,
       architecture: lambda.Architecture.ARM_64,
       timeout: Duration.seconds(20),
+      logGroup: provisionerLogGroup,
       environment: { OPERATIONAL_KEY_PARAMETER: operationalKeyName },
     });
     const provisionerPolicy = new iam.Policy(this, 'OperationalKeyProvisionerPolicy', {
