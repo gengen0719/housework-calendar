@@ -18,7 +18,7 @@ GitHub変数の `STAGING_` / `PRODUCTION_` に続けて `NOTIFICATIONS_ENABLED`�
 
 RUNは列挙完了とexpected/completedを持ち、0家族も完了になります。家族の完了マーカーで重複を数えません。5分以上未完了、SQS最古年齢120秒以上、watchdog失敗はNotifyHealthと定型メールで追います。watchdogが止まると欠測アラームになります。DLQは自動再投入しません。不正入力と期限切れを区別して原因を直し、古い仕事を別キーで送り直さないでください。
 
-通知時刻は CDK コンテキストの `notificationDailyTime` と `notificationMonthlyTime` に JST の `HH:mm` で指定できます（例 `-c notificationDailyTime=17:30`）。既定値はそれぞれ `16:00` と `21:00` です。CDK 反映で Scheduler と watchdog の時刻を揃えます。通知の受付と送信期限は Scheduler が渡した予定時刻を起点に計算し、15分後に期限切れになります。
+通知時刻は [`infrastructure/cdk.json`](../infrastructure/cdk.json) の `context` にある `notificationDailyTime` と `notificationMonthlyTime` を JST の `HH:mm` で設定します（例 `17:30`）。既定値はそれぞれ `16:00` と `21:00` です。このファイルの値はステージングと本番の通常デプロイで使われ、Scheduler と watchdog に反映されます。通知の受付と送信期限は Scheduler が渡した予定時刻を起点に計算し、15分後に期限切れになります。
 
 ## 清掃と復旧
 

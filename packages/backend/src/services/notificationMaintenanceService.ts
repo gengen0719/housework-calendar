@@ -117,14 +117,16 @@ export async function watchdog(now: number): Promise<boolean> {
       await operationalAlert('notify', 'queueAge');
     }
     const missing: NotificationTrigger[] = [];
-    const date = jstDateOf(new Date(now));
+    const today = jstDateOf(new Date(now));
+    const todayStart = Date.parse(`${today}T00:00:00+09:00`);
+    const yesterday = jstDateOf(new Date(todayStart - 1));
     for (const kind of ['dailyReminder', 'monthlySummary'] as const) {
-      const scheduled = fromScheduledTime(
-        kind,
-        configuredScheduledTime({ kind, targetDate: date }),
-      );
-      if (scheduled && now >= scheduled.scheduledAt + 300000) {
-        const trigger = { kind, targetDate: scheduled.targetDate };
+      for (const targetDate of [yesterday, today]) {
+        const scheduled = fromScheduledTime(kind, configuredScheduledTime({ kind, targetDate }));
+        if (!scheduled) continue;
+        const checkAt = scheduled.scheduledAt + 300_000;
+        if (checkAt < todayStart || now < checkAt) continue;
+        const trigger = { kind, targetDate };
         const run = await getRun(trigger);
         if (!run || !run.enumerationDone || run.completed < run.expected) {
           healthy = false;
