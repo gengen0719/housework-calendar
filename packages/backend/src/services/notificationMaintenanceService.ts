@@ -25,7 +25,7 @@ import {
 } from '../repositories/notificationRepository';
 import { listPayloads, deletePayload } from '../repositories/notificationPayloadRepository';
 import { operationalAlert } from './operationalAlertService';
-import { fromScheduledTime } from './notificationTime';
+import { configuredScheduledTime, fromScheduledTime } from './notificationTime';
 const cw = new CloudWatchClient({ maxAttempts: 1 });
 const db = new DynamoDBClient({ maxAttempts: 1 });
 const ssm = new SSMClient({ maxAttempts: 1 });
@@ -119,11 +119,12 @@ export async function watchdog(now: number): Promise<boolean> {
     const missing: NotificationTrigger[] = [];
     const date = jstDateOf(new Date(now));
     for (const kind of ['dailyReminder', 'monthlySummary'] as const) {
-      const scheduledAt = Date.parse(
-        `${date}T${kind === 'dailyReminder' ? '16' : '21'}:00:00+09:00`,
+      const scheduled = fromScheduledTime(
+        kind,
+        configuredScheduledTime({ kind, targetDate: date }),
       );
-      const trigger = fromScheduledTime(kind, new Date(scheduledAt).toISOString());
-      if (trigger && now >= scheduledAt + 300000) {
+      if (scheduled && now >= scheduled.scheduledAt + 300000) {
+        const trigger = { kind, targetDate: scheduled.targetDate };
         const run = await getRun(trigger);
         if (!run || !run.enumerationDone || run.completed < run.expected) {
           healthy = false;

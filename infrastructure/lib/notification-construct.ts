@@ -14,6 +14,18 @@ import * as actions from 'aws-cdk-lib/aws-cloudwatch-actions';
 import * as scheduler from 'aws-cdk-lib/aws-scheduler';
 import type { AppStackProps } from './app-stack.js';
 import { ssmPrefix } from './env.js';
+function scheduleTime(value: unknown, fallback: string): string {
+  const time = value ?? fallback;
+  if (typeof time !== 'string' || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(time))
+    throw new Error('通知予定時刻は JST の HH:mm で指定してください');
+  return time;
+}
+
+function dailyCron(time: string): string {
+  const [hour, minute] = time.split(':').map(Number);
+  return `cron(${minute} ${hour} * * ? *)`;
+}
+
 interface Props extends AppStackProps {
   api: nodejs.NodejsFunction;
   line: nodejs.NodejsFunction;
@@ -42,6 +54,8 @@ export class NotificationConstruct extends Construct {
       );
     if (props.reservedConcurrency !== undefined && props.reservedConcurrency < 3 && enabled)
       throw new Error('通知の予約並行数は3以上が必要です');
+    const dailyTime = scheduleTime(this.node.tryGetContext('notificationDailyTime'), '16:00');
+    const monthlyTime = scheduleTime(this.node.tryGetContext('notificationMonthlyTime'), '21:00');
     const dlq = new sqs.Queue(this, 'DeadLetterQueue', {
       encryption: sqs.QueueEncryption.SQS_MANAGED,
       enforceSSL: true,
@@ -78,6 +92,8 @@ export class NotificationConstruct extends Construct {
         ENV: env,
         SSM_PREFIX: ssmPrefix(env),
         NOTIFICATIONS_ENABLED: String(enabled),
+        NOTIFICATION_DAILY_TIME: dailyTime,
+        NOTIFICATION_MONTHLY_TIME: monthlyTime,
         BACKUPS_ENABLED: String(backupsEnabled),
         ADJUSTMENTS_TABLE: props.adjustments.tableName,
         ADJUSTMENTS_ARN: props.adjustments.tableArn,
@@ -195,7 +211,7 @@ export class NotificationConstruct extends Construct {
     const schedules: [string, string, Record<string, string>][] = [
       [
         'Daily',
-        'cron(0 16 * * ? *)',
+        dailyCron(dailyTime),
         {
           operation: 'scheduled',
           kind: 'dailyReminder',
@@ -204,7 +220,7 @@ export class NotificationConstruct extends Construct {
       ],
       [
         'Monthly',
-        'cron(0 21 * * ? *)',
+        dailyCron(monthlyTime),
         {
           operation: 'scheduled',
           kind: 'monthlySummary',

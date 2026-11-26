@@ -1,5 +1,9 @@
 import type { SQSEvent, SQSBatchResponse } from 'aws-lambda';
-import { parseTrigger, fromScheduledTime } from '../services/notificationTime';
+import {
+  parseTrigger,
+  fromScheduledTime,
+  configuredScheduledTime,
+} from '../services/notificationTime';
 import {
   dispatchFamily,
   dispatchTrigger,
@@ -22,7 +26,6 @@ const inputErrors = new Set([
   'INVALID_BATCH',
   'INVALID_EVENT',
   'INVALID_NOTIFICATION',
-  'INVALID_SCHEDULE',
   'NOT_MONTH_END',
   'INACTIVE_NOTIFICATION',
   'MISSING_OPERATIONAL_KEY',
@@ -131,7 +134,10 @@ export async function handler(event: unknown): Promise<SQSBatchResponse | void> 
         throw new Error('INVALID_EVENT');
       trigger = fromScheduledTime(input.kind, input.scheduledTime);
       if (!trigger) return;
-    } else trigger = parseTrigger(input);
+    } else {
+      const direct = parseTrigger(input);
+      trigger = { ...direct, scheduledAt: Date.parse(configuredScheduledTime(direct)) };
+    }
     targetDate = trigger.targetDate;
     stage = 'environment';
     const env = requireEnv('ENV');

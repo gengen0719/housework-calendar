@@ -2,6 +2,7 @@ import { beforeEach, afterEach, describe, it, expect, vi } from 'vitest';
 import { logger } from '../../src/lib/logger';
 import { handler } from '../../src/entries/notify';
 import * as service from '../../src/services/notificationService';
+import * as family from '../../src/services/familyMemberService';
 import * as queue from '../../src/services/notificationQueueService';
 import * as ops from '../../src/services/notificationMaintenanceService';
 import * as alerts from '../../src/services/operationalAlertService';
@@ -29,6 +30,7 @@ beforeEach(() => {
 });
 afterEach(() => {
   vi.restoreAllMocks();
+  vi.useRealTimers();
   delete process.env.NOTIFICATIONS_ENABLED;
 });
 describe('通知の入口とキュー応答', () => {
@@ -89,7 +91,7 @@ describe('通知の入口とキュー応答', () => {
       handler({
         operation: 'scheduled',
         kind: 'dailyReminder',
-        scheduledTime: '2026-11-23T05:30:00Z',
+        scheduledTime: 'not-a-date',
       }),
     ).rejects.toThrow('NOTIFY_ENTRY_FAILED');
     expect(log).toHaveBeenCalledWith(
@@ -98,8 +100,35 @@ describe('通知の入口とキュー応答', () => {
         operation: 'scheduled',
         kind: 'dailyReminder',
         stage: 'input',
-        errorCode: 'INVALID_SCHEDULE',
+        errorCode: 'INVALID_EVENT',
       }),
+    );
+  });
+
+  it('変更された予定時刻を家族ジョブに引き継ぐ', async () => {
+    const scheduledTime = '2027-01-31T08:30:00Z';
+    const scheduledAt = Date.parse(scheduledTime);
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(scheduledAt + 899999);
+    vi.spyOn(family, 'listNotificationFamilies').mockImplementation(async function* () {
+      yield [job.familyId];
+    });
+    vi.spyOn(repo, 'beginRun').mockResolvedValue();
+    vi.spyOn(repo, 'registerRunFamily').mockResolvedValue();
+    vi.spyOn(repo, 'finishRunEnumeration').mockResolvedValue();
+    const enqueue = vi.spyOn(queue, 'enqueue').mockResolvedValue();
+    const scheduled = { operation: 'scheduled', kind: job.kind, scheduledTime };
+    await handler(scheduled);
+    expect(enqueue).toHaveBeenCalledExactlyOnceWith({ ...job, scheduledAt });
+    expect(queue.parseJob(enqueue.mock.calls[0]![0])).toEqual({ ...job, scheduledAt });
+
+    enqueue.mockClear();
+    vi.setSystemTime(scheduledAt + 900000);
+    const log = vi.spyOn(logger, 'error').mockImplementation(() => {});
+    await expect(handler(scheduled)).rejects.toThrow('NOTIFY_ENTRY_FAILED');
+    expect(enqueue).not.toHaveBeenCalled();
+    expect(log).toHaveBeenCalledWith(
+      expect.objectContaining({ stage: 'window', errorCode: 'INACTIVE_NOTIFICATION' }),
     );
   });
 

@@ -20,10 +20,24 @@ export function parseTrigger(value: unknown): NotificationTrigger {
     throw new Error('NOT_MONTH_END');
   return { kind: input.kind as NotificationTrigger['kind'], targetDate: input.targetDate };
 }
-export function notificationWindow(trigger: NotificationTrigger, now: Date) {
-  const scheduledAt = Date.parse(
-    `${trigger.targetDate}T${trigger.kind === 'dailyReminder' ? '16' : '21'}:00:00+09:00`,
-  );
+export function configuredScheduledTime({ kind, targetDate }: NotificationTrigger): string {
+  const time =
+    kind === 'dailyReminder'
+      ? (process.env.NOTIFICATION_DAILY_TIME ?? '16:00')
+      : (process.env.NOTIFICATION_MONTHLY_TIME ?? '21:00');
+  return `${targetDate}T${time}:00+09:00`;
+}
+
+export interface NotificationTiming {
+  scheduledAt?: number;
+}
+
+export function notificationWindow(trigger: NotificationTrigger & NotificationTiming, now: Date) {
+  const scheduledAt =
+    trigger.scheduledAt ??
+    Date.parse(
+      `${trigger.targetDate}T${trigger.kind === 'dailyReminder' ? '16' : '21'}:00:00+09:00`,
+    );
   const expiresAt = scheduledAt + 15 * 60 * 1000;
   return {
     scheduledAt,
@@ -36,13 +50,13 @@ export function notificationWindow(trigger: NotificationTrigger, now: Date) {
           : ('active' as const),
   };
 }
-/** Schedulerだけのアダプター。月末でない21時は正常省略する。 */
+/** Schedulerだけのアダプター。月末でない月次通知は正常省略する。 */
 export function fromScheduledTime(
   kind: NotificationTrigger['kind'],
   scheduledTime: string,
-): NotificationTrigger | undefined {
+): (NotificationTrigger & { scheduledAt: number }) | undefined {
   const instant = new Date(scheduledTime);
-  if (!Number.isFinite(instant.getTime())) throw new Error('INVALID_SCHEDULE');
+  if (!Number.isFinite(instant.getTime())) throw new Error('INVALID_EVENT');
   const targetDate = jstDateOf(instant);
   if (
     kind === 'monthlySummary' &&
@@ -50,8 +64,5 @@ export function fromScheduledTime(
       targetDate.slice(0, 7)
   )
     return undefined;
-  const trigger = parseTrigger({ kind, targetDate });
-  if (notificationWindow(trigger, instant).scheduledAt !== instant.getTime())
-    throw new Error('INVALID_SCHEDULE');
-  return trigger;
+  return { ...parseTrigger({ kind, targetDate }), scheduledAt: instant.getTime() };
 }

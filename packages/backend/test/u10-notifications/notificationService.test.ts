@@ -5,6 +5,22 @@ import { workflow, job } from './helpers/workflow';
 import { FAKE_U10_OTHER_FAMILY_ID } from '../fixtures/fakeSecrets';
 afterEach(() => vi.restoreAllMocks());
 describe('家族ごとの配信', () => {
+  it('変更された予定時刻を家族ごとの送信期限に使う', async () => {
+    const w = workflow();
+    const scheduledAt = Date.parse('2027-01-31T08:30:00Z');
+    const scheduledJob = { ...job, scheduledAt };
+    w.setNow(scheduledAt + 600000);
+    expect(await dispatchFamily(scheduledJob, w.options)).toEqual({ outcome: 'sent' });
+    expect(w.records.get(job.familyId)).toMatchObject({
+      scheduledAt,
+      expiresAt: scheduledAt + 900000,
+    });
+    w.setNow(scheduledAt + 900000);
+    expect(
+      await dispatchFamily({ ...scheduledJob, familyId: FAKE_U10_OTHER_FAMILY_ID }, w.options),
+    ).toEqual({ outcome: 'expired' });
+    expect(w.provider).toHaveBeenCalledTimes(1);
+  });
   it('一度送った通知は再生成も再送もしない', async () => {
     const w = workflow();
     expect((await dispatchFamily(job, w.options)).outcome).toBe('sent');

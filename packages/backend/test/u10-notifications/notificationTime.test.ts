@@ -36,13 +36,22 @@ describe('通知の時刻', () => {
     expect(fromScheduledTime('monthlySummary', '2027-12-31T12:00:00Z')).toEqual({
       kind: 'monthlySummary',
       targetDate: '2027-12-31',
+      scheduledAt: Date.parse('2027-12-31T12:00:00Z'),
     });
   });
   it('非月末21時は正常省略', () => {
     expect(fromScheduledTime('monthlySummary', '2027-12-30T12:00:00Z')).toBeUndefined();
   });
-  it('予定からずれた入力を受けない', () => {
-    expect(() => fromScheduledTime('dailyReminder', '2027-01-31T07:01:00Z')).toThrow();
+  it.each([-1, 0, 899999, 900000])('変更後の予定時刻との差%sミリ秒を分類', (offset) => {
+    const scheduledTime = '2027-01-30T15:30:00Z';
+    const scheduledAt = Date.parse(scheduledTime);
+    const trigger = fromScheduledTime('dailyReminder', scheduledTime)!;
+    expect(trigger.targetDate).toBe('2027-01-31');
+    expect(notificationWindow(trigger, new Date(scheduledAt + offset))).toEqual({
+      scheduledAt,
+      expiresAt: scheduledAt + 900000,
+      status: offset < 0 ? 'early' : offset >= 900000 ? 'expired' : 'active',
+    });
   });
   it.each([
     null,
