@@ -168,7 +168,11 @@ export class NotificationConstruct extends Construct {
     const operationalKeyArn = parameterArn(operationalKeyName);
     policy(
       ['ssm:GetParameter', 'ssm:GetParameters'],
-      [parameterArn(`${ssmPrefix(env)}/line/channel-access-token`), operationalKeyArn],
+      [
+        parameterArn(`${ssmPrefix(env)}/line/channel-access-token`),
+        parameterArn(`${ssmPrefix(env)}/line/liff-url`),
+        operationalKeyArn,
+      ],
     );
     const provisionerLogGroup = new logs.LogGroup(this, 'OperationalKeyProvisionerLogGroup', {
       retention: logs.RetentionDays.ONE_MONTH,
