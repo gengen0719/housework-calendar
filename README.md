@@ -289,6 +289,7 @@ GitHub 側でマージを強制的に止めるには、`main` の保護ルール
 - `ci.yml`: プルリクエストと `main` への push。`npm run check:ci` を実行します。AWS の権限は付けません。
 - `deploy-staging.yml`: `main` への push で自動実行します。手動で実行する場合は、GitHub の Actions で `Deploy staging` を開き、`Run workflow` から `main` を選びます。どちらも同じ検査が通ったらステージングに反映し、`scripts/smoke-check.sh` で確かめます。
 - `deploy-production.yml`: 作り手が手動で実行します（`ref` に反映するコミットを入れる）。`main` にあるコミットだけが対象で、環境 `production` の承認を待ちます。
+- GitHub Actions の外部アクションはコミット SHA で固定しています。Dependabot が毎週更新を確認し、更新があれば PR を作成します。
 - 前の版に戻すとき: 問題のコミットを `git revert` して `main` に取り込み、ステージングで確かめてから本番を手動で実行します。DynamoDB のデータは戻しません（項目やテーブルを足すだけにして、消したり名前を変えたりしません）。
 
 ## ステージングで B1 を確かめる（4 つの手順）
@@ -684,6 +685,5 @@ DynamoDBの呼出し回数は `AWS/DynamoDB` の `SuccessfulRequestLatency` の 
 
 費用目標は2環境合計で月100円です。設計の約56円は無料枠と利用量・200円/USD・税等10%の仮定による計画値です。実際の税込み見積もりと無料枠を確認するまで有効化しません。AWS Budgetsの0.50USD通知は請求を強制停止しません。メール購読確認、15分以内の実受信、実LINEの重複受理0回、清掃・復旧・費用の実測はまだ行っていません。
 
-- GitHub Actions のサードパーティのアクション（`actions/checkout`、`actions/setup-node`、`aws-actions/configure-aws-credentials`）は、いまはバージョンのタグで指定しています。コミット SHA の固定は、ネットワークのある環境で調べて置き換えてください。
 - 本番用の OIDC のロールは `environment:production` で絞っています。「`main` のコミットだけ」は、GitHub の環境の Deployment branches と、`deploy-production.yml` の確かめ（ref が `main` にあること）で守っています。
 - ステージングと本番で LINE のチャネルを別にすると、公式アカウントごとに無料で送れるメッセージ数の枠があります。費用 0 円の条件との関係は、要件の段階で確かめてください。
