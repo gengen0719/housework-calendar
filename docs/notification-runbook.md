@@ -6,6 +6,8 @@ U11では外向き通知とバックアップを分離しました。`STAGING_BA
 
 初回はすべて無効で配備します。通知用の公開URLはありません。SSMの環境別 `line/channel-access-token` を設定し、環境別SNSのメール購読確認を終えます。CDKは環境ごとに `notifications/operational-hash-key` をランダムに生成し、初回配備時にSSMへ `SecureString` として保存します。再配備やスタック削除時も鍵は保持されます。
 
+日次のお手伝い通知の末尾には、同じ環境のSSMパラメータ `/housework-calendar/<env>/line/liff-url` のURLが付きます。有効化前にその値が対象環境のLIFF URLであることを確認し、ステージングでは受信した通知からアプリを開きます。[実機確認の手順4](manual-check-u10.md)を参照してください。
+
 GitHub変数の `STAGING_` / `PRODUCTION_` に続けて `NOTIFICATIONS_ENABLED`、`NOTIFICATION_EMAIL`、`NOTIFICATION_CHECKS_PASSED`、`NOTIFICATION_BUDGET_VERIFIED` を設定します。合算額は共通 `NOTIFICATION_TOTAL_ESTIMATED_JPY` です。有効化するにはメール、購読・実機試験の確認、費用確認、0〜100円の合算額がそろう必要があります。これらは秘密ではなく、実際の値をコードへ入れません。API/LINEの既存OIDCとproductionの手動承認を通して反映します。
 
 検査は既存CIの全体VitestにU10も含まれます。`npx vitest run u10-notifications` が単位の確認です。現環境のgitleaks未導入は未実施として扱い、ツールを導入した端末で既存 `npm run secrets:scan` を配備前に実行します。

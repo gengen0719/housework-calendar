@@ -5,11 +5,12 @@ const feature = await loadFeature(
   'packages/backend/test/u10-notifications/notification-content.feature',
 );
 describeFeature(feature, ({ Scenario }) =>
-  Scenario('状態を省かず一通へまとめる', ({ Given, When, Then }) => {
+  Scenario('状態を省かず一通へまとめる', ({ Given, When, Then, And }) => {
+    const liffUrl = 'https://example.com/app';
+    let text: string;
     Given('未と済とやらなかった担当がある', () => undefined);
-    When('当日一覧を組み立てる', () => undefined);
-    Then('三つの状態が残り名前の改行は整う', () => {
-      const text = buildDailyMessage(
+    When('当日一覧を組み立てる', () => {
+      text = buildDailyMessage(
         '2027-01-31',
         [
           {
@@ -28,11 +29,16 @@ describeFeature(feature, ({ Scenario }) =>
             status: 'skipped',
           },
         ],
-        'https://example.com/app',
+        liffUrl,
       );
+    });
+    Then('三つの状態が残り名前の改行は整う', () => {
       expect(text).toContain('皿 洗い・太郎・未');
       expect(text).toContain('風呂・花子・済');
       expect(text).toContain('掃除・次郎・×');
+    });
+    And('通知の末尾にアプリを開くURLが付く', () => {
+      expect(text.split('\n').at(-1)).toBe(liffUrl);
     });
   }),
 );
