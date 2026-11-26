@@ -25,7 +25,7 @@ import {
 } from '../repositories/notificationRepository';
 import { listPayloads, deletePayload } from '../repositories/notificationPayloadRepository';
 import { operationalAlert } from './operationalAlertService';
-import { fromScheduledTime } from './notificationTime';
+import { configuredScheduledTime, fromScheduledTime } from './notificationTime';
 const cw = new CloudWatchClient({ maxAttempts: 1 });
 const db = new DynamoDBClient({ maxAttempts: 1 });
 const ssm = new SSMClient({ maxAttempts: 1 });
@@ -117,13 +117,16 @@ export async function watchdog(now: number): Promise<boolean> {
       await operationalAlert('notify', 'queueAge');
     }
     const missing: NotificationTrigger[] = [];
-    const date = jstDateOf(new Date(now));
+    const today = jstDateOf(new Date(now));
+    const todayStart = Date.parse(`${today}T00:00:00+09:00`);
+    const yesterday = jstDateOf(new Date(todayStart - 1));
     for (const kind of ['dailyReminder', 'monthlySummary'] as const) {
-      const scheduledAt = Date.parse(
-        `${date}T${kind === 'dailyReminder' ? '16' : '21'}:00:00+09:00`,
-      );
-      const trigger = fromScheduledTime(kind, new Date(scheduledAt).toISOString());
-      if (trigger && now >= scheduledAt + 300000) {
+      for (const targetDate of [yesterday, today]) {
+        const scheduled = fromScheduledTime(kind, configuredScheduledTime({ kind, targetDate }));
+        if (!scheduled) continue;
+        const checkAt = scheduled.scheduledAt + 300_000;
+        if (checkAt < todayStart || now < checkAt) continue;
+        const trigger = { kind, targetDate };
         const run = await getRun(trigger);
         if (!run || !run.enumerationDone || run.completed < run.expected) {
           healthy = false;

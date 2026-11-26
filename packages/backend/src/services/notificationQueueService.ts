@@ -4,23 +4,34 @@ import {
   ChangeMessageVisibilityCommand,
   GetQueueAttributesCommand,
 } from '@aws-sdk/client-sqs';
-import type { NotificationTrigger } from '@housework/shared';
+import { jstDateOf, type NotificationTrigger } from '@housework/shared';
 import { requireEnv } from '../lib/config';
-import { parseTrigger } from './notificationTime';
+import { parseTrigger, type NotificationTiming } from './notificationTime';
 const sqs = new SQSClient({ maxAttempts: 1 });
-export interface NotificationJob extends NotificationTrigger {
+export interface NotificationJob extends NotificationTrigger, NotificationTiming {
   familyId: string;
 }
 export function parseJob(value: unknown): NotificationJob {
   if (!value || typeof value !== 'object') throw new Error('INVALID_JOB');
   const v = value as Record<string, unknown>;
+  const keys = Object.keys(v).sort().join(',');
   if (
-    Object.keys(v).sort().join(',') !== 'familyId,kind,targetDate' ||
+    (keys !== 'familyId,kind,targetDate' && keys !== 'familyId,kind,scheduledAt,targetDate') ||
     typeof v.familyId !== 'string' ||
     !/^[0-9a-f-]{36}$/.test(v.familyId)
   )
     throw new Error('INVALID_JOB');
-  return { ...parseTrigger({ kind: v.kind, targetDate: v.targetDate }), familyId: v.familyId };
+  const trigger = parseTrigger({ kind: v.kind, targetDate: v.targetDate });
+  const job = { ...trigger, familyId: v.familyId };
+  if (!('scheduledAt' in v)) return job;
+  if (
+    typeof v.scheduledAt !== 'number' ||
+    !Number.isInteger(v.scheduledAt) ||
+    !Number.isFinite(new Date(v.scheduledAt).getTime()) ||
+    jstDateOf(new Date(v.scheduledAt)) !== trigger.targetDate
+  )
+    throw new Error('INVALID_JOB');
+  return { ...job, scheduledAt: v.scheduledAt };
 }
 export async function enqueue(job: NotificationJob): Promise<void> {
   await sqs.send(

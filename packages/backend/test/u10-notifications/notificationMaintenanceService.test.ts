@@ -46,7 +46,10 @@ beforeEach(() => {
   process.env.NOTIFICATION_DISPATCHES_ARN = tableArn;
   vi.spyOn(alert, 'operationalAlert').mockResolvedValue();
 });
-afterEach(() => vi.restoreAllMocks());
+afterEach(() => {
+  vi.restoreAllMocks();
+  vi.unstubAllEnvs();
+});
 describe('起動と滞留の見守り', () => {
   it('固定したキューの直近5分を読む', async () => {
     cw.on(GetMetricStatisticsCommand).resolves({ Datapoints: [{ Maximum: 12 }, { Maximum: 3 }] });
@@ -145,6 +148,25 @@ describe('起動と滞留の見守り', () => {
         ['notify', 'runMissing', daily],
         ['notify', 'runMissing', { ...daily, kind: 'monthlySummary' }],
       ]);
+    });
+
+    it.each([
+      ['dailyReminder', 'NOTIFICATION_DAILY_TIME', '23:55', '2027-02-01T00:00:00+09:00'],
+      ['monthlySummary', 'NOTIFICATION_MONTHLY_TIME', '23:58', '2027-02-01T00:03:00+09:00'],
+    ])('日付をまたいで予定から5分後に%sを監視する', async (kind, env, time, checkAt) => {
+      vi.stubEnv(env, time);
+      const trigger = { kind, targetDate: '2027-01-31' };
+      const check = Date.parse(checkAt);
+      vi.mocked(repo.getRun).mockImplementation(async (candidate) =>
+        candidate.kind === kind && candidate.targetDate === trigger.targetDate
+          ? undefined
+          : { expected: 0, completed: 0, enumerationDone: true, ttl: 0 },
+      );
+      expect(await watchdog(check - 1)).toBe(true);
+      expect(missingAlerts()).toHaveLength(0);
+      expect(await watchdog(check)).toBe(false);
+      expect(repo.getRun).toHaveBeenCalledWith(trigger);
+      expect(missingAlerts()).toEqual([['notify', 'runMissing', trigger]]);
     });
 
     it('並行実行でも送信権を取った実行だけが送信する', async () => {

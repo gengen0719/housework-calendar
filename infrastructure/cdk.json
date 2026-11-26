@@ -6,6 +6,8 @@
   },
   "context": {
     "@aws-cdk/core:newStyleStackSynthesis": true,
-    "@aws-cdk/core:defaultCrossStackReferences": "strong"
+    "@aws-cdk/core:defaultCrossStackReferences": "strong",
+    "notificationDailyTime": "16:00",
+    "notificationMonthlyTime": "21:00"
   }
 }

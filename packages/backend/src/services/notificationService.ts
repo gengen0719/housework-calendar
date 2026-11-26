@@ -6,7 +6,7 @@ import { getPayload } from '../repositories/notificationPayloadRepository';
 import * as family from './familyMemberService';
 import * as calendar from './calendarService';
 import { notificationKey, familyRef } from './notificationIdentity';
-import { notificationWindow } from './notificationTime';
+import { notificationWindow, type NotificationTiming } from './notificationTime';
 import { prepareContent, NotificationContentError } from './notificationMessages';
 import { pushNotification } from './notificationPushService';
 import { operationalAlert } from './operationalAlertService';
@@ -27,7 +27,7 @@ export type TriggerStage = 'window' | 'beginRun' | 'enumerateFamilies' | 'finish
 
 /** 列挙の再実行で未完了の家族を再投入する。RUNの対象数は家族ごとの印で重複加算しない。 */
 export async function dispatchTrigger(
-  trigger: NotificationTrigger,
+  trigger: NotificationTrigger & NotificationTiming,
   options: DispatchOptions,
   onStage?: (stage: TriggerStage) => void,
 ): Promise<void> {
@@ -56,7 +56,6 @@ export async function dispatchFamily(
 ): Promise<DispatchResult> {
   const now = options.now ?? Date.now;
   const start = now();
-  const window = notificationWindow(job, new Date(start));
   const ctx = { familyId: job.familyId, role: 'system' as const };
   const ref = familyRef(job.familyId, options.operationalKey);
   const logResult = (outcome: 'duplicate' | 'expired'): DispatchResult => {
@@ -79,6 +78,7 @@ export async function dispatchFamily(
   try {
     record = await store.getDispatch(job.familyId, job);
     if (record && store.terminal(record.state)) return logResult('duplicate');
+    const window = notificationWindow(record ?? job, new Date(start));
     if (window.status === 'early') return { outcome: 'retry', at: window.scheduledAt };
     if (window.status === 'expired') {
       if (record)
