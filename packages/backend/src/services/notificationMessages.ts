@@ -4,6 +4,7 @@ import * as family from './familyMemberService';
 import * as calendar from './calendarService';
 import * as chores from './choreTypeService';
 import * as allowance from './allowanceService';
+import { getConfig } from '../lib/config';
 import { mapWithConcurrency } from '../lib/promise';
 
 export class NotificationContentError extends Error {
@@ -31,7 +32,11 @@ export interface DailyLine {
   displayName: string;
   status: 'todo' | 'done' | 'skipped';
 }
-export function buildDailyMessage(date: string, lines: readonly DailyLine[]): string {
+export function buildDailyMessage(
+  date: string,
+  lines: readonly DailyLine[],
+  liffUrl: string,
+): string {
   const labels = { todo: '未', done: '済', skipped: '×' };
   return checkMessage(
     [
@@ -44,6 +49,8 @@ export function buildDailyMessage(date: string, lines: readonly DailyLine[]): st
           (l) =>
             `${normalizeName(l.choreName)}・${normalizeName(l.displayName)}・${labels[l.status]}`,
         ),
+      '',
+      liffUrl,
     ].join('\n'),
   );
 }
@@ -87,6 +94,7 @@ export async function prepareContent(
       names.set(id, n.ok ? n.value : '名前が分からない子供');
     },
   );
+  const { liffUrl } = await getConfig();
   return {
     text: buildDailyMessage(
       date,
@@ -97,6 +105,7 @@ export async function prepareContent(
         choreName: typeNames.get(d.choreTypeId) ?? '不明なお手伝い',
         displayName: names.get(d.childUserId) ?? '名前が分からない子供',
       })),
+      liffUrl,
     ),
   };
 }

@@ -12,19 +12,31 @@ describe('通知本文', () => {
   it('日付と全状態を残す', () => {
     for (const status of ['todo', 'done', 'skipped'] as const) {
       expect(
-        buildDailyMessage('2027-01-31', [
-          { dutyId: 'a', choreTypeId: 'c', choreName: '皿洗い', displayName: '太郎', status },
-        ]),
+        buildDailyMessage(
+          '2027-01-31',
+          [{ dutyId: 'a', choreTypeId: 'c', choreName: '皿洗い', displayName: '太郎', status }],
+          'https://example.com/app',
+        ),
       ).toContain({ todo: '未', done: '済', skipped: '×' }[status]);
     }
   });
   it('同名の担当をまとめない', () => {
     expect(
-      buildDailyMessage('2027-01-31', [
-        { dutyId: 'a', choreTypeId: 'a', choreName: '洗い', displayName: '太郎', status: 'todo' },
-        { dutyId: 'b', choreTypeId: 'b', choreName: '洗い', displayName: '太郎', status: 'todo' },
-      ]).split('\n'),
-    ).toHaveLength(3);
+      buildDailyMessage(
+        '2027-01-31',
+        [
+          { dutyId: 'a', choreTypeId: 'a', choreName: '洗い', displayName: '太郎', status: 'todo' },
+          { dutyId: 'b', choreTypeId: 'b', choreName: '洗い', displayName: '太郎', status: 'todo' },
+        ],
+        'https://example.com/app',
+      ).split('\n'),
+    ).toEqual([
+      '今日のお手伝い 2027-01-31',
+      '洗い・太郎・未',
+      '洗い・太郎・未',
+      '',
+      'https://example.com/app',
+    ]);
   });
   it('0円と負の合計はそのまま', () => {
     expect(
@@ -47,10 +59,14 @@ describe('通知本文', () => {
   });
   it('担当IDで安定的に並べる', () => {
     expect(
-      buildDailyMessage('2027-01-31', [
-        { dutyId: 'b', choreTypeId: 'b', choreName: '後', displayName: '太郎', status: 'todo' },
-        { dutyId: 'a', choreTypeId: 'a', choreName: '先', displayName: '花子', status: 'todo' },
-      ]),
+      buildDailyMessage(
+        '2027-01-31',
+        [
+          { dutyId: 'b', choreTypeId: 'b', choreName: '後', displayName: '太郎', status: 'todo' },
+          { dutyId: 'a', choreTypeId: 'a', choreName: '先', displayName: '花子', status: 'todo' },
+        ],
+        'https://example.com/app',
+      ),
     ).toMatch(/先.*\n後/);
   });
 });

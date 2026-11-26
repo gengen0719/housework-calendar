@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ok, err } from '@housework/shared';
 import { prepareContent } from '../../src/services/notificationMessages';
+import * as config from '../../src/lib/config';
 import * as family from '../../src/services/familyMemberService';
 import * as calendar from '../../src/services/calendarService';
 import * as chores from '../../src/services/choreTypeService';
@@ -9,6 +10,9 @@ import { FAKE_U10_FAMILY_ID, FAKE_U10_RETRY_KEY } from '../fixtures/fakeSecrets'
 const ctx = { familyId: FAKE_U10_FAMILY_ID, role: 'system' as const };
 afterEach(() => vi.restoreAllMocks());
 function daily() {
+  vi.spyOn(config, 'getConfig').mockResolvedValue({
+    liffUrl: 'https://example.com/app',
+  } as config.AppConfig);
   vi.spyOn(calendar, 'isMonthConfirmed').mockResolvedValue(false);
   vi.spyOn(calendar, 'listDutiesOn').mockResolvedValue([
     {
@@ -38,8 +42,8 @@ describe('本文作成とC6〜C9の境界', () => {
   });
   it('種類がなくても担当の済を隠さず名前を補う', async () => {
     const get = daily();
-    expect((await prepareContent(ctx, 'dailyReminder', '2027-01-31')).text).toContain(
-      '不明なお手伝い・太郎・済',
+    expect((await prepareContent(ctx, 'dailyReminder', '2027-01-31')).text).toBe(
+      '今日のお手伝い 2027-01-31\n不明なお手伝い・太郎・済\n\nhttps://example.com/app',
     );
     expect(get).toHaveBeenCalledWith(ctx, FAKE_U10_FAMILY_ID);
   });
