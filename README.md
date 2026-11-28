@@ -105,7 +105,7 @@ LINE から写す 4 つの値も、同じ `aws ssm put-parameter --type SecureSt
 
 ```bash
 npm ci
-npx cdk bootstrap aws://<アカウント ID>/ap-northeast-1   # infrastructure/ で実行してもよい
+npx --no-install cdk bootstrap aws://<アカウント ID>/ap-northeast-1   # infrastructure/ で実行してもよい
 ```
 
 ### 4. `Housework-Account` を手元から反映する（1 回だけ）
@@ -115,7 +115,7 @@ GitHub の OIDC のプロバイダー、反映用のロール 2 つ、AWS Budget
 ```bash
 npm run build -w packages/frontend      # VITE_LIFF_ID を付ける（下の「画面のビルド」）
 cd infrastructure
-npx cdk deploy Housework-Account \
+npx --no-install cdk deploy Housework-Account \
   -c originVerifySecret=unused \
   -c githubOwner=<GitHub のユーザー名または組織> \
   -c githubRepo=<リポジトリ名> \
@@ -175,7 +175,7 @@ aws service-quotas get-service-quota --region ap-northeast-1 \
 export VITE_LIFF_ID=<LIFF ID>
 npm run build -w packages/frontend
 cd infrastructure
-npx cdk deploy Housework-staging-Data Housework-staging-App \
+npx --no-install cdk deploy Housework-staging-Data Housework-staging-App \
   -c originVerifySecret="$(aws ssm get-parameter --name /housework-calendar/staging/cloudfront/origin-verify-secret --with-decryption --query Parameter.Value --output text)"
 ```
 
@@ -229,7 +229,7 @@ CDK の組み立ては、AWS の権限なしで確かめられます（先に画
 
 ```bash
 cd infrastructure
-npx cdk synth --quiet -c originVerifySecret=dummy -c githubOwner=o -c githubRepo=r -c budgetEmail=a@example.com
+npx --no-install cdk synth --quiet -c originVerifySecret=dummy -c githubOwner=o -c githubRepo=r -c budgetEmail=a@example.com
 ```
 
 ## テストの作り物の秘密の値と、push 前の秘密の情報の検査
@@ -508,9 +508,9 @@ U6 は、子供が LINE のリッチメニュー「やった」と画面から�
 LINE のリッチメニュー（画面の下の「やった」ボタン）は、CDK ではなく `scripts/setup-rich-menu.ts` で設定します。チャネルアクセストークンは、スクリプトが実行時にパラメータストア（`/housework-calendar/<env>/line/channel-access-token`）から読みます。**トークンの値は、コマンドにもファイルにも書きません**（値は `<作り物の値>`）。手元の AWS CLI のプロファイルにそのパラメータを読む権限が要ります。
 
 ```bash
-npx tsx scripts/setup-rich-menu.ts --env staging set      # メニューを作って全員に適用する
-npx tsx scripts/setup-rich-menu.ts --env staging get      # 今の設定を確認する
-npx tsx scripts/setup-rich-menu.ts --env staging delete   # 設定を取り消す
+npx --no-install tsx scripts/setup-rich-menu.ts --env staging set      # メニューを作って全員に適用する
+npx --no-install tsx scripts/setup-rich-menu.ts --env staging get      # 今の設定を確認する
+npx --no-install tsx scripts/setup-rich-menu.ts --env staging delete   # 設定を取り消す
 ```
 
 - **`--env staging|production` は必須です。** 指定がないとスクリプトは止まります（既定で本番を選ばないため）。本番に設定するときは `--env production` にします。

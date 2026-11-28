@@ -63,7 +63,7 @@ jobs:
       - name: 反映
         working-directory: infrastructure
         run: >
-          npx cdk deploy Housework-staging-Data Housework-staging-App
+          npx --no-install cdk deploy Housework-staging-Data Housework-staging-App
           --require-approval never
           --outputs-file ../cdk-outputs.json
           -c originVerifySecret="${ORIGIN_VERIFY_SECRET}"
