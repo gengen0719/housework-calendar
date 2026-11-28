@@ -429,7 +429,7 @@ export class AppStack extends Stack {
         minify: true,
         target: 'node22',
         format: nodejs.OutputFormat.CJS,
-        externalModules: ['@aws-sdk/*'],
+        bundleAwsSDK: true,
       },
     });
     return { fn, logGroup };

@@ -3,9 +3,9 @@
  * LINE のリッチメニュー（画面の下の「やった」ボタン）を設定・確認・取り消しするスクリプト（U6）。
  *
  * 使い方（リポジトリのルートで）:
- *   npx tsx scripts/setup-rich-menu.ts --env staging set      # メニューを作って全員に適用する
- *   npx tsx scripts/setup-rich-menu.ts --env staging get      # 今の設定を確認する
- *   npx tsx scripts/setup-rich-menu.ts --env staging delete   # 設定を取り消す
+ *   npx --no-install tsx scripts/setup-rich-menu.ts --env staging set      # メニューを作って全員に適用する
+ *   npx --no-install tsx scripts/setup-rich-menu.ts --env staging get      # 今の設定を確認する
+ *   npx --no-install tsx scripts/setup-rich-menu.ts --env staging delete   # 設定を取り消す
  *
  * 決まり（NFR10.6、本番のデータの決まり）:
  *   - `--env staging|production` は必須。既定で本番を選ばない（指定がなければ止める）。

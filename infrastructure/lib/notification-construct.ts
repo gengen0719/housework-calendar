@@ -114,7 +114,7 @@ export class NotificationConstruct extends Construct {
         minify: true,
         target: 'node22',
         format: nodejs.OutputFormat.CJS,
-        externalModules: ['@aws-sdk/*'],
+        bundleAwsSDK: true,
       },
     });
     this.notify.addEventSource(
@@ -204,6 +204,7 @@ export class NotificationConstruct extends Construct {
       timeout: Duration.seconds(20),
       logGroup: provisionerLogGroup,
       environment: { OPERATIONAL_KEY_PARAMETER: operationalKeyName },
+      bundling: { bundleAwsSDK: true },
     });
     const provisionerPolicy = new iam.Policy(this, 'OperationalKeyProvisionerPolicy', {
       roles: [provisioner.role!],
